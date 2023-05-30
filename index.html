@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <title>LinkedList&#39;s Blog</title>
         <meta name="author" content="Ding Li" />
-        <meta name="description" content="This is my blog, welcome!" />
+        <meta name="description" content="This is blog for Linkedlist771, mainly record some learning notes, thank you for your visit!" />
         <meta name="keywords" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <link rel="icon" href="/images/favicon.png" />
@@ -24,6 +24,11 @@
 />
 <script src="/js/lib/highlight.js"></script>
 
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
 
 
 <script src="/js/lib/preview.js"></script>
@@ -144,7 +149,7 @@
             <transition name="into">
                 <div id="main" v-show="!loading">
                     <div id="home-head">
-    <div id="home-background" ref="homeBackground" data-images="/images/background.jpg"></div>
+    <div id="home-background" ref="homeBackground" data-images="/images/background1.jpg"></div>
     <div id="home-info" @click="homeClick">
         <span class="loop"></span>
         <span class="loop"></span>
@@ -153,8 +158,8 @@
         <span class="info">
             <div class="wrap">
                 <h1>LinkedList&#39;s Blog</h1>
-                <h3>Hello World!</h3>
-                <h5>This is my blog, welcome!</h5>
+                <h3>Learning notes</h3>
+                <h5>This is blog for Linkedlist771, mainly record some learning notes, thank you for your visit!</h5>
             </div>
         </span>
     </div>
@@ -162,6 +167,155 @@
 <div id="home-posts-wrap"  ref="homePostsWrap">
     <div id="home-posts">
         
+
+<div class="post">
+    <a href="/2023/05/30/paper-reading-DAMO/">
+        <h2 class="post-title">DAMO(Deep Agile Mask Optimization for Full-Chip Scale, 用于全芯片规模的深度学习敏捷掩膜优化）</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/5/30
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li><strong>作者</strong>：Haoyu Yang、Zongyi Li、Kumara Sastry、Saumyadip Mukhopadhyay、Mark Kilgard、Anima Anandkumar、Brucek Khailany、Vivek Singh、Haoxing Ren</li>
+<li><strong>发布时间</strong>：（发表日期）</li>
+<li><strong>来源</strong>：（期刊、会议等）</li>
+<li><strong>关键词</strong>：光刻建模，神经网络，双波段，光学启发</li>
+</ul>
+<h2 id="目的与动机"><a href="#目的与动机" class="headerlink" title="目的与动机"></a>目的与动机</h2><ul>
+<li>光学近接校正（OPC）在传统设计流程中被广泛应用于可制造性优化。</li>
+<li>传统方法使用光刻模型进行 OPC，但可能会遇到过高的计算开销。</li>
+<li>大部分方法关注优化单个局部剪辑，而没有解决如何处理全芯片级别的问题。</li>
+</ul>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ul>
+<li>本文提出了一种名为 DAMO 的高性能、可扩展的深度学习支持的全芯片级 OPC 系统。</li>
+<li>DAMO 是一种端到端的掩模优化范式，包括一个深度光刻模拟器（DLS）用于光刻建模，以及一个深度掩模生成器（DMG）用于掩模图案生成。</li>
+<li>提出了一种专门为 DAMO 设计的新型布局分割算法，由 DBSCAN 聚类和 KMeans++ 聚类组成，用于处理全芯片 OPC 问题。</li>
+</ul>
+<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><ul>
+<li><p>optical proximity correction (OPC， 光学接近矫正)超大规模集成电路(VLSI)系统的不断缩小带来了不可避免的光刻邻近效应，导致制造良率下降。 </p>
+<p>主流的OPC的技术包括：</p>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h3 id="目前光刻OPC的缺点"><a href="#目前光刻OPC的缺点" class="headerlink" title="目前光刻OPC的缺点"></a>目前光刻OPC的缺点</h3><ol>
+<li><p>耗时：模型驱动&#x2F;ILT方法需要大量光刻模拟和掩模优化调用。</p>
+</li>
+<li><p>低分辨率：基于机器学习的 OPC 工作局限于低分辨率图像。</p>
+</li>
+<li><p>无法容忍分辨率损失：传统 OPC 引擎仍需处理低分辨率限制。</p>
+</li>
+<li><p>单剪辑 OPC 不实用：基于机器学习的方法局限性较大。</p>
+</li>
+<li><p>针对全片尺度问题：少有讨论如何从全片尺度解决 OPC 问题。</p>
+</li>
+<li><p>运行时开销大：传统方法在全片 OPC 任务中面临运行时开销难题。</p>
+</li>
+<li><p>资源消耗：D2S 等方法在硬件和软件上消耗大量资源。</p>
+</li>
+<li><p>数据集限制：基于学习的方法在全片掩模优化方面受限于数据集和低晶圆图案保真度。</p>
+<h1 id="本文完成的内容"><a href="#本文完成的内容" class="headerlink" title="本文完成的内容"></a>本文完成的内容</h1><ol>
+<li>设计了 DCGAN-HD，通过重新设计 DCGAN 的生成器和判别器，实现了具有竞争力的高分辨率特征提取器（1024 × 1024）。</li>
+<li>基于 DCGAN-HD 构建了 DLS 和 DMG。DLS 能进行高分辨率光刻模拟，通过与 DLS 的逆校正一起训练，DMG 可直接生成高质量掩模。</li>
+<li>开发了一种高效的无缝全片分割算法，由 DBSCAN 和 KMeans++ 聚类算法组成，使 DAMO 可以应用于任意大小的布局。</li>
+<li>提出使用基于图的计算技术和并行技术分别加速 DBSCAN 和 KMeans++ 在 GPU 上的计算。此外，还使用 TensorRT 部署了所提出的 DCGAN-HD，从而实现更快的推理。</li>
+<li>将提出的框架与最先进的商业工具 Calibre 进行了比较：在单剪辑 OPC 任务中加速 5 倍，全片 OPC 任务中加速 1.3 倍，同时保持更好的解决方案质量。</li>
+</ol>
+<h3 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h3><ul>
+<li><strong>cGAN基础</strong></li>
+</ul>
+<p>cGAN（Conditional Generative Adversarial Networks，条件生成对抗网络）[18]，[19] 是一种类似于经典 GAN（Generative Adversarial Networks，生成对抗网络）[20] 的模型，由一个生成器和一个判别器组成。生成器被训练以生成遵循某种分布的样本，使得判别器无法识别这些数据是来自生成器还是来自训练数据集。cGAN 与 GAN 的不同之处在于某些限制，例如生成器的输入和输出可以具有更强的关联性。</p>
+<p>在超大规模集成电路中，典型的 cGAN 应用包括 GANOPC[9] 和 LithoGAN[14]。前者被设计用于布局掩模合成，后者则侧重于单通孔&#x2F;接触形状的光刻轮廓预测。cGAN 的优点在于生成器和判别器之间的竞争性训练过程，可以促使生成器生成更真实、高质量的样本。而在光刻掩模生成和预测等任务中，cGAN 能够利用输入布局的条件信息，生成更为精确且符合实际需求的掩模。</p>
+<h4 id="DAMO框架引入了以下术语和评估指标："><a href="#DAMO框架引入了以下术语和评估指标：" class="headerlink" title="DAMO框架引入了以下术语和评估指标："></a>DAMO框架引入了以下术语和评估指标：</h4><ul>
+<li><p>**定义1 (mIoU)**：给定两个形状P和G，P和G之间的IoU为 $IoU(P, G) &#x3D; \frac{P \cap G}{P \cup G}$。mIoU 是平均IoU。</p>
+</li>
+<li><p>**定义2 (像素准确度)**：像素准确度（pixAcc）定义为图像上正确分类像素的百分比。</p>
+</li>
+<li><p>**定义3 (平方 L2 误差)**：设w和y分别为设计图像和晶圆图像，平方L2误差由 $||w - y||_2^2$ 计算。</p>
+</li>
+<li><p>**定义4 (PV Band)**：给定一组工艺条件下的光刻仿真轮廓，PV Bands 是这些条件下所有轮廓的区域。</p>
+</li>
+<li><p><strong>问题1（掩模优化）</strong>：给定设计图像w，掩模优化的目标是生成相应的掩模x，使得光刻过程后剩余的图案y尽可能接近w，换句话说，最小化光刻图像的PV Band和平方L2误差。</p>
+</li>
+</ul>
+<p>掩模质量通过与目标图像的晶圆图像保真度评估，主要采用三种缺陷检测器：EPE（边缘放大误差）、桥和颈部。EPE计算目标边缘到光刻轮廓的距离，颈部缺陷关注关键尺寸误差，桥接检测器寻找意外的电线缩短。为确保光刻后图案尽量接近目标图案，采用平方L2误差和PV Band评估掩模质量，分别衡量标称工艺条件下的质量和生成掩模的稳健性。</p>
+<p>PV Band（过程变差带）是在一组工艺条件下，衡量掩膜对光刻过程中各种变化的稳健性的指标。在光刻过程中，不同的工艺条件可能会导致不同的光刻轮廓，因此在这些条件下的光刻仿真轮廓之间存在一定的区域差异。PV Band就是描述这些条件下所有轮廓区域差异的指标。一个较小的PV Band表示生成的掩模在工艺条件变化下更具稳健性，光刻过程后产生的图案与目标图案更为接近。</p>
+</li>
+</ol>
+<h2 id="DAMO框架"><a href="#DAMO框架" class="headerlink" title="DAMO框架"></a>DAMO框架</h2><p><img src="/../images/image-20230504202444044.png" alt="image-20230504202444044"></p>
+<h4 id="DMG"><a href="#DMG" class="headerlink" title="DMG"></a>DMG</h4><p>DMG是DAMO的第二部分，它与DLS共享相同的体系结构。正向光刻过程可以用下式描述<br>$$<br>\boldsymbol{Z}&#x3D;f(\boldsymbol{M})<br>$$<br>传统的ILT试图根据给定的光刻模型获得最优掩模$\boldsymbol{M_{opt}}$，该模型表示为<br>$$<br>\boldsymbol{M}_{\mathrm{opt}}&#x3D;f^{-1}\left(\boldsymbol{Z}_t\right)<br>$$</p>
+<h4 id="通过更高的分辨率提高精—–DCGAN-HD-高分辨率解决方案"><a href="#通过更高的分辨率提高精—–DCGAN-HD-高分辨率解决方案" class="headerlink" title="通过更高的分辨率提高精—–DCGAN-HD:高分辨率解决方案"></a>通过更高的分辨率提高精—–DCGAN-HD:高分辨率解决方案</h4><ul>
+<li>DCGAN-HD用于模拟光刻。</li>
+</ul>
+<h4 id="数据集准备"><a href="#数据集准备" class="headerlink" title="数据集准备"></a>数据集准备</h4><p><img src="/../images/image-20230504230501724.png" alt="image-20230504230501724"></p>
+<ul>
+<li><p>从零开始建立训练集</p>
+<p>生成训练图像需要五个步骤，包括设计生成、SRAF插入(带设计规则检查)、OPC、光刻仿真、布局到图像转换。</p>
+<ul>
+<li>**设计一个设计模式: **</li>
+</ul>
+<p>所有通孔图案(70 × 70 nm2)都被限制在1024 × 1024 nm2的窗口中。其次，通过改变通孔密度，我们可以控制单个窗口中通孔图案的数量。为了减少训练集随机分布带来的偏差，通过对经过数进行均匀分组。</p>
+<ul>
+<li><strong>SRAF插入和DRC</strong></li>
+</ul>
+<p>使用Mentor Calibre[17]进行SRAF插入和设计规则检查。请注意，过孔图案可能出现在设计区域内的任何位置，Calibre在执行SRAF插入时将在过孔图案的中心创建一个新的设计层。这使得模型更容易学习，因为所有的via模式都位于图像的中心附近。此外，它还为我们进一步开发加速算法提供了指导。由于设计面积为1024 × 1024 nm2，当有2个以上的via图案时，可能会有一些SRAF图案出现在设计区域之外。一个更大的窗口2048×2048 nm2将用于捕获所有SRAF模式，它们与设计窗口共享同一个中心。</p>
+<ul>
+<li><strong>OPC，光刻仿真和图像生成</strong></li>
+</ul>
+<p>我们使用由Calibre生成的掩模和晶圆图案作为ground truth。</p>
+<ul>
+<li><strong>DLS的训练</strong></li>
+</ul>
+<p><img src="/../images/image-20230505105107484.png" alt="image-20230505105107484"></p>
+<ul>
+<li><strong>训练DMG</strong></li>
+</ul>
+<p><img src="/../images/image-20230505105728177.png" alt="image-20230505105728177"></p>
+</li>
+<li><p>所提出的DAMO使用Python和PyTorch库[35]实现。在DLS和DMG的训练阶段，我们采用了Adam优化器[36]，基础学习率和动量参数分别设置为0.0002和（0.5，0.999）。在所有模型中，LeakyReLU中的泄漏斜率设置为0.2。我们将批次大小设置为4，最大训练轮次设置为100。权重参数λ0、λ1、α0、α1和λ2分别设置为100、100、30、30和20。可以通过PyTorch的评估模式实现DLS的固定参数。训练后，生成的掩模层将转换为GDSII布局文件，然后输入到Mentor Calibre进行光刻模拟验证。我们使用四个Nvidia TITAN Xp GPU进行训练，一个用于测试。我们采用的评估指标有mIoU、pixAcc、L2误差和PV Band。这里，PV Band是由Calibre计算的。</p>
+</li>
+</ul>
+<p>其中Calibre的使用手册：</p>
+<p><a href="calibreManual.pdf">[17]Calibre V erification User’s Manual, Mentor Graph., Wilsonville, OR, USA, 2008. </a></p>
+<h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="http://www.ispd.cc/contests/19/#benchmarks">ISPD-2019</a>：此设计来自ISPD 2019初始详细布线竞赛[25]。布局是使用商业布点和布线工具进行合成的。通过将过孔层输入到OPC和仿真流程中，获得名义电阻轮廓。训练集包括$10 \mathrm{<del>K} 4 \mu \mathrm{m}^2$的平铺，这些平铺是使用遵循与[25]中设计相同设计规则的开源布局生成器生成的。在测试中，[25]中的过孔层也被切成 $4 \mu \mathrm{m}^2$ 的平铺，总计 $11 \mathrm{</del>K}$ 实例，转换为 $2000 \times 2000$（ISPD-2019 (H)）和 $1000 \times 1000$（ISPD-2019 (L)）图像。在大平铺模拟实验中，我们从[25]中选择十个最密集的 $64 \mu \mathrm{m}^2$ 平铺，并将它们转换为 $8000 \times 8000$ 图像。</p>
+<ol>
+<li><strong><font color="red">摘要</font></strong></li>
+</ol>
+<p>2019年ISPD竞赛在2018年ISPD详细布线竞赛的基础上，增加了更符合实际工业应用的设计规则设定。</p>
+<p>详细布线过程可以分为两个步骤。首先，进行初始详细布线，以生成详细布线解决方案并处理主要设计规则。然后进行详细布线优化，修复剩余的设计规则违规问题。本次竞赛主要关注初始详细布线步骤。</p>
+<p>假设全局布线结果已经针对某些指标（如时序）进行了良好的优化，详细布线器需要尽可能遵循全局布线结果。这样，优化的指标得以保留，同时避免了设计规则违例。例如，图1(a)显示了一个具有源引脚A和汇引脚B、C、D的网络的全局布线结果。由于从A到B的路径对时序至关重要，全局布线器识别出一条从A到B的短路径。然而，该路径穿过了局部布线拥堵区域，这一区域并未被全局布线器发现。如果详细布线器如图1(b)所示，在该区域上布线，将会产生设计规则违例。图1(c)显示了一个没有短路&#x2F;间距违例的布线结果，但它会导致从A到B的路径时序退化。另一方面，图1(d)显示了一个理想的解决方案。</p>
+</li>
+</ul>
+<p><img src="http://www.ispd.cc/contests/19/fig1.png" alt="img"></p>
+<p>​	      为了尽量减小对网络拓扑的干扰，初始详细布线起着重要作用。如果初始详细布线结果能够满足大部分常见的布线规则，即使没有    完全达到DRC要求，后续的详细布线优化就不太可能对布线结果造成很大干扰。</p>
+<p><font color="red"><a target="_blank" rel="noopener" href="http://www.ispd.cc/contests/19/tutorial.htm">相关教程</a></font></p>
+<p>在本教程中，我们将使用一个仅包含11个网络的样本基准来介绍基准格式、竞赛问题的目标&#x2F;约束以及如何使用Cadence P&amp;R工具Innovus评估您的布线方案。请从以下链接下载样本基准到您的Linux服务器，然后使用命令“tar zxvf ispd19_sample.tgz”解压缩下载的文件。</p>
+<p><em>注意：</em>ispd19_sample.tgz、ispd19_sample2.tgz 和 ispd19_sample3.tgz 是在 ISPD 2018竞赛中使用的相同样本基准。而ispd19_sample4.tgz 是一个新的样本基准，其中包含了本次竞赛所需的新规则。</p>
+<p>“.input.lef”文件包含了竞赛中需要考虑的布线规则和设计信息。 “.input.def”文件包含了设计的布局信息、引脚和阻塞。 “.input.guide”文件包含了详细布线器应遵循的全局布线解决方案。每个基准测试都将有这三个文件来表示详细布线问题的实例。请参考以下文档，了解本次竞赛中规则和目标的详细信息。</p>
+<p>另一方面，“.solution.good.def”和“.solution.bad.def”分别代表了一个好的布线解决方案和一个不好的布线解决方案。这两个“解决方案”文件的大部分内容与“*.input.def”文件相同，但解决方案文件包含每个网络的布线信息。在后面的部分，我们将使用这两个文件来介绍如何使用Innovus评估详细布线器生成的布线解决方案。其他基准测试中将不提供这两个文件，它们仅用于教程目的。您的可执行文件生成的解决方案文件格式应遵循上述链接中介绍的LEF&#x2F;DEF格式。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/05/30/paper-reading-DAMO/" class="go-post">阅读全文</a>
+</div>
 
 <div class="post">
     <a href="/2023/05/30/Infinite-GPT4-Usage/">
@@ -310,12 +464,48 @@
         <div id="card-div">
     <div class="card-style">
         <div class="avatar">
-            <img src="/images/avatar.jpg" alt="avatar" />
+            <img src="/images/avatar2.jpg" alt="avatar" />
         </div>
         <div class="name">Ding Li</div>
         <div class="description">
-            <p>Description<br>…</p>
+            <p>Description<br>你好， 这里是Linkedlist771的个人博客，主要记录一些学习笔记，谢谢你的访问！</p>
 
+        </div>
+        
+        <div class="icon-links">
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="https://github.com/linkedlist771">
+                    <i
+                        class="fa-brands fa-github fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a href="/null">
+                    <i
+                        class="fa-brands fa-twitter fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a target="_blank" rel="noopener" href="http://wpa.qq.com/msgrd?v=3&uin=2317431442&site=qq&menu=yes">
+                    <i
+                        class="fa-brands fa-qq fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+            <span class="icon-link">
+                <a href="mailto:213193509seu@gmail.com">
+                    <i
+                        class="fa-solid fa-envelope fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
         </div>
         
         
