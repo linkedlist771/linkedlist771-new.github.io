@@ -169,6 +169,88 @@
         
 
 <div class="post">
+    <a href="/2023/06/01/DeepLearningSystem/">
+        <h2 class="post-title">DeepLearningSystem</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/6/1
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h2><p>深度学习系统，主要是实现一个类似pytorch的深度学习框架，包括计算图传播和GPU加速.</p>
+<ul>
+<li>github链接:<a target="_blank" rel="noopener" href="https://github.com/linkedlist771/DeepLearningSystem">linkedlist771&#x2F;DeepLearningSystem: 深度学习系统，主要是实现一个类似pytorch的深度学习框架，包括计算图传播和GPU加速 (github.com)</a></li>
+</ul>
+<h3 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h3><ul>
+<li><code>Linear</code> 层神经网络前向传播， 代码如下：</li>
+</ul>
+<pre><code class="Python">class Linear(Module):
+    def __init__(self, in_features, out_features, bias=True, device=None, dtype=&quot;float32&quot;):
+        super().__init__()
+        self.in_features = in_features
+        self.out_features = out_features
+        ### BEGIN YOUR SOLUTION
+        #self.bias = bias
+        self.device = device
+        self.dtype = dtype
+        # 如果有偏置的话
+        weight = init.kaiming_uniform(in_features, out_features, nonlinearity=&quot;relu&quot;, device=device, dtype=dtype)
+        self.weight = Tensor(weight)
+        if bias:
+            # 然而，如果你的代码中某些地方假定偏置是一个二维张量，而且第一个维度为1，那么reshape就是必须的。
+            # 这可能是为了保持与特定操作的兼容性，例如广播或矩阵乘法。
+            # 另外一种可能的原因是，在使用Kaiming初始化时，fan_in和fan_out参数的顺序可能会影响到初始化的结果。
+            # 在你的代码中，可能作者想要使用out_features作为fan_in来进行初始化。然后，通过reshape操作将偏置调整为正确的形状。
+            # 不过在偏置初始化中，一般不需要这样做，因为偏置通常都被初始化为零或者接近零的小值。
+            self.bias = init.kaiming_uniform(out_features, 1, dtype=dtype).reshape((1, out_features))
+            # self.bias = init.kaiming_uniform(1, out_features, nonlinearity=&quot;relu&quot;, device=device, dtype=dtype)
+        else:
+            self.bias = None
+        # raise NotImplementedError()
+        ### END YOUR SOLUTION
+
+    def forward(self, X: Tensor) -&gt; Tensor:
+        ### BEGIN YOUR SOLUTION
+        if self.bias:
+            # 如果有偏置的话
+            a_l = ops.matmul(X, self.weight)
+            return a_l + self.bias
+        else:
+            return ops.matmul(X, self.weight)
+        # raise NotImplementedError()
+        ## END YOUR SOLUTION
+</code></pre>
+<p>踩坑点：如果含有偏置bias的情况下，由于<code>out_features</code>可能不是一维的，默认生成(1,out_features) 形状的张量， 在多维情况将出现错误，所以需要<code>init.kaiming_uniform(out_features, 1, dtype=dtype).reshape((1, out_features))</code>先生成这种形状的Tensor然后进行reshape保持兼容性。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%B3%BB%E7%BB%9F%EF%BC%8C-DeepLearning-system/" style="color: #00bcd4">深度学习系统， DeepLearning system</a>
+        </span>
+        
+    </div>
+    <a href="/2023/06/01/DeepLearningSystem/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/06/01/GN%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/">
         <h2 class="post-title">GN机器人下载链接</h2>
     </a>
@@ -508,7 +590,7 @@ get_chatglm(&quot;你是谁？ 你能干什么？ 今天晚上什么吃什么？
         
         <span class="tag">
             
-            <a href="/tags/ChatGLM%EF%BC%8C-%E6%95%B0%E5%AD%97%E5%AD%AA%E7%94%9F%EF%BC%8C-QQ%E6%95%B0%E6%8D%AE%E9%9B%86/" style="color: #ffa2c4">ChatGLM， 数字孪生， QQ数据集</a>
+            <a href="/tags/ChatGLM%EF%BC%8C-%E6%95%B0%E5%AD%97%E5%AD%AA%E7%94%9F%EF%BC%8C-QQ%E6%95%B0%E6%8D%AE%E9%9B%86/" style="color: #00bcd4">ChatGLM， 数字孪生， QQ数据集</a>
         </span>
         
     </div>
@@ -860,6 +942,10 @@ get_chatglm(&quot;你是谁？ 你能干什么？ 今天晚上什么吃什么？
             
             <div class="friend-link">
                 <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
+            </div>
+            
+            <div class="friend-link">
+                <a href="/www.803366.xyz">Stmoonar</a>
             </div>
             
         </div>
