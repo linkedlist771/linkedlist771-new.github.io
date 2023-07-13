@@ -182,7 +182,7 @@
 <li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
 </ul>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h2 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h2><p>分子动力学（MD）模拟在凝聚态物理、材料科学、聚合物化学和分子生物学等领域具有广泛的应用，它允许研究人员检查原子或分子的行为，这在实验难以进行时尤为宝贵。然而，MD模拟的质量受到势能（PES）准确性的限制。传统上，有两种常见的模型：经验性原子势模型和量子力学模型。经验性原子势模型在计算上高效但准确性有限，而量子力学模型虽然准确度高，但计算成本很高。近年来，机器学习（ML）模型开始崭露头角，用于解决准确性和效率之间的权衡问题。ML模型通过训练来建立原子配置和势能之间的关系，并能达到与量子力学方法相当的准确性，同时具有更低的计算成本。深度势（DP）模型是ML模型的一种，它不仅具有量子力学精度，而且具有高计算效率，并且是端到端的，支持在现代高性能计算机上高效运行。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701141805592.png" alt="image-20230701141805592"></p>
+<p><img src="/../images/image-20230701141805592.png" alt="image-20230701141805592"></p>
 <h2 id="DeePMD-kit-概述"><a href="#DeePMD-kit-概述" class="headerlink" title="DeePMD-kit 概述"></a>DeePMD-kit 概述</h2><p>DeePMD-kit 是一个使用深度学习模型来高效模拟分子动力学的工具包。下面是相关的参考内容：</p>
 <ul>
 <li><strong><a target="_blank" rel="noopener" href="https://docs.deepmodeling.com/projects/deepmd/en/master/index.html">文档</a></strong></li>
@@ -190,7 +190,8 @@
 <li><strong><a target="_blank" rel="noopener" href="https://github.com/deepmodeling">GitHub主页</a></strong></li>
 <li><strong><a target="_blank" rel="noopener" href="https://www.aissquare.com/">数据集和模型的共享平台</a></strong></li>
 </ul>
-<img src="../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701154308257.png" alt="image-20230701154308257" style="zoom:67%;">
+<p><img src="/../images/image-20230701154308257.png" alt="figure"></p>
+<!-- <img src="../images/image-20230701154308257.png" alt="image-20230701154308257" style="zoom:67%;" /> -->
 
 <h3 id="DeePMD-kit-的工作流程"><a href="#DeePMD-kit-的工作流程" class="headerlink" title="DeePMD-kit 的工作流程"></a>DeePMD-kit 的工作流程</h3><ol>
 <li><p><strong>准备训练数据</strong>：从量子力学模拟收集原子配置和相应的能量和力。</p>
@@ -206,14 +207,40 @@
 <li><p><strong>原子类型嵌入</strong>：DeePMD-kit v2.0 允许在不同原子类型之间共享嵌入网络和拟合网络，从而降低训练复杂性。</p>
 </li>
 </ol>
-<img src="../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701140012565.png" alt="image-20230701140012565" style="zoom:50%;">
-<img src="../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701140054102.png" alt="image-20230701140054102" style="zoom:50%;">
+<p><img src="/../images/image-20230701140012565.png" alt="figure"><br><img src="/../images/image-20230701140054102.png" alt="figure"></p>
+<!-- 
 
-<h3 id="DeePMD-kit-的原理"><a href="#DeePMD-kit-的原理" class="headerlink" title="DeePMD-kit 的原理"></a>DeePMD-kit 的原理</h3><h4 id="理论基础"><a href="#理论基础" class="headerlink" title="理论基础"></a>理论基础</h4><p>在介绍DP方法之前，我们定义了一个包含N个原子的系统的坐标矩阵$\mathcal{R} \in \mathbb{R}^{N \times 3}$，<br>$$<br>\mathcal{R}&#x3D;\left{\boldsymbol{r}<em>1^T, \cdots, \boldsymbol{r}<em>i^T, \cdots, \boldsymbol{r}<em>N^T\right}^T, \boldsymbol{r}<em>i&#x3D;\left(x_i, y_i, z_i\right),(1)<br>$$<br>$\boldsymbol{r}<em>i$包含原子$i$的3个笛卡尔坐标，$\boldsymbol{\mathcal { R }}$可以转换为局部环境矩阵$\left{\boldsymbol{\mathcal { R }}^i\right}</em>{i&#x3D;1}^N$<br>$$<br>\mathcal{R}^i&#x3D;\left{\boldsymbol{r}</em>{1 i}^T, \cdots, \boldsymbol{r}</em>{j i}^T, \cdots, \boldsymbol{r}</em>{N_i, i}^T\right}^T, \boldsymbol{r}</em>{j i}&#x3D;\left(x_{j i}, y_{j i}, z_{j i}\right),(2)<br>$$<br>其中$j$和$N_i$是原子$i$在截止半径$r_c$内的邻居的索引，$\boldsymbol{r}_{j i} \equiv \boldsymbol{r}_j-\boldsymbol{r}_i$被定义为相对坐标。<br>在DP方法中，系统的总能量$E$被构造为原子能量的总和。<br>$$<br>E&#x3D;\sum_i E_i,(3)<br>$$<br>其中$E_i$是原子$i$的局部原子能量。$E_i$取决于原子$i$的局部环境：<br>$$<br>E&#x3D;\sum_i E_i&#x3D;\sum_i E\left(\mathcal{R}^i\right),(4)<br>$$<br>$\mathcal{R}^i$到$E_i$的映射分两步构造。如下图所示，</p>
+<img src="../images/image-20230701140012565.png" alt="image-20230701140012565" style="zoom:50%;" />
+<img src="../images/image-20230701140054102.png" alt="image-20230701140054102" style="zoom:50%;" /> -->
+
+<h3 id="DeePMD-kit-的原理"><a href="#DeePMD-kit-的原理" class="headerlink" title="DeePMD-kit 的原理"></a>DeePMD-kit 的原理</h3><h4 id="理论基础"><a href="#理论基础" class="headerlink" title="理论基础"></a>理论基础</h4><p>在介绍DP方法之前，我们定义了一个包含N个原子的系统的坐标矩阵$\mathcal{R} \in \mathbb{R}^{N \times 3}$，</p>
+<p>$\mathcal{R}&#x3D;\left{\boldsymbol{r}_1^T, \cdots, \boldsymbol{r}_i^T, \cdots, \boldsymbol{r}_N^T\right}^T, \boldsymbol{r}_i&#x3D;\left(x_i, y_i, z_i\right),(1)$</p>
+<p>$\boldsymbol{r}<em>i$包含原子$i$的3个笛卡尔坐标，$\boldsymbol{\mathcal { R }}$可以转换为局部环境矩阵$\left{\boldsymbol{\mathcal { R }}^i\right}</em>{i&#x3D;1}^N$</p>
+<p>$\mathcal{R}^i&#x3D;\left{\boldsymbol{r}<em>{1 i}^T, \cdots, \boldsymbol{r}</em>{j i}^T, \cdots, \boldsymbol{r}<em>{N_i, i}^T\right}^T, \boldsymbol{r}</em>{j i}&#x3D;\left(x_{j i}, y_{j i}, z_{j i}\right),(2)$</p>
+<p>其中$j$和$N_i$是原子$i$在截止半径$r_c$内的邻居的索引，$\boldsymbol{r}_{j i} \equiv \boldsymbol{r}_j-\boldsymbol{r}_i$被定义为相对坐标。<br>在DP方法中，系统的总能量$E$被构造为原子能量的总和。</p>
+<p>$E&#x3D;\sum_i E_i,(3)$</p>
+<p>其中$E_i$是原子$i$的局部原子能量。$E_i$取决于原子$i$的局部环境：</p>
+<p>$E&#x3D;\sum_i E_i&#x3D;\sum_i E\left(\mathcal{R}^i\right),(4)$</p>
+<p>$\mathcal{R}^i$到$E_i$的映射分两步构造。如下图所示，</p>
 <p><img src="https://dp-public.oss-cn-beijing.aliyuncs.com/20220523-143747.png" alt="figure"></p>
-<p>首先，$\mathcal{R}^i$被映射到一个特征矩阵，也称为描述符，$\mathcal{D}^i$，以保持系统的平移、旋转和排列对称性。$\mathcal{R}^i \in \mathbb{R}^{N_i \times 3}$首先被转换为广义坐标$\tilde{\mathcal{R}}^i \in \mathbb{R}^{N_i \times 4}$。<br>$$<br>\left{x_{j i}, y_{j i}, z_{j i}\right} \mapsto\left{s\left(r_{j i}\right), \hat{x}<em>{j i}, \hat{y}</em>{j i}, \hat{z}<em>{j i}\right}<br>$$<br>其中$\hat{x}</em>{j i}&#x3D;\frac{s\left(r_{j j}\right) x x_{j i}}{r_{j i}}, \hat{y}<em>{j i}&#x3D;\frac{s\left(r</em>{j j}\right) y \ddot{j}}{r_{j i}}$, 和 $\hat{z}<em>{j i}&#x3D;\frac{s\left(r</em>{j j}\right) z j i}{r_{j i}}$。$s\left(r_{j i}\right)$是一个权重函数，用于减少离原子$i$较远的粒子的权重，定义为：<br>$$<br>s\left(r_{j i}\right)&#x3D; \begin{cases}\frac{1}{r_{j i}}, &amp; r_{j i}&lt;r_{c s} \ \frac{1}{r_{j i}}\left{\left(\frac{r_{j i}-r_{c s}}{r_c-r_{c s}}\right)^3\left(-6\left(\frac{r_{j j}-r_{c s}}{r_c-r_{c s}}\right)^2+15 \frac{r_{j j}-r_{c s}}{r_c-r_{c s}}-10\right)+1\right}, &amp; r_{c s}&lt;r_{j i}&lt;r_c,(6) \ 0, &amp; r_{j i}&gt;r_c\end{cases}<br>$$<br>这里$r_{j i}$是原子$i$和$j$之间的欧几里得距离，$r_{c s}$是平滑截止参数。通过引入$s\left(r_{j i}\right)$，$\tilde{\mathcal{R}}^i$中的分量从$r_{c s}$到$r_c$平滑地变为零。然后，$s\left(r_{j i}\right)$，即$\tilde{\mathcal{R}}^i$的第一列，通过嵌入神经网络映射到嵌入矩阵$\mathcal{G}^{i 2} \in \mathbb{R}^{N_i \times M_1}$。通过取$\mathcal{G}^{i 2} \in \mathbb{R}^{N_i \times M_2}$的前$M_2\left(&lt;M_1\right)$列，我们得到另一个嵌入矩阵$\mathcal{G}^{i 2} \in \mathbb{R}^{N_i \times M_2}$。最后，我们定义原子$i$的特征矩阵$\mathcal{G}^{i 2} \in \mathbb{R}^{M_1 \times M_2}$：<br>$$<br>\mathcal{D}^i&#x3D;\left(\mathcal{G}^{i 1}\right)^T \tilde{\mathcal{R}}^i\left(\tilde{\mathcal{R}}^i\right)^T \mathcal{G}^{i 2},(7)<br>$$<br>在特征矩阵中，通过$\tilde{\mathcal{R}}^i\left(\tilde{\mathcal{R}}^i\right)^T$的矩阵乘积保持平移和旋转对称性，并通过$\left(\mathcal{G}^i\right)^T \tilde{\mathcal{R}}^i$的矩阵乘积保持排列对称性。接下来，每个$\mathcal{D}^i$通过拟合网络映射到局部原子能量$E_i$。</p>
-<p>嵌入网络$\mathcal{N}^e$和拟合网络$\mathcal{N}^f$都是包含几个隐藏层的前馈神经网络。从前一层的输入数据$d_l^{\text {in }}$到下一层的输出数据$d_k^{\text {out }}$的映射由线性和非线性变换组成。<br>$$<br>d_k^{o u t}&#x3D;\varphi\left(\sum_{k l} w_{k l} d_l^{i n}+b_k\right),(8)<br>$$<br>在等式(8)中，$w_{k l}$是连接权重，$b_k$是偏置权重，$\varphi$是非线性激活函数。需要注意的是，只在输出节点应用线性变换。嵌入和拟合网络中包含的参数是通过最小化损失函数$L$获得的：<br>$$<br>L\left(p_\epsilon, p_f, p_{\xi}\right)&#x3D;\frac{p_\epsilon}{N} \Delta \epsilon^2+\frac{p_f}{3 N} \sum_i\left|\Delta \boldsymbol{F}<em>i\right|^2+\frac{p</em>{\xi}}{9 N}|\Delta \xi|^2,(9)<br>$$<br>其中$\Delta \epsilon, \Delta \boldsymbol{F}<em>i$, 和 $\Delta \xi$分别表示能量、力和应力的均方根误差。在训练过程中，前因子$p_\epsilon, p_f$, 和 $p</em>{\xi}$由以下公式确定<br>$$<br>p(t)&#x3D;p^{\operatorname{limit}}\left[1-\frac{r_l(t)}{r_l^0}\right]+p^{\operatorname{start}}\left[\frac{r_l(t)}{r_l^0}\right]<br>$$<br>其中$r_l(t)$和$r_l^0$分别是训练步骤$t$和训练步骤0的学习率。$r_l(t)$定义为<br>$$<br>r_l(t)&#x3D;r_l^0 \times d_r^{t &#x2F; d_s}<br>$$<br>其中$d_r$和$d_s$分别是衰减率和衰减步骤。衰减率$d_r$需要小于1。有关DeepPot-SE (DP)方法的详细信息，请参阅原始论文。</p>
-<h4 id="分子动力学"><a href="#分子动力学" class="headerlink" title="分子动力学"></a>分子动力学</h4><p>分子动力学模拟是一种从微观出发的模拟手段，在科学发现，工程设计等领域具有重要作用。<br>$$<br>\begin{aligned}<br>&amp; m_i \frac{d^2 \boldsymbol{r}_i}{d t^2}&#x3D;-\nabla_i E \<br>&amp; E&#x3D;E\left(\boldsymbol{r}_1, \boldsymbol{r}_2, \ldots, \boldsymbol{r}_N\right)<br>\end{aligned}<br>$$</p>
+<p>首先，$\mathcal{R}^i$被映射到一个特征矩阵，也称为描述符，$\mathcal{D}^i$，以保持系统的平移、旋转和排列对称性。$\mathcal{R}^i \in \mathbb{R}^{N_i \times 3}$首先被转换为广义坐标$\tilde{\mathcal{R}}^i \in \mathbb{R}^{N_i \times 4}$。</p>
+<p>$\left{x_{j i}, y_{j i}, z_{j i}\right} \mapsto\left{s\left(r_{j i}\right), \hat{x}<em>{j i}, \hat{y}</em>{j i}, \hat{z}_{j i}\right}$</p>
+<p>其中$\hat{x}<em>{j i}&#x3D;\frac{s\left(r</em>{j j}\right) x x_{j i}}{r_{j i}}, \hat{y}<em>{j i}&#x3D;\frac{s\left(r</em>{j j}\right) y \ddot{j}}{r_{j i}}$, 和 $\hat{z}<em>{j i}&#x3D;\frac{s\left(r</em>{j j}\right) z j i}{r_{j i}}$。$s\left(r_{j i}\right)$是一个权重函数，用于减少离原子$i$较远的粒子的权重，定义为：</p>
+<p>$s\left(r_{j i}\right)&#x3D; \begin{cases}\frac{1}{r_{j i}}, &amp; r_{j i}&lt;r_{c s} \ \frac{1}{r_{j i}}\left{\left(\frac{r_{j i}-r_{c s}}{r_c-r_{c s}}\right)^3\left(-6\left(\frac{r_{j j}-r_{c s}}{r_c-r_{c s}}\right)^2+15 \frac{r_{j j}-r_{c s}}{r_c-r_{c s}}-10\right)+1\right}, &amp; r_{c s}&lt;r_{j i}&lt;r_c,(6) \ 0, &amp; r_{j i}&gt;r_c\end{cases}$</p>
+<p>这里$r_{j i}$是原子$i$和$j$之间的欧几里得距离，$r_{c s}$是平滑截止参数。通过引入$s\left(r_{j i}\right)$，$\tilde{\mathcal{R}}^i$中的分量从$r_{c s}$到$r_c$平滑地变为零。然后，$s\left(r_{j i}\right)$，即$\tilde{\mathcal{R}}^i$的第一列，通过嵌入神经网络映射到嵌入矩阵$\mathcal{G}^{i 2} \in \mathbb{R}^{N_i \times M_1}$。通过取$\mathcal{G}^{i 2} \in \mathbb{R}^{N_i \times M_2}$的前$M_2\left(&lt;M_1\right)$列，我们得到另一个嵌入矩阵$\mathcal{G}^{i 2} \in \mathbb{R}^{N_i \times M_2}$。最后，我们定义原子$i$的特征矩阵$\mathcal{G}^{i 2} \in \mathbb{R}^{M_1 \times M_2}$：</p>
+<p>$\mathcal{D}^i&#x3D;\left(\mathcal{G}^{i 1}\right)^T \tilde{\mathcal{R}}^i\left(\tilde{\mathcal{R}}^i\right)^T \mathcal{G}^{i 2},(7)$</p>
+<p>在特征矩阵中，通过$\tilde{\mathcal{R}}^i\left(\tilde{\mathcal{R}}^i\right)^T$的矩阵乘积保持平移和旋转对称性，并通过$\left(\mathcal{G}^i\right)^T \tilde{\mathcal{R}}^i$的矩阵乘积保持排列对称性。接下来，每个$\mathcal{D}^i$通过拟合网络映射到局部原子能量$E_i$。</p>
+<p>嵌入网络$\mathcal{N}^e$和拟合网络$\mathcal{N}^f$都是包含几个隐藏层的前馈神经网络。从前一层的输入数据$d_l^{\text {in }}$到下一层的输出数据$d_k^{\text {out }}$的映射由线性和非线性变换组成。</p>
+<p>$d_k^{o u t}&#x3D;\varphi\left(\sum_{k l} w_{k l} d_l^{i n}+b_k\right),(8)$</p>
+<p>在等式(8)中，$w_{k l}$是连接权重，$b_k$是偏置权重，$\varphi$是非线性激活函数。需要注意的是，只在输出节点应用线性变换。嵌入和拟合网络中包含的参数是通过最小化损失函数$L$获得的：</p>
+<p>$L\left(p_\epsilon, p_f, p_{\xi}\right)&#x3D;\frac{p_\epsilon}{N} \Delta \epsilon^2+\frac{p_f}{3 N} \sum_i\left|\Delta \boldsymbol{F}<em>i\right|^2+\frac{p</em>{\xi}}{9 N}|\Delta \xi|^2,(9)$</p>
+<p>其中$\Delta \epsilon, \Delta \boldsymbol{F}<em>i$, 和 $\Delta \xi$分别表示能量、力和应力的均方根误差。在训练过程中，前因子$p_\epsilon, p_f$, 和 $p</em>{\xi}$由以下公式确定</p>
+<p>$p(t)&#x3D;p^{\operatorname{limit}}\left[1-\frac{r_l(t)}{r_l^0}\right]+p^{\operatorname{start}}\left[\frac{r_l(t)}{r_l^0}\right]$</p>
+<p>其中$r_l(t)$和$r_l^0$分别是训练步骤$t$和训练步骤0的学习率。$r_l(t)$定义为</p>
+<p>$r_l(t)&#x3D;r_l^0 \times d_r^{t &#x2F; d_s}$</p>
+<p>其中$d_r$和$d_s$分别是衰减率和衰减步骤。衰减率$d_r$需要小于1。有关DeepPot-SE (DP)方法的详细信息，请参阅原始论文。</p>
+<h4 id="分子动力学"><a href="#分子动力学" class="headerlink" title="分子动力学"></a>分子动力学</h4><p>分子动力学模拟是一种从微观出发的模拟手段，在科学发现，工程设计等领域具有重要作用。</p>
+<p>$\begin{aligned}<br>&amp; m_i \frac{d^2 \boldsymbol{r}_i}{d t^2}&#x3D;-\nabla_i E \<br>&amp; E&#x3D;E\left(\boldsymbol{r}_1, \boldsymbol{r}_2, \ldots, \boldsymbol{r}_N\right)<br>\end{aligned}$</p>
 <ul>
 <li>计算能量的常见的方式</li>
 </ul>
@@ -236,14 +263,19 @@
 <td>计算复杂度低，精度不可靠</td>
 </tr>
 </tbody></table>
-<h4 id="DeePKS（电子结构）"><a href="#DeePKS（电子结构）" class="headerlink" title="DeePKS（电子结构）"></a>DeePKS（电子结构）</h4><img src="../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701173718442.png" alt="image-20230701173718442" style="zoom:67%;">
+<h4 id="DeePKS（电子结构）"><a href="#DeePKS（电子结构）" class="headerlink" title="DeePKS（电子结构）"></a>DeePKS（电子结构）</h4><p><img src="/../images/image-20230701173718442.png" alt="figure"></p>
+<!-- <img src="../images/image-20230701173718442.png" alt="image-20230701173718442" style="zoom:67%;" /> -->
 
-<p>满足要求比较好的是<code>单电子的密度矩阵</code>， 然后把波函数投影到一组比较好的<code>完备基</code>上。</p>
-<img src="../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701175149730.png" alt="image-20230701175149730" style="zoom:67%;">
+<p>满足要求比较好的是<code>单电子的密度矩阵</code>， 然后把波函数投影到一组比较好的<code>完备基</code>上。<br><img src="/../images/image-20230701175149730.png" alt="figure"></p>
+<!-- <img src="../images/image-20230701175149730.png" alt="image-20230701175149730" style="zoom:67%;" /> -->
 
 
 
-<h4 id="构建过程"><a href="#构建过程" class="headerlink" title="构建过程"></a><img src="../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701175739715.png" alt="image-20230701175739715" style="zoom:67%;">构建过程</h4><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701143507583.png" alt="image-20230701143507583"></p>
+<h4 id><a href="#" class="headerlink" title></a></h4><p><img src="/../images/image-20230701175739715.png" alt="figure"></p>
+<!-- <img src="../images/image-20230701175739715.png" alt="image-20230701175739715" style="zoom:67%;" /> -->
+
+<p>构建过程</p>
+<p><img src="/../images/image-20230701143507583.png" alt="image-20230701143507583"></p>
 <ol>
 <li>给定原子坐标， 写出电子结构， 利用DFT计算得到能量， 构建坐标能量对，典型的<code>监督学习</code>，<code>回归</code>问题。</li>
 <li>利用DNN来构建<code>体系坐标</code>和<code>能量</code>的关系。</li>
@@ -254,40 +286,43 @@
 <li><ul>
 <li>物理约束（旋转性，对称性， 平移， 交换…）</li>
 </ul>
-<img src="../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701143814105.png" alt="image-20230701143814105" style="zoom: 67%;">
+</li>
+</ul>
+<p><img src="/../images/image-20230701143814105.png" alt="figure"></p>
+  <!-- <img src="../images/image-20230701143814105.png" alt="image-20230701143814105" style="zoom: 67%;" /> -->
 
 <ul>
-<li>小原子数量训练得到的在大体系上是否存在问题？</li>
-</ul>
+<li><p>小原子数量训练得到的在大体系上是否存在问题？</p>
 </li>
-<li><p>深度势能的构建关系<br>$$<br>E&#x3D;\sum_i \mathcal{N}<em>{\alpha_i}\left(\mathcal{D}</em>{\alpha_i}\left(r_i,\left{r_j\right}_{j \in n(i)}\right)\right)<br>$$</p>
+<li><p>深度势能的构建关系<br>$<br>E&#x3D;\sum_i \mathcal{N}<em>{\alpha_i}\left(\mathcal{D}</em>{\alpha_i}\left(r_i,\left{r_j\right}_{j \in n(i)}\right)\right)<br>$</p>
 </li>
 </ul>
-<img src="../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701144137434.png" alt="image-20230701144137434" style="zoom: 67%;">
+<p><img src="/../images/image-20230701144137434.png" alt="figure"></p>
+<!-- <img src="../images/image-20230701144137434.png" alt="image-20230701144137434" style="zoom: 67%;" /> -->
 
-<p>Function $f\left(x_1, x_2, \ldots x_N\right)$ is permutationally invariant if and only if there exist $\rho$ and $\phi$ such that $f\left(\left{x_i\right}\right)&#x3D;\rho\left(\sum_i \phi\left(x_i\right)\right)$<br>$$<br>\mathcal{R}<em>i&#x3D;\left(\begin{array}{cccc}<br>1 &#x2F; r</em>{i 1} &amp; x_{i 1} &#x2F; r_{i 1}^2 &amp; y_{i 1} &#x2F; r_{i 1}^2 &amp; z_{i 1} &#x2F; r_{i 1}^2 \<br>1 &#x2F; r_{i 2} &amp; x_{i 2} &#x2F; r_{i 2}^2 &amp; y_{i 2} &#x2F; r_{i 2}^2 &amp; z_{i 2} &#x2F; r_{i 2}^2 \<br>1 &#x2F; r_{i 3} &amp; x_{i 3} &#x2F; r_{i 3}^2 &amp; y_{i 3} &#x2F; r_{i 3}^2 &amp; z_{i 3} &#x2F; r_{i 3}^2 \</p>
+<p>Function $f\left(x_1, x_2, \ldots x_N\right)$ is permutationally invariant if and only if there exist $\rho$ and $\phi$ such that $f\left(\left{x_i\right}\right)&#x3D;\rho\left(\sum_i \phi\left(x_i\right)\right)$<br>$<br>\mathcal{R}<em>i&#x3D;\left(\begin{array}{cccc}<br>1 &#x2F; r</em>{i 1} &amp; x_{i 1} &#x2F; r_{i 1}^2 &amp; y_{i 1} &#x2F; r_{i 1}^2 &amp; z_{i 1} &#x2F; r_{i 1}^2 \<br>1 &#x2F; r_{i 2} &amp; x_{i 2} &#x2F; r_{i 2}^2 &amp; y_{i 2} &#x2F; r_{i 2}^2 &amp; z_{i 2} &#x2F; r_{i 2}^2 \<br>1 &#x2F; r_{i 3} &amp; x_{i 3} &#x2F; r_{i 3}^2 &amp; y_{i 3} &#x2F; r_{i 3}^2 &amp; z_{i 3} &#x2F; r_{i 3}^2 \</p>
 <p>\vdots &amp; \vdots &amp; \vdots &amp; \vdots<br>\end{array}\right) \<br>\mathcal{G}_i&#x3D;\left(\begin{array}{cccc}</p>
-<p>G_1\left(r_{i 1}\right)  G_2\left(r_{i 1}\right) &amp; G_3\left(r_{i 1}\right) &amp; \cdots \<br>G_1\left(r_{i 2}\right) &amp; G_2\left(r_{i 2}\right) &amp; G_3\left(r_{i 2}\right) &amp; \cdots \<br>G_1\left(r_{i 3}\right) &amp; G_2\left(r_{i 3}\right) &amp; G_3\left(r_{i 3}\right) &amp; \cdots \<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots<br>\end{array}\right)<br>$$</p>
+<p>G_1\left(r_{i 1}\right)  G_2\left(r_{i 1}\right) &amp; G_3\left(r_{i 1}\right) &amp; \cdots \<br>G_1\left(r_{i 2}\right) &amp; G_2\left(r_{i 2}\right) &amp; G_3\left(r_{i 2}\right) &amp; \cdots \<br>G_1\left(r_{i 3}\right) &amp; G_2\left(r_{i 3}\right) &amp; G_3\left(r_{i 3}\right) &amp; \cdots \<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots<br>\end{array}\right)<br>$</p>
 <blockquote>
 <p>R： 环境矩阵， 对于每一个原子来说的， 元素是原子之间的相对距离，所以满足平移相对性， </p>
-<p>G： embedding matrix。 </p>
+<p>G： embedding matrix。<br><img src="/../images/image-20230701144137434.png" alt="figure"></p>
 </blockquote>
-<img src="../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701144805918.png" alt="image-20230701144805918" style="zoom:67%;">
+<!-- <img src="../images/image-20230701144805918.png" alt="image-20230701144805918" style="zoom:67%;" /> -->
 
-<p>周期不变：<br>$$<br>\mathcal{D}_i&#x3D;\left(\mathcal{G}_i^{&lt;}\right)^T \mathcal{R}_i\left(\mathcal{R}_i\right)^T \mathcal{G}_i<br>$$</p>
-<p>旋转不变：<br>$$<br>\tilde{\mathcal{D}}_i&#x3D;\left(\mathcal{G}_i\right)^T\left(\mathcal{R}_i U\right)\left(\mathcal{R}_i U\right)^T \mathcal{G}_i&#x3D;\left(\mathcal{G}_i\right)^T \mathcal{R}_i U U^T \mathcal{R}_i \mathcal{G}_i&#x3D;\mathcal{D}_i<br>$$</p>
-<p>神经网络的构建:</p>
-<img src="../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701145048547.png" alt="image-20230701145048547" style="zoom:67%;">
+<p>周期不变：<br>$<br>\mathcal{D}_i&#x3D;\left(\mathcal{G}_i^{&lt;}\right)^T \mathcal{R}_i\left(\mathcal{R}_i\right)^T \mathcal{G}_i<br>$</p>
+<p>旋转不变：<br>$<br>\tilde{\mathcal{D}}_i&#x3D;\left(\mathcal{G}_i\right)^T\left(\mathcal{R}_i U\right)\left(\mathcal{R}_i U\right)^T \mathcal{G}_i&#x3D;\left(\mathcal{G}_i\right)^T \mathcal{R}_i U U^T \mathcal{R}_i \mathcal{G}_i&#x3D;\mathcal{D}_i<br>$</p>
+<p>神经网络的构建:<br><img src="/../images/image-20230701144137434.png" alt="figure"></p>
+<img src="../images/image-20230701145048547.png" alt="image-20230701145048547" style="zoom:67%;">
 
 
 
-<h4 id="数据集构建"><a href="#数据集构建" class="headerlink" title="数据集构建"></a>数据集构建</h4><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701145823815.png" alt="image-20230701145823815"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701150019764.png" alt="image-20230701150019764"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701150243858.png" alt="image-20230701150243858"></p>
+<h4 id="数据集构建"><a href="#数据集构建" class="headerlink" title="数据集构建"></a>数据集构建</h4><p><img src="/../images/image-20230701145823815.png" alt="image-20230701145823815"></p>
+<p><img src="/../images/image-20230701150019764.png" alt="image-20230701150019764"></p>
+<p><img src="/../images/image-20230701150243858.png" alt="image-20230701150243858"></p>
 <blockquote>
 <p>需要保证，大体系结构中的局部体系的结果都在数据集里面有实现。</p>
 </blockquote>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230701150513105.png" alt="image-20230701150513105"></p>
+<p><img src="/../images/image-20230701150513105.png" alt="image-20230701150513105"></p>
 <h3 id="DeePMD-kit-的代码实现"><a href="#DeePMD-kit-的代码实现" class="headerlink" title="DeePMD-kit 的代码实现"></a>DeePMD-kit 的代码实现</h3><p><strong>代码修改</strong>： DeePMD-kit 的代码实现涉及到几个主要部分，包括<code>trainer</code>，<code>model</code>，<code>embedding net</code> 和 <code>fitting net</code>。<code>trainer</code> 部分解析输入 JSON 文件中的参数。<code>model</code> 部分构建操作图，包括<code>type embed net</code>，<code>embedding net</code> 和 <code>fitting net</code>。<code>embedding net</code> 接收环境矩阵 $ \mathcal{R} $ 作为输入，并输出矩阵 $ \mathcal{G} $。<code>fitting net</code> 接收描述符向量作为输入，并输出能量预测。</p>
 <p><strong>模型训练的代码</strong>：</p>
 <pre><code class="python">class Trainer () :

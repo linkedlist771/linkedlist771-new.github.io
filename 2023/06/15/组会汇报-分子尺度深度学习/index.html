@@ -170,7 +170,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%88%86%E5%AD%90%E5%B0%BA%E5%BA%A6%EF%BC%8C-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="color: #00a596">分子尺度， 深度学习</a>
+                <a href="/tags/%E5%88%86%E5%AD%90%E5%B0%BA%E5%BA%A6%EF%BC%8C-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="color: #03a9f4">分子尺度， 深度学习</a>
             </span>
             
         </span>
@@ -185,9 +185,9 @@
 <p>这篇论文讨论了一种新的基于机器学习和原子模拟方法的强大研究方法。利用这种方法，作者预测了使用Si2H6（硅烷）前驱体进行硅外延生长的一种先前未被发现的反应序列。这一复杂的表面反应机制通过元动力学模拟揭示出来，它涉及到可控的中间体SiH2的形成过程，解释了在H2载气存在下进行Si2H6吸附时，实验报告中长期未解的生长平台现象。</p>
 <p>由于其准确性和灵活的设计，这个工作流模型可以被应用于任何沉积和蚀刻过程条件的优化，以提高薄膜质量，并为下一代电子设备材料提供产量改进的途径。</p>
 </blockquote>
-<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230616104936985.png" alt="image-20230616104936985"></p>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p><img src="/../images/image-20230616104936985.png" alt="image-20230616104936985"></p>
 <p>利用<code>VASP</code>和<code>DeepMD</code>来构建深度学习， 就是利用前者计算力场，利用后者拟合。</p>
-<h4 id="模型训练与验证"><a href="#模型训练与验证" class="headerlink" title="模型训练与验证"></a>模型训练与验证</h4><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230616105632564.png" alt="image-20230616105632564"></p>
+<h4 id="模型训练与验证"><a href="#模型训练与验证" class="headerlink" title="模型训练与验证"></a>模型训练与验证</h4><p><img src="/../images/image-20230616105632564.png" alt="image-20230616105632564"></p>
 <ol>
 <li><strong>DNN训练数据生成过程</strong></li>
 </ol>
@@ -374,7 +374,7 @@ Direct
       0.38371000       0.87102997       0.00000000   F  F  F 
       0.86592531       0.37820479       0.19126102   T  T  T 
 </code></pre>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230616111122830.png" alt="image-20230616111122830"></p>
+<p><img src="/../images/image-20230616111122830.png" alt="image-20230616111122830"></p>
 <p><strong>DeepMD计算</strong></p>
 <ul>
 <li>原理</li>
@@ -387,11 +387,11 @@ Direct
 <ol>
 <li>首先构造一个新的坐标系用于保持环境的平移、旋转和置换对称：</li>
 </ol>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230617144548185.png" alt="image-20230617144548185"></p>
+<p><img src="/../images/image-20230617144548185.png" alt="image-20230617144548185"></p>
 <ol start="2">
 <li>新坐标系的$D_{ij}$ 作为DNN神经网络的输入用于求解$E_i$, 这里采用的是<code>MLP</code>神经网络</li>
 </ol>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230617144909939.png" alt="image-20230617144909939"></p>
+<p><img src="/../images/image-20230617144909939.png" alt="image-20230617144909939"></p>
 <ol start="3">
 <li>基于<code>Adam</code>优化算法来进行优化， 定义损失函数如下：</li>
 </ol>
@@ -405,7 +405,7 @@ Direct
 <p>$p_\epsilon, p_f$, 和 $p_{\xi}$：这些是可调的预因子（prefactors），它们可以在训练过程中调整，以达到最小化损失函数的目标。当数据中缺少virial信息时，我们设定$p_{\xi}&#x3D;0$。在训练过程中，我们逐渐增大$p_\epsilon$和$p_{\xi}$，同时减小$p_f$，以确保在训练开始时，力的项占主导，而在训练结束时，能量和virial项变得重要。</p>
 </blockquote>
 <p>基于前面<code>VASP</code> 计算得到的数据，便可以开始训练力场了。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230616115654284.png" alt="image-20230616115654284"></p>
+<p><img src="/../images/image-20230616115654284.png" alt="image-20230616115654284"></p>
 <p>之前配置的内容：</p>
 <pre><code class="python">&#123;
     &quot;model&quot;: &#123;
@@ -467,7 +467,7 @@ Direct
 <h4 id="结果讨论"><a href="#结果讨论" class="headerlink" title="结果讨论"></a>结果讨论</h4><ul>
 <li>SiH$_4$和Si$_2$H$_6$吸附的反应动力学。</li>
 </ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230616111449593.png" alt="image-20230616111449593"></p>
+<p><img src="/../images/image-20230616111449593.png" alt="image-20230616111449593"></p>
 <ol>
 <li><strong>自由能表面（FES）计算</strong>：该表面描述了化学反应的空间。它是通过使用元动力学模拟和增强采样方法来计算的。元动力学模拟是一种计算方法，可以帮助研究者对复杂系统的自由能表面进行建模和分析。</li>
 <li><strong>高斯山（Gaussian hills）</strong>：整个势能表面是通过随机添加潜在能量（“高斯山”）来采样的。高斯山是元动力学模拟中的一个重要概念，用于改变势能表面，以提高探索率并避免陷入局部最小值。</li>
@@ -480,12 +480,12 @@ Direct
 <ul>
 <li><strong>氢解吸的替代反应路径</strong>：这个替代反应路径在图10中以示意图的形式描绘。解吸是吸附过程的逆过程，也就是说，吸附到物质表面的粒子离开表面并回到气相。</li>
 </ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230616112412823.png" alt="image-20230616112412823"></p>
+<p><img src="/../images/image-20230616112412823.png" alt="image-20230616112412823"></p>
 <ul>
 <li><strong>文献中的氢解吸路径</strong>：通常文献中讨论的氢解吸路径涉及到两个表面氢（surface H）。表面氢是指已经吸附在物质表面上的氢原子。</li>
 <li><strong>表面氢和前驱体氢的相互作用</strong>：然而，表面氢与前驱体氢的相互作用产生了更低的活化能。这个过程在图11中展示。活化能是一种反应需要的能量，更低的活化能意味着反应更容易进行。</li>
 </ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230616112437013.png" alt="image-20230616112437013"></p>
+<p><img src="/../images/image-20230616112437013.png" alt="image-20230616112437013"></p>
 <ul>
 <li><strong>影响因素</strong>：当前驱体或载气流量增加时，这个具有较低活化能的过程可能更容易发生。这意味着，通过改变前驱体或载气的流量，可以影响这个反应过程。</li>
 </ul>
@@ -493,19 +493,19 @@ Direct
 <ol>
 <li><strong>SiH2的吸附</strong>：通过DPMD研究预测，SiH2可以在无阻力的过程中自发地吸附在Si表面（图9，公式4）。当活化能Ea&#x3D; 0 eV时，根据阿伦尼乌斯方程，SiH2在大于700 K的温度范围内的吸附速度是常数，这导致生长速率呈现出一个平台阶段。</li>
 </ol>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230616113051079.png" alt="image-20230616113051079"></p>
+<p><img src="/../images/image-20230616113051079.png" alt="image-20230616113051079"></p>
 <ol>
 <li><strong>Si的生长过程</strong>：为了全面了解从低温到高温的Si生长过程，计算了所有可能的表面反应作为表面氢覆盖率的函数（图11）。反应速率在SiH4、Si2H6和SiH2吸附，H2吸附和所有已知H解吸路径中被提取出来（图12）。由于SiH2的吸附没有活化障碍，其数据被放置在水平轴上。</li>
 </ol>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230616113136130.png" alt="image-20230616113136130"></p>
+<p><img src="/../images/image-20230616113136130.png" alt="image-20230616113136130"></p>
 <ol>
 <li><strong>Si生长的模拟</strong>：模拟了通过Si2H6沉积生长Si的过程，这也支持了之前提出的在低温和高温区间存在明显分界线的观点（图13）。在低温区，根据图11和图12，H的解吸被证实为速率限制步骤。当温度适度增加时，H表面覆盖率略有降低，而可供前驱体吸附的Si表面积增加，因此Si的生长速率随温度的升高而增加。</li>
 </ol>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230616113146211.png" alt="image-20230616113146211"></p>
+<p><img src="/../images/image-20230616113146211.png" alt="image-20230616113146211"></p>
 <ol>
 <li><strong>高温区的特性</strong>：在约700 K，Si2H6在气相中开始分解，生成SiH2和SiH4。因为SiH2在Si表面的吸附是无阻力的过程，所以它在中温和高温区域占主导，引起了生长速率的“恒定”并定义了低温和高温机制之间的“交叉点”（图13）。此外，SiH2吸附产生表面SiH键，SiH（0.7 eV）或H（0.5 eV）的小表面扩散障碍在大于700 K可热力学上实现，促进了表面重排和加速了H2的解吸（图14）。</li>
 </ol>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230616113202942.png" alt="image-20230616113202942"></p>
+<p><img src="/../images/image-20230616113202942.png" alt="image-20230616113202942"></p>
 <ol>
 <li><strong>更高温度下的行为</strong>：在大约840 K的高温开始，表面H覆盖率显著降低，任何前驱体或产品（SiH4，Si2H6，或SiH2）都可以直接在表面沉积，直到约1100 K生长速率“饱和”，系统进入由前驱体流速限制的阶段。</li>
 </ol>
