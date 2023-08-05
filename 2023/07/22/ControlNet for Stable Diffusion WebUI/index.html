@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title> | LinkedList&#39;s Blog</title>
+        <meta name="author" content="Ding Li" />
+        <meta name="description" content="This is blog for Linkedlist771, mainly record some learning notes, thank you for your visit!" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/favicon.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>LINKEDLIST&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LINKEDLIST&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1></h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/7/22
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="ControlNet-for-Stable-Diffusion-WebUI"><a href="#ControlNet-for-Stable-Diffusion-WebUI" class="headerlink" title="ControlNet for Stable Diffusion WebUI"></a>ControlNet for Stable Diffusion WebUI</h1><p>The WebUI extension for ControlNet and other injection-based SD controls.</p>
+<p><img src="https://user-images.githubusercontent.com/19834515/235606305-229b3d1e-5bfc-467f-9d55-0976eab71652.png" alt="image"></p>
+<p>This extension is for AUTOMATIC1111’s <a target="_blank" rel="noopener" href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion web UI</a>, allows the Web UI to add <a target="_blank" rel="noopener" href="https://github.com/lllyasviel/ControlNet">ControlNet</a> to the original Stable Diffusion model to generate images. The addition is on-the-fly, the merging is not required.</p>
+<h1 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h1><ol>
+<li>Open “Extensions” tab.</li>
+<li>Open “Install from URL” tab in the tab.</li>
+<li>Enter <code>https://github.com/Mikubill/sd-webui-controlnet.git</code> to “URL for extension’s git repository”.</li>
+<li>Press “Install” button.</li>
+<li>Wait for 5 seconds, and you will see the message “Installed into stable-diffusion-webui\extensions\sd-webui-controlnet. Use Installed tab to restart”.</li>
+<li>Go to “Installed” tab, click “Check for updates”, and then click “Apply and restart UI”. (The next time you can also use these buttons to update ControlNet.)</li>
+<li>Completely restart A1111 webui including your terminal. (If you do not know what is a “terminal”, you can reboot your computer to achieve the same effect.)</li>
+<li>Download models (see below).</li>
+<li>After you put models in the correct folder, you may need to refresh to see the models. The refresh button is right to your “Model” dropdown.</li>
+</ol>
+<p><strong>Update from ControlNet 1.0 to 1.1:</strong></p>
+<ul>
+<li><p>If you are not sure, you can back up and remove the folder “stable-diffusion-webui\extensions\sd-webui-controlnet”, and then start from the step 1 in the above Installation section. </p>
+</li>
+<li><p>Or you can start from the step 6 in the above Install section.</p>
+</li>
+</ul>
+<h1 id="Download-Models"><a href="#Download-Models" class="headerlink" title="Download Models"></a>Download Models</h1><p>Right now all the 14 models of ControlNet 1.1 are in the beta test.</p>
+<p>Download the models from ControlNet 1.1: <a target="_blank" rel="noopener" href="https://huggingface.co/lllyasviel/ControlNet-v1-1/tree/main">https://huggingface.co/lllyasviel/ControlNet-v1-1/tree/main</a></p>
+<p>You need to download model files ending with “.pth” .</p>
+<p>Put models in your “stable-diffusion-webui\extensions\sd-webui-controlnet\models”. Now we have already included all “yaml” files. You only need to download “pth” files.</p>
+<p>Do not right-click the filenames in HuggingFace website to download. Some users right-clicked those HuggingFace HTML websites and saved those HTML pages as PTH&#x2F;YAML files. They are not downloading correct files. Instead, please click the small download arrow “↓” icon in HuggingFace to download.</p>
+<p>Note: If you download models elsewhere, please make sure that yaml file names and model files names are same. Please manually rename all yaml files if you download from other sources. (Some models like “shuffle” needs the yaml file so that we know the outputs of ControlNet should pass a global average pooling before injecting to SD U-Nets.)</p>
+<h1 id="New-Features-in-ControlNet-1-1"><a href="#New-Features-in-ControlNet-1-1" class="headerlink" title="New Features in ControlNet 1.1"></a>New Features in ControlNet 1.1</h1><h3 id="Perfect-Support-for-All-ControlNet-1-0-x2F-1-1-and-T2I-Adapter-Models"><a href="#Perfect-Support-for-All-ControlNet-1-0-x2F-1-1-and-T2I-Adapter-Models" class="headerlink" title="Perfect Support for All ControlNet 1.0&#x2F;1.1 and T2I Adapter Models."></a>Perfect Support for All ControlNet 1.0&#x2F;1.1 and T2I Adapter Models.</h3><p>Now we have perfect support all available models and preprocessors, including perfect support for T2I style adapter and ControlNet 1.1 Shuffle. (Make sure that your YAML file names and model file names are same, see also YAML files in “stable-diffusion-webui\extensions\sd-webui-controlnet\models”.)</p>
+<h3 id="Perfect-Support-for-A1111-High-Res-Fix"><a href="#Perfect-Support-for-A1111-High-Res-Fix" class="headerlink" title="Perfect Support for A1111 High-Res. Fix"></a>Perfect Support for A1111 High-Res. Fix</h3><p>Now if you turn on High-Res Fix in A1111, each controlnet will output two different control images: a small one and a large one. The small one is for your basic generating, and the big one is for your High-Res Fix generating. The two control images are computed by a smart algorithm called “super high-quality control image resampling”. This is turned on by default, and you do not need to change any setting.</p>
+<h3 id="Perfect-Support-for-All-A1111-Img2Img-or-Inpaint-Settings-and-All-Mask-Types"><a href="#Perfect-Support-for-All-A1111-Img2Img-or-Inpaint-Settings-and-All-Mask-Types" class="headerlink" title="Perfect Support for All A1111 Img2Img or Inpaint Settings and All Mask Types"></a>Perfect Support for All A1111 Img2Img or Inpaint Settings and All Mask Types</h3><p>Now ControlNet is extensively tested with A1111’s different types of masks, including “Inpaint masked”&#x2F;“Inpaint not masked”, and “Whole picture”&#x2F;“Only masked”, and “Only masked padding”&amp;”Mask blur”. The resizing perfectly matches A1111’s “Just resize”&#x2F;“Crop and resize”&#x2F;“Resize and fill”. This means you can use ControlNet in nearly everywhere in your A1111 UI without difficulty!</p>
+<h3 id="The-New-“Pixel-Perfect”-Mode"><a href="#The-New-“Pixel-Perfect”-Mode" class="headerlink" title="The New “Pixel-Perfect” Mode"></a>The New “Pixel-Perfect” Mode</h3><p>Now if you turn on pixel-perfect mode, you do not need to set preprocessor (annotator) resolutions manually. The ControlNet will automatically compute the best annotator resolution for you so that each pixel perfectly matches Stable Diffusion.</p>
+<h3 id="User-Friendly-GUI-and-Preprocessor-Preview"><a href="#User-Friendly-GUI-and-Preprocessor-Preview" class="headerlink" title="User-Friendly GUI and Preprocessor Preview"></a>User-Friendly GUI and Preprocessor Preview</h3><p>We reorganized some previously confusing UI like “canvas width&#x2F;height for new canvas” and it is in the 📝 button now. Now the preview GUI is controlled by the “allow preview” option and the trigger button 💥. The preview image size is better than before, and you do not need to scroll up and down - your a1111 GUI will not be messed up anymore!</p>
+<h3 id="Support-for-Almost-All-Upscaling-Scripts"><a href="#Support-for-Almost-All-Upscaling-Scripts" class="headerlink" title="Support for Almost All Upscaling Scripts"></a>Support for Almost All Upscaling Scripts</h3><p>Now ControlNet 1.1 can support almost all Upscaling&#x2F;Tile methods. ControlNet 1.1 support the script “Ultimate SD upscale” and almost all other tile-based extensions. Please do not confuse <a target="_blank" rel="noopener" href="https://github.com/Coyote-A/ultimate-upscale-for-automatic1111">“Ultimate SD upscale”</a> with “SD upscale” - they are different scripts. Note that the most recommended upscaling method is <a target="_blank" rel="noopener" href="https://github.com/pkuliyi2015/multidiffusion-upscaler-for-automatic1111">“Tiled VAE&#x2F;Diffusion”</a> but we test as many methods&#x2F;extensions as possible. Note that “SD upscale” is supported since 1.1.117, and if you use it, you need to leave all ControlNet images as blank (We do not recommend “SD upscale” since it is somewhat buggy and cannot be maintained - use the “Ultimate SD upscale” instead).</p>
+<h3 id="More-Control-Modes-previously-called-Guess-Mode"><a href="#More-Control-Modes-previously-called-Guess-Mode" class="headerlink" title="More Control Modes (previously called Guess Mode)"></a>More Control Modes (previously called Guess Mode)</h3><p>We have fixed many bugs in previous 1.0’s Guess Mode and now it is called Control Mode</p>
+<p><img src="https://user-images.githubusercontent.com/19834515/236641759-6c44ddf6-c7ad-4bda-92be-e90a52911d75.png" alt="image"></p>
+<p>Now you can control which aspect is more important (your prompt or your ControlNet)：</p>
+<ul>
+<li><p>“Balanced”: ControlNet on both sides of CFG scale, same as turning off “Guess Mode” in ControlNet 1.0</p>
+</li>
+<li><p>“My prompt is more important”: ControlNet on both sides of CFG scale, with progressively reduced SD U-Net injections (layer_weight*&#x3D;0.825**I, where 0&lt;&#x3D;I &lt;13, and the 13 means ControlNet injected SD 13 times). In this way, you can make sure that your prompts are perfectly displayed in your generated images.</p>
+</li>
+<li><p>“ControlNet is more important”: ControlNet only on the Conditional Side of CFG scale (the cond in A1111’s batch-cond-uncond). This means the ControlNet will be X times stronger if your cfg-scale is X. For example, if your cfg-scale is 7, then ControlNet is 7 times stronger. Note that here the X times stronger is different from “Control Weights” since your weights are not modified. This “stronger” effect usually has less artifact and give ControlNet more room to guess what is missing from your prompts (and in the previous 1.0, it is called “Guess Mode”).</p>
+</li>
+</ul>
+<table width="100%">
+<tr>
+<td width="25%" style="text-align: center">Input (depth+canny+hed)</td>
+<td width="25%" style="text-align: center">"Balanced"</td>
+<td width="25%" style="text-align: center">"My prompt is more important"</td>
+<td width="25%" style="text-align: center">"ControlNet is more important"</td>
+</tr>
+<tr>
+<td width="25%" style="text-align: center"><img src="/.com//cm1.png"></td>
+<td width="25%" style="text-align: center"><img src="/.com//cm2.png"></td>
+<td width="25%" style="text-align: center"><img src="/.com//cm3.png"></td>
+<td width="25%" style="text-align: center"><img src="/.com//cm4.png"></td>
+</tr>
+</table>
+
+<h3 id="Reference-Only-Control"><a href="#Reference-Only-Control" class="headerlink" title="Reference-Only Control"></a>Reference-Only Control</h3><p>Now we have a <code>reference-only</code> preprocessor that does not require any control models. It can guide the diffusion directly using images as references.</p>
+<p>(Prompt “a dog running on grassland, best quality, …”)</p>
+<p><img src="/.com//ref.png" alt="image"></p>
+<p>This method is similar to inpaint-based reference but it does not make your image disordered. </p>
+<p>Many professional A1111 users know a trick to diffuse image with references by inpaint. For example, if you have a 512x512 image of a dog, and want to generate another 512x512 image with the same dog, some users will connect the 512x512 dog image and a 512x512 blank image into a 1024x512 image, send to inpaint, and mask out the blank 512x512 part to diffuse a dog with similar appearance. However, that method is usually not very satisfying since images are connected and many distortions will appear.</p>
+<p>This <code>reference-only</code> ControlNet can directly link the attention layers of your SD to any independent images, so that your SD will read arbitary images for reference. You need at least ControlNet 1.1.153 to use it.</p>
+<p>To use, just select <code>reference-only</code> as preprocessor and put an image. Your SD will just use the image as reference.</p>
+<p><em>Note that this method is as “non-opinioned” as possible. It only contains very basic connection codes, without any personal preferences, to connect the attention layers with your reference images. However, even if we tried best to not include any opinioned codes, we still need to write some subjective implementations to deal with weighting, cfg-scale, etc - tech report is on the way.</em></p>
+<p>More examples <a target="_blank" rel="noopener" href="https://github.com/Mikubill/sd-webui-controlnet/discussions/1236">here</a>.</p>
+<h1 id="Technical-Documents"><a href="#Technical-Documents" class="headerlink" title="Technical Documents"></a>Technical Documents</h1><p>See also the documents of ControlNet 1.1: </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/lllyasviel/ControlNet-v1-1-nightly#model-specification">https://github.com/lllyasviel/ControlNet-v1-1-nightly#model-specification</a></p>
+<h1 id="Default-Setting"><a href="#Default-Setting" class="headerlink" title="Default Setting"></a>Default Setting</h1><p>This is my setting. If you run into any problem, you can use this setting as a sanity check</p>
+<p><img src="https://user-images.githubusercontent.com/19834515/235620638-17937171-8ac1-45bc-a3cb-3aebf605b4ef.png" alt="image"></p>
+<h1 id="Use-Previous-Models"><a href="#Use-Previous-Models" class="headerlink" title="Use Previous Models"></a>Use Previous Models</h1><h3 id="Use-ControlNet-1-0-Models"><a href="#Use-ControlNet-1-0-Models" class="headerlink" title="Use ControlNet 1.0 Models"></a>Use ControlNet 1.0 Models</h3><p><a target="_blank" rel="noopener" href="https://huggingface.co/lllyasviel/ControlNet/tree/main/models">https://huggingface.co/lllyasviel/ControlNet/tree/main/models</a></p>
+<p>You can still use all previous models in the previous ControlNet 1.0. Now, the previous “depth” is now called “depth_midas”, the previous “normal” is called “normal_midas”, the previous “hed” is called “softedge_hed”. And starting from 1.1, all line maps, edge maps, lineart maps, boundary maps will have black background and white lines.</p>
+<h3 id="Use-T2I-Adapter-Models"><a href="#Use-T2I-Adapter-Models" class="headerlink" title="Use T2I-Adapter Models"></a>Use T2I-Adapter Models</h3><p>(From TencentARC&#x2F;T2I-Adapter)</p>
+<p>To use T2I-Adapter models:</p>
+<ol>
+<li>Download files from <a target="_blank" rel="noopener" href="https://huggingface.co/TencentARC/T2I-Adapter/tree/main/models">https://huggingface.co/TencentARC/T2I-Adapter/tree/main/models</a></li>
+<li>Put them in “stable-diffusion-webui\extensions\sd-webui-controlnet\models”.</li>
+<li>Make sure that the file names of pth files and yaml files are consistent.</li>
+</ol>
+<p><em>Note that “CoAdapter” is not implemented yet.</em></p>
+<h1 id="Gallery"><a href="#Gallery" class="headerlink" title="Gallery"></a>Gallery</h1><p>The below results are from ControlNet 1.0.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Source</th>
+<th align="center">Input</th>
+<th align="center">Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">(no preprocessor)</td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/bal-source.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/bal-gen.png?raw=true"></td>
+</tr>
+<tr>
+<td align="center">(no preprocessor)</td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/dog_rel.jpg?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/dog_rel.png?raw=true"></td>
+</tr>
+<tr>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/mahiro_input.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/mahiro_canny.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/mahiro-out.png?raw=true"></td>
+</tr>
+<tr>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/evt_source.jpg?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/evt_hed.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/evt_gen.png?raw=true"></td>
+</tr>
+<tr>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/an-source.jpg?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/an-pose.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/an-gen.png?raw=true"></td>
+</tr>
+<tr>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/sk-b-src.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/sk-b-dep.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/sk-b-out.png?raw=true"></td>
+</tr>
+</tbody></table>
+<p>The below examples are from T2I-Adapter.</p>
+<p>From <code>t2iadapter_color_sd14v1.pth</code> :</p>
+<table>
+<thead>
+<tr>
+<th align="center">Source</th>
+<th align="center">Input</th>
+<th align="center">Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img width="256" alt src="https://user-images.githubusercontent.com/31246794/222947416-ec9e52a4-a1d0-48d8-bb81-736bf636145e.jpeg"></td>
+<td align="center"><img width="256" alt src="https://user-images.githubusercontent.com/31246794/222947435-1164e7d8-d857-42f9-ab10-2d4a4b25f33a.png"></td>
+<td align="center"><img width="256" alt src="https://user-images.githubusercontent.com/31246794/222947557-5520d5f8-88b4-474d-a576-5c9cd3acac3a.png"></td>
+</tr>
+</tbody></table>
+<p>From <code>t2iadapter_style_sd14v1.pth</code> :</p>
+<table>
+<thead>
+<tr>
+<th align="center">Source</th>
+<th align="center">Input</th>
+<th align="center">Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img width="256" alt src="https://user-images.githubusercontent.com/31246794/222947416-ec9e52a4-a1d0-48d8-bb81-736bf636145e.jpeg"></td>
+<td align="center">(clip, non-image)</td>
+<td align="center"><img width="256" alt src="https://user-images.githubusercontent.com/31246794/222965711-7b884c9e-7095-45cb-a91c-e50d296ba3a2.png"></td>
+</tr>
+</tbody></table>
+<h1 id="Minimum-Requirements"><a href="#Minimum-Requirements" class="headerlink" title="Minimum Requirements"></a>Minimum Requirements</h1><ul>
+<li>(Windows) (NVIDIA: Ampere) 4gb - with <code>--xformers</code> enabled, and <code>Low VRAM</code> mode ticked in the UI, goes up to 768x832</li>
+</ul>
+<h1 id="Multi-ControlNet"><a href="#Multi-ControlNet" class="headerlink" title="Multi-ControlNet"></a>Multi-ControlNet</h1><p>This option allows multiple ControlNet inputs for a single generation. To enable this option, change <code>Multi ControlNet: Max models amount (requires restart)</code> in the settings. Note that you will need to restart the WebUI for changes to take effect.</p>
+<table width="100%">
+<tr>
+<td width="25%" style="text-align: center">Source A</td>
+<td width="25%" style="text-align: center">Source B</td>
+<td width="25%" style="text-align: center">Output</td>
+</tr>
+<tr>
+<td width="25%" style="text-align: center"><img src="https://user-images.githubusercontent.com/31246794/220448620-cd3ede92-8d3f-43d5-b771-32dd8417618f.png"></td>
+<td width="25%" style="text-align: center"><img src="https://user-images.githubusercontent.com/31246794/220448619-beed9bdb-f6bb-41c2-a7df-aa3ef1f653c5.png"></td>
+<td width="25%" style="text-align: center"><img src="https://user-images.githubusercontent.com/31246794/220448613-c99a9e04-0450-40fd-bc73-a9122cefaa2c.png"></td>
+</tr>
+</table>
+
+<h1 id="Control-Weight-x2F-Start-x2F-End"><a href="#Control-Weight-x2F-Start-x2F-End" class="headerlink" title="Control Weight&#x2F;Start&#x2F;End"></a>Control Weight&#x2F;Start&#x2F;End</h1><p>Weight is the weight of the controlnet “influence”. It’s analogous to prompt attention&#x2F;emphasis. E.g. (myprompt: 1.2). Technically, it’s the factor by which to multiply the ControlNet outputs before merging them with original SD Unet.</p>
+<p>Guidance Start&#x2F;End is the percentage of total steps the controlnet applies (guidance strength &#x3D; guidance end). It’s analogous to prompt editing&#x2F;shifting. E.g. [myprompt::0.8] (It applies from the beginning until 80% of total steps)</p>
+<h1 id="Batch-Mode"><a href="#Batch-Mode" class="headerlink" title="Batch Mode"></a>Batch Mode</h1><p>Put any unit into batch mode to activate batch mode for all units. Specify a batch directory for each unit, or use the new textbox in the img2img batch tab as a fallback. Although the textbox is located in the img2img batch tab, you can use it to generate images in the txt2img tab as well.</p>
+<p>Note that this feature is only available in the gradio user interface. Call the APIs as many times as you want for custom batch scheduling.</p>
+<h1 id="API-and-Script-Access"><a href="#API-and-Script-Access" class="headerlink" title="API and Script Access"></a>API and Script Access</h1><p>This extension can accept txt2img or img2img tasks via API or external extension call. Note that you may need to enable <code>Allow other scripts to control this extension</code> in settings for external calls.</p>
+<p>To use the API: start WebUI with argument <code>--api</code> and go to <code>http://webui-address/docs</code> for documents or checkout <a target="_blank" rel="noopener" href="https://github.com/Mikubill/sd-webui-controlnet/blob/main/example/api_txt2img.ipynb">examples</a>.</p>
+<p>To use external call: Checkout <a target="_blank" rel="noopener" href="https://github.com/Mikubill/sd-webui-controlnet/wiki/API">Wiki</a></p>
+<h1 id="Command-Line-Arguments"><a href="#Command-Line-Arguments" class="headerlink" title="Command Line Arguments"></a>Command Line Arguments</h1><p>This extension adds these command line arguments to the webui:</p>
+<pre><code>    --controlnet-dir &lt;path to directory with controlnet models&gt;                                ADD a controlnet models directory
+    --controlnet-annotator-models-path &lt;path to directory with annotator model directories&gt;    SET the directory for annotator models
+    --no-half-controlnet                                                                       load controlnet models in full precision
+    --controlnet-preprocessor-cache-size                                                       Cache size for controlnet preprocessor results
+    --controlnet-loglevel                                                                      Log level for the controlnet extension
+</code></pre>
+<h1 id="MacOS-Support"><a href="#MacOS-Support" class="headerlink" title="MacOS Support"></a>MacOS Support</h1><p>Tested with pytorch nightly: <a target="_blank" rel="noopener" href="https://github.com/Mikubill/sd-webui-controlnet/pull/143#issuecomment-1435058285">https://github.com/Mikubill/sd-webui-controlnet/pull/143#issuecomment-1435058285</a></p>
+<p>To use this extension with mps and normal pytorch, currently you may need to start WebUI with <code>--no-half</code>.</p>
+<h1 id="Archive-of-Deprecated-Versions"><a href="#Archive-of-Deprecated-Versions" class="headerlink" title="Archive of Deprecated Versions"></a>Archive of Deprecated Versions</h1><p>The previous version (sd-webui-controlnet 1.0) is archived in </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/lllyasviel/webui-controlnet-v1-archived">https://github.com/lllyasviel/webui-controlnet-v1-archived</a></p>
+<p>Using this version is not a temporary stop of updates. You will stop all updates forever.</p>
+<p>Please consider this version if you work with professional studios that requires 100% reproducing of all previous results pixel by pixel.</p>
+<h1 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h1><p>This implementation is inspired by kohya-ss&#x2F;sd-webui-additional-networks</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 LinkedList&#39;s Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Ding Li
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+
+
+        
+    </body>
+</html>

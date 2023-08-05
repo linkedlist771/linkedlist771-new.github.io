@@ -169,6 +169,533 @@
         
 
 <div class="post">
+    <a href="/2023/08/05/%E9%AB%98%E7%BA%A7python%E7%9F%A5%E8%AF%86/">
+        <h2 class="post-title">高级python知识</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/8/5
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/08/05/%E9%AB%98%E7%BA%A7python%E7%9F%A5%E8%AF%86/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/07/24/docker%E5%AD%A6%E4%B9%A0/">
+        <h2 class="post-title">docker学习</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/7/24
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h3 id="什么是docker"><a href="#什么是docker" class="headerlink" title="什么是docker"></a>什么是docker</h3><blockquote>
+<p>Simply put, a container is a sandboxed process on your machine that is isolated from all other processes on the host machine. That isolation leverages <a target="_blank" rel="noopener" href="https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504">kernel namespaces and cgroups</a>, features that have been in Linux for a long time. Docker has worked to make these capabilities approachable and easy to use. To summarize, a container:</p>
+<ul>
+<li>Is a runnable instance of an image. You can create, start, stop, move, or delete a container using the DockerAPI or CLI.</li>
+<li>Can be run on local machines, virtual machines or deployed to the cloud.</li>
+<li>Is portable (can be run on any OS).</li>
+<li>Is isolated from other containers and runs its own software, binaries, and configurations.</li>
+</ul>
+</blockquote>
+<h3 id="什么是Image"><a href="#什么是Image" class="headerlink" title="什么是Image"></a>什么是Image</h3><blockquote>
+<p>When running a container, it uses an isolated filesystem. This custom filesystem is provided by a container image. Since the image contains the container’s filesystem, it must contain everything needed to run an application - all dependencies, configurations, scripts, binaries, etc. The image also contains other configuration for the container, such as environment variables, a default command to run, and other metadata.</p>
+</blockquote>
+<h3 id="下载安装docker"><a href="#下载安装docker" class="headerlink" title="下载安装docker"></a>下载安装docker</h3><p><a target="_blank" rel="noopener" href="https://docs.docker.com/get-docker/">Get Docker | Docker Documentation</a></p>
+<h3 id="创建部署docker"><a href="#创建部署docker" class="headerlink" title="创建部署docker"></a>创建部署docker</h3><ul>
+<li><p>Create an empty file named <code>Dockerfile</code>.</p>
+<pre><code class="bash">type nul &gt; Dockerfile
+</code></pre>
+</li>
+</ul>
+<h2 id="Ubuntu部署docker"><a href="#Ubuntu部署docker" class="headerlink" title="Ubuntu部署docker"></a>Ubuntu部署docker</h2><h3 id="卸载docker"><a href="#卸载docker" class="headerlink" title="卸载docker"></a>卸载docker</h3><pre><code class="bash">sudo apt remove docker-desktop
+</code></pre>
+<h2 id="更新包"><a href="#更新包" class="headerlink" title="更新包"></a>更新包</h2><p>Update the <code>apt</code> package index and install packages to allow <code>apt</code> to use a repository over HTTPS:</p>
+<p>容器的运行环境是隔离的</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/07/24/docker%E5%AD%A6%E4%B9%A0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/07/23/%E4%B8%8B%E8%BD%BD%E9%A1%B9%E7%9B%AE/">
+        <h2 class="post-title"></h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/7/23
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h4 id="下载项目"><a href="#下载项目" class="headerlink" title="下载项目"></a>下载项目</h4><pre><code class="bash">git clone git@github.com:RVC-Project/Retrieval-based-Voice-Conversion-WebUI.git
+</code></pre>
+<h4 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h4><pre><code class="bash">conda create -n SVC python=3.9
+pip install -r requirements.txt
+</code></pre>
+<h4 id="下载对应的配置环境"><a href="#下载对应的配置环境" class="headerlink" title="下载对应的配置环境"></a>下载对应的配置环境</h4><p><a target="_blank" rel="noopener" href="https://huggingface.co/lj1995/VoiceConversionWebUI/tree/main">lj1995&#x2F;VoiceConversionWebUI at main (huggingface.co)</a></p>
+<p><img src="/.com//Users\23174\AppData\Roaming\Typora\typora-user-images\image-20230723155912006.png" alt="image-20230723155912006"></p>
+<p><img src="/.com//Users\23174\AppData\Roaming\Typora\typora-user-images\image-20230723155937470.png" alt="image-20230723155937470"></p>
+<p><img src="/.com//Users\23174\AppData\Roaming\Typora\typora-user-images\image-20230723155959215.png" alt="image-20230723155959215"></p>
+<p>将这些文件配置在对应的路径中：</p>
+<pre><code class="bash">hubert_base.pt
+
+./pretrained 
+
+./uvr5_weights
+
+想测试v2版本模型的话，需要额外下载
+
+./pretrained_v2 
+
+如果你正在使用Windows，则你可能需要这个文件，若ffmpeg和ffprobe已安装则跳过; ubuntu/debian 用户可以通过apt install ffmpeg来安装这2个库
+
+./ffmpeg
+
+https://huggingface.co/lj1995/VoiceConversionWebUI/blob/main/ffmpeg.exe
+
+./ffprobe
+
+https://huggingface.co/lj1995/VoiceConversionWebUI/blob/main/ffprobe.exe
+
+如果你想使用最新的RMVPE人声音高提取算法，则你需要下载音高提取模型参数并放置于RVC根目录
+
+https://huggingface.co/lj1995/VoiceConversionWebUI/blob/main/rmvpe.pt
+</code></pre>
+<p>然后启动<code>infer-web.py</code> 来运行webui。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/07/23/%E4%B8%8B%E8%BD%BD%E9%A1%B9%E7%9B%AE/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/07/22/ControlNet%20for%20Stable%20Diffusion%20WebUI/">
+        <h2 class="post-title"></h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/7/22
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="ControlNet-for-Stable-Diffusion-WebUI"><a href="#ControlNet-for-Stable-Diffusion-WebUI" class="headerlink" title="ControlNet for Stable Diffusion WebUI"></a>ControlNet for Stable Diffusion WebUI</h1><p>The WebUI extension for ControlNet and other injection-based SD controls.</p>
+<p><img src="https://user-images.githubusercontent.com/19834515/235606305-229b3d1e-5bfc-467f-9d55-0976eab71652.png" alt="image"></p>
+<p>This extension is for AUTOMATIC1111’s <a target="_blank" rel="noopener" href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion web UI</a>, allows the Web UI to add <a target="_blank" rel="noopener" href="https://github.com/lllyasviel/ControlNet">ControlNet</a> to the original Stable Diffusion model to generate images. The addition is on-the-fly, the merging is not required.</p>
+<h1 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h1><ol>
+<li>Open “Extensions” tab.</li>
+<li>Open “Install from URL” tab in the tab.</li>
+<li>Enter <code>https://github.com/Mikubill/sd-webui-controlnet.git</code> to “URL for extension’s git repository”.</li>
+<li>Press “Install” button.</li>
+<li>Wait for 5 seconds, and you will see the message “Installed into stable-diffusion-webui\extensions\sd-webui-controlnet. Use Installed tab to restart”.</li>
+<li>Go to “Installed” tab, click “Check for updates”, and then click “Apply and restart UI”. (The next time you can also use these buttons to update ControlNet.)</li>
+<li>Completely restart A1111 webui including your terminal. (If you do not know what is a “terminal”, you can reboot your computer to achieve the same effect.)</li>
+<li>Download models (see below).</li>
+<li>After you put models in the correct folder, you may need to refresh to see the models. The refresh button is right to your “Model” dropdown.</li>
+</ol>
+<p><strong>Update from ControlNet 1.0 to 1.1:</strong></p>
+<ul>
+<li><p>If you are not sure, you can back up and remove the folder “stable-diffusion-webui\extensions\sd-webui-controlnet”, and then start from the step 1 in the above Installation section. </p>
+</li>
+<li><p>Or you can start from the step 6 in the above Install section.</p>
+</li>
+</ul>
+<h1 id="Download-Models"><a href="#Download-Models" class="headerlink" title="Download Models"></a>Download Models</h1><p>Right now all the 14 models of ControlNet 1.1 are in the beta test.</p>
+<p>Download the models from ControlNet 1.1: <a target="_blank" rel="noopener" href="https://huggingface.co/lllyasviel/ControlNet-v1-1/tree/main">https://huggingface.co/lllyasviel/ControlNet-v1-1/tree/main</a></p>
+<p>You need to download model files ending with “.pth” .</p>
+<p>Put models in your “stable-diffusion-webui\extensions\sd-webui-controlnet\models”. Now we have already included all “yaml” files. You only need to download “pth” files.</p>
+<p>Do not right-click the filenames in HuggingFace website to download. Some users right-clicked those HuggingFace HTML websites and saved those HTML pages as PTH&#x2F;YAML files. They are not downloading correct files. Instead, please click the small download arrow “↓” icon in HuggingFace to download.</p>
+<p>Note: If you download models elsewhere, please make sure that yaml file names and model files names are same. Please manually rename all yaml files if you download from other sources. (Some models like “shuffle” needs the yaml file so that we know the outputs of ControlNet should pass a global average pooling before injecting to SD U-Nets.)</p>
+<h1 id="New-Features-in-ControlNet-1-1"><a href="#New-Features-in-ControlNet-1-1" class="headerlink" title="New Features in ControlNet 1.1"></a>New Features in ControlNet 1.1</h1><h3 id="Perfect-Support-for-All-ControlNet-1-0-x2F-1-1-and-T2I-Adapter-Models"><a href="#Perfect-Support-for-All-ControlNet-1-0-x2F-1-1-and-T2I-Adapter-Models" class="headerlink" title="Perfect Support for All ControlNet 1.0&#x2F;1.1 and T2I Adapter Models."></a>Perfect Support for All ControlNet 1.0&#x2F;1.1 and T2I Adapter Models.</h3><p>Now we have perfect support all available models and preprocessors, including perfect support for T2I style adapter and ControlNet 1.1 Shuffle. (Make sure that your YAML file names and model file names are same, see also YAML files in “stable-diffusion-webui\extensions\sd-webui-controlnet\models”.)</p>
+<h3 id="Perfect-Support-for-A1111-High-Res-Fix"><a href="#Perfect-Support-for-A1111-High-Res-Fix" class="headerlink" title="Perfect Support for A1111 High-Res. Fix"></a>Perfect Support for A1111 High-Res. Fix</h3><p>Now if you turn on High-Res Fix in A1111, each controlnet will output two different control images: a small one and a large one. The small one is for your basic generating, and the big one is for your High-Res Fix generating. The two control images are computed by a smart algorithm called “super high-quality control image resampling”. This is turned on by default, and you do not need to change any setting.</p>
+<h3 id="Perfect-Support-for-All-A1111-Img2Img-or-Inpaint-Settings-and-All-Mask-Types"><a href="#Perfect-Support-for-All-A1111-Img2Img-or-Inpaint-Settings-and-All-Mask-Types" class="headerlink" title="Perfect Support for All A1111 Img2Img or Inpaint Settings and All Mask Types"></a>Perfect Support for All A1111 Img2Img or Inpaint Settings and All Mask Types</h3><p>Now ControlNet is extensively tested with A1111’s different types of masks, including “Inpaint masked”&#x2F;“Inpaint not masked”, and “Whole picture”&#x2F;“Only masked”, and “Only masked padding”&amp;”Mask blur”. The resizing perfectly matches A1111’s “Just resize”&#x2F;“Crop and resize”&#x2F;“Resize and fill”. This means you can use ControlNet in nearly everywhere in your A1111 UI without difficulty!</p>
+<h3 id="The-New-“Pixel-Perfect”-Mode"><a href="#The-New-“Pixel-Perfect”-Mode" class="headerlink" title="The New “Pixel-Perfect” Mode"></a>The New “Pixel-Perfect” Mode</h3><p>Now if you turn on pixel-perfect mode, you do not need to set preprocessor (annotator) resolutions manually. The ControlNet will automatically compute the best annotator resolution for you so that each pixel perfectly matches Stable Diffusion.</p>
+<h3 id="User-Friendly-GUI-and-Preprocessor-Preview"><a href="#User-Friendly-GUI-and-Preprocessor-Preview" class="headerlink" title="User-Friendly GUI and Preprocessor Preview"></a>User-Friendly GUI and Preprocessor Preview</h3><p>We reorganized some previously confusing UI like “canvas width&#x2F;height for new canvas” and it is in the 📝 button now. Now the preview GUI is controlled by the “allow preview” option and the trigger button 💥. The preview image size is better than before, and you do not need to scroll up and down - your a1111 GUI will not be messed up anymore!</p>
+<h3 id="Support-for-Almost-All-Upscaling-Scripts"><a href="#Support-for-Almost-All-Upscaling-Scripts" class="headerlink" title="Support for Almost All Upscaling Scripts"></a>Support for Almost All Upscaling Scripts</h3><p>Now ControlNet 1.1 can support almost all Upscaling&#x2F;Tile methods. ControlNet 1.1 support the script “Ultimate SD upscale” and almost all other tile-based extensions. Please do not confuse <a target="_blank" rel="noopener" href="https://github.com/Coyote-A/ultimate-upscale-for-automatic1111">“Ultimate SD upscale”</a> with “SD upscale” - they are different scripts. Note that the most recommended upscaling method is <a target="_blank" rel="noopener" href="https://github.com/pkuliyi2015/multidiffusion-upscaler-for-automatic1111">“Tiled VAE&#x2F;Diffusion”</a> but we test as many methods&#x2F;extensions as possible. Note that “SD upscale” is supported since 1.1.117, and if you use it, you need to leave all ControlNet images as blank (We do not recommend “SD upscale” since it is somewhat buggy and cannot be maintained - use the “Ultimate SD upscale” instead).</p>
+<h3 id="More-Control-Modes-previously-called-Guess-Mode"><a href="#More-Control-Modes-previously-called-Guess-Mode" class="headerlink" title="More Control Modes (previously called Guess Mode)"></a>More Control Modes (previously called Guess Mode)</h3><p>We have fixed many bugs in previous 1.0’s Guess Mode and now it is called Control Mode</p>
+<p><img src="https://user-images.githubusercontent.com/19834515/236641759-6c44ddf6-c7ad-4bda-92be-e90a52911d75.png" alt="image"></p>
+<p>Now you can control which aspect is more important (your prompt or your ControlNet)：</p>
+<ul>
+<li><p>“Balanced”: ControlNet on both sides of CFG scale, same as turning off “Guess Mode” in ControlNet 1.0</p>
+</li>
+<li><p>“My prompt is more important”: ControlNet on both sides of CFG scale, with progressively reduced SD U-Net injections (layer_weight*&#x3D;0.825**I, where 0&lt;&#x3D;I &lt;13, and the 13 means ControlNet injected SD 13 times). In this way, you can make sure that your prompts are perfectly displayed in your generated images.</p>
+</li>
+<li><p>“ControlNet is more important”: ControlNet only on the Conditional Side of CFG scale (the cond in A1111’s batch-cond-uncond). This means the ControlNet will be X times stronger if your cfg-scale is X. For example, if your cfg-scale is 7, then ControlNet is 7 times stronger. Note that here the X times stronger is different from “Control Weights” since your weights are not modified. This “stronger” effect usually has less artifact and give ControlNet more room to guess what is missing from your prompts (and in the previous 1.0, it is called “Guess Mode”).</p>
+</li>
+</ul>
+<table width="100%">
+<tr>
+<td width="25%" style="text-align: center">Input (depth+canny+hed)</td>
+<td width="25%" style="text-align: center">"Balanced"</td>
+<td width="25%" style="text-align: center">"My prompt is more important"</td>
+<td width="25%" style="text-align: center">"ControlNet is more important"</td>
+</tr>
+<tr>
+<td width="25%" style="text-align: center"><img src="/.com//cm1.png"></td>
+<td width="25%" style="text-align: center"><img src="/.com//cm2.png"></td>
+<td width="25%" style="text-align: center"><img src="/.com//cm3.png"></td>
+<td width="25%" style="text-align: center"><img src="/.com//cm4.png"></td>
+</tr>
+</table>
+
+<h3 id="Reference-Only-Control"><a href="#Reference-Only-Control" class="headerlink" title="Reference-Only Control"></a>Reference-Only Control</h3><p>Now we have a <code>reference-only</code> preprocessor that does not require any control models. It can guide the diffusion directly using images as references.</p>
+<p>(Prompt “a dog running on grassland, best quality, …”)</p>
+<p><img src="/.com//ref.png" alt="image"></p>
+<p>This method is similar to inpaint-based reference but it does not make your image disordered. </p>
+<p>Many professional A1111 users know a trick to diffuse image with references by inpaint. For example, if you have a 512x512 image of a dog, and want to generate another 512x512 image with the same dog, some users will connect the 512x512 dog image and a 512x512 blank image into a 1024x512 image, send to inpaint, and mask out the blank 512x512 part to diffuse a dog with similar appearance. However, that method is usually not very satisfying since images are connected and many distortions will appear.</p>
+<p>This <code>reference-only</code> ControlNet can directly link the attention layers of your SD to any independent images, so that your SD will read arbitary images for reference. You need at least ControlNet 1.1.153 to use it.</p>
+<p>To use, just select <code>reference-only</code> as preprocessor and put an image. Your SD will just use the image as reference.</p>
+<p><em>Note that this method is as “non-opinioned” as possible. It only contains very basic connection codes, without any personal preferences, to connect the attention layers with your reference images. However, even if we tried best to not include any opinioned codes, we still need to write some subjective implementations to deal with weighting, cfg-scale, etc - tech report is on the way.</em></p>
+<p>More examples <a target="_blank" rel="noopener" href="https://github.com/Mikubill/sd-webui-controlnet/discussions/1236">here</a>.</p>
+<h1 id="Technical-Documents"><a href="#Technical-Documents" class="headerlink" title="Technical Documents"></a>Technical Documents</h1><p>See also the documents of ControlNet 1.1: </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/lllyasviel/ControlNet-v1-1-nightly#model-specification">https://github.com/lllyasviel/ControlNet-v1-1-nightly#model-specification</a></p>
+<h1 id="Default-Setting"><a href="#Default-Setting" class="headerlink" title="Default Setting"></a>Default Setting</h1><p>This is my setting. If you run into any problem, you can use this setting as a sanity check</p>
+<p><img src="https://user-images.githubusercontent.com/19834515/235620638-17937171-8ac1-45bc-a3cb-3aebf605b4ef.png" alt="image"></p>
+<h1 id="Use-Previous-Models"><a href="#Use-Previous-Models" class="headerlink" title="Use Previous Models"></a>Use Previous Models</h1><h3 id="Use-ControlNet-1-0-Models"><a href="#Use-ControlNet-1-0-Models" class="headerlink" title="Use ControlNet 1.0 Models"></a>Use ControlNet 1.0 Models</h3><p><a target="_blank" rel="noopener" href="https://huggingface.co/lllyasviel/ControlNet/tree/main/models">https://huggingface.co/lllyasviel/ControlNet/tree/main/models</a></p>
+<p>You can still use all previous models in the previous ControlNet 1.0. Now, the previous “depth” is now called “depth_midas”, the previous “normal” is called “normal_midas”, the previous “hed” is called “softedge_hed”. And starting from 1.1, all line maps, edge maps, lineart maps, boundary maps will have black background and white lines.</p>
+<h3 id="Use-T2I-Adapter-Models"><a href="#Use-T2I-Adapter-Models" class="headerlink" title="Use T2I-Adapter Models"></a>Use T2I-Adapter Models</h3><p>(From TencentARC&#x2F;T2I-Adapter)</p>
+<p>To use T2I-Adapter models:</p>
+<ol>
+<li>Download files from <a target="_blank" rel="noopener" href="https://huggingface.co/TencentARC/T2I-Adapter/tree/main/models">https://huggingface.co/TencentARC/T2I-Adapter/tree/main/models</a></li>
+<li>Put them in “stable-diffusion-webui\extensions\sd-webui-controlnet\models”.</li>
+<li>Make sure that the file names of pth files and yaml files are consistent.</li>
+</ol>
+<p><em>Note that “CoAdapter” is not implemented yet.</em></p>
+<h1 id="Gallery"><a href="#Gallery" class="headerlink" title="Gallery"></a>Gallery</h1><p>The below results are from ControlNet 1.0.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Source</th>
+<th align="center">Input</th>
+<th align="center">Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">(no preprocessor)</td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/bal-source.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/bal-gen.png?raw=true"></td>
+</tr>
+<tr>
+<td align="center">(no preprocessor)</td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/dog_rel.jpg?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/dog_rel.png?raw=true"></td>
+</tr>
+<tr>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/mahiro_input.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/mahiro_canny.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/mahiro-out.png?raw=true"></td>
+</tr>
+<tr>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/evt_source.jpg?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/evt_hed.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/evt_gen.png?raw=true"></td>
+</tr>
+<tr>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/an-source.jpg?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/an-pose.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/an-gen.png?raw=true"></td>
+</tr>
+<tr>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/sk-b-src.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/sk-b-dep.png?raw=true"></td>
+<td align="center"><img width="256" alt src="https://github.com/Mikubill/sd-webui-controlnet/blob/main/samples/sk-b-out.png?raw=true"></td>
+</tr>
+</tbody></table>
+<p>The below examples are from T2I-Adapter.</p>
+<p>From <code>t2iadapter_color_sd14v1.pth</code> :</p>
+<table>
+<thead>
+<tr>
+<th align="center">Source</th>
+<th align="center">Input</th>
+<th align="center">Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img width="256" alt src="https://user-images.githubusercontent.com/31246794/222947416-ec9e52a4-a1d0-48d8-bb81-736bf636145e.jpeg"></td>
+<td align="center"><img width="256" alt src="https://user-images.githubusercontent.com/31246794/222947435-1164e7d8-d857-42f9-ab10-2d4a4b25f33a.png"></td>
+<td align="center"><img width="256" alt src="https://user-images.githubusercontent.com/31246794/222947557-5520d5f8-88b4-474d-a576-5c9cd3acac3a.png"></td>
+</tr>
+</tbody></table>
+<p>From <code>t2iadapter_style_sd14v1.pth</code> :</p>
+<table>
+<thead>
+<tr>
+<th align="center">Source</th>
+<th align="center">Input</th>
+<th align="center">Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img width="256" alt src="https://user-images.githubusercontent.com/31246794/222947416-ec9e52a4-a1d0-48d8-bb81-736bf636145e.jpeg"></td>
+<td align="center">(clip, non-image)</td>
+<td align="center"><img width="256" alt src="https://user-images.githubusercontent.com/31246794/222965711-7b884c9e-7095-45cb-a91c-e50d296ba3a2.png"></td>
+</tr>
+</tbody></table>
+<h1 id="Minimum-Requirements"><a href="#Minimum-Requirements" class="headerlink" title="Minimum Requirements"></a>Minimum Requirements</h1><ul>
+<li>(Windows) (NVIDIA: Ampere) 4gb - with <code>--xformers</code> enabled, and <code>Low VRAM</code> mode ticked in the UI, goes up to 768x832</li>
+</ul>
+<h1 id="Multi-ControlNet"><a href="#Multi-ControlNet" class="headerlink" title="Multi-ControlNet"></a>Multi-ControlNet</h1><p>This option allows multiple ControlNet inputs for a single generation. To enable this option, change <code>Multi ControlNet: Max models amount (requires restart)</code> in the settings. Note that you will need to restart the WebUI for changes to take effect.</p>
+<table width="100%">
+<tr>
+<td width="25%" style="text-align: center">Source A</td>
+<td width="25%" style="text-align: center">Source B</td>
+<td width="25%" style="text-align: center">Output</td>
+</tr>
+<tr>
+<td width="25%" style="text-align: center"><img src="https://user-images.githubusercontent.com/31246794/220448620-cd3ede92-8d3f-43d5-b771-32dd8417618f.png"></td>
+<td width="25%" style="text-align: center"><img src="https://user-images.githubusercontent.com/31246794/220448619-beed9bdb-f6bb-41c2-a7df-aa3ef1f653c5.png"></td>
+<td width="25%" style="text-align: center"><img src="https://user-images.githubusercontent.com/31246794/220448613-c99a9e04-0450-40fd-bc73-a9122cefaa2c.png"></td>
+</tr>
+</table>
+
+<h1 id="Control-Weight-x2F-Start-x2F-End"><a href="#Control-Weight-x2F-Start-x2F-End" class="headerlink" title="Control Weight&#x2F;Start&#x2F;End"></a>Control Weight&#x2F;Start&#x2F;End</h1><p>Weight is the weight of the controlnet “influence”. It’s analogous to prompt attention&#x2F;emphasis. E.g. (myprompt: 1.2). Technically, it’s the factor by which to multiply the ControlNet outputs before merging them with original SD Unet.</p>
+<p>Guidance Start&#x2F;End is the percentage of total steps the controlnet applies (guidance strength &#x3D; guidance end). It’s analogous to prompt editing&#x2F;shifting. E.g. [myprompt::0.8] (It applies from the beginning until 80% of total steps)</p>
+<h1 id="Batch-Mode"><a href="#Batch-Mode" class="headerlink" title="Batch Mode"></a>Batch Mode</h1><p>Put any unit into batch mode to activate batch mode for all units. Specify a batch directory for each unit, or use the new textbox in the img2img batch tab as a fallback. Although the textbox is located in the img2img batch tab, you can use it to generate images in the txt2img tab as well.</p>
+<p>Note that this feature is only available in the gradio user interface. Call the APIs as many times as you want for custom batch scheduling.</p>
+<h1 id="API-and-Script-Access"><a href="#API-and-Script-Access" class="headerlink" title="API and Script Access"></a>API and Script Access</h1><p>This extension can accept txt2img or img2img tasks via API or external extension call. Note that you may need to enable <code>Allow other scripts to control this extension</code> in settings for external calls.</p>
+<p>To use the API: start WebUI with argument <code>--api</code> and go to <code>http://webui-address/docs</code> for documents or checkout <a target="_blank" rel="noopener" href="https://github.com/Mikubill/sd-webui-controlnet/blob/main/example/api_txt2img.ipynb">examples</a>.</p>
+<p>To use external call: Checkout <a target="_blank" rel="noopener" href="https://github.com/Mikubill/sd-webui-controlnet/wiki/API">Wiki</a></p>
+<h1 id="Command-Line-Arguments"><a href="#Command-Line-Arguments" class="headerlink" title="Command Line Arguments"></a>Command Line Arguments</h1><p>This extension adds these command line arguments to the webui:</p>
+<pre><code>    --controlnet-dir &lt;path to directory with controlnet models&gt;                                ADD a controlnet models directory
+    --controlnet-annotator-models-path &lt;path to directory with annotator model directories&gt;    SET the directory for annotator models
+    --no-half-controlnet                                                                       load controlnet models in full precision
+    --controlnet-preprocessor-cache-size                                                       Cache size for controlnet preprocessor results
+    --controlnet-loglevel                                                                      Log level for the controlnet extension
+</code></pre>
+<h1 id="MacOS-Support"><a href="#MacOS-Support" class="headerlink" title="MacOS Support"></a>MacOS Support</h1><p>Tested with pytorch nightly: <a target="_blank" rel="noopener" href="https://github.com/Mikubill/sd-webui-controlnet/pull/143#issuecomment-1435058285">https://github.com/Mikubill/sd-webui-controlnet/pull/143#issuecomment-1435058285</a></p>
+<p>To use this extension with mps and normal pytorch, currently you may need to start WebUI with <code>--no-half</code>.</p>
+<h1 id="Archive-of-Deprecated-Versions"><a href="#Archive-of-Deprecated-Versions" class="headerlink" title="Archive of Deprecated Versions"></a>Archive of Deprecated Versions</h1><p>The previous version (sd-webui-controlnet 1.0) is archived in </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/lllyasviel/webui-controlnet-v1-archived">https://github.com/lllyasviel/webui-controlnet-v1-archived</a></p>
+<p>Using this version is not a temporary stop of updates. You will stop all updates forever.</p>
+<p>Please consider this version if you work with professional studios that requires 100% reproducing of all previous results pixel by pixel.</p>
+<h1 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h1><p>This implementation is inspired by kohya-ss&#x2F;sd-webui-additional-networks</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/07/22/ControlNet%20for%20Stable%20Diffusion%20WebUI/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/07/22/%E4%B8%BA%E4%BA%86%E8%A7%A3%E5%86%B3%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%8C%E6%88%91%E4%BB%AC%E6%8F%90%E5%87%BA%E4%BA%86%E5%8F%A6%E4%B8%80%E7%A7%8D%E7%AE%80%E5%8D%95%E8%80%8C%E6%9C%89%E6%95%88%E7%9A%84%E6%9D%A1%E4%BB%B6%E5%8C%96%E6%96%B9%E6%B3%95%EF%BC%9A%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E6%9C%9F%E9%97%B4%EF%BC%8C%E6%88%91%E4%BB%AC%E5%9D%87%E5%8C%80%E5%9C%B0%E9%87%87%E6%A0%B7%E8%A3%81%E5%89%AA%E5%9D%90%E6%A0%87ctop%20c_%7Btext%20%7Btop%20%7D%7D%20%E5%92%8C%20cleft%20c_%7Btext%20%7Bleft%20%7D%7D%EF%BC%88%E5%88%86%E5%88%AB%E6%8C%87%E5%AE%9A%E4%BB%8E%E5%B7%A6%E4%B8%8A%E8%A7%92%E6%B2%BF%E9%AB%98%E5%BA%A6%E5%92%8C%E5%AE%BD%E5%BA%A6%E8%BD%B4%E8%A3%81%E5%89%AA%E7%9A%84%E5%83%8F%E7%B4%A0%E6%95%B0%E9%87%8F%E7%9A%84%E6%95%B4/">
+        <h2 class="post-title"></h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/7/22
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>为了解决这个问题，我们提出了另一种简单而有效的条件化方法：在数据加载期间，我们均匀地采样裁剪坐标$c_{\text {top }}$ 和 $c_{\text {left }}$（分别指定从左上角沿高度和宽度轴裁剪的像素数量的整数），并通过傅立叶特征嵌入将它们作为条件参数输入到模型中，类似于上述的大小条件化。然后，连接的嵌入$\mathbf{c}<em>{\mathrm{crop}}$被用作额外的条件参数。我们强调，这种技术不仅限于LDMs，可以用于任何DM。注意，裁剪和大小条件化可以轻松地结合起来。在这种情况下，我们在将其添加到UNet的时间步嵌入之前，沿着通道维度连接特征嵌入。算法1说明了在应用这种组合时，我们如何在训练期间采样$\mathbf{c}</em>{\text {crop }}$ 和 $\mathbf{c}_{\text {size }}$。</p>
+<p>考虑到我们的经验是，大规模数据集平均来说是以对象为中心的，我们在推理期间设置$\left(c_{\text {top }}, c_{\text {left }}\right)&#x3D;$ $(0,0)$，从而从训练模型中获得以对象为中心的样本。</p>
+<p>请参见图5的说明：通过调整$\left(c_{\text {top }}, c_{\text {left }}\right)$，我们可以成功地模拟推理期间的裁剪量。这是一种条件化增强的形式，已经在自回归模型[20]和最近的扩散模型[21]中以各种形式使用。</p>
+<p>虽然其他方法，如数据分桶[31]，成功地解决了同样的任务，但我们仍然从裁剪引起的数据增强中受益，同时确保它不会渗入生成过程 - 我们实际上利用它来获得对图像合成过程的更多控制。此外，它易于实现，并且可以在训练期间在线应用，无需额外的数据预处理。</p>
+<p>这个伪代码描述了一个用于图像处理的算法，它包括调整图像大小和裁剪图像的步骤。这个算法的目标是将输入的图像调整到指定的大小，并在需要的情况下进行裁剪。以下是对每一段的解释：</p>
+<ol>
+<li><p><strong>Require: Training dataset of images</strong> $\mathcal{D}$ <strong>, target image size for training</strong> $\boldsymbol{s}&#x3D;\left(h_{\text {tgt }}, w_{\text {tgt }}\right)$</p>
+<p>这一段定义了算法的输入。需要一个图像的训练数据集$\mathcal{D}$，以及目标图像的大小$\boldsymbol{s}$，其中$h_{\text {tgt }}$和$w_{\text {tgt }}$分别代表目标图像的高度和宽度。</p>
+</li>
+<li><p><strong>Require: Resizing function</strong> $\boldsymbol{R}$ <strong>, cropping function function</strong> $\boldsymbol{C}$</p>
+<p>这一段定义了两个函数，一个是用于调整图像大小的函数$\boldsymbol{R}$，另一个是用于裁剪图像的函数$\boldsymbol{C}$。</p>
+</li>
+<li><p><strong>Require: Model train step</strong> $\boldsymbol{T}$</p>
+<p>这一段定义了模型训练的步骤函数$\boldsymbol{T}$。</p>
+</li>
+<li><p><strong>converged</strong> $\leftarrow$ <strong>False</strong></p>
+<p>这一段初始化了一个名为”converged”的变量，其初始值为False。这个变量用于控制训练过程的结束，当模型收敛（即模型的训练误差不再显著下降或者达到预设的训练轮数）时，这个变量将被设置为True。</p>
+</li>
+<li><p><strong>while not converged do</strong></p>
+<p>这一段开始了一个循环，只有当”converged”变量为False时，循环才会继续。也就是说，只要模型还没有收敛，就会继续执行循环中的步骤。</p>
+</li>
+<li><p><strong>x $\sim$ $\mathcal{D}$</strong></p>
+<p>这一段从训练数据集$\mathcal{D}$中随机选择一个图像作为输入。</p>
+</li>
+<li><p><strong>$w_{\text {original }} \leftarrow \text { width }(x)$</strong></p>
+<p><strong>$h_{\text {original }} \leftarrow \text { height }(x)$</strong></p>
+<p>这两段获取了选定图像的原始宽度和高度。</p>
+</li>
+<li><p><strong>$\mathbf{c}<em>{\text {size }} \leftarrow\left(h</em>{\text {original }}, w_{\text {original }}\right)$</strong></p>
+<p>这一段创建了一个向量$\mathbf{c}_{\text {size }}$，其中包含了图像的原始高度和宽度。</p>
+</li>
+<li><p><strong>x $\leftarrow$ $\boldsymbol{R}(x, \boldsymbol{s})$</strong></p>
+<p>这一段使用调整大小的函数$\boldsymbol{R}$将图像调整到目标大小$\boldsymbol{s}$。</p>
+</li>
+<li><p><strong>if $h_{\text {original }} \leq w_{\text {original }}$ then</strong></p>
+<p><strong>$c_{\text {left }} \sim \mathcal{U}\left(0, \text { width }(x)-s_w\right)$</strong></p>
+<p><strong>$c_{\text {top }}&#x3D;0$</strong></p>
+<p><strong>else if $h_{\text {original }}&gt;w_{\text {original }}$ then</strong></p>
+<p><strong>$c_{\text {top }} \sim \mathcal{U}\left(0, \text { height }(x)-s_h\right)$</strong></p>
+<p><strong>$c_{\text {left }}&#x3D;0$</strong></p>
+<p><strong>end if</strong></p>
+<p>这一段决定了裁剪的位置。如果原始图像的高度小于或等于宽度，那么将从左侧随机裁剪；如果原始图像的高度大于宽度，那么将从顶部随机裁剪。</p>
+</li>
+<li><p><strong>$\mathbf{c}<em>{\text {crop }} \leftarrow\left(c</em>{\text {top }}, c_{\text {left }}\right)$</strong></p>
+<p>这一段创建了一个向量$\mathbf{c}_{\text {crop }}$，其中包含了裁剪的位置。</p>
+</li>
+<li><p><strong>x $\leftarrow$ $\boldsymbol{C}\left(x, \boldsymbol{s}, \mathbf{c}_{\text {crop }}\right)$</strong></p>
+<p>这一段使用裁剪函数$\boldsymbol{C}$将图像裁剪到目标大小$\boldsymbol{s}$，并在指定的位置$\mathbf{c}_{\text {crop }}$进行裁剪。</p>
+</li>
+<li><p><strong>converged $\leftarrow$ $\boldsymbol{T}\left(x, \mathbf{c}<em>{\text {size }}, \mathbf{c}</em>{\mathrm{crop}}\right)$</strong></p>
+<p>这一段执行模型训练的步骤，并将结果赋值给”converged”变量。如果模型已经收敛，那么”converged”变量将被设置为True，从而结束循环。</p>
+</li>
+<li><p><strong>end while</strong></p>
+<p>这一段标志着循环的结束。当”converged”变量为True时，循环将结束，模型训练也就完成了。</p>
+</li>
+</ol>
+<p>在这个伪代码中，$\mathbf{c}<em>{\mathrm{crop}}$ 是一个向量，它包含了裁剪图像的位置信息。具体来说，它由两个元素组成：$c</em>{\text {top }}$ 和 $c_{\text {left }}$。</p>
+<p>$c_{\text {top }}$ 是从图像顶部开始裁剪的位置，$c_{\text {left }}$ 是从图像左侧开始裁剪的位置。这两个值决定了裁剪框的起始点。</p>
+<p>在这个算法中，如果原始图像的高度小于或等于宽度，那么将从左侧随机裁剪，此时 $c_{\text {left }}$ 会从均匀分布 $\mathcal{U}\left(0, \text { width }(x)-s_w\right)$ 中随机取值，而 $c_{\text {top }}$ 则被设为 0。反之，如果原始图像的高度大于宽度，那么将从顶部随机裁剪，此时 $c_{\text {top }}$ 会从均匀分布 $\mathcal{U}\left(0, \text { height }(x)-s_h\right)$ 中随机取值，而 $c_{\text {left }}$ 则被设为 0。</p>
+<p>这样，$\mathbf{c}_{\mathrm{crop}}$ 就定义了裁剪框的起始点，然后根据目标图像的大小 $\boldsymbol{s}$，就可以确定裁剪框的大小，从而完成图像的裁剪。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/07/22/%E4%B8%BA%E4%BA%86%E8%A7%A3%E5%86%B3%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%8C%E6%88%91%E4%BB%AC%E6%8F%90%E5%87%BA%E4%BA%86%E5%8F%A6%E4%B8%80%E7%A7%8D%E7%AE%80%E5%8D%95%E8%80%8C%E6%9C%89%E6%95%88%E7%9A%84%E6%9D%A1%E4%BB%B6%E5%8C%96%E6%96%B9%E6%B3%95%EF%BC%9A%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E6%9C%9F%E9%97%B4%EF%BC%8C%E6%88%91%E4%BB%AC%E5%9D%87%E5%8C%80%E5%9C%B0%E9%87%87%E6%A0%B7%E8%A3%81%E5%89%AA%E5%9D%90%E6%A0%87ctop%20c_%7Btext%20%7Btop%20%7D%7D%20%E5%92%8C%20cleft%20c_%7Btext%20%7Bleft%20%7D%7D%EF%BC%88%E5%88%86%E5%88%AB%E6%8C%87%E5%AE%9A%E4%BB%8E%E5%B7%A6%E4%B8%8A%E8%A7%92%E6%B2%BF%E9%AB%98%E5%BA%A6%E5%92%8C%E5%AE%BD%E5%BA%A6%E8%BD%B4%E8%A3%81%E5%89%AA%E7%9A%84%E5%83%8F%E7%B4%A0%E6%95%B0%E9%87%8F%E7%9A%84%E6%95%B4/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/07/21/ControlNet%E9%80%9A%E8%BF%87%E6%93%8D%E7%BA%B5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9D%97%E7%9A%84%E8%BE%93%E5%85%A5%E6%9D%A1%E4%BB%B6%EF%BC%8C%E4%BB%A5%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%8E%A7%E5%88%B6%E6%95%B4%E4%B8%AA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%95%B4%E4%BD%93%E8%A1%8C%E4%B8%BA%E3%80%82%E5%9C%A8%E8%BF%99%E9%87%8C%EF%BC%8C%E7%BD%91%E7%BB%9C%E5%9D%97%E6%8C%87%E7%9A%84%E6%98%AF%E4%B8%80%E7%BB%84%E8%A2%AB%E7%BB%84%E5%90%88%E5%9C%A8%E4%B8%80%E8%B5%B7%E4%BD%9C%E4%B8%BA%E5%B8%B8%E7%94%A8%E5%8D%95%E5%85%83%E6%9D%A5%E6%9E%84%E5%BB%BA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E7%A5%9E%E7%BB%8F%E5%B1%82%EF%BC%8C%E4%BE%8B%E5%A6%82%20resnet%20%E5%9D%97%EF%BC%8Cconv-bn-relu%20%E5%9D%97%EF%BC%8C%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%9D%97%EF%BC%8C%E5%8F%98/">
+        <h2 class="post-title"></h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/7/21
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>ControlNet通过操纵神经网络块的输入条件，以进一步控制整个神经网络的整体行为。在这里，”网络块”指的是一组被组合在一起作为常用单元来构建神经网络的神经层，例如 “resnet” 块，”conv-bn-relu” 块，多头注意力块，变压器块等。</p>
+<p>以2D特征为例，给定一个特征图 $\boldsymbol{x} \in \mathbb{R}^{h \times w \times c}$，其中 ${h, w, c}$ 是高度，宽度和通道数，一个带有一组参数 $\Theta$ 的神经网络块 $\mathcal{F}(\cdot ; \Theta)$ 将 $\boldsymbol{x}$ 转换为另一个特征图 $\boldsymbol{y}$，有<br>$$<br>\boldsymbol{y}&#x3D;\mathcal{F}(\boldsymbol{x} ; \Theta)<br>$$<br>这个过程在图 2-(a) 中进行了可视化。<br>我们锁定所有的参数在 $\Theta$ 中，然后将其克隆为一个可训练的副本 $\Theta_{\mathrm{c}}$。复制的 $\Theta_{\mathrm{c}}$ 与一个外部条件向量 $c$ 一起进行训练。在这篇论文中，我们将原始参数和新参数称为 “锁定副本” 和 “可训练副本”。制作这样的副本而不是直接训练原始权重的动机是为了避免在数据集小的时候过拟合，并保留从数十亿图像中学习的大型模型的生产就绪质量。</p>
+<p>神经网络块通过一个称为 “零卷积” 的特殊类型的卷积层连接，即权重和偏置都初始化为零的 $1 \times 1$ 卷积层。我们将零卷积操作表示为 $\mathcal{Z}(\cdot ; \cdot)$，并使用两个参数实例 $\left{\Theta_{z 1}, \Theta_{z 2}\right}$ 来构成 ControlNet 结构，有<br>$$<br>\boldsymbol{y}<em>{\mathrm{c}}&#x3D;\mathcal{F}(\boldsymbol{x} ; \Theta)+\mathcal{Z}\left(\mathcal{F}\left(\boldsymbol{x}+\mathcal{Z}\left(\boldsymbol{c} ; \Theta</em>{\mathrm{z} 1}\right) ; \Theta_{\mathrm{c}}\right) ; \Theta_{\mathrm{z} 2}\right)<br>$$<br>其中 $\boldsymbol{y}<em>{\mathrm{c}}$ 成为这个神经网络块的输出，如图 2-(b) 所示。<br>因为零卷积层的权重和偏置都初始化为零，在第一步训练中，我们有<br>$$<br>\left{\begin{array}{l}<br>\mathcal{Z}\left(\boldsymbol{c} ; \Theta</em>{\mathrm{z} 1}\right)&#x3D;\mathbf{0} \<br>\mathcal{F}\left(\boldsymbol{x}+\mathcal{Z}\left(\boldsymbol{c} ; \Theta_{\mathrm{z} 1}\right) ; \Theta_{\mathrm{c}}\right)&#x3D;\mathcal{F}\left(\boldsymbol{x} ; \Theta_{\mathrm{c}}\right)&#x3D;\mathcal{F}(\boldsymbol{x} ; \Theta) \<br>\mathcal{Z}\left(\mathcal{F}\left(\boldsymbol{x}+\mathcal{Z}\left(\boldsymbol{c} ; \Theta_{\mathrm{z} 1}\right) ; \Theta_{\mathrm{c}}\right) ; \Theta_{\mathrm{z} 2}\right)&#x3D;\mathcal{Z}\left(\mathcal{F}\left(\boldsymbol{x} ; \Theta_{\mathrm{c}}\right) ; \Theta_{\mathrm{z} 2}\right)&#x3D;\mathbf{0}<br>\end{array}\right.<br>$$</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/07/21/ControlNet%E9%80%9A%E8%BF%87%E6%93%8D%E7%BA%B5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9D%97%E7%9A%84%E8%BE%93%E5%85%A5%E6%9D%A1%E4%BB%B6%EF%BC%8C%E4%BB%A5%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%8E%A7%E5%88%B6%E6%95%B4%E4%B8%AA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%95%B4%E4%BD%93%E8%A1%8C%E4%B8%BA%E3%80%82%E5%9C%A8%E8%BF%99%E9%87%8C%EF%BC%8C%E7%BD%91%E7%BB%9C%E5%9D%97%E6%8C%87%E7%9A%84%E6%98%AF%E4%B8%80%E7%BB%84%E8%A2%AB%E7%BB%84%E5%90%88%E5%9C%A8%E4%B8%80%E8%B5%B7%E4%BD%9C%E4%B8%BA%E5%B8%B8%E7%94%A8%E5%8D%95%E5%85%83%E6%9D%A5%E6%9E%84%E5%BB%BA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E7%A5%9E%E7%BB%8F%E5%B1%82%EF%BC%8C%E4%BE%8B%E5%A6%82%20resnet%20%E5%9D%97%EF%BC%8Cconv-bn-relu%20%E5%9D%97%EF%BC%8C%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%9D%97%EF%BC%8C%E5%8F%98/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/07/21/%E4%BD%A0%E7%BB%99%E5%87%BA%E7%9A%84%E8%BF%99%E4%B8%A4%E4%B8%AA%E6%96%B9%E7%A8%8B%E6%98%AF%E6%8F%8F%E8%BF%B0%E4%B8%A4%E4%B8%AA%E8%80%A6%E5%90%88%E8%B0%90%E6%8C%AF%E5%99%A8%E7%9A%84%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%9A%84%E8%80%A6%E5%90%88%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%82%E4%BD%A0%E7%BB%99%E5%87%BA%E7%9A%84%E5%93%88%E5%AF%86%E9%A1%BF%E9%87%8F%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%83%BD%E9%87%8F%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA%EF%BC%8C%E5%AF%B9%E8%A7%92%E5%85%83%E7%B4%A0%E4%BB%A3%E8%A1%A8%E6%AF%8F%E4%B8%AA%E8%B0%90%E6%8C%AF%E5%99%A8%E7%9A%84%E8%83%BD%E9%87%8F%EF%BC%8C%E9%9D%9E%E5%AF%B9%E8%A7%92%E5%85%83%E7%B4%A0%E4%BB%A3%E8%A1%A8%E4%B8%A4%E4%B8%AA%E8%B0%90%E6%8C%AF%E5%99%A8%E4%B9%8B%E9%97%B4%E7%9A%84%E8%80%A6%E5%90%88%E3%80%82/">
+        <h2 class="post-title"></h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/7/21
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>你给出的这两个方程是描述两个耦合谐振器的动力学的耦合微分方程。你给出的哈密顿量是系统能量的矩阵表示，对角元素代表每个谐振器的能量，非对角元素代表两个谐振器之间的耦合。</p>
+<p>在这里，ω_c 和 ω_m 代表两个谐振器的频率。你给出的哈密顿量矩阵的对角元素包含了这些频率。</p>
+<p>如果你问为什么哈密顿量矩阵中没有明确出现 ω，那是因为它们已经被吸收到矩阵的对角元素的复数中。换句话说，这些复数的实部代表频率 ω_c 和 ω_m，虚部代表两个谐振器的阻尼率（β 和 α）。</p>
+<p>如果你问为什么微分方程中没有 ω，那是因为这些方程是在旋转参考系中写出的，其中振动的频率已经被“旋转”掉了。这是物理中常用的一种简化振动系统分析的技术。频率 ω 仍然影响系统的动力学，但它是通过方程中的参数（如耦合强度 J 和阻尼率 β 和 α）间接地影响。</p>
+<p>以下是这个过程的推导：</p>
+<p>首先，我们可以将这两个耦合微分方程写为矩阵形式：</p>
+<p>$$<br>\begin{aligned}<br>&amp; \left[i\left(\omega-\omega_c\right)-\beta\right] \hat{a}-(i J-\sqrt{\kappa \gamma}) \hat{m}&#x3D;0, \<br>&amp; \left[i\left(\omega-\omega_m\right)-\alpha\right] \hat{m}-(i J-\sqrt{\kappa \gamma}) \hat{a}&#x3D;0,<br>\end{aligned}<br>$$</p>
+<p>可以写为：</p>
+<h1 id="begin-bmatrix-i-omega-omega-c-beta-amp-iJ-sqrt-kappa-gamma-iJ-sqrt-kappa-gamma-amp-i-omega-omega-m-alpha-end-bmatrix-begin-bmatrix-hat-a-hat-m-end-bmatrix"><a href="#begin-bmatrix-i-omega-omega-c-beta-amp-iJ-sqrt-kappa-gamma-iJ-sqrt-kappa-gamma-amp-i-omega-omega-m-alpha-end-bmatrix-begin-bmatrix-hat-a-hat-m-end-bmatrix" class="headerlink" title="$$\begin{bmatrix}i(\omega-\omega_c)-\beta &amp; -(iJ-\sqrt{\kappa \gamma}) \-(iJ-\sqrt{\kappa \gamma}) &amp; i(\omega-\omega_m)-\alpha\end{bmatrix}\begin{bmatrix}\hat{a} \\hat{m}\end{bmatrix}"></a>$$<br>\begin{bmatrix}<br>i(\omega-\omega_c)-\beta &amp; -(iJ-\sqrt{\kappa \gamma}) \<br>-(iJ-\sqrt{\kappa \gamma}) &amp; i(\omega-\omega_m)-\alpha<br>\end{bmatrix}<br>\begin{bmatrix}<br>\hat{a} \<br>\hat{m}<br>\end{bmatrix}</h1><p>\begin{bmatrix}<br>0 \<br>0<br>\end{bmatrix}<br>$$</p>
+<p>这个矩阵方程的解就是哈密顿量矩阵的本征值问题，所以我们可以将这个矩阵方程写为哈密顿量矩阵的形式：</p>
+<p>$$<br>H_{e f f} &#x2F; \hbar&#x3D;\left[\begin{array}{cc}<br>\omega_c-i \beta &amp; J+i \Gamma \<br>J+i \Gamma &amp; \omega_m-i \alpha<br>\end{array}\right]<br>$$</p>
+<p>其中，$\omega_c$ 和 $\omega_m$ 是两个谐振器的频率，$\beta$ 和 $\alpha$ 是两个谐振器的阻尼率，$J$ 是两个谐振器之间的耦合强度，$\Gamma$ 是耦合的阻尼率。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/07/21/%E4%BD%A0%E7%BB%99%E5%87%BA%E7%9A%84%E8%BF%99%E4%B8%A4%E4%B8%AA%E6%96%B9%E7%A8%8B%E6%98%AF%E6%8F%8F%E8%BF%B0%E4%B8%A4%E4%B8%AA%E8%80%A6%E5%90%88%E8%B0%90%E6%8C%AF%E5%99%A8%E7%9A%84%E5%8A%A8%E5%8A%9B%E5%AD%A6%E7%9A%84%E8%80%A6%E5%90%88%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%82%E4%BD%A0%E7%BB%99%E5%87%BA%E7%9A%84%E5%93%88%E5%AF%86%E9%A1%BF%E9%87%8F%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%83%BD%E9%87%8F%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA%EF%BC%8C%E5%AF%B9%E8%A7%92%E5%85%83%E7%B4%A0%E4%BB%A3%E8%A1%A8%E6%AF%8F%E4%B8%AA%E8%B0%90%E6%8C%AF%E5%99%A8%E7%9A%84%E8%83%BD%E9%87%8F%EF%BC%8C%E9%9D%9E%E5%AF%B9%E8%A7%92%E5%85%83%E7%B4%A0%E4%BB%A3%E8%A1%A8%E4%B8%A4%E4%B8%AA%E8%B0%90%E6%8C%AF%E5%99%A8%E4%B9%8B%E9%97%B4%E7%9A%84%E8%80%A6%E5%90%88%E3%80%82/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/07/02/DeepMD%E8%AF%A6%E7%BB%86%E5%86%85%E5%AE%B9%E4%BB%8B%E7%BB%8D/">
         <h2 class="post-title">DeepMD详细内容介绍</h2>
     </a>
@@ -833,1041 +1360,11 @@ Direct
         
         <span class="tag">
             
-            <a href="/tags/%E5%88%86%E5%AD%90%E5%B0%BA%E5%BA%A6%EF%BC%8C-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="color: #ffa2c4">分子尺度， 深度学习</a>
+            <a href="/tags/%E5%88%86%E5%AD%90%E5%B0%BA%E5%BA%A6%EF%BC%8C-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="color: #00bcd4">分子尺度， 深度学习</a>
         </span>
         
     </div>
     <a href="/2023/06/15/%E7%BB%84%E4%BC%9A%E6%B1%87%E6%8A%A5-%E5%88%86%E5%AD%90%E5%B0%BA%E5%BA%A6%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/10/%E5%9F%BA%E4%BA%8EGPTPlus%E8%B4%A6%E5%8F%B7%E9%83%A8%E7%BD%B2API/">
-        <h2 class="post-title">基于GPTPlus账号部署API</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/10
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <blockquote>
-<p>这个博客主要介绍如何基于<code>GPT - Plus</code>用户的账号来部署<code>API</code>。</p>
-</blockquote>
-<p>整个项目是对<a target="_blank" rel="noopener" href="https://github.com/linkedlist771/infiniteGPT4">linkedlist771&#x2F;infiniteGPT4: 基于revChatGPT和IOS新推出的无限次GPT4使用实现GPT4无限次数使用的API (github.com)</a> 的一个延伸， 在之前的项目中没有解决很重要的问题， 就是反代服务器利用的是作者部署的公网服务器。如果要自己使用的话，最好能够基于自己的服务器实现一个。所以第一步我们需要构建一个反代服务。</p>
-<h3 id="ChatGPT反代服务构建"><a href="#ChatGPT反代服务构建" class="headerlink" title="ChatGPT反代服务构建"></a>ChatGPT反代服务构建</h3><p>反代服务器的搭建，可以参考：<a target="_blank" rel="noopener" href="https://github.com/acheong08/ChatGPT-Proxy-V4">acheong08&#x2F;ChatGPT-Proxy-V4: Simple Cloudflare bypass for ChatGPT (github.com)</a>。 </p>
-<p>首先需要下载这个项目：</p>
-<pre><code class="bash">git clone git@github.com:acheong08/ChatGPT-Proxy-V4.git
-</code></pre>
-<p>笔者使用的服务器为<code>centos</code>， 基于你使用的服务器的类型，不同的命令可能稍有不同，稍作调整即可。主要分为以下几步:</p>
-<ol>
-<li><strong>安装Go环境：</strong></li>
-</ol>
-<p>Go的安装包可以从<a target="_blank" rel="noopener" href="https://golang.org/dl/">Go官网</a>上找到，选择一个合适的版本下载到你的CentOS服务器。例如，如果我们要下载Go 1.16.4版本，可以使用下面的命令：</p>
-<pre><code class="bash">
-wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz
-</code></pre>
-<p>然后，解压这个文件到<code>/usr/local</code>：</p>
-<pre><code class="bash">tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz
-</code></pre>
-<p>将Go的二进制文件添加到<code>PATH</code>中：</p>
-<pre><code class="bash">echo &quot;export PATH=$PATH:/usr/local/go/bin&quot; &gt;&gt; ~/.bash_profile
-source ~/.bash_profile
-</code></pre>
-<p>你可以使用<code>go version</code>命令来验证Go是否安装成功。</p>
-<p> <img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230610174001359.png" alt="image-20230610174001359"></p>
-<p>我这里测试是成功的。</p>
-<ol start="2">
-<li><strong>设置环境变量：</strong></li>
-</ol>
-<p>你需要一个ChatGPT Plus账号的PUID来设置环境变量。你可以使用下面的命令将PUID添加到环境变量中：</p>
-<pre><code>bashCopy codeecho &quot;export PUID=\&quot;user-...\&quot;&quot; &gt;&gt; ~/.bash_profile
-source ~/.bash_profile
-</code></pre>
-<p>记得将”user-…”替换为你的实际PUID。</p>
-<p>其中<code>PUID</code>意思为<code>Plus UID</code> 也就是你的账户的ID， 可以在这里找到：<a target="_blank" rel="noopener" href="https://chat.openai.com/api/auth/session">chat.openai.com&#x2F;api&#x2F;auth&#x2F;session</a>， </p>
-<ol start="3">
-<li><strong>构建和运行项目：</strong></li>
-</ol>
-<p>首先，你需要把项目代码复制到你的服务器上。你可以使用<code>git clone</code>命令来完成这个步骤，如果项目代码托管在一个git仓库上的话。</p>
-<p>在项目的根目录下，使用<code>go build</code>命令构建项目：</p>
-<pre><code class="bash">go build
-</code></pre>
-<p>将会输出一下内容：</p>
-<pre><code class="bash">go build
-go: downloading github.com/acheong08/endless v0.0.0-20230522010333-1359fd84c836
-go: downloading github.com/bogdanfinn/fhttp v0.5.22
-go: downloading github.com/bogdanfinn/tls-client v1.3.12
-go: downloading github.com/gin-gonic/gin v1.9.0
-go: downloading github.com/andybalholm/brotli v1.0.5
-go: downloading github.com/bogdanfinn/utls v1.5.16
-go: downloading golang.org/x/net v0.10.0
-go: downloading github.com/tam7t/hpkp v0.0.0-20160821193359-2b70b4024ed5
-go: downloading github.com/gin-contrib/sse v0.1.0
-go: downloading github.com/mattn/go-isatty v0.0.19
-go: downloading github.com/klauspost/compress v1.16.5
-go: downloading golang.org/x/crypto v0.9.0
-go: downloading golang.org/x/text v0.9.0
-go: downloading github.com/go-playground/validator/v10 v10.14.0
-go: downloading github.com/pelletier/go-toml/v2 v2.0.8
-go: downloading github.com/ugorji/go/codec v1.2.11
-go: downloading google.golang.org/protobuf v1.30.0
-go: downloading gopkg.in/yaml.v3 v3.0.1
-go: downloading golang.org/x/sys v0.8.0
-go: downloading github.com/gabriel-vasile/mimetype v1.4.2
-go: downloading github.com/go-playground/universal-translator v0.18.1
-go: downloading github.com/leodido/go-urn v1.2.4
-...
-</code></pre>
-<p>现在，你应该可以在项目的根目录下看到一个叫做<code>ChatGPT-Proxy-V4</code>的可执行文件。你可以直接运行这个文件来启动项目：</p>
-<p>这是我的目录：</p>
-<pre><code class="bash">ChatGPT-Proxy-V4  docker-compose.yml  Dockerfile  go1.20.5.linux-amd64.tar.gz  go.mod  go.sum  LICENSE  main.go  README.md
-</code></pre>
-<p>运行后， 你讲看到以下输出：</p>
-<pre><code class="bash">[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
-
-[GIN-debug] [WARNING] Running in &quot;debug&quot; mode. Switch to &quot;release&quot; mode in production.
- - using env:   export GIN_MODE=release
- - using code:  gin.SetMode(gin.ReleaseMode)
-
-[GIN-debug] GET    /ping                     --&gt; main.main.func1 (3 handlers)
-[GIN-debug] PATCH  /admin/puid               --&gt; main.main.func2 (4 handlers)
-[GIN-debug] PATCH  /admin/password           --&gt; main.main.func3 (4 handlers)
-[GIN-debug] GET    /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] POST   /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] PUT    /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] PATCH  /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] HEAD   /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] OPTIONS /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] DELETE /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] CONNECT /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] TRACE  /api/*path                --&gt; main.proxy (3 handlers)
-2023/06/10 05:54:46 1878014 :9090
-</code></pre>
-<p>目前，我们就部署完毕了。 注意，这里你需要打开<code>9090</code>端口的防火墙，不然的话反代无法发挥作用。</p>
-<pre><code class="bash">sudo firewall-cmd --permanent --add-port=9090/tcp
-sudo firewall-cmd --reload
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/GPTPlus-GPT4-API%E9%83%A8%E7%BD%B2/" style="color: #ff7d73">GPTPlus, GPT4 API部署</a>
-        </span>
-        
-    </div>
-    <a href="/2023/06/10/%E5%9F%BA%E4%BA%8EGPTPlus%E8%B4%A6%E5%8F%B7%E9%83%A8%E7%BD%B2API/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/06/%E7%89%88%E5%9B%BE%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/">
-        <h2 class="post-title">版图设计介绍</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/6
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h3 id="版图介绍"><a href="#版图介绍" class="headerlink" title="版图介绍"></a>版图介绍</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=1ed0ZL_Eg58">视频来源介绍</a></p>
-</blockquote>
-<p>版图(lay out)， 定义了在制造中的掩膜的几何图形。多层次的一个绘制， 因为每一张mask都对应一张layout。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606232859683.png" alt="image-20230606232859683"></p>
-<p>不同的颜色代表不同的层次， foundry(代工厂)， 不同的层次是不同的掩膜版，对于芯片的每一个层，对应一个版图。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606232829685.png" alt="image-20230606232829685"></p>
-<p>数字电路的版图主要是影响速度（降低延时和面积）， 模拟版图主要影响速度和精度，（对称性，器件匹配，降低寄生， 避免串扰，优化互联线，看起来好看）。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606234139272.png" alt="image-20230606234139272"></p>
-<p>数字版图杂乱无章， 最小化面积。 </p>
-<h3 id="Tapeout-Flow-流片"><a href="#Tapeout-Flow-流片" class="headerlink" title="Tapeout Flow(流片)"></a>Tapeout Flow(流片)</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606234543501.png" alt="image-20230606234543501"></p>
-<p>两者交互利用的是<code>GDSII</code>文件，  </p>
-<ul>
-<li><code>OPC</code>(optical proximity correction， 光学邻近矫正)</li>
-</ul>
-<p>掩膜版的图案都是很小的， 来加工<code>wafer</code>（晶圆上的图像）， 由于衍射和光学系统的问题， 通过掩膜版去光刻， </p>
-<p>会导致<code>光刻胶的图形和掩膜版并不是完全一致的</code> ， 然后通过其他工艺将光刻胶图像转移到wafer上。</p>
-<p><em>Design Pattern</em> -&gt; <em>光刻胶的图形</em></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606235916759.png" alt="image-20230606235916759"></p>
-<p>如果进行OPC矫正后：</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607000141480.png" alt="image-20230607000141480"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607000150023.png" alt="image-20230607000150023"></p>
-<ul>
-<li>数字芯片电路设计流程</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607000330248.png" alt="image-20230607000330248"></p>
-<ul>
-<li><ul>
-<li>Logic Design -&gt; Verilog描述</li>
-<li>Logic Synthesis -&gt; 构建门级网表</li>
-<li>Floorplan -&gt; 布局</li>
-<li>Place &amp; Route Tools -&gt; 构建版图雏形（布局布线）</li>
-<li>生成GDSII（添加Digital Libraries）</li>
-<li>DRC + LVS 检查</li>
-<li>Final GDSII</li>
-</ul>
-</li>
-<li><p>模拟集成电路设计流程</p>
-</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607001029421.png" alt="image-20230607001029421"></p>
-<ul>
-<li><ul>
-<li>Circuit Design ： 用基本元器件实现。</li>
-<li>Simulation ： 频域仿真&#x2F;时域仿真</li>
-<li>Layout ： 手工绘制模拟电路版图</li>
-<li>DRC LVS 检测： 设计是否满足foundry要求， 检测器件链接关系是否一直</li>
-<li>Parasitic Extraction ： 寄生参数提取 -&gt; 生成新的netlist -&gt; post simulation（后仿真）</li>
-</ul>
-</li>
-</ul>
-<p><strong>Layout不是绘制图形，更重要的是前期的规划。</strong></p>
-<ul>
-<li><p>CMOS 晶体管参数：</p>
-</li>
-<li><ul>
-<li><code>Finger</code>：让器件的源极和漏级交叉出现， 截成几段就是几个<code>Finger</code>， 下面的是3(3个蓝色)。</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607175254574.png" alt="image-20230607175254574"></p>
-</li>
-<li><ul>
-<li><code>Multiplier</code>：复制几倍</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607175412729.png" alt="image-20230607175412729"></p>
-</li>
-<li><ul>
-<li><code>W</code>:宽度， <code>L</code> ：长度</li>
-</ul>
-</li>
-</ul>
-<p>总的宽长比计算公式：</p>
-<p>$Total \quad W&#x2F;L &#x3D; W&#x2F;L \times Finger \times Multiplier$</p>
-<h3 id="IC的横截面"><a href="#IC的横截面" class="headerlink" title="IC的横截面"></a>IC的横截面</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607175752145.png" alt="image-20230607175752145"></p>
-<p><code>1P4M</code> ： 1 poly 4 metal ，一层多晶硅， 四层金属。 </p>
-<p><code>ACT(active)</code> ： 衬底，有源区。</p>
-<p><code>CT(contact)</code>： 接触孔， 有源区和M1的通孔</p>
-<p><code>M1,M2,M3,M4</code>: 金属</p>
-<p><code>MT(metal TOP)</code>: 最上层金属</p>
-<p><code>180nm</code>： 指的是，晶体管的最小沟道长度是<code>180nm</code>。</p>
-<p>M金属之间是由介质隔离的，  绝缘， 连接金属使用<code>Via(通孔)</code>， 链接M1和M2是<code>Via1</code>。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607180242248.png" alt="image-20230607180242248"></p>
-<p><strong>两个金属线之间是存在寄生电容的。</strong></p>
-<h3 id="CMOS制备流程图："><a href="#CMOS制备流程图：" class="headerlink" title="CMOS制备流程图："></a>CMOS制备流程图：</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607180600966.png" alt="image-20230607180600966"></p>
-<p><code>1:Grow field oxide</code>： 生长场氧， 作用是器件隔离，$0.35\mu m$ 工艺以上用的。 $0.35\mu m$ 工艺以下用 <code>STI</code>隔离。</p>
-<p><code>2： </code> 刻蚀</p>
-<p><code>3:注入N井</code></p>
-<p><code>4:再刻蚀得到的就是active区域。</code></p>
-<p><code>5：生成栅氧</code></p>
-<p><code>6：沉淀郭金贵。</code></p>
-<p><code>7:刻蚀</code></p>
-<p><code>8：注入</code></p>
-<p><code>9:生长氮化物</code>……..</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607181030747.png" alt="image-20230607181030747"></p>
-<p><code>Mask</code>的组成主要是金属（Cr）和 和玻璃（透光的）， 将Cr镀在玻璃上， 金属上有各种图像(Layout定义的)。 </p>
-<p><code>Clear Tone</code>： 大部分区域是被涂上金属的， 只有少部分是镂空的， 这样的掩膜版叫做<code>暗场</code>。 地下的红色的就是光刻胶， 是在wafer上面的。</p>
-<p>Layout上定义的是镂空的。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607181823904.png" alt="image-20230607181823904"></p>
-<p><code>正胶</code>： 有光照的地方会变性，用显影液可以去掉。 <strong>挖空挖洞的一般都是clear tone</strong></p>
-<p><code>Dark Tone</code>: 亮场，大部分地方没有金属，只有少部分地方有金属， <strong>要保留的就是dark tone</strong></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607182220028.png" alt="image-20230607182220028"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607182641437.png" alt="image-20230607182641437"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607182857765.png" alt="image-20230607182857765"></p>
-<p>N井注入，开个孔，进行注入。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607182954092.png" alt="image-20230607182954092"></p>
-<p>形成一个N井的区域。 先光刻刻蚀掉光刻胶，再刻蚀氧化硅（可能用HF刻蚀）， 再沉积金属坞。 最后得到的效果</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607183855256.png" alt="image-20230607183855256"></p>
-<h3 id="Design-Rules"><a href="#Design-Rules" class="headerlink" title="Design Rules"></a>Design Rules</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607184358426.png" alt="image-20230607184358426"></p>
-<p><code>width</code>：<strong>至少是这个值</strong></p>
-<p><code>size</code>的形状， 一定是正方形， 表示的是正方形的边长。 <strong>要是这个值</strong></p>
-<p><code>enclosure</code>： A包含B， 包裹的距离是<code>enclosure </code></p>
-<p><code>extension</code> ： 有一个边超过就行了。</p>
-<p><code>overlap</code>： 重叠，两个图像的重叠。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185012751.png" alt="image-20230607185012751"></p>
-<h3 id="DRC-Design-Rule-Check"><a href="#DRC-Design-Rule-Check" class="headerlink" title="DRC:(Design Rule Check)"></a>DRC:(Design Rule Check)</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185325355.png" alt="image-20230607185325355"></p>
-<h3 id="LVS-Layout-Versus-Schematic"><a href="#LVS-Layout-Versus-Schematic" class="headerlink" title="LVS:(Layout Versus Schematic)"></a>LVS:(Layout Versus Schematic)</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185545088.png" alt="image-20230607185545088"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185750166.png" alt="image-20230607185750166"></p>
-<h2 id="后仿真："><a href="#后仿真：" class="headerlink" title="后仿真："></a>后仿真：</h2><h3 id="寄生参数抽取："><a href="#寄生参数抽取：" class="headerlink" title="寄生参数抽取："></a>寄生参数抽取：</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185941176.png" alt="image-20230607185941176"></p>
-<h3 id="Layout-里面常用的工具："><a href="#Layout-里面常用的工具：" class="headerlink" title="Layout 里面常用的工具："></a>Layout 里面常用的工具：</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607190219993.png" alt="image-20230607190219993"></p>
-<p><strong>启动Calibre WorkBench进行LTO</strong>：</p>
-<pre><code class="bash">calibrewb
-</code></pre>
-<h3 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230614211959737.png" alt="image-20230614211959737"></p>
-<ul>
-<li>分别选择<code>LEF</code>和<code>DEF</code>文件即可</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230614212030241.png" alt="image-20230614212030241"></p>
-<h3 id="存在的问题："><a href="#存在的问题：" class="headerlink" title="存在的问题："></a>存在的问题：</h3><ul>
-<li>问题1： 不知道OPC模拟的参数设置（现在采用的是默认的OPC参数设置， 关于模型参数， 迭代次数）：</li>
-<li><ul>
-<li>原始的版图</li>
-</ul>
-</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607203724041.png" alt="image-20230607203724041"></p>
-<ul>
-<li><ul>
-<li>OPC矫正后的版图：</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607203829141.png" alt="image-20230607203829141"></p>
-</li>
-<li><p>问题2： 不知道对于这个版图文件进行OPC光刻矫正是怎么操作，是对每一层layout进行矫正都生成还是怎么样（不太懂这个版图文件的层数是怎么定义的），目前是采用GUI来操作的，如果是对全部数据集进行OPC操作的话如何通过脚本化操作实现。</p>
-</li>
-<li><p>问题3： SARF插入不会目前不会操作， 以及对于最后的图像导出是怎么样的？ 是一层一层版图的导出还是怎么样， 颜色怎么定义， 。</p>
-</li>
-<li><p>问题4：不太理解这个版图里面的这些内容是什么， 顺便不太理解每一层layout是什么， 具体总结就是怎么生成数据集：</p>
-</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607204554631.png" alt="image-20230607204554631"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607204707453.png" alt="image-20230607204707453"></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E7%89%88%E5%9B%BE%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D%EF%BC%8C-%E5%AE%B9%E5%99%AA%E5%A3%B0/" style="color: #00bcd4">版图设计介绍， 容噪声</a>
-        </span>
-        
-    </div>
-    <a href="/2023/06/06/%E7%89%88%E5%9B%BE%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/01/DeepLearningSystem/">
-        <h2 class="post-title">DeepLearningSystem</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/1
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h2><p>深度学习系统，主要是实现一个类似pytorch的深度学习框架，包括计算图传播和GPU加速.</p>
-<ul>
-<li>github链接:<a target="_blank" rel="noopener" href="https://github.com/linkedlist771/DeepLearningSystem">linkedlist771&#x2F;DeepLearningSystem: 深度学习系统，主要是实现一个类似pytorch的深度学习框架，包括计算图传播和GPU加速 (github.com)</a></li>
-</ul>
-<h3 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h3><ul>
-<li><code>Linear</code> 层神经网络前向传播， 代码如下：</li>
-</ul>
-<pre><code class="Python">class Linear(Module):
-    def __init__(self, in_features, out_features, bias=True, device=None, dtype=&quot;float32&quot;):
-        super().__init__()
-        self.in_features = in_features
-        self.out_features = out_features
-        ### BEGIN YOUR SOLUTION
-        #self.bias = bias
-        self.device = device
-        self.dtype = dtype
-        # 如果有偏置的话
-        weight = init.kaiming_uniform(in_features, out_features, nonlinearity=&quot;relu&quot;, device=device, dtype=dtype)
-        self.weight = Tensor(weight)
-        if bias:
-            # 然而，如果你的代码中某些地方假定偏置是一个二维张量，而且第一个维度为1，那么reshape就是必须的。
-            # 这可能是为了保持与特定操作的兼容性，例如广播或矩阵乘法。
-            # 另外一种可能的原因是，在使用Kaiming初始化时，fan_in和fan_out参数的顺序可能会影响到初始化的结果。
-            # 在你的代码中，可能作者想要使用out_features作为fan_in来进行初始化。然后，通过reshape操作将偏置调整为正确的形状。
-            # 不过在偏置初始化中，一般不需要这样做，因为偏置通常都被初始化为零或者接近零的小值。
-            self.bias = init.kaiming_uniform(out_features, 1, dtype=dtype).reshape((1, out_features))
-            # self.bias = init.kaiming_uniform(1, out_features, nonlinearity=&quot;relu&quot;, device=device, dtype=dtype)
-        else:
-            self.bias = None
-        # raise NotImplementedError()
-        ### END YOUR SOLUTION
-
-    def forward(self, X: Tensor) -&gt; Tensor:
-        ### BEGIN YOUR SOLUTION
-        if self.bias:
-            # 如果有偏置的话
-            a_l = ops.matmul(X, self.weight)
-            return a_l + self.bias
-        else:
-            return ops.matmul(X, self.weight)
-        # raise NotImplementedError()
-        ## END YOUR SOLUTION
-</code></pre>
-<p>踩坑点：如果含有偏置bias的情况下，由于<code>out_features</code>可能不是一维的，默认生成(1,out_features) 形状的张量， 在多维情况将出现错误，所以需要<code>init.kaiming_uniform(out_features, 1, dtype=dtype).reshape((1, out_features))</code>先生成这种形状的Tensor然后进行reshape保持兼容性。</p>
-<h2 id="一个两层的神经网络"><a href="#一个两层的神经网络" class="headerlink" title="一个两层的神经网络"></a>一个两层的神经网络</h2><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230617174413453.png" alt="image-20230617174413453"></p>
-<h2 id="梯度下降求导"><a href="#梯度下降求导" class="headerlink" title="梯度下降求导"></a>梯度下降求导</h2><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230617174451412.png" alt="image-20230617174451412"></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%B3%BB%E7%BB%9F%EF%BC%8C-DeepLearning-system/" style="color: #00bcd4">深度学习系统， DeepLearning system</a>
-        </span>
-        
-    </div>
-    <a href="/2023/06/01/DeepLearningSystem/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/06/01/GN%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/">
-        <h2 class="post-title">GN机器人下载链接</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/6/1
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>之前制作的ChatGPT移动版本（windows+安卓的api已耗尽，请下载新版本， PS， 熟悉软件热更新的小伙伴可以联系我帮忙优化捏), <code>下载链接</code>更新为：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="http://101.132.169.133:5000/file/download/chatgpt%E7%A7%BB%E5%8A%A8%E7%89%88%28GN%E5%88%B6%E4%BD%9C%29V0.6.apk">安卓版本</a></li>
-<li><a target="_blank" rel="noopener" href="http://101.132.169.133:5000/file/download/Win%E7%B3%BB%E7%BB%9Fchatgpt%E7%A7%BB%E5%8A%A8%E7%89%88(GN%E5%88%B6%E4%BD%9C)V0.6.zip">Windows版本</a></li>
-</ul>
-<p>如果还有问题，请联系<code>QQ:2317431442</code></p>
-<p>如果觉得不错给我买杯可乐捏：</p>
-<p><img src="/../images/wechat.png" alt="wechat"></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/06/01/GN%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/05/30/%E5%88%A9%E7%94%A8ChatGLM%E5%88%A9%E7%94%A8QQ%E6%95%B0%E6%8D%AE%E9%9B%86%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%95%B0%E5%AD%97%E5%AD%AA%E7%94%9F/">
-        <h2 class="post-title">利用ChatGLM利用QQ数据集构建自己的数字孪生</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/5/30
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h3 id="项目简介："><a href="#项目简介：" class="headerlink" title="项目简介："></a>项目简介：</h3><p>本项目源自<a target="_blank" rel="noopener" href="https://github.com/kcxain/CloneLLM">kcxain</a>, 本人只是将其在本地部署完成， 作者使用了<code>NVIDIA A100 80GB</code> 并不是每个人都拥有的。也不是每一个人都拥有<code>Linux</code>系统进行部署，并且对于<code>ChatGLM</code>的部署，作者没有说的很明白。所以这个项目将分为两个部分：</p>
-<ol>
-<li><code>ChatGLM</code>的部署</li>
-<li>基于该项目的自我数据集的训练</li>
-</ol>
-<h3 id="ChatGLM部署"><a href="#ChatGLM部署" class="headerlink" title="ChatGLM部署"></a>ChatGLM部署</h3><ul>
-<li>ChatGLM-6B 是一个开源的、支持中英双语的对话语言模型，基于 General Language Model (GLM) 架构，具有 62 亿参数<a target="_blank" rel="noopener" href="https://github.com/THUDM/ChatGLM-6B">1</a>。</li>
-<li>结合模型量化技术，用户可以在消费级的显卡上进行本地部署（INT4 量化级别下最低只需 6GB 显存）<a target="_blank" rel="noopener" href="https://github.com/THUDM/ChatGLM-6B">1</a>。</li>
-<li>ChatGLM-6B 使用了和 ChatGPT 相似的技术，针对中文问答和对话进行了优化<a target="_blank" rel="noopener" href="https://github.com/THUDM/ChatGLM-6B">1</a>。</li>
-<li>经过约 1T 标识符的中英双语训练，辅以监督微调、反馈自助、人类反馈强化学习等技术的加持，62 亿参数的 ChatGLM-6B 已经能生成相当符合人类偏好的回答<a target="_blank" rel="noopener" href="https://github.com/THUDM/ChatGLM-6B">1</a>。</li>
-<li>为了方便下游开发者针对自己的应用场景定制模型，他们同时实现了基于 P-Tuning v2 的高效参数微调方法 (使用指南) ，INT4 量化级别下最低只需 7GB 显存即可启动微调<a target="_blank" rel="noopener" href="https://github.com/THUDM/ChatGLM-6B">1</a>。</li>
-<li>ChatGLM-6B 开源模型旨在与开源社区一起推动大模型技术发展，恳请开发者和大家遵守开源协议，勿将开源模型和代码及基于开源项目产生的衍生物用于任何可能给国家和社会带来危害的用途以及用于任何未经过安全评估和备案的服务<a target="_blank" rel="noopener" href="https://github.com/THUDM/ChatGLM-6B">1</a>。</li>
-</ul>
-<p>清华的 ChatGLM 项目在 2023 年也发布了一些重要的更新：</p>
-<ul>
-<li>2023 年 5 月 17 日，他们发布了 VisualGLM-6B，一个支持图像理解的多模态对话语言模型<a target="_blank" rel="noopener" href="https://github.com/THUDM/ChatGLM-6B">1</a>。</li>
-<li>2023 年 5 月 15 日，他们更新了 v1.1 版本 checkpoint，训练数据增加英文指令微调数据以平衡中英文数据比例，解决英文回答中夹杂中文词语的现象<a target="_blank" rel="noopener" href="https://github.com/THUDM/ChatGLM-6B">1</a>。</li>
-</ul>
-<h4 id="部署ChatGLM"><a href="#部署ChatGLM" class="headerlink" title="部署ChatGLM"></a>部署ChatGLM</h4><ol>
-<li><p>进入<a target="_blank" rel="noopener" href="https://github.com/THUDM/ChatGLM-6B">ChatGLM</a> 主页，找到git链接，git到本地即可:</p>
-<p><img src="/../images/image-20230530173507682.png" alt="image-20230530173507682"></p>
-<p>然后使用git 命令下载到本地即可：</p>
-<pre><code class="bash">git clone git@github.com:THUDM/ChatGLM-6B.git
-</code></pre>
-<p>如果不熟悉git， 也可以点击主页的下载按钮下载zip文件进行解压。</p>
-<p><img src="/../images/image-20230530173631415.png" alt="image-20230530173631415"></p>
-</li>
-<li><p>下载完ChatGLM主页程序后，现在需要下载模型的权重文件。进入ChatGLM的<a target="_blank" rel="noopener" href="https://huggingface.co/THUDM/chatglm-6b">hugging face hub</a></p>
-<p>利用按照主页教程利用git lsf 进行下载即可。 </p>
-<p>如果这一步也存在问题，也可以先下载项目文件， 将权重文件下载并保存这个文件里面的其他的文件到chatglm-6b文件夹（<code>注意，该文件夹要在之前的ChatGLM文件夹下</code>）：</p>
-<p><img src="/../images/image-20230530174240127.png" alt="image-20230530174240127"></p>
-</li>
-<li><p>下载完毕后，我们便可以试着运行一下预训练的<code>ChatGLM</code>了， 注意，这里根据你电脑的显存不同采用的量化规则也不太相同， 官网的建议如下：</p>
-</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th><strong>量化等级</strong></th>
-<th><strong>最低 GPU 显存</strong>（推理）</th>
-<th><strong>最低 GPU 显存</strong>（高效参数微调）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>FP16（无量化）</td>
-<td>13 GB</td>
-<td>14 GB</td>
-</tr>
-<tr>
-<td>INT8</td>
-<td>8 GB</td>
-<td>9 GB</td>
-</tr>
-<tr>
-<td>INT4</td>
-<td>6 GB</td>
-<td>7 GB</td>
-</tr>
-</tbody></table>
-<p>​       如果你的电脑是8G显存， 本人实测也只能选择<code>INT4</code> 量化， 对于6G以下显存的用户不太友好，你这里可以尝试<a target="_blank" rel="noopener" href="https://github.com/Jittor/JittorLLMs">清华的另一个项目</a> , 基于<code>动态计算图</code>的<code>硬盘，内存，显存</code>动态交换量化的方式进行运行。笔者的显卡为<code>NVIDIA RTX 3070Ti-Laptop</code>， 显存为8G，选择为<code>INT4</code>量化。</p>
-<p>​       现在我们已经完成了所有的预设步骤啦，现在可以部署实验了， 选择这个文件：</p>
-<p><img src="/../images/image-20230530175109292.png" alt="image-20230530175109292"></p>
-<p>将第7-8行的代码修改为：</p>
-<p><code>INT4量化</code>：</p>
-<pre><code class="python">tokenizer = AutoTokenizer.from_pretrained(&quot;chatglm-6b&quot;, trust_remote_code=True)
-model = AutoModel.from_pretrained(&quot;chatglm-6b&quot;, trust_remote_code=True).quantize(4).half().cuda()
-</code></pre>
-<p>或者<code>INT8量化</code>:</p>
-<pre><code class="python">tokenizer = AutoTokenizer.from_pretrained(&quot;chatglm-6b&quot;, trust_remote_code=True)
-model = AutoModel.from_pretrained(&quot;chatglm-6b&quot;, trust_remote_code=True).quantize(8).half().cuda()
-</code></pre>
-<p>然后进行运行即可，现在我们就可以给他提问了，取决于你的显卡的显存和算力，回复速度可能存在差距。</p>
-<p><img src="/../images/image-20230530183000569.png" alt="image-20230530183000569"></p>
-<p><img src="/../images/image-20230530183459075.png" alt="image-20230530183459075"></p>
-<h4 id="基于自己的QQ数据集的P-tuning"><a href="#基于自己的QQ数据集的P-tuning" class="headerlink" title="基于自己的QQ数据集的P-tuning"></a>基于自己的QQ数据集的P-tuning</h4><p>参考<a target="_blank" rel="noopener" href="https://github.com/kcxain/CloneLLM">kcxain</a>,的介绍，你现在应该能够完成数据集的构建，然后我们就可以开始训练了， 这里需要注意的是，作者使用的是<code>Linux</code>系统编写的训练脚本，所以我们需要在<code>windows</code>下进行训练需要进行修改。</p>
-<p>这里我们选择<code>P-tuning</code>下面的<code>main.py</code>文件</p>
-<p><img src="/../images/image-20230530175722861.png" alt="image-20230530175722861"></p>
-<p>在pycharm中我们可以在这里设置参数</p>
-<p><img src="/../images/image-20230530175742124.png" alt="image-20230530175742124"></p>
-<p>在这里输入参数：</p>
-<p><img src="/../images/image-20230530175804152.png" alt="image-20230530175804152"></p>
-<p>我这里选择的参数为：</p>
-<pre><code class="bash">--quantization_bit
-4
---do_train
---train_file
-我的好友.txt.json
---prompt_column
-prompt
---response_column
-response
---history_column
-history
---overwrite_cache
---model_name_or_path
-..\chatglm-6b
---output_dir
-chatglm_qq
---overwrite_output_dir
---max_source_length
-128
---max_target_length
-128
---per_device_train_batch_size
-4
---per_device_eval_batch_size
-1
---gradient_accumulation_steps
-2
---predict_with_generate
---max_steps
-10000
---logging_steps
-10
---save_steps
-1000
---learning_rate
-0.002
---pre_seq_len
-128
-</code></pre>
-<p>这里需要说明一下，根据你的显卡的显存大小，可以适当调整<code>batch_size</code>,<code>max_source_length</code>,<code>max_target_length  </code>从而减小你的显存消耗，这里我设置的参数的显存占用为<code>7.8/8G</code>, 基本上吃满了。</p>
-<p><img src="/../images/image-20230530180019282.png" alt="image-20230530180019282"></p>
-<p>然后我们运行后便可以看到训练的log输出了。</p>
-<p><img src="/../images/image-20230530180052355.png" alt="image-20230530180052355"></p>
-<p>这里我设置的每隔1000个epoch进行一个保存，在训练1000个epoch后，我终止了。这是目前的对话效果：</p>
-<p>按照博主的介绍，这里我们注意一下，传入的参数是在py程序中</p>
-<pre><code class="BASH">--model_name_or_path
-..\chatglm-6b
---pre_seq_len
-128
---ptuning_checkpoint
-chatglm_qq/checkpoint-1000
-</code></pre>
-<p><img src="/../images/image-20230530185103745.png" alt="image-20230530185103745"></p>
-<p>好吧，看来我和QQ群友主要的讨论内容还是关于文件接受&#x2F;传输的， 太尴尬了，后面准备拿QQ群聊数据训练一下 ，毕竟我的活跃主要是在QQ群聊立马🤣。 </p>
-<p>笔者又进行了训练，得到如下效果：</p>
-<p><img src="/../images/image-20230530201939083.png" alt="image-20230530201939083"></p>
-<p>怎么说呢，差强人意吧， 可能还是预料数据集质量较差。</p>
-<h3 id="构建自己的数字孪生"><a href="#构建自己的数字孪生" class="headerlink" title="构建自己的数字孪生"></a>构建自己的数字孪生</h3><p>在前文中，我们完成了基于自己的QQ数据集的<code>P-tuning</code>得到的自己的对话模型，现在我们可以部署了，这里我采用的是一个常用的解决方案<code>cqhttp+nonebot</code>, 然后选择基于已有插件进行修改得到。<code>nonebot</code>是一个基于异步架构搭建的， 基于此，我们基于<code>fast api</code>搭建一个异步路由构建自己的数字孪生。借助<code>GPT4</code>，简单描述需求后便可以得到所需要的代码：</p>
-<pre><code class="python">from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from transformers import (
-    AutoConfig,
-    AutoModel,
-    AutoTokenizer,
-)
-from arguments import ModelArguments, DataTrainingArguments
-import torch
-import os
-
-app = FastAPI()
-
-model = None
-tokenizer = None
-
-
-class Prompt(BaseModel):
-    text: str
-
-@app.on_event(&quot;startup&quot;)
-async def load_model():
-    global model, tokenizer
-
-    model_args = ModelArguments(
-        model_name_or_path=&quot;..\\chatglm-6b&quot;,
-        ptuning_checkpoint=&quot;chatglm_qq/checkpoint-600&quot;,
-        pre_seq_len=128,
-        prefix_projection=False,
-        quantization_bit=8,
-    )
-
-    tokenizer = AutoTokenizer.from_pretrained(model_args.model_name_or_path,
-                                              trust_remote_code=True)
-    config = AutoConfig.from_pretrained(model_args.model_name_or_path,
-                                        trust_remote_code=True)
-
-    config.pre_seq_len = model_args.pre_seq_len
-    config.prefix_projection = model_args.prefix_projection
-
-    if model_args.ptuning_checkpoint is not None:
-        print(
-            f&quot;Loading prefix_encoder weight from &#123;model_args.ptuning_checkpoint&#125;&quot;
-        )
-        model = AutoModel.from_pretrained(model_args.model_name_or_path,
-                                          config=config,
-                                          trust_remote_code=True).quantize(4).half().cuda()
-        prefix_state_dict = torch.load(
-            os.path.join(model_args.ptuning_checkpoint, &quot;pytorch_model.bin&quot;))
-        new_prefix_state_dict = &#123;&#125;
-        for k, v in prefix_state_dict.items():
-            if k.startswith(&quot;transformer.prefix_encoder.&quot;):
-                new_prefix_state_dict[
-                    k[len(&quot;transformer.prefix_encoder.&quot;):]] = v
-        model.transformer.prefix_encoder.load_state_dict(new_prefix_state_dict)
-    else:
-        model = AutoModel.from_pretrained(model_args.model_name_or_path,
-                                          config=config,
-                                          trust_remote_code=True)
-
-    if model_args.quantization_bit is not None:
-        print(f&quot;Quantized to &#123;model_args.quantization_bit&#125; bit&quot;)
-        model = model.quantize(model_args.quantization_bit)
-
-    if model_args.pre_seq_len is not None:
-        # P-tuning v2
-        model = model.half().cuda()
-        model.transformer.prefix_encoder.float().cuda()
-
-    model = model.eval()
-    print(f&quot;模型加载成功&quot;)
-
-
-@app.post(&quot;/chatglm/qq/ask&quot;)
-async def ask(prompt: Prompt):
-    global model, tokenizer
-    if model is None or tokenizer is None:
-        raise HTTPException(status_code=503, detail=&quot;Model not loaded&quot;)
-
-    # 现在你需要使用model和tokenizer处理prompt并生成response
-    # response = model.chat(prompt)
-    # 调用模型的 chat 方法
-    history = []
-    response, history = model.chat(
-        tokenizer,
-        prompt.text,
-        history=history,
-    )
-
-    return &#123;&quot;response&quot;: response&#125;
-
-
-
-async def main():
-    await load_model()
-    while True:
-        prompt = input(&quot;请输入：&quot;)
-        response = await ask(Prompt(text=prompt))
-        print(response)
-
-
-if __name__ == &quot;__main__&quot;:
-    import asyncio
-    asyncio.run(main())
-</code></pre>
-<p>启动代码为：</p>
-<pre><code class="bash"> uvicorn qq_chat_app:app --host 0.0.0.0 --port 1414 --reload
-</code></pre>
-<p>简单编写测试代码测试端口：</p>
-<pre><code class="python">import requests
-def get_chatglm(prompt):
-    url = &#39;http://localhost:1414/chatglm/qq/ask&#39;
-    data = &#123;
-        &#39;text&#39;: prompt
-    &#125;
-    response = requests.post(url, json=data)
-
-    print(response.json()[&quot;response&quot;])
-
-get_chatglm(&quot;你是谁？ 你能干什么？ 今天晚上什么吃什么？&quot;)
-</code></pre>
-<p>得到结果:</p>
-<pre><code class="bash">我是一个名为 ChatGPT 的人工智能助手，我可以通过自然语言处理技术，回答您的问题和提供信息。
-</code></pre>
-<p>成功测试通接口，暂时基于<code>nonebot2</code>搭建了一个简单的回复框架，效果如下：</p>
-<p><img src="/../images/image-20230530214355521.png" alt="image-20230530214355521"></p>
-<p><img src="/../images/image-20230530214405417.png" alt="image-20230530214405417"></p>
-<p><img src="/../images/image-20230530214524635.png" alt="image-20230530214524635"></p>
-<p>由于目前<code>tx</code>对QQ机器人风控严重，回复了几次就不行了，而且回复效果只能算一般吧。</p>
-<h1 id="Todo-List"><a href="#Todo-List" class="headerlink" title="Todo List"></a>Todo List</h1><ul>
-<li><input disabled type="checkbox"> 优化数据集构建， 提高对话质量，增强模型训练。</li>
-<li><input disabled type="checkbox"> 尝试注入<code>RWKV</code>, <code>LLM</code>等模型进行构建。</li>
-<li><input disabled type="checkbox"> 暂时还没想好。</li>
-</ul>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/ChatGLM%EF%BC%8C-%E6%95%B0%E5%AD%97%E5%AD%AA%E7%94%9F%EF%BC%8C-QQ%E6%95%B0%E6%8D%AE%E9%9B%86/" style="color: #ffa2c4">ChatGLM， 数字孪生， QQ数据集</a>
-        </span>
-        
-    </div>
-    <a href="/2023/05/30/%E5%88%A9%E7%94%A8ChatGLM%E5%88%A9%E7%94%A8QQ%E6%95%B0%E6%8D%AE%E9%9B%86%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%95%B0%E5%AD%97%E5%AD%AA%E7%94%9F/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/05/30/paper-reading-DAMO/">
-        <h2 class="post-title">DAMO(Deep Agile Mask Optimization for Full-Chip Scale, 用于全芯片规模的深度学习敏捷掩膜优化）</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/5/30
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
-<li><strong>作者</strong>：Haoyu Yang、Zongyi Li、Kumara Sastry、Saumyadip Mukhopadhyay、Mark Kilgard、Anima Anandkumar、Brucek Khailany、Vivek Singh、Haoxing Ren</li>
-<li><strong>发布时间</strong>：（发表日期）</li>
-<li><strong>来源</strong>：（期刊、会议等）</li>
-<li><strong>关键词</strong>：光刻建模，神经网络，双波段，光学启发</li>
-</ul>
-<h2 id="目的与动机"><a href="#目的与动机" class="headerlink" title="目的与动机"></a>目的与动机</h2><ul>
-<li>光学近接校正（OPC）在传统设计流程中被广泛应用于可制造性优化。</li>
-<li>传统方法使用光刻模型进行 OPC，但可能会遇到过高的计算开销。</li>
-<li>大部分方法关注优化单个局部剪辑，而没有解决如何处理全芯片级别的问题。</li>
-</ul>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ul>
-<li>本文提出了一种名为 DAMO 的高性能、可扩展的深度学习支持的全芯片级 OPC 系统。</li>
-<li>DAMO 是一种端到端的掩模优化范式，包括一个深度光刻模拟器（DLS）用于光刻建模，以及一个深度掩模生成器（DMG）用于掩模图案生成。</li>
-<li>提出了一种专门为 DAMO 设计的新型布局分割算法，由 DBSCAN 聚类和 KMeans++ 聚类组成，用于处理全芯片 OPC 问题。</li>
-</ul>
-<h4 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h4><ul>
-<li><p>optical proximity correction (OPC， 光学接近矫正)超大规模集成电路(VLSI)系统的不断缩小带来了不可避免的光刻邻近效应，导致制造良率下降。 </p>
-<p>主流的OPC的技术包括：</p>
-<ul>
-<li></li>
-</ul>
-</li>
-</ul>
-<h3 id="目前光刻OPC的缺点"><a href="#目前光刻OPC的缺点" class="headerlink" title="目前光刻OPC的缺点"></a>目前光刻OPC的缺点</h3><ol>
-<li><p>耗时：模型驱动&#x2F;ILT方法需要大量光刻模拟和掩模优化调用。</p>
-</li>
-<li><p>低分辨率：基于机器学习的 OPC 工作局限于低分辨率图像。</p>
-</li>
-<li><p>无法容忍分辨率损失：传统 OPC 引擎仍需处理低分辨率限制。</p>
-</li>
-<li><p>单剪辑 OPC 不实用：基于机器学习的方法局限性较大。</p>
-</li>
-<li><p>针对全片尺度问题：少有讨论如何从全片尺度解决 OPC 问题。</p>
-</li>
-<li><p>运行时开销大：传统方法在全片 OPC 任务中面临运行时开销难题。</p>
-</li>
-<li><p>资源消耗：D2S 等方法在硬件和软件上消耗大量资源。</p>
-</li>
-<li><p>数据集限制：基于学习的方法在全片掩模优化方面受限于数据集和低晶圆图案保真度。</p>
-<h1 id="本文完成的内容"><a href="#本文完成的内容" class="headerlink" title="本文完成的内容"></a>本文完成的内容</h1><ol>
-<li>设计了 DCGAN-HD，通过重新设计 DCGAN 的生成器和判别器，实现了具有竞争力的高分辨率特征提取器（1024 × 1024）。</li>
-<li>基于 DCGAN-HD 构建了 DLS 和 DMG。DLS 能进行高分辨率光刻模拟，通过与 DLS 的逆校正一起训练，DMG 可直接生成高质量掩模。</li>
-<li>开发了一种高效的无缝全片分割算法，由 DBSCAN 和 KMeans++ 聚类算法组成，使 DAMO 可以应用于任意大小的布局。</li>
-<li>提出使用基于图的计算技术和并行技术分别加速 DBSCAN 和 KMeans++ 在 GPU 上的计算。此外，还使用 TensorRT 部署了所提出的 DCGAN-HD，从而实现更快的推理。</li>
-<li>将提出的框架与最先进的商业工具 Calibre 进行了比较：在单剪辑 OPC 任务中加速 5 倍，全片 OPC 任务中加速 1.3 倍，同时保持更好的解决方案质量。</li>
-</ol>
-<h3 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h3><ul>
-<li><strong>cGAN基础</strong></li>
-</ul>
-<p>cGAN（Conditional Generative Adversarial Networks，条件生成对抗网络）[18]，[19] 是一种类似于经典 GAN（Generative Adversarial Networks，生成对抗网络）[20] 的模型，由一个生成器和一个判别器组成。生成器被训练以生成遵循某种分布的样本，使得判别器无法识别这些数据是来自生成器还是来自训练数据集。cGAN 与 GAN 的不同之处在于某些限制，例如生成器的输入和输出可以具有更强的关联性。</p>
-<p>在超大规模集成电路中，典型的 cGAN 应用包括 GANOPC[9] 和 LithoGAN[14]。前者被设计用于布局掩模合成，后者则侧重于单通孔&#x2F;接触形状的光刻轮廓预测。cGAN 的优点在于生成器和判别器之间的竞争性训练过程，可以促使生成器生成更真实、高质量的样本。而在光刻掩模生成和预测等任务中，cGAN 能够利用输入布局的条件信息，生成更为精确且符合实际需求的掩模。</p>
-<h4 id="DAMO框架引入了以下术语和评估指标："><a href="#DAMO框架引入了以下术语和评估指标：" class="headerlink" title="DAMO框架引入了以下术语和评估指标："></a>DAMO框架引入了以下术语和评估指标：</h4><ul>
-<li><p>**定义1 (mIoU)**：给定两个形状P和G，P和G之间的IoU为 $IoU(P, G) &#x3D; \frac{P \cap G}{P \cup G}$。mIoU 是平均IoU。</p>
-</li>
-<li><p>**定义2 (像素准确度)**：像素准确度（pixAcc）定义为图像上正确分类像素的百分比。</p>
-</li>
-<li><p>**定义3 (平方 L2 误差)**：设w和y分别为设计图像和晶圆图像，平方L2误差由 $||w - y||_2^2$ 计算。</p>
-</li>
-<li><p>**定义4 (PV Band)**：给定一组工艺条件下的光刻仿真轮廓，PV Bands 是这些条件下所有轮廓的区域。</p>
-</li>
-<li><p><strong>问题1（掩模优化）</strong>：给定设计图像w，掩模优化的目标是生成相应的掩模x，使得光刻过程后剩余的图案y尽可能接近w，换句话说，最小化光刻图像的PV Band和平方L2误差。</p>
-</li>
-</ul>
-<p>掩模质量通过与目标图像的晶圆图像保真度评估，主要采用三种缺陷检测器：EPE（边缘放大误差）、桥和颈部。EPE计算目标边缘到光刻轮廓的距离，颈部缺陷关注关键尺寸误差，桥接检测器寻找意外的电线缩短。为确保光刻后图案尽量接近目标图案，采用平方L2误差和PV Band评估掩模质量，分别衡量标称工艺条件下的质量和生成掩模的稳健性。</p>
-<p>PV Band（过程变差带）是在一组工艺条件下，衡量掩膜对光刻过程中各种变化的稳健性的指标。在光刻过程中，不同的工艺条件可能会导致不同的光刻轮廓，因此在这些条件下的光刻仿真轮廓之间存在一定的区域差异。PV Band就是描述这些条件下所有轮廓区域差异的指标。一个较小的PV Band表示生成的掩模在工艺条件变化下更具稳健性，光刻过程后产生的图案与目标图案更为接近。</p>
-</li>
-</ol>
-<h2 id="DAMO框架"><a href="#DAMO框架" class="headerlink" title="DAMO框架"></a>DAMO框架</h2><p><img src="/../images/image-20230504202444044.png" alt="image-20230504202444044"></p>
-<h4 id="DMG"><a href="#DMG" class="headerlink" title="DMG"></a>DMG</h4><p>DMG是DAMO的第二部分，它与DLS共享相同的体系结构。正向光刻过程可以用下式描述<br>$$<br>\boldsymbol{Z}&#x3D;f(\boldsymbol{M})<br>$$<br>传统的ILT试图根据给定的光刻模型获得最优掩模$\boldsymbol{M_{opt}}$，该模型表示为<br>$$<br>\boldsymbol{M}_{\mathrm{opt}}&#x3D;f^{-1}\left(\boldsymbol{Z}_t\right)<br>$$</p>
-<h4 id="通过更高的分辨率提高精—–DCGAN-HD-高分辨率解决方案"><a href="#通过更高的分辨率提高精—–DCGAN-HD-高分辨率解决方案" class="headerlink" title="通过更高的分辨率提高精—–DCGAN-HD:高分辨率解决方案"></a>通过更高的分辨率提高精—–DCGAN-HD:高分辨率解决方案</h4><ul>
-<li>DCGAN-HD用于模拟光刻。</li>
-</ul>
-<h4 id="数据集准备"><a href="#数据集准备" class="headerlink" title="数据集准备"></a>数据集准备</h4><p><img src="/../images/image-20230504230501724.png" alt="image-20230504230501724"></p>
-<ul>
-<li><p>从零开始建立训练集</p>
-<p>生成训练图像需要五个步骤，包括设计生成、SRAF插入(带设计规则检查)、OPC、光刻仿真、布局到图像转换。</p>
-<ul>
-<li>**设计一个设计模式: **</li>
-</ul>
-<p>所有通孔图案(70 × 70 nm2)都被限制在1024 × 1024 nm2的窗口中。其次，通过改变通孔密度，我们可以控制单个窗口中通孔图案的数量。为了减少训练集随机分布带来的偏差，通过对经过数进行均匀分组。</p>
-<ul>
-<li><strong>SRAF插入和DRC</strong></li>
-</ul>
-<p>使用Mentor Calibre[17]进行SRAF插入和设计规则检查。请注意，过孔图案可能出现在设计区域内的任何位置，Calibre在执行SRAF插入时将在过孔图案的中心创建一个新的设计层。这使得模型更容易学习，因为所有的via模式都位于图像的中心附近。此外，它还为我们进一步开发加速算法提供了指导。由于设计面积为1024 × 1024 nm2，当有2个以上的via图案时，可能会有一些SRAF图案出现在设计区域之外。一个更大的窗口2048×2048 nm2将用于捕获所有SRAF模式，它们与设计窗口共享同一个中心。</p>
-<ul>
-<li><strong>OPC，光刻仿真和图像生成</strong></li>
-</ul>
-<p>我们使用由Calibre生成的掩模和晶圆图案作为ground truth。</p>
-<ul>
-<li><strong>DLS的训练</strong></li>
-</ul>
-<p><img src="/../images/image-20230505105107484.png" alt="image-20230505105107484"></p>
-<ul>
-<li><strong>训练DMG</strong></li>
-</ul>
-<p><img src="/../images/image-20230505105728177.png" alt="image-20230505105728177"></p>
-</li>
-<li><p>所提出的DAMO使用Python和PyTorch库[35]实现。在DLS和DMG的训练阶段，我们采用了Adam优化器[36]，基础学习率和动量参数分别设置为0.0002和（0.5，0.999）。在所有模型中，LeakyReLU中的泄漏斜率设置为0.2。我们将批次大小设置为4，最大训练轮次设置为100。权重参数λ0、λ1、α0、α1和λ2分别设置为100、100、30、30和20。可以通过PyTorch的评估模式实现DLS的固定参数。训练后，生成的掩模层将转换为GDSII布局文件，然后输入到Mentor Calibre进行光刻模拟验证。我们使用四个Nvidia TITAN Xp GPU进行训练，一个用于测试。我们采用的评估指标有mIoU、pixAcc、L2误差和PV Band。这里，PV Band是由Calibre计算的。</p>
-</li>
-</ul>
-<p>其中Calibre的使用手册：</p>
-<p><a href="calibreManual.pdf">[17]Calibre V erification User’s Manual, Mentor Graph., Wilsonville, OR, USA, 2008. </a></p>
-<h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><ul>
-<li><p><a target="_blank" rel="noopener" href="http://www.ispd.cc/contests/19/#benchmarks">ISPD-2019</a>：此设计来自ISPD 2019初始详细布线竞赛[25]。布局是使用商业布点和布线工具进行合成的。通过将过孔层输入到OPC和仿真流程中，获得名义电阻轮廓。训练集包括$10 \mathrm{<del>K} 4 \mu \mathrm{m}^2$的平铺，这些平铺是使用遵循与[25]中设计相同设计规则的开源布局生成器生成的。在测试中，[25]中的过孔层也被切成 $4 \mu \mathrm{m}^2$ 的平铺，总计 $11 \mathrm{</del>K}$ 实例，转换为 $2000 \times 2000$（ISPD-2019 (H)）和 $1000 \times 1000$（ISPD-2019 (L)）图像。在大平铺模拟实验中，我们从[25]中选择十个最密集的 $64 \mu \mathrm{m}^2$ 平铺，并将它们转换为 $8000 \times 8000$ 图像。</p>
-<ol>
-<li><strong><font color="red">摘要</font></strong></li>
-</ol>
-<p>2019年ISPD竞赛在2018年ISPD详细布线竞赛的基础上，增加了更符合实际工业应用的设计规则设定。</p>
-<p>详细布线过程可以分为两个步骤。首先，进行初始详细布线，以生成详细布线解决方案并处理主要设计规则。然后进行详细布线优化，修复剩余的设计规则违规问题。本次竞赛主要关注初始详细布线步骤。</p>
-<p>假设全局布线结果已经针对某些指标（如时序）进行了良好的优化，详细布线器需要尽可能遵循全局布线结果。这样，优化的指标得以保留，同时避免了设计规则违例。例如，图1(a)显示了一个具有源引脚A和汇引脚B、C、D的网络的全局布线结果。由于从A到B的路径对时序至关重要，全局布线器识别出一条从A到B的短路径。然而，该路径穿过了局部布线拥堵区域，这一区域并未被全局布线器发现。如果详细布线器如图1(b)所示，在该区域上布线，将会产生设计规则违例。图1(c)显示了一个没有短路&#x2F;间距违例的布线结果，但它会导致从A到B的路径时序退化。另一方面，图1(d)显示了一个理想的解决方案。</p>
-</li>
-</ul>
-<p><img src="http://www.ispd.cc/contests/19/fig1.png" alt="img"></p>
-<p>​	      为了尽量减小对网络拓扑的干扰，初始详细布线起着重要作用。如果初始详细布线结果能够满足大部分常见的布线规则，即使没有    完全达到DRC要求，后续的详细布线优化就不太可能对布线结果造成很大干扰。</p>
-<p><font color="red"><a target="_blank" rel="noopener" href="http://www.ispd.cc/contests/19/tutorial.htm">相关教程</a></font></p>
-<p>在本教程中，我们将使用一个仅包含11个网络的样本基准来介绍基准格式、竞赛问题的目标&#x2F;约束以及如何使用Cadence P&amp;R工具Innovus评估您的布线方案。请从以下链接下载样本基准到您的Linux服务器，然后使用命令“tar zxvf ispd19_sample.tgz”解压缩下载的文件。</p>
-<p><em>注意：</em>ispd19_sample.tgz、ispd19_sample2.tgz 和 ispd19_sample3.tgz 是在 ISPD 2018竞赛中使用的相同样本基准。而ispd19_sample4.tgz 是一个新的样本基准，其中包含了本次竞赛所需的新规则。</p>
-<p>“.input.lef”文件包含了竞赛中需要考虑的布线规则和设计信息。 “.input.def”文件包含了设计的布局信息、引脚和阻塞。 “.input.guide”文件包含了详细布线器应遵循的全局布线解决方案。每个基准测试都将有这三个文件来表示详细布线问题的实例。请参考以下文档，了解本次竞赛中规则和目标的详细信息。</p>
-<p>另一方面，“.solution.good.def”和“.solution.bad.def”分别代表了一个好的布线解决方案和一个不好的布线解决方案。这两个“解决方案”文件的大部分内容与“*.input.def”文件相同，但解决方案文件包含每个网络的布线信息。在后面的部分，我们将使用这两个文件来介绍如何使用Innovus评估详细布线器生成的布线解决方案。其他基准测试中将不提供这两个文件，它们仅用于教程目的。您的可执行文件生成的解决方案文件格式应遵循上述链接中介绍的LEF&#x2F;DEF格式。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/05/30/paper-reading-DAMO/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/05/30/Infinite-GPT4-Usage/">
-        <h2 class="post-title">GPT4逆向IOS模型无限次数油猴脚本编写</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/5/30
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p><a target="_blank" rel="noopener" href="https://github.com/linkedlist771/infiniteGPT4">GitHub项目链接</a></p>
-<p><a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/467074-%E6%97%A0%E9%99%90gpt4/">脚本链接</a></p>
-<h2 id="1：起因"><a href="#1：起因" class="headerlink" title="1：起因"></a>1：起因</h2><p><img src="/../images/image-20230529191948609.png" alt="image-20230529191948609"></p>
-<p> 目前<code>ChatGPT</code> 如火如荼， 但是<code>GPT3.5</code>的模型能力有限，很多人选择开通<code>GPT Plus</code>来使用<code>GPT4</code>功能。</p>
-<p>目前，<code>GPT PLUS</code> 用户可以使用以下模型：</p>
-<ul>
-<li>GPT 3.5<ul>
-<li>优点：速度快，适合一般的需求。</li>
-<li>缺点：模型参数较少，回答不够智能。</li>
-</ul>
-</li>
-</ul>
-<p><img src="/../images/image-20230529192326117.png" alt="image-20230529192326117"></p>
-<ul>
-<li>GPT 4<ul>
-<li>优点：模型参数多，回答更智能，上下文理解更强。</li>
-<li>缺点：有次数限制， 25次&#x2F;3小时， <code>对英文理解能力强于中文</code>，如果中文回答较烂，可以尝试英文。</li>
-</ul>
-</li>
-</ul>
-<p><img src="/../images/image-20230529192507875.png" alt="image-20230529192507875"></p>
-<ul>
-<li>GPT 4 - Browsing<ul>
-<li>优点：添加了联网功能， 同上</li>
-<li>缺点：同上</li>
-</ul>
-</li>
-</ul>
-<p><img src="/../images/image-20230529193218778.png" alt="image-20230529193218778"></p>
-<p>GPT 4 - Plugin</p>
-<ul>
-<li>优点：各种千奇百怪的插件，其中文献检索功能较为不错，同上</li>
-<li>缺点：同上</li>
-</ul>
-<p><img src="/../images/image-20230529193310330.png" alt="image-20230529193310330"></p>
-<p> <strong>5.18日</strong> <code>OpenAI</code>推出IOS的APP版本，其中对于plus用户可以无限次数的使用<code>GPT4</code>模型。在登录IOS的过程中发现<code>OpenAI</code>在其中内嵌了一个网页，推测可以通过逆向功能实现网页版无限使用。</p>
-<h1 id="2：具体实现"><a href="#2：具体实现" class="headerlink" title="2：具体实现"></a>2：具体实现</h1><p><strong>在<code>IOS</code>设备使用无限次数的GPT4后会留下历史记录：</strong></p>
-<p><img src="/../images/image-20230529193753235.png" alt="image-20230529193753235"></p>
-<p>推测可能是调用了不同的模型， 决定采取浏览器抓包的方式来实现。</p>
-<h3 id="具体实现步骤"><a href="#具体实现步骤" class="headerlink" title="具体实现步骤"></a>具体实现步骤</h3><ol>
-<li><p>什么是浏览器抓包：</p>
-<p><strong>浏览器抓包</strong> 是一种网络调试方法，主要用于观察并分析浏览器和服务器之间的网络交互过程。具体来说，就是在浏览器发送请求和接收响应的过程中，捕获并记录网络数据包的过程。</p>
-<h2 id="抓包的用途"><a href="#抓包的用途" class="headerlink" title="抓包的用途"></a>抓包的用途</h2><ul>
-<li><strong>调试网络问题</strong>：开发者可以使用抓包工具检查请求和响应的详细信息，如HTTP头，内容，以及错误代码，等等，从而查找问题的来源。</li>
-<li><strong>网络性能优化</strong>：通过抓包，我们可以观察网页加载的具体过程，以及每个请求所需的时间，这对于网络优化和性能提升非常有帮助。</li>
-<li><strong>网络安全</strong>：抓包工具也常被用于检测网络安全问题，如未加密的数据，或是恶意的网络活动。</li>
-</ul>
-<h2 id="如何进行浏览器抓包"><a href="#如何进行浏览器抓包" class="headerlink" title="如何进行浏览器抓包"></a>如何进行浏览器抓包</h2><ol>
-<li><strong>使用浏览器的开发者工具</strong>：大部分现代浏览器都内置了开发者工具，可以直接进行网络抓包。例如，在 Chrome 浏览器中，只需打开“开发者工具”（F12或右键点击页面然后选择”检查”），然后选择”Network”标签，就可以看到网络请求的详细信息。</li>
-<li><strong>使用抓包工具</strong>：除了浏览器自带的工具，还有一些专业的抓包工具，如 Wireshark，Fiddler，Charles 等，这些工具功能更强大，能捕获更多类型的网络数据包。</li>
-</ol>
-</li>
-<li><p>如何进行浏览器抓包</p>
-</li>
-</ol>
-<p>​		本人的使用的浏览器为<code>Edge</code>浏览器， <code>Chrome</code>浏览器同理， 在浏览器中按下<code>F12</code>键打开调试工具，选择网络这一项。</p>
-<p><img src="/../images/image-20230529194415396.png" alt="image-20230529194415396"></p>
-<p>​        然后清空历史的记录（点击上方的圆圈符号）， 然后当你在<code>ChatGPT</code>的网页版发送信息后， 在右侧的网络调试工具便可以看到你调用时发送的信息。比如说这里我们调用的是GPT4模型。</p>
-<p><img src="/../images/image-20230529194947263.png" alt="image-20230529194947263"></p>
-<p>​      当然，Mac同理，由于该<code>APP</code>只能在<code>IOS</code>设备上使用， 所以我借用了舍友的<code>MAC</code>进行了抓包，最后发现IOS设备无限使用的模型为<code>gpt-4-mobile</code>。 现在我们已经获取了我们所需要的所有内容了。现在就可以开始编写脚本来实现了。</p>
-<ol start="3">
-<li>脚本编写</li>
-</ol>
-<p>很多人觉得编写脚本代码是一键很难的事，但是有<code>GPT-4</code>的帮助后，其实不然，询问如何编写，他便可以很轻松的给出代码：</p>
-<p><img src="/../images/image-20230529195510378.png" alt="image-20230529195510378"></p>
-<p>稍加修改，便得到了第一版可以运行的代码：</p>
-<pre><code class="javascript">// ==UserScript==
-// @name        无限GPT4
-// @namespace   https://github.com/linkedlist771
-// @description 无限使用GPT4
-// @license MIT
-// @include     *
-// @version     1
-// @grant       none
-// ==/UserScript==
- 
-(function() &#123;
-    &#39;use strict&#39;;
- 
-    let realFetch = window.fetch;
-    window.fetch = function(url, init) &#123;
-        if (init &amp;&amp; init.method === &#39;POST&#39;) &#123;
-            let data = JSON.parse(init.body);
-            if (data.hasOwnProperty(&#39;model&#39;)) &#123;
-                data.model = &#39;gpt-4-mobile&#39;;
-                init.body = JSON.stringify(data);
-            &#125;
-        &#125;
-        return realFetch(url, init);
-    &#125;;
-&#125;)()
-</code></pre>
-<p>现在这个代码已经可以正常运行了，在启动后，询问区别GPT4和3.5的问题，可以得到正确的答案，而且会看历史记录可以发现模型已经被修改了。确实为GPT4。</p>
-<p><img src="/../images/image-20230529195952022.png" alt="image-20230529195952022"></p>
-<p>在<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/users/1084702-lshang001">LShang001</a>和<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/users/116238-seto">Seto</a>的建议后， 对代码的部分部分逻辑进行了订正，<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/users/1047225-xuzihanshsjnsn">xuzihanshsjnsn</a> 帮忙完成了UI部分的设计。 基于此完成了<code>第四版</code>脚本，开启后有一个按钮，通过选择可以控制目前是否开启。</p>
-<p><img src="/../images/image-20230529204718806.png" alt="image-20230529204718806"></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>至此，我们完成了如何通过抓包找到模型然后编写JS代码进行实现无限次数的GPT4模型调用，如果觉得写的不错可以给项目点个赞捏， **给大家磕头了ლ(´ڡ&#96;ლ)**。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-    </div>
-    <a href="/2023/05/30/Infinite-GPT4-Usage/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -1879,8 +1376,18 @@ get_chatglm(&quot;你是谁？ 你能干什么？ 今天晚上什么吃什么？
         
         <span class="current">1</span>
         
+        <span>
+            <a class="page-num" href="/page/2/">2</a>
+            
+            
+        </span>
+        
     </div>
     <div class="next">
+        
+        <a class="page-num" href="/page/2/">
+            <i class="fa-solid fa-caret-right fa-fw"></i>
+        </a>
         
     </div>
 </div>
