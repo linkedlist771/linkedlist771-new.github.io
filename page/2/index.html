@@ -189,101 +189,6 @@
             <blockquote>
 <p>这个博客主要介绍如何基于<code>GPT - Plus</code>用户的账号来部署<code>API</code>。</p>
 </blockquote>
-<p>整个项目是对<a target="_blank" rel="noopener" href="https://github.com/linkedlist771/infiniteGPT4">linkedlist771&#x2F;infiniteGPT4: 基于revChatGPT和IOS新推出的无限次GPT4使用实现GPT4无限次数使用的API (github.com)</a> 的一个延伸， 在之前的项目中没有解决很重要的问题， 就是反代服务器利用的是作者部署的公网服务器。如果要自己使用的话，最好能够基于自己的服务器实现一个。所以第一步我们需要构建一个反代服务。</p>
-<h3 id="ChatGPT反代服务构建"><a href="#ChatGPT反代服务构建" class="headerlink" title="ChatGPT反代服务构建"></a>ChatGPT反代服务构建</h3><p>反代服务器的搭建，可以参考：<a target="_blank" rel="noopener" href="https://github.com/acheong08/ChatGPT-Proxy-V4">acheong08&#x2F;ChatGPT-Proxy-V4: Simple Cloudflare bypass for ChatGPT (github.com)</a>。 </p>
-<p>首先需要下载这个项目：</p>
-<pre><code class="bash">git clone git@github.com:acheong08/ChatGPT-Proxy-V4.git
-</code></pre>
-<p>笔者使用的服务器为<code>centos</code>， 基于你使用的服务器的类型，不同的命令可能稍有不同，稍作调整即可。主要分为以下几步:</p>
-<ol>
-<li><strong>安装Go环境：</strong></li>
-</ol>
-<p>Go的安装包可以从<a target="_blank" rel="noopener" href="https://golang.org/dl/">Go官网</a>上找到，选择一个合适的版本下载到你的CentOS服务器。例如，如果我们要下载Go 1.16.4版本，可以使用下面的命令：</p>
-<pre><code class="bash">
-wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz
-</code></pre>
-<p>然后，解压这个文件到<code>/usr/local</code>：</p>
-<pre><code class="bash">tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz
-</code></pre>
-<p>将Go的二进制文件添加到<code>PATH</code>中：</p>
-<pre><code class="bash">echo &quot;export PATH=$PATH:/usr/local/go/bin&quot; &gt;&gt; ~/.bash_profile
-source ~/.bash_profile
-</code></pre>
-<p>你可以使用<code>go version</code>命令来验证Go是否安装成功。</p>
-<p> <img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230610174001359.png" alt="image-20230610174001359"></p>
-<p>我这里测试是成功的。</p>
-<ol start="2">
-<li><strong>设置环境变量：</strong></li>
-</ol>
-<p>你需要一个ChatGPT Plus账号的PUID来设置环境变量。你可以使用下面的命令将PUID添加到环境变量中：</p>
-<pre><code>bashCopy codeecho &quot;export PUID=\&quot;user-...\&quot;&quot; &gt;&gt; ~/.bash_profile
-source ~/.bash_profile
-</code></pre>
-<p>记得将”user-…”替换为你的实际PUID。</p>
-<p>其中<code>PUID</code>意思为<code>Plus UID</code> 也就是你的账户的ID， 可以在这里找到：<a target="_blank" rel="noopener" href="https://chat.openai.com/api/auth/session">chat.openai.com&#x2F;api&#x2F;auth&#x2F;session</a>， </p>
-<ol start="3">
-<li><strong>构建和运行项目：</strong></li>
-</ol>
-<p>首先，你需要把项目代码复制到你的服务器上。你可以使用<code>git clone</code>命令来完成这个步骤，如果项目代码托管在一个git仓库上的话。</p>
-<p>在项目的根目录下，使用<code>go build</code>命令构建项目：</p>
-<pre><code class="bash">go build
-</code></pre>
-<p>将会输出一下内容：</p>
-<pre><code class="bash">go build
-go: downloading github.com/acheong08/endless v0.0.0-20230522010333-1359fd84c836
-go: downloading github.com/bogdanfinn/fhttp v0.5.22
-go: downloading github.com/bogdanfinn/tls-client v1.3.12
-go: downloading github.com/gin-gonic/gin v1.9.0
-go: downloading github.com/andybalholm/brotli v1.0.5
-go: downloading github.com/bogdanfinn/utls v1.5.16
-go: downloading golang.org/x/net v0.10.0
-go: downloading github.com/tam7t/hpkp v0.0.0-20160821193359-2b70b4024ed5
-go: downloading github.com/gin-contrib/sse v0.1.0
-go: downloading github.com/mattn/go-isatty v0.0.19
-go: downloading github.com/klauspost/compress v1.16.5
-go: downloading golang.org/x/crypto v0.9.0
-go: downloading golang.org/x/text v0.9.0
-go: downloading github.com/go-playground/validator/v10 v10.14.0
-go: downloading github.com/pelletier/go-toml/v2 v2.0.8
-go: downloading github.com/ugorji/go/codec v1.2.11
-go: downloading google.golang.org/protobuf v1.30.0
-go: downloading gopkg.in/yaml.v3 v3.0.1
-go: downloading golang.org/x/sys v0.8.0
-go: downloading github.com/gabriel-vasile/mimetype v1.4.2
-go: downloading github.com/go-playground/universal-translator v0.18.1
-go: downloading github.com/leodido/go-urn v1.2.4
-...
-</code></pre>
-<p>现在，你应该可以在项目的根目录下看到一个叫做<code>ChatGPT-Proxy-V4</code>的可执行文件。你可以直接运行这个文件来启动项目：</p>
-<p>这是我的目录：</p>
-<pre><code class="bash">ChatGPT-Proxy-V4  docker-compose.yml  Dockerfile  go1.20.5.linux-amd64.tar.gz  go.mod  go.sum  LICENSE  main.go  README.md
-</code></pre>
-<p>运行后， 你讲看到以下输出：</p>
-<pre><code class="bash">[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
-
-[GIN-debug] [WARNING] Running in &quot;debug&quot; mode. Switch to &quot;release&quot; mode in production.
- - using env:   export GIN_MODE=release
- - using code:  gin.SetMode(gin.ReleaseMode)
-
-[GIN-debug] GET    /ping                     --&gt; main.main.func1 (3 handlers)
-[GIN-debug] PATCH  /admin/puid               --&gt; main.main.func2 (4 handlers)
-[GIN-debug] PATCH  /admin/password           --&gt; main.main.func3 (4 handlers)
-[GIN-debug] GET    /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] POST   /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] PUT    /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] PATCH  /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] HEAD   /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] OPTIONS /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] DELETE /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] CONNECT /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] TRACE  /api/*path                --&gt; main.proxy (3 handlers)
-2023/06/10 05:54:46 1878014 :9090
-</code></pre>
-<p>目前，我们就部署完毕了。 注意，这里你需要打开<code>9090</code>端口的防火墙，不然的话反代无法发挥作用。</p>
-<pre><code class="bash">sudo firewall-cmd --permanent --add-port=9090/tcp
-sudo firewall-cmd --reload
-</code></pre>
-
             
         </div>
     </div>
@@ -296,7 +201,7 @@ sudo firewall-cmd --reload
         
         <span class="tag">
             
-            <a href="/tags/GPTPlus-GPT4-API%E9%83%A8%E7%BD%B2/" style="color: #00bcd4">GPTPlus, GPT4 API部署</a>
+            <a href="/tags/GPTPlus-GPT4-API%E9%83%A8%E7%BD%B2/" style="color: #03a9f4">GPTPlus, GPT4 API部署</a>
         </span>
         
     </div>
@@ -321,156 +226,7 @@ sudo firewall-cmd --reload
     <div class="description">
         <div class="content" v-pre>
             
-            <h3 id="版图介绍"><a href="#版图介绍" class="headerlink" title="版图介绍"></a>版图介绍</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=1ed0ZL_Eg58">视频来源介绍</a></p>
-</blockquote>
-<p>版图(lay out)， 定义了在制造中的掩膜的几何图形。多层次的一个绘制， 因为每一张mask都对应一张layout。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606232859683.png" alt="image-20230606232859683"></p>
-<p>不同的颜色代表不同的层次， foundry(代工厂)， 不同的层次是不同的掩膜版，对于芯片的每一个层，对应一个版图。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606232829685.png" alt="image-20230606232829685"></p>
-<p>数字电路的版图主要是影响速度（降低延时和面积）， 模拟版图主要影响速度和精度，（对称性，器件匹配，降低寄生， 避免串扰，优化互联线，看起来好看）。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606234139272.png" alt="image-20230606234139272"></p>
-<p>数字版图杂乱无章， 最小化面积。 </p>
-<h3 id="Tapeout-Flow-流片"><a href="#Tapeout-Flow-流片" class="headerlink" title="Tapeout Flow(流片)"></a>Tapeout Flow(流片)</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606234543501.png" alt="image-20230606234543501"></p>
-<p>两者交互利用的是<code>GDSII</code>文件，  </p>
-<ul>
-<li><code>OPC</code>(optical proximity correction， 光学邻近矫正)</li>
-</ul>
-<p>掩膜版的图案都是很小的， 来加工<code>wafer</code>（晶圆上的图像）， 由于衍射和光学系统的问题， 通过掩膜版去光刻， </p>
-<p>会导致<code>光刻胶的图形和掩膜版并不是完全一致的</code> ， 然后通过其他工艺将光刻胶图像转移到wafer上。</p>
-<p><em>Design Pattern</em> -&gt; <em>光刻胶的图形</em></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606235916759.png" alt="image-20230606235916759"></p>
-<p>如果进行OPC矫正后：</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607000141480.png" alt="image-20230607000141480"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607000150023.png" alt="image-20230607000150023"></p>
-<ul>
-<li>数字芯片电路设计流程</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607000330248.png" alt="image-20230607000330248"></p>
-<ul>
-<li><ul>
-<li>Logic Design -&gt; Verilog描述</li>
-<li>Logic Synthesis -&gt; 构建门级网表</li>
-<li>Floorplan -&gt; 布局</li>
-<li>Place &amp; Route Tools -&gt; 构建版图雏形（布局布线）</li>
-<li>生成GDSII（添加Digital Libraries）</li>
-<li>DRC + LVS 检查</li>
-<li>Final GDSII</li>
-</ul>
-</li>
-<li><p>模拟集成电路设计流程</p>
-</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607001029421.png" alt="image-20230607001029421"></p>
-<ul>
-<li><ul>
-<li>Circuit Design ： 用基本元器件实现。</li>
-<li>Simulation ： 频域仿真&#x2F;时域仿真</li>
-<li>Layout ： 手工绘制模拟电路版图</li>
-<li>DRC LVS 检测： 设计是否满足foundry要求， 检测器件链接关系是否一直</li>
-<li>Parasitic Extraction ： 寄生参数提取 -&gt; 生成新的netlist -&gt; post simulation（后仿真）</li>
-</ul>
-</li>
-</ul>
-<p><strong>Layout不是绘制图形，更重要的是前期的规划。</strong></p>
-<ul>
-<li><p>CMOS 晶体管参数：</p>
-</li>
-<li><ul>
-<li><code>Finger</code>：让器件的源极和漏级交叉出现， 截成几段就是几个<code>Finger</code>， 下面的是3(3个蓝色)。</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607175254574.png" alt="image-20230607175254574"></p>
-</li>
-<li><ul>
-<li><code>Multiplier</code>：复制几倍</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607175412729.png" alt="image-20230607175412729"></p>
-</li>
-<li><ul>
-<li><code>W</code>:宽度， <code>L</code> ：长度</li>
-</ul>
-</li>
-</ul>
-<p>总的宽长比计算公式：</p>
-<p>$Total \quad W&#x2F;L &#x3D; W&#x2F;L \times Finger \times Multiplier$</p>
-<h3 id="IC的横截面"><a href="#IC的横截面" class="headerlink" title="IC的横截面"></a>IC的横截面</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607175752145.png" alt="image-20230607175752145"></p>
-<p><code>1P4M</code> ： 1 poly 4 metal ，一层多晶硅， 四层金属。 </p>
-<p><code>ACT(active)</code> ： 衬底，有源区。</p>
-<p><code>CT(contact)</code>： 接触孔， 有源区和M1的通孔</p>
-<p><code>M1,M2,M3,M4</code>: 金属</p>
-<p><code>MT(metal TOP)</code>: 最上层金属</p>
-<p><code>180nm</code>： 指的是，晶体管的最小沟道长度是<code>180nm</code>。</p>
-<p>M金属之间是由介质隔离的，  绝缘， 连接金属使用<code>Via(通孔)</code>， 链接M1和M2是<code>Via1</code>。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607180242248.png" alt="image-20230607180242248"></p>
-<p><strong>两个金属线之间是存在寄生电容的。</strong></p>
-<h3 id="CMOS制备流程图："><a href="#CMOS制备流程图：" class="headerlink" title="CMOS制备流程图："></a>CMOS制备流程图：</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607180600966.png" alt="image-20230607180600966"></p>
-<p><code>1:Grow field oxide</code>： 生长场氧， 作用是器件隔离，$0.35\mu m$ 工艺以上用的。 $0.35\mu m$ 工艺以下用 <code>STI</code>隔离。</p>
-<p><code>2： </code> 刻蚀</p>
-<p><code>3:注入N井</code></p>
-<p><code>4:再刻蚀得到的就是active区域。</code></p>
-<p><code>5：生成栅氧</code></p>
-<p><code>6：沉淀郭金贵。</code></p>
-<p><code>7:刻蚀</code></p>
-<p><code>8：注入</code></p>
-<p><code>9:生长氮化物</code>……..</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607181030747.png" alt="image-20230607181030747"></p>
-<p><code>Mask</code>的组成主要是金属（Cr）和 和玻璃（透光的）， 将Cr镀在玻璃上， 金属上有各种图像(Layout定义的)。 </p>
-<p><code>Clear Tone</code>： 大部分区域是被涂上金属的， 只有少部分是镂空的， 这样的掩膜版叫做<code>暗场</code>。 地下的红色的就是光刻胶， 是在wafer上面的。</p>
-<p>Layout上定义的是镂空的。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607181823904.png" alt="image-20230607181823904"></p>
-<p><code>正胶</code>： 有光照的地方会变性，用显影液可以去掉。 <strong>挖空挖洞的一般都是clear tone</strong></p>
-<p><code>Dark Tone</code>: 亮场，大部分地方没有金属，只有少部分地方有金属， <strong>要保留的就是dark tone</strong></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607182220028.png" alt="image-20230607182220028"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607182641437.png" alt="image-20230607182641437"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607182857765.png" alt="image-20230607182857765"></p>
-<p>N井注入，开个孔，进行注入。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607182954092.png" alt="image-20230607182954092"></p>
-<p>形成一个N井的区域。 先光刻刻蚀掉光刻胶，再刻蚀氧化硅（可能用HF刻蚀）， 再沉积金属坞。 最后得到的效果</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607183855256.png" alt="image-20230607183855256"></p>
-<h3 id="Design-Rules"><a href="#Design-Rules" class="headerlink" title="Design Rules"></a>Design Rules</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607184358426.png" alt="image-20230607184358426"></p>
-<p><code>width</code>：<strong>至少是这个值</strong></p>
-<p><code>size</code>的形状， 一定是正方形， 表示的是正方形的边长。 <strong>要是这个值</strong></p>
-<p><code>enclosure</code>： A包含B， 包裹的距离是<code>enclosure </code></p>
-<p><code>extension</code> ： 有一个边超过就行了。</p>
-<p><code>overlap</code>： 重叠，两个图像的重叠。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185012751.png" alt="image-20230607185012751"></p>
-<h3 id="DRC-Design-Rule-Check"><a href="#DRC-Design-Rule-Check" class="headerlink" title="DRC:(Design Rule Check)"></a>DRC:(Design Rule Check)</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185325355.png" alt="image-20230607185325355"></p>
-<h3 id="LVS-Layout-Versus-Schematic"><a href="#LVS-Layout-Versus-Schematic" class="headerlink" title="LVS:(Layout Versus Schematic)"></a>LVS:(Layout Versus Schematic)</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185545088.png" alt="image-20230607185545088"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185750166.png" alt="image-20230607185750166"></p>
-<h2 id="后仿真："><a href="#后仿真：" class="headerlink" title="后仿真："></a>后仿真：</h2><h3 id="寄生参数抽取："><a href="#寄生参数抽取：" class="headerlink" title="寄生参数抽取："></a>寄生参数抽取：</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185941176.png" alt="image-20230607185941176"></p>
-<h3 id="Layout-里面常用的工具："><a href="#Layout-里面常用的工具：" class="headerlink" title="Layout 里面常用的工具："></a>Layout 里面常用的工具：</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607190219993.png" alt="image-20230607190219993"></p>
-<p><strong>启动Calibre WorkBench进行LTO</strong>：</p>
-<pre><code class="bash">calibrewb
-</code></pre>
-<h3 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230614211959737.png" alt="image-20230614211959737"></p>
-<ul>
-<li>分别选择<code>LEF</code>和<code>DEF</code>文件即可</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230614212030241.png" alt="image-20230614212030241"></p>
-<h3 id="存在的问题："><a href="#存在的问题：" class="headerlink" title="存在的问题："></a>存在的问题：</h3><ul>
-<li>问题1： 不知道OPC模拟的参数设置（现在采用的是默认的OPC参数设置， 关于模型参数， 迭代次数）：</li>
-<li><ul>
-<li>原始的版图</li>
-</ul>
-</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607203724041.png" alt="image-20230607203724041"></p>
-<ul>
-<li><ul>
-<li>OPC矫正后的版图：</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607203829141.png" alt="image-20230607203829141"></p>
-</li>
-<li><p>问题2： 不知道对于这个版图文件进行OPC光刻矫正是怎么操作，是对每一层layout进行矫正都生成还是怎么样（不太懂这个版图文件的层数是怎么定义的），目前是采用GUI来操作的，如果是对全部数据集进行OPC操作的话如何通过脚本化操作实现。</p>
-</li>
-<li><p>问题3： SARF插入不会目前不会操作， 以及对于最后的图像导出是怎么样的？ 是一层一层版图的导出还是怎么样， 颜色怎么定义， 。</p>
-</li>
-<li><p>问题4：不太理解这个版图里面的这些内容是什么， 顺便不太理解每一层layout是什么， 具体总结就是怎么生成数据集：</p>
-</li>
-</ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607204554631.png" alt="image-20230607204554631"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607204707453.png" alt="image-20230607204707453"></p>
-
+            <h3 id="版图介绍"><a href="#版图介绍" class="headerlink" title="版图介绍"></a>版图介绍</h3>
             
         </div>
     </div>
@@ -483,7 +239,7 @@ sudo firewall-cmd --reload
         
         <span class="tag">
             
-            <a href="/tags/%E7%89%88%E5%9B%BE%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D%EF%BC%8C-%E5%AE%B9%E5%99%AA%E5%A3%B0/" style="color: #00a596">版图设计介绍， 容噪声</a>
+            <a href="/tags/%E7%89%88%E5%9B%BE%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D%EF%BC%8C-%E5%AE%B9%E5%99%AA%E5%A3%B0/" style="color: #ff7d73">版图设计介绍， 容噪声</a>
         </span>
         
     </div>
@@ -512,49 +268,6 @@ sudo firewall-cmd --reload
 <ul>
 <li>github链接:<a target="_blank" rel="noopener" href="https://github.com/linkedlist771/DeepLearningSystem">linkedlist771&#x2F;DeepLearningSystem: 深度学习系统，主要是实现一个类似pytorch的深度学习框架，包括计算图传播和GPU加速 (github.com)</a></li>
 </ul>
-<h3 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h3><ul>
-<li><code>Linear</code> 层神经网络前向传播， 代码如下：</li>
-</ul>
-<pre><code class="Python">class Linear(Module):
-    def __init__(self, in_features, out_features, bias=True, device=None, dtype=&quot;float32&quot;):
-        super().__init__()
-        self.in_features = in_features
-        self.out_features = out_features
-        ### BEGIN YOUR SOLUTION
-        #self.bias = bias
-        self.device = device
-        self.dtype = dtype
-        # 如果有偏置的话
-        weight = init.kaiming_uniform(in_features, out_features, nonlinearity=&quot;relu&quot;, device=device, dtype=dtype)
-        self.weight = Tensor(weight)
-        if bias:
-            # 然而，如果你的代码中某些地方假定偏置是一个二维张量，而且第一个维度为1，那么reshape就是必须的。
-            # 这可能是为了保持与特定操作的兼容性，例如广播或矩阵乘法。
-            # 另外一种可能的原因是，在使用Kaiming初始化时，fan_in和fan_out参数的顺序可能会影响到初始化的结果。
-            # 在你的代码中，可能作者想要使用out_features作为fan_in来进行初始化。然后，通过reshape操作将偏置调整为正确的形状。
-            # 不过在偏置初始化中，一般不需要这样做，因为偏置通常都被初始化为零或者接近零的小值。
-            self.bias = init.kaiming_uniform(out_features, 1, dtype=dtype).reshape((1, out_features))
-            # self.bias = init.kaiming_uniform(1, out_features, nonlinearity=&quot;relu&quot;, device=device, dtype=dtype)
-        else:
-            self.bias = None
-        # raise NotImplementedError()
-        ### END YOUR SOLUTION
-
-    def forward(self, X: Tensor) -&gt; Tensor:
-        ### BEGIN YOUR SOLUTION
-        if self.bias:
-            # 如果有偏置的话
-            a_l = ops.matmul(X, self.weight)
-            return a_l + self.bias
-        else:
-            return ops.matmul(X, self.weight)
-        # raise NotImplementedError()
-        ## END YOUR SOLUTION
-</code></pre>
-<p>踩坑点：如果含有偏置bias的情况下，由于<code>out_features</code>可能不是一维的，默认生成(1,out_features) 形状的张量， 在多维情况将出现错误，所以需要<code>init.kaiming_uniform(out_features, 1, dtype=dtype).reshape((1, out_features))</code>先生成这种形状的Tensor然后进行reshape保持兼容性。</p>
-<h2 id="一个两层的神经网络"><a href="#一个两层的神经网络" class="headerlink" title="一个两层的神经网络"></a>一个两层的神经网络</h2><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230617174413453.png" alt="image-20230617174413453"></p>
-<h2 id="梯度下降求导"><a href="#梯度下降求导" class="headerlink" title="梯度下降求导"></a>梯度下降求导</h2><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230617174451412.png" alt="image-20230617174451412"></p>
-
             
         </div>
     </div>

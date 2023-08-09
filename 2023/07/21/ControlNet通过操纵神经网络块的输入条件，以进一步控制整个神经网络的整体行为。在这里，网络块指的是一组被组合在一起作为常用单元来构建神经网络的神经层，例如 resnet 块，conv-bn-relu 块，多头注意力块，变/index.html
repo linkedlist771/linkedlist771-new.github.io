@@ -166,7 +166,11 @@
     </div>
     
     <div class="content" v-pre>
-        <p>ControlNet通过操纵神经网络块的输入条件，以进一步控制整个神经网络的整体行为。在这里，”网络块”指的是一组被组合在一起作为常用单元来构建神经网络的神经层，例如 “resnet” 块，”conv-bn-relu” 块，多头注意力块，变压器块等。</p>
+        <h1 id="ControlNet原理解析"><a href="#ControlNet原理解析" class="headerlink" title="ControlNet原理解析"></a>ControlNet原理解析</h1><span id="more"></span>
+
+
+
+<p>ControlNet通过操纵神经网络块的输入条件，以进一步控制整个神经网络的整体行为。在这里，”网络块”指的是一组被组合在一起作为常用单元来构建神经网络的神经层，例如 “resnet” 块，”conv-bn-relu” 块，多头注意力块，变压器块等。</p>
 <p>以2D特征为例，给定一个特征图 $\boldsymbol{x} \in \mathbb{R}^{h \times w \times c}$，其中 ${h, w, c}$ 是高度，宽度和通道数，一个带有一组参数 $\Theta$ 的神经网络块 $\mathcal{F}(\cdot ; \Theta)$ 将 $\boldsymbol{x}$ 转换为另一个特征图 $\boldsymbol{y}$，有<br>$$<br>\boldsymbol{y}&#x3D;\mathcal{F}(\boldsymbol{x} ; \Theta)<br>$$<br>这个过程在图 2-(a) 中进行了可视化。<br>我们锁定所有的参数在 $\Theta$ 中，然后将其克隆为一个可训练的副本 $\Theta_{\mathrm{c}}$。复制的 $\Theta_{\mathrm{c}}$ 与一个外部条件向量 $c$ 一起进行训练。在这篇论文中，我们将原始参数和新参数称为 “锁定副本” 和 “可训练副本”。制作这样的副本而不是直接训练原始权重的动机是为了避免在数据集小的时候过拟合，并保留从数十亿图像中学习的大型模型的生产就绪质量。</p>
 <p>神经网络块通过一个称为 “零卷积” 的特殊类型的卷积层连接，即权重和偏置都初始化为零的 $1 \times 1$ 卷积层。我们将零卷积操作表示为 $\mathcal{Z}(\cdot ; \cdot)$，并使用两个参数实例 $\left{\Theta_{z 1}, \Theta_{z 2}\right}$ 来构成 ControlNet 结构，有<br>$$<br>\boldsymbol{y}<em>{\mathrm{c}}&#x3D;\mathcal{F}(\boldsymbol{x} ; \Theta)+\mathcal{Z}\left(\mathcal{F}\left(\boldsymbol{x}+\mathcal{Z}\left(\boldsymbol{c} ; \Theta</em>{\mathrm{z} 1}\right) ; \Theta_{\mathrm{c}}\right) ; \Theta_{\mathrm{z} 2}\right)<br>$$<br>其中 $\boldsymbol{y}<em>{\mathrm{c}}$ 成为这个神经网络块的输出，如图 2-(b) 所示。<br>因为零卷积层的权重和偏置都初始化为零，在第一步训练中，我们有<br>$$<br>\left{\begin{array}{l}<br>\mathcal{Z}\left(\boldsymbol{c} ; \Theta</em>{\mathrm{z} 1}\right)&#x3D;\mathbf{0} \<br>\mathcal{F}\left(\boldsymbol{x}+\mathcal{Z}\left(\boldsymbol{c} ; \Theta_{\mathrm{z} 1}\right) ; \Theta_{\mathrm{c}}\right)&#x3D;\mathcal{F}\left(\boldsymbol{x} ; \Theta_{\mathrm{c}}\right)&#x3D;\mathcal{F}(\boldsymbol{x} ; \Theta) \<br>\mathcal{Z}\left(\mathcal{F}\left(\boldsymbol{x}+\mathcal{Z}\left(\boldsymbol{c} ; \Theta_{\mathrm{z} 1}\right) ; \Theta_{\mathrm{c}}\right) ; \Theta_{\mathrm{z} 2}\right)&#x3D;\mathcal{Z}\left(\mathcal{F}\left(\boldsymbol{x} ; \Theta_{\mathrm{c}}\right) ; \Theta_{\mathrm{z} 2}\right)&#x3D;\mathbf{0}<br>\end{array}\right.<br>$$</p>
 
