@@ -170,7 +170,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%B3%BB%E7%BB%9F%EF%BC%8C-DeepLearning-system/" style="color: #00bcd4">深度学习系统， DeepLearning system</a>
+                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%B3%BB%E7%BB%9F%EF%BC%8C-DeepLearning-system/" style="color: #ff7d73">深度学习系统， DeepLearning system</a>
             </span>
             
         </span>
@@ -230,8 +230,8 @@
         ## END YOUR SOLUTION
 </code></pre>
 <p>踩坑点：如果含有偏置bias的情况下，由于<code>out_features</code>可能不是一维的，默认生成(1,out_features) 形状的张量， 在多维情况将出现错误，所以需要<code>init.kaiming_uniform(out_features, 1, dtype=dtype).reshape((1, out_features))</code>先生成这种形状的Tensor然后进行reshape保持兼容性。</p>
-<h2 id="一个两层的神经网络"><a href="#一个两层的神经网络" class="headerlink" title="一个两层的神经网络"></a>一个两层的神经网络</h2><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230617174413453.png" alt="image-20230617174413453"></p>
-<h2 id="梯度下降求导"><a href="#梯度下降求导" class="headerlink" title="梯度下降求导"></a>梯度下降求导</h2><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230617174451412.png" alt="image-20230617174451412"></p>
+<h2 id="一个两层的神经网络"><a href="#一个两层的神经网络" class="headerlink" title="一个两层的神经网络"></a>一个两层的神经网络</h2><p><img src="/../images/image-20230617174413453.png" alt="image-20230617174413453"></p>
+<h2 id="梯度下降求导"><a href="#梯度下降求导" class="headerlink" title="梯度下降求导"></a>梯度下降求导</h2><p><img src="/../images/image-20230617174451412.png" alt="image-20230617174451412"></p>
 
     </div>
     

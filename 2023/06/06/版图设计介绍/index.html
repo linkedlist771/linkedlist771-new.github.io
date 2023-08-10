@@ -170,7 +170,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E7%89%88%E5%9B%BE%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D%EF%BC%8C-%E5%AE%B9%E5%99%AA%E5%A3%B0/" style="color: #03a9f4">版图设计介绍， 容噪声</a>
+                <a href="/tags/%E7%89%88%E5%9B%BE%E8%AE%BE%E8%AE%A1%E4%BB%8B%E7%BB%8D%EF%BC%8C-%E5%AE%B9%E5%99%AA%E5%A3%B0/" style="color: #ffa2c4">版图设计介绍， 容噪声</a>
             </span>
             
         </span>
@@ -184,13 +184,13 @@
 <p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=1ed0ZL_Eg58">视频来源介绍</a></p>
 </blockquote>
 <p>版图(lay out)， 定义了在制造中的掩膜的几何图形。多层次的一个绘制， 因为每一张mask都对应一张layout。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606232859683.png" alt="image-20230606232859683"></p>
+<p><img src="/../images/image-20230606232859683.png" alt="image-20230606232859683"></p>
 <p>不同的颜色代表不同的层次， foundry(代工厂)， 不同的层次是不同的掩膜版，对于芯片的每一个层，对应一个版图。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606232829685.png" alt="image-20230606232829685"></p>
+<p><img src="/../images/image-20230606232829685.png" alt="image-20230606232829685"></p>
 <p>数字电路的版图主要是影响速度（降低延时和面积）， 模拟版图主要影响速度和精度，（对称性，器件匹配，降低寄生， 避免串扰，优化互联线，看起来好看）。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606234139272.png" alt="image-20230606234139272"></p>
+<p><img src="/../images/image-20230606234139272.png" alt="image-20230606234139272"></p>
 <p>数字版图杂乱无章， 最小化面积。 </p>
-<h3 id="Tapeout-Flow-流片"><a href="#Tapeout-Flow-流片" class="headerlink" title="Tapeout Flow(流片)"></a>Tapeout Flow(流片)</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606234543501.png" alt="image-20230606234543501"></p>
+<h3 id="Tapeout-Flow-流片"><a href="#Tapeout-Flow-流片" class="headerlink" title="Tapeout Flow(流片)"></a>Tapeout Flow(流片)</h3><p><img src="/../images/image-20230606234543501.png" alt="image-20230606234543501"></p>
 <p>两者交互利用的是<code>GDSII</code>文件，  </p>
 <ul>
 <li><code>OPC</code>(optical proximity correction， 光学邻近矫正)</li>
@@ -198,14 +198,14 @@
 <p>掩膜版的图案都是很小的， 来加工<code>wafer</code>（晶圆上的图像）， 由于衍射和光学系统的问题， 通过掩膜版去光刻， </p>
 <p>会导致<code>光刻胶的图形和掩膜版并不是完全一致的</code> ， 然后通过其他工艺将光刻胶图像转移到wafer上。</p>
 <p><em>Design Pattern</em> -&gt; <em>光刻胶的图形</em></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230606235916759.png" alt="image-20230606235916759"></p>
+<p><img src="/../images/image-20230606235916759.png" alt="image-20230606235916759"></p>
 <p>如果进行OPC矫正后：</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607000141480.png" alt="image-20230607000141480"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607000150023.png" alt="image-20230607000150023"></p>
+<p><img src="/../images/image-20230607000141480.png" alt="image-20230607000141480"></p>
+<p><img src="/../images/image-20230607000150023.png" alt="image-20230607000150023"></p>
 <ul>
 <li>数字芯片电路设计流程</li>
 </ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607000330248.png" alt="image-20230607000330248"></p>
+<p><img src="/../images/image-20230607000330248.png" alt="image-20230607000330248"></p>
 <ul>
 <li><ul>
 <li>Logic Design -&gt; Verilog描述</li>
@@ -220,7 +220,7 @@
 <li><p>模拟集成电路设计流程</p>
 </li>
 </ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607001029421.png" alt="image-20230607001029421"></p>
+<p><img src="/../images/image-20230607001029421.png" alt="image-20230607001029421"></p>
 <ul>
 <li><ul>
 <li>Circuit Design ： 用基本元器件实现。</li>
@@ -238,12 +238,12 @@
 <li><ul>
 <li><code>Finger</code>：让器件的源极和漏级交叉出现， 截成几段就是几个<code>Finger</code>， 下面的是3(3个蓝色)。</li>
 </ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607175254574.png" alt="image-20230607175254574"></p>
+<p><img src="/../images/image-20230607175254574.png" alt="image-20230607175254574"></p>
 </li>
 <li><ul>
 <li><code>Multiplier</code>：复制几倍</li>
 </ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607175412729.png" alt="image-20230607175412729"></p>
+<p><img src="/../images/image-20230607175412729.png" alt="image-20230607175412729"></p>
 </li>
 <li><ul>
 <li><code>W</code>:宽度， <code>L</code> ：长度</li>
@@ -252,7 +252,7 @@
 </ul>
 <p>总的宽长比计算公式：</p>
 <p>$Total \quad W&#x2F;L &#x3D; W&#x2F;L \times Finger \times Multiplier$</p>
-<h3 id="IC的横截面"><a href="#IC的横截面" class="headerlink" title="IC的横截面"></a>IC的横截面</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607175752145.png" alt="image-20230607175752145"></p>
+<h3 id="IC的横截面"><a href="#IC的横截面" class="headerlink" title="IC的横截面"></a>IC的横截面</h3><p><img src="/../images/image-20230607175752145.png" alt="image-20230607175752145"></p>
 <p><code>1P4M</code> ： 1 poly 4 metal ，一层多晶硅， 四层金属。 </p>
 <p><code>ACT(active)</code> ： 衬底，有源区。</p>
 <p><code>CT(contact)</code>： 接触孔， 有源区和M1的通孔</p>
@@ -260,9 +260,9 @@
 <p><code>MT(metal TOP)</code>: 最上层金属</p>
 <p><code>180nm</code>： 指的是，晶体管的最小沟道长度是<code>180nm</code>。</p>
 <p>M金属之间是由介质隔离的，  绝缘， 连接金属使用<code>Via(通孔)</code>， 链接M1和M2是<code>Via1</code>。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607180242248.png" alt="image-20230607180242248"></p>
+<p><img src="/../images/image-20230607180242248.png" alt="image-20230607180242248"></p>
 <p><strong>两个金属线之间是存在寄生电容的。</strong></p>
-<h3 id="CMOS制备流程图："><a href="#CMOS制备流程图：" class="headerlink" title="CMOS制备流程图："></a>CMOS制备流程图：</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607180600966.png" alt="image-20230607180600966"></p>
+<h3 id="CMOS制备流程图："><a href="#CMOS制备流程图：" class="headerlink" title="CMOS制备流程图："></a>CMOS制备流程图：</h3><p><img src="/../images/image-20230607180600966.png" alt="image-20230607180600966"></p>
 <p><code>1:Grow field oxide</code>： 生长场氧， 作用是器件隔离，$0.35\mu m$ 工艺以上用的。 $0.35\mu m$ 工艺以下用 <code>STI</code>隔离。</p>
 <p><code>2： </code> 刻蚀</p>
 <p><code>3:注入N井</code></p>
@@ -272,40 +272,40 @@
 <p><code>7:刻蚀</code></p>
 <p><code>8：注入</code></p>
 <p><code>9:生长氮化物</code>……..</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607181030747.png" alt="image-20230607181030747"></p>
+<p><img src="/../images/image-20230607181030747.png" alt="image-20230607181030747"></p>
 <p><code>Mask</code>的组成主要是金属（Cr）和 和玻璃（透光的）， 将Cr镀在玻璃上， 金属上有各种图像(Layout定义的)。 </p>
 <p><code>Clear Tone</code>： 大部分区域是被涂上金属的， 只有少部分是镂空的， 这样的掩膜版叫做<code>暗场</code>。 地下的红色的就是光刻胶， 是在wafer上面的。</p>
 <p>Layout上定义的是镂空的。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607181823904.png" alt="image-20230607181823904"></p>
+<p><img src="/../images/image-20230607181823904.png" alt="image-20230607181823904"></p>
 <p><code>正胶</code>： 有光照的地方会变性，用显影液可以去掉。 <strong>挖空挖洞的一般都是clear tone</strong></p>
 <p><code>Dark Tone</code>: 亮场，大部分地方没有金属，只有少部分地方有金属， <strong>要保留的就是dark tone</strong></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607182220028.png" alt="image-20230607182220028"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607182641437.png" alt="image-20230607182641437"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607182857765.png" alt="image-20230607182857765"></p>
+<p><img src="/../images/image-20230607182220028.png" alt="image-20230607182220028"></p>
+<p><img src="/../images/image-20230607182641437.png" alt="image-20230607182641437"></p>
+<p><img src="/../images/image-20230607182857765.png" alt="image-20230607182857765"></p>
 <p>N井注入，开个孔，进行注入。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607182954092.png" alt="image-20230607182954092"></p>
+<p><img src="/../images/image-20230607182954092.png" alt="image-20230607182954092"></p>
 <p>形成一个N井的区域。 先光刻刻蚀掉光刻胶，再刻蚀氧化硅（可能用HF刻蚀）， 再沉积金属坞。 最后得到的效果</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607183855256.png" alt="image-20230607183855256"></p>
-<h3 id="Design-Rules"><a href="#Design-Rules" class="headerlink" title="Design Rules"></a>Design Rules</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607184358426.png" alt="image-20230607184358426"></p>
+<p><img src="/../images/image-20230607183855256.png" alt="image-20230607183855256"></p>
+<h3 id="Design-Rules"><a href="#Design-Rules" class="headerlink" title="Design Rules"></a>Design Rules</h3><p><img src="/../images/image-20230607184358426.png" alt="image-20230607184358426"></p>
 <p><code>width</code>：<strong>至少是这个值</strong></p>
 <p><code>size</code>的形状， 一定是正方形， 表示的是正方形的边长。 <strong>要是这个值</strong></p>
 <p><code>enclosure</code>： A包含B， 包裹的距离是<code>enclosure </code></p>
 <p><code>extension</code> ： 有一个边超过就行了。</p>
 <p><code>overlap</code>： 重叠，两个图像的重叠。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185012751.png" alt="image-20230607185012751"></p>
-<h3 id="DRC-Design-Rule-Check"><a href="#DRC-Design-Rule-Check" class="headerlink" title="DRC:(Design Rule Check)"></a>DRC:(Design Rule Check)</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185325355.png" alt="image-20230607185325355"></p>
-<h3 id="LVS-Layout-Versus-Schematic"><a href="#LVS-Layout-Versus-Schematic" class="headerlink" title="LVS:(Layout Versus Schematic)"></a>LVS:(Layout Versus Schematic)</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185545088.png" alt="image-20230607185545088"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185750166.png" alt="image-20230607185750166"></p>
-<h2 id="后仿真："><a href="#后仿真：" class="headerlink" title="后仿真："></a>后仿真：</h2><h3 id="寄生参数抽取："><a href="#寄生参数抽取：" class="headerlink" title="寄生参数抽取："></a>寄生参数抽取：</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607185941176.png" alt="image-20230607185941176"></p>
-<h3 id="Layout-里面常用的工具："><a href="#Layout-里面常用的工具：" class="headerlink" title="Layout 里面常用的工具："></a>Layout 里面常用的工具：</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607190219993.png" alt="image-20230607190219993"></p>
+<p><img src="/../images/image-20230607185012751.png" alt="image-20230607185012751"></p>
+<h3 id="DRC-Design-Rule-Check"><a href="#DRC-Design-Rule-Check" class="headerlink" title="DRC:(Design Rule Check)"></a>DRC:(Design Rule Check)</h3><p><img src="/../images/image-20230607185325355.png" alt="image-20230607185325355"></p>
+<h3 id="LVS-Layout-Versus-Schematic"><a href="#LVS-Layout-Versus-Schematic" class="headerlink" title="LVS:(Layout Versus Schematic)"></a>LVS:(Layout Versus Schematic)</h3><p><img src="/../images/image-20230607185545088.png" alt="image-20230607185545088"></p>
+<p><img src="/../images/image-20230607185750166.png" alt="image-20230607185750166"></p>
+<h2 id="后仿真："><a href="#后仿真：" class="headerlink" title="后仿真："></a>后仿真：</h2><h3 id="寄生参数抽取："><a href="#寄生参数抽取：" class="headerlink" title="寄生参数抽取："></a>寄生参数抽取：</h3><p><img src="/../images/image-20230607185941176.png" alt="image-20230607185941176"></p>
+<h3 id="Layout-里面常用的工具："><a href="#Layout-里面常用的工具：" class="headerlink" title="Layout 里面常用的工具："></a>Layout 里面常用的工具：</h3><p><img src="/../images/image-20230607190219993.png" alt="image-20230607190219993"></p>
 <p><strong>启动Calibre WorkBench进行LTO</strong>：</p>
 <pre><code class="bash">calibrewb
 </code></pre>
-<h3 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h3><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230614211959737.png" alt="image-20230614211959737"></p>
+<h3 id="导入数据"><a href="#导入数据" class="headerlink" title="导入数据"></a>导入数据</h3><p><img src="/../images/image-20230614211959737.png" alt="image-20230614211959737"></p>
 <ul>
 <li>分别选择<code>LEF</code>和<code>DEF</code>文件即可</li>
 </ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230614212030241.png" alt="image-20230614212030241"></p>
+<p><img src="/../images/image-20230614212030241.png" alt="image-20230614212030241"></p>
 <h3 id="存在的问题："><a href="#存在的问题：" class="headerlink" title="存在的问题："></a>存在的问题：</h3><ul>
 <li>问题1： 不知道OPC模拟的参数设置（现在采用的是默认的OPC参数设置， 关于模型参数， 迭代次数）：</li>
 <li><ul>
@@ -313,12 +313,12 @@
 </ul>
 </li>
 </ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607203724041.png" alt="image-20230607203724041"></p>
+<p><img src="/../images/image-20230607203724041.png" alt="image-20230607203724041"></p>
 <ul>
 <li><ul>
 <li>OPC矫正后的版图：</li>
 </ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607203829141.png" alt="image-20230607203829141"></p>
+<p><img src="/../images/image-20230607203829141.png" alt="image-20230607203829141"></p>
 </li>
 <li><p>问题2： 不知道对于这个版图文件进行OPC光刻矫正是怎么操作，是对每一层layout进行矫正都生成还是怎么样（不太懂这个版图文件的层数是怎么定义的），目前是采用GUI来操作的，如果是对全部数据集进行OPC操作的话如何通过脚本化操作实现。</p>
 </li>
@@ -327,8 +327,8 @@
 <li><p>问题4：不太理解这个版图里面的这些内容是什么， 顺便不太理解每一层layout是什么， 具体总结就是怎么生成数据集：</p>
 </li>
 </ul>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607204554631.png" alt="image-20230607204554631"></p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230607204707453.png" alt="image-20230607204707453"></p>
+<p><img src="/../images/image-20230607204554631.png" alt="image-20230607204554631"></p>
+<p><img src="/../images/image-20230607204707453.png" alt="image-20230607204707453"></p>
 
     </div>
     
