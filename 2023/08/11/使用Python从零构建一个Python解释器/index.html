@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>使用Python从零构建一个Python解释器 | LinkedList&#39;s Blog</title>
+        <meta name="author" content="Ding Li" />
+        <meta name="description" content="This is blog for Linkedlist771, mainly record some learning notes, thank you for your visit!" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/favicon.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>LINKEDLIST&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LINKEDLIST&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1>使用Python从零构建一个Python解释器</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/8/11
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E4%BB%8E%E9%9B%B6%E6%89%8B%E6%90%93Python%E8%A7%A3%E9%87%8A%E5%99%A8/" style="color: #00a596">从零手搓Python解释器</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <blockquote>
+<p>本项目主要是对<a target="_blank" rel="noopener" href="https://aosabook.org/en/500L/a-python-interpreter-written-in-python.html">500 Lines or LessA Python Interpreter Written in Python (aosabook.org)</a> 的复现，尝试通过Python来实现Python的解释器，从而理解Python的原理。</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h1><blockquote>
+<p>Byterun是一个用Python实现的Python解释器。在我研究Byterun的过程中，我惊讶地发现Python解释器的基本结构很容易适应500行的大小限制。本章将介绍解释器的结构，并为您提供足够的背景来进一步探索它。目标不是解释关于解释器的所有知识——像许多有趣的编程和计算机科学领域一样，您可以花费数年时间深入了解这个主题。</p>
+<p>Byterun是由Ned Batchelder和我编写的，基于Paul Swartz的工作。其结构与Python的主要实现，CPython，相似，因此理解Byterun将帮助您了解解释器通常和CPython解释器特别是什么。 (如果你不知道你正在使用哪个Python，那可能是CPython。) 尽管长度很短，但Byterun能够运行大多数简单的Python程序。</p>
+</blockquote>
+<h1 id="Python解释器"><a href="#Python解释器" class="headerlink" title="Python解释器"></a>Python解释器</h1><ol>
+<li><strong>Python解释器</strong>: 这里详细描述了“解释器”的不同定义。在本文中，它特指执行Python程序的最后一步。</li>
+<li><strong>执行过程</strong>: Python代码的执行包括四个主要步骤：<code>词法分析、解析、编译和解释</code>。前三个步骤将源代码转化为解释器可以理解的指令，而解释器的任务是执行这些指令。</li>
+<li><strong>编译与解释</strong>: 尽管Python通常被称为解释型语言，但它确实有一个编译步骤。与编译型语言相比，Python的编译步骤相对简单，而解释步骤更为复杂。</li>
+</ol>
+<blockquote>
+<p>Python解释器是一个虚拟机，这意味着它是模拟物理计算机的软件。这个特定的虚拟机是一个堆栈机器：它操作几个堆栈来执行其操作（与寄存器机相对，寄存器机从特定的内存位置读取和写入）。</p>
+<p>Python解释器是一个字节码解释器：它的输入是称为字节码的指令集。当你编写Python时，词法分析器、解析器和编译器为解释器操作生成代码对象。每个代码对象都包含一组要执行的指令——那就是字节码——以及解释器需要的其他信息。字节码是Python代码的中间表示：它以解释器可以理解的方式表达你编写的源代码。它类似于汇编语言作为C代码和硬件之间的中间表示的方式。</p>
+</blockquote>
+<h1 id="制作一个最简单的解释器"><a href="#制作一个最简单的解释器" class="headerlink" title="制作一个最简单的解释器"></a>制作一个最简单的解释器</h1><p>为了具体化这个概念，让我们从一个非常简单的解释器开始。这个解释器只能加数字，并且只理解三个指令。它能执行的所有代码都由这三个指令的不同组合组成。这三个指令是：</p>
+<ul>
+<li><p>LOAD_VALUE</p>
+</li>
+<li><p>ADD_TWO_VALUES </p>
+</li>
+<li><p>PRINT_ANSWER </p>
+<p>由于在本章中我们不关心词法分析器、解析器和编译器，所以指令集是如何生成的并不重要。你可以想象编写7 + 5，然后有一个编译器发出这三个指令的组合。或者，如果你有合适的编译器，你可以写Lisp语法，它被转化为相同的指令组合。解释器不在乎。重要的是我们的解释器得到了这些指令的一个良好的组合。</p>
+</li>
+</ul>
+<p>假设</p>
+<p>7 + 5 产生了这个指令集：</p>
+<pre><code class="bash">what_to_execute = &#123; &quot;instructions&quot;: [(&quot;LOAD_VALUE&quot;, 0), # 第一个数字 (&quot;LOAD_VALUE&quot;, 1), # 第二个数字 (&quot;ADD_TWO_VALUES&quot;, None), (&quot;PRINT_ANSWER&quot;, None)], &quot;numbers&quot;: [7, 5] &#125; 
+</code></pre>
+<p>Python解释器是一个堆栈机器，所以它必须操作堆栈来加两个数字（图12.1）。解释器将从执行第一个指令<code>LOAD_VALUE</code>开始，并将第一个数字压入堆栈。接下来，它会将第二个数字压入堆栈。对于第三个指令，<code>ADD_TWO_VALUES</code>，它会弹出两个数字，将它们加在一起，并将结果压入堆栈。最后，它会从堆栈中弹出答案并打印出来。</p>
+<p><img src="https://aosabook.org/en/500L/interpreter-images/interpreter-stack.png" alt="Figure 12.1 - A stack machine"></p>
+<p>​     LOAD_VALUE指令告诉解释器将一个数字压入堆栈，但该指令本身并没有指定哪个数字。每个指令都需要额外的信息，告诉解释器在哪里找到要加载的数字。因此，我们的指令集有两部分：指令本身，以及指令需要的常量列表。（在Python中，我们称之为“指令”的是字节码，而下面的“what to execute”对象是代码对象。）</p>
+<p>为什么不直接将数字放入指令中呢？想象一下，如果我们是在将字符串而不是数字加在一起。我们不希望将字符串与指令混在一起，因为它们可能会任意大。这种设计也意味着我们只需要每个对象的一个副本，所以例如要加7 + 7，”numbers”可以只是[7]。</p>
+<p>你可能会想知道为什么除了<code>ADD_TWO_VALUES</code>之外还需要其他指令。的确，对于简单地加两个数字的情况，这个例子有点做作。然而，这个指令是更复杂程序的构建块。例如，只用我们迄今为止定义的指令，我们已经可以将三个值加在一起——或任意数量的值——只要给定正确的这些指令集。堆栈为我们提供了一个清晰的方式来跟踪解释器的状态，并且随着我们的进展，它将支持更多的复杂性。</p>
+<p>现在，让我们开始编写解释器本身。解释器对象有一个堆栈，我们将用一个列表来表示。该对象还有一个描述如何执行每个指令的方法。例如，对于<code>LOAD_VALUE</code>，解释器将把值压入堆栈。</p>
+<pre><code class="python">class Interpreter:
+    def __init__(self):
+        self.stack = []
+
+    def LOAD_VALUE(self, number):
+        self.stack.append(number)
+
+    def PRINT_ANSWER(self):
+        answer = self.stack.pop()
+        print(answer)
+
+    def ADD_TWO_VALUES(self):
+        first_num = self.stack.pop()
+        second_num = self.stack.pop()
+        total = first_num + second_num
+        self.stack.append(total)
+</code></pre>
+<p>这三个函数实现了我们的解释器所理解的三个指令。解释器还需要另一个部分：一个将所有内容整合在一起并实际执行的方法。这个方法，名为<code>run_code</code>，将上面定义的<code>what_to_execute</code>字典作为参数。它遍历每个指令，如果有的话，处理该指令的参数，然后在解释器对象上调用相应的方法。</p>
+<pre><code class="python">    def run_code(self, what_to_execute):
+        instructions = what_to_execute[&quot;instructions&quot;]
+        numbers = what_to_execute[&quot;numbers&quot;]
+        for each_step in instructions:
+            instruction, argument = each_step
+            if instruction == &quot;LOAD_VALUE&quot;:
+                number = numbers[argument]
+                self.LOAD_VALUE(number)
+            elif instruction == &quot;ADD_TWO_VALUES&quot;:
+                self.ADD_TWO_VALUES()
+            elif instruction == &quot;PRINT_ANSWER&quot;:
+                self.PRINT_ANSWER()
+</code></pre>
+<p>也就是说， 这个其实是对每一行字节码都有对应的内容。进行执行，这里传入的是参数列表和对应的参数列表的<code>index</code>， 而不是直接传参，这是为什么？</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 LinkedList&#39;s Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Ding Li
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+
+
+    
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+
+
+        
+    </body>
+</html>
