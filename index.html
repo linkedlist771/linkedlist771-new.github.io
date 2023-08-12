@@ -190,117 +190,6 @@
 <p>这个教程主要描述如何通过网络抓包从而绕过下面的调查问卷的填写：</p>
 <p>各位同学好：<br>  为了更好的开始我们一年的集中教学生活，请大家填写“2023级集中教学学生信息调查表”，请于今天晚上24:00点前填写完毕。问卷星链接：<a target="_blank" rel="noopener" href="https://www.wjx.cn/vm/wMNNEs7.aspx#">https://www.wjx.cn/vm/wMNNEs7.aspx#</a></p>
 </blockquote>
-<h2 id="进入开发者模型进行抓包"><a href="#进入开发者模型进行抓包" class="headerlink" title="进入开发者模型进行抓包"></a>进入开发者模型进行抓包</h2><p>首先按<code>F12</code>进入开发者模型， 这里作者使用的是Edge， 其他Chrome内核的浏览器：</p>
-<p>选择网络：</p>
-<p><img src="/../images/image-20230812180824676.png" alt="image-20230812180824676"></p>
-<h2 id="进行POST请求测试"><a href="#进行POST请求测试" class="headerlink" title="进行POST请求测试"></a>进行POST请求测试</h2><p>对于这种调查问卷类型的表单，其一般采用POST请求进行表单上传，这里我们在每个输入框里面都填入<code>test</code>字段进行测试。</p>
-<p><img src="/../images/image-20230812181005602.png" alt="image-20230812181005602"></p>
-<p>对于下面的复选框， 随便选一个进行测试，点击提交，注意观看开发者模式的网路一栏的内容。</p>
-<h2 id="抓包内容分析："><a href="#抓包内容分析：" class="headerlink" title="抓包内容分析："></a>抓包内容分析：</h2><p><img src="/../images/image-20230812181301129.png" alt="image-20230812181301129"></p>
-<p>手速要快，主要发现是这几个内容的请求，我们可以进行逐一分析。</p>
-<p>其中三个都是<code>gif</code>图像，显然不是所需的内容。</p>
-<p>快速反应，最后可以确定提交的就是利用的这个<code>POST</code>请求：</p>
-<p><img src="/../images/image-20230812181729275.png" alt="image-20230812181729275"></p>
-<p>从负载我们可以看到， 这里的表单数据就是在submitdata里面：</p>
-<p><img src="/.com//../../../%E6%8E%A5%E5%8D%95%E4%BD%9C%E4%B8%9A/DataScience3/image-20230812181826371.png" alt="image-20230812181826371"></p>
-<p>就是我们所选取的<code>test</code>字段和默认选择的1的标签，既然知道我们需要进行访问的URL和参数数据集，现在就可以进行模拟请求发送了。</p>
-<h2 id="模拟POST表单发送"><a href="#模拟POST表单发送" class="headerlink" title="模拟POST表单发送"></a>模拟POST表单发送</h2><p>这里笔者选择使用Python请求来发送脏数据进行测试，通过这个方法，你也可以在最下面的复选框中一个都不选了！</p>
-<p>基于<code>requests</code>库稍作推测和实现便可得到模拟访问程序：</p>
-<pre><code class="python">import requests
-import datetime
-
-url = &quot;https://www.wjx.cn/joinnew/processjq.ashx&quot;
-headers = &#123;
-    &quot;Accept&quot;: &quot;text/plain, */*; q=0.01&quot;,
-    &quot;Accept-Encoding&quot;: &quot;gzip, deflate, br&quot;,
-    &quot;Accept-Language&quot;: &quot;zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6&quot;,
-    &quot;Connection&quot;: &quot;keep-alive&quot;,
-    &quot;Content-Length&quot;: &quot;236&quot;,
-    &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded; charset=UTF-8&quot;,
-    &quot;Cookie&quot;: &quot;acw_tc=2f624a3816918348291846419e66cf78e8bd53a33e7c2afea8f27f1d1381d3; .ASPXANONYMOUS=p9EOmJYD2gEkAAAAZTYxZDY0ZTUtODc2ZS00YTY1LWI3M2EtOWMwNGNiMmM3YTgzWBfLKTIfMYSVXJxBdtDwAvcEscQ1; Hm_lvt_21be24c80829bd7a683b2c536fcf520b=1691834833; jcn225388949=test; LastActivityJoin=225388949,118451582870; join_225388949=1; browserid=cd2af523-f56d-4e46-933c-097f389f1d10; wjxawardload=13503%7C225388949; jac225388949=59380619; awardshowway10=1; lastshowway=10|2023-08-12 18:12; SERVERID=c4b399ae928d1f610f814996e4778c43|1691835159|1691834829; Hm_lpvt_21be24c80829bd7a683b2c536fcf520b=1691835163&quot;,
-    &quot;Host&quot;: &quot;www.wjx.cn&quot;,
-    &quot;Origin&quot;: &quot;https://www.wjx.cn&quot;,
-    &quot;Referer&quot;: &quot;https://www.wjx.cn/vm/wMNNEs7.aspx&quot;,
-    &quot;Sec-Ch-Ua&quot;: &#39;&quot;Not/A)Brand&quot;;v=&quot;99&quot;, &quot;Microsoft Edge&quot;;v=&quot;115&quot;, &quot;Chromium&quot;;v=&quot;115&quot;&#39;,
-    &quot;Sec-Ch-Ua-Mobile&quot;: &quot;?0&quot;,
-    &quot;Sec-Ch-Ua-Platform&quot;: &quot;Windows&quot;,
-    &quot;Sec-Fetch-Dest&quot;: &quot;empty&quot;,
-    &quot;Sec-Fetch-Mode&quot;: &quot;cors&quot;,
-    &quot;Sec-Fetch-Site&quot;: &quot;same-origin&quot;,
-    &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.1901.200&quot;,
-    &quot;X-Requested-With&quot;: &quot;XMLHttpRequest&quot;
-&#125;
-
-# 获取当前时间
-current_time = datetime.datetime.now()
-
-# 格式化时间
-formatted_time = current_time.strftime(&#39;%Y/%m/%d %H:%M:%S&#39;)
-
-# 获取当前时间的时间戳（毫秒级）
-timestamp_millis = int(current_time.timestamp() * 1000)
-
-params = &#123;
-    &quot;shortid&quot;: &quot;wMNNEs7&quot;,
-    &quot;starttime&quot;: formatted_time,  # 使用格式化的当前时间
-    &quot;submittype&quot;: &quot;1&quot;,
-    &quot;ktimes&quot;: &quot;227&quot;,
-    &quot;hlv&quot;: &quot;1&quot;,
-    &quot;rn&quot;: &quot;606778550.36779983&quot;,
-    &quot;jqpram&quot;: &quot;E5dngoOx&quot;,
-    &quot;jcn&quot;: &quot;sbts&quot;,
-    &quot;nw&quot;: &quot;1&quot;,
-    &quot;jwt&quot;: &quot;4&quot;,
-    &quot;jpm&quot;: &quot;52&quot;,
-    &quot;nip&quot;: &quot;1&quot;,
-    &quot;t&quot;: str(timestamp_millis),  # 使用当前时间的时间戳
-    &quot;jqnonce&quot;: &quot;0fb09b25-90d3-449b-83a0-12f8a58eb811&quot;,
-    &quot;jqsign&quot;: &quot;7ae7&gt;e52*&gt;7c4*33&gt;e*?4f7*65a?f2?be?66&quot;
-&#125;
-
-data = &#123;
-    &quot;submitdata&quot;: &quot;1$test&#125;2$test&#125;3$test&#125;4$test&#125;5$test&#125;6$test&#125;7$test&#125;8$test&#125;9$test&#125;10$test&#125;11$test&#125;12$test&#125;13$test&#125;14$test&#125;15$test&#125;16$test&#125;17$test&#125;18$test&#125;19$test&#125;20$1&quot;
-&#125;
-
-
-responsed = requests.post(url, headers=headers, params=params, data=data)
-print(responsed.text)
-</code></pre>
-<p>这里稍作解释下， 对于每一个调查问卷，都有一个<code>shortid</code>， 在这个调查问卷中，就是这个调查问卷的唯一值标识码， 在实际传参中通过路径参数传入， 这里为了防止浏览器检测，选取了浏览器的默认的<code>headers</code> 进行传入反反爬虫。</p>
-<p>而实际数据就是在data传入， 其他参数推测和时间日期和时间戳相关，所以稍作修改，发送<code>POST</code>请求就可以得到访问结果：</p>
-<p><img src="/../images/image-20230812183616834.png" alt="image-20230812183616834"></p>
-<p>进行发送，未出现报错，基本证明抓包和模拟请求正确，现在， 我们就可以进行仿造来传入自己想传入的数据，比如最后一个复选框，自己什么多不想选，这里可以直接传入<code>-1</code> 或者不传。</p>
-<p>这里我生成一套伪数据来测试：</p>
-<pre><code class="python">&#123;
-    &quot;姓名&quot;: &quot;张三&quot;,
-    &quot;性别&quot;: &quot;男&quot;,
-    &quot;班级&quot;: &quot;2023级1班&quot;,
-    &quot;学号&quot;: &quot;20230001&quot;,
-    &quot;民族&quot;: &quot;汉族&quot;,
-    &quot;籍贯&quot;: &quot;北京&quot;,
-    &quot;政治面貌&quot;: &quot;团员&quot;,
-    &quot;出生日期&quot;: &quot;2005-01-01&quot;,
-    &quot;身份证号&quot;: &quot;110101200501011234&quot;,
-    &quot;本人电话&quot;: &quot;13800138000&quot;,
-    &quot;常用邮箱&quot;: &quot;zhangsan@example.com&quot;,
-    &quot;所学专业&quot;: &quot;计算机科学与技术&quot;,
-    &quot;父亲电话&quot;: &quot;13800138001&quot;,
-    &quot;母亲电话&quot;: &quot;13800138002&quot;,
-    &quot;家庭详细住址&quot;: &quot;北京市某某区某某街道123号&quot;,
-    &quot;有何特长爱好&quot;: &quot;编程、音乐&quot;,
-    &quot;本科期间担任过的学生职务&quot;: &quot;学生会主席&quot;,
-    &quot;对研究生学习生活的愿景&quot;: &quot;希望能够深入研究，为社会做出贡献&quot;,
-    &quot;是否愿意加入学生工作队伍&quot;: &quot;是&quot;,
-    &quot;请选择是否有以下工作经历&quot;: [&quot;微信公众号运营排版&quot;, &quot;新闻稿撰写&quot;]
-&#125;
-</code></pre>
-<p>对应的参数为：</p>
-<p>比如，最后一个复选框，我一个都不想选，那么我就填<code>-1</code>:</p>
-<pre><code class="python">submitdata = &quot;1$张三&#125;2$男&#125;3$2023级1班&#125;4$20230001&#125;5$汉族&#125;6$北京&#125;7$团员&#125;8$2005-01-01&#125;9$110101200501011234&#125;10$13800138000&#125;11$zhangsan@example.com&#125;12$计算机科学与技术&#125;13$13800138001&#125;14$13800138002&#125;15$北京市某某区某某街道123号&#125;16$编程、音乐&#125;17$学生会主席&#125;18$希望能够深入研究，为社会做出贡献&#125;19$是&#125;20$-1&quot;
-</code></pre>
-<p>改变传入，参数， 我们便可以传入我们想传入的虚假数据了， 可以做到开始实现的， 一个学生工作都不做，打破默认复选框的限制！！！！</p>
-<p><img src="/../images/image-20230812184216533.png" alt="image-20230812184216533"></p>
-
             
         </div>
     </div>
@@ -313,7 +202,7 @@ print(responsed.text)
         
         <span class="tag">
             
-            <a href="/tags/web%E6%8A%93%E5%8C%85%E7%BB%95%E8%BF%87/" style="color: #00a596">web抓包绕过</a>
+            <a href="/tags/web%E6%8A%93%E5%8C%85%E7%BB%95%E8%BF%87/" style="color: #ff7d73">web抓包绕过</a>
         </span>
         
     </div>
@@ -353,7 +242,7 @@ print(responsed.text)
         
         <span class="tag">
             
-            <a href="/tags/%E4%BB%8E%E9%9B%B6%E6%89%8B%E6%90%93Python%E8%A7%A3%E9%87%8A%E5%99%A8/" style="color: #00a596">从零手搓Python解释器</a>
+            <a href="/tags/%E4%BB%8E%E9%9B%B6%E6%89%8B%E6%90%93Python%E8%A7%A3%E9%87%8A%E5%99%A8/" style="color: #00bcd4">从零手搓Python解释器</a>
         </span>
         
     </div>
@@ -393,7 +282,7 @@ print(responsed.text)
         
         <span class="tag">
             
-            <a href="/tags/%E5%9B%BD%E7%A7%91%E5%A4%A7%EF%BC%8C%E6%96%B0%E6%89%8B%E5%85%A5%E5%AD%A6%E6%95%99%E7%A8%8B%EF%BC%8C%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE/" style="color: #00bcd4">国科大，新手入学教程，详细配置</a>
+            <a href="/tags/%E5%9B%BD%E7%A7%91%E5%A4%A7%EF%BC%8C%E6%96%B0%E6%89%8B%E5%85%A5%E5%AD%A6%E6%95%99%E7%A8%8B%EF%BC%8C%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE/" style="color: #03a9f4">国科大，新手入学教程，详细配置</a>
         </span>
         
     </div>
