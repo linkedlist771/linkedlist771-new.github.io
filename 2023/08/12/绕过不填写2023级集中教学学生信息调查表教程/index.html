@@ -170,7 +170,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/web%E6%8A%93%E5%8C%85%E7%BB%95%E8%BF%87/" style="color: #ff7d73">web抓包绕过</a>
+                <a href="/tags/web%E6%8A%93%E5%8C%85%E7%BB%95%E8%BF%87/" style="color: #00a596">web抓包绕过</a>
             </span>
             
         </span>
@@ -184,15 +184,15 @@
 </blockquote>
 <h2 id="进入开发者模型进行抓包"><a href="#进入开发者模型进行抓包" class="headerlink" title="进入开发者模型进行抓包"></a>进入开发者模型进行抓包</h2><p>首先按<code>F12</code>进入开发者模型， 这里作者使用的是Edge， 其他Chrome内核的浏览器：</p>
 <p>选择网络：</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230812180824676.png" alt="image-20230812180824676"></p>
+<p><img src="/../images/image-20230812180824676.png" alt="image-20230812180824676"></p>
 <h2 id="进行POST请求测试"><a href="#进行POST请求测试" class="headerlink" title="进行POST请求测试"></a>进行POST请求测试</h2><p>对于这种调查问卷类型的表单，其一般采用POST请求进行表单上传，这里我们在每个输入框里面都填入<code>test</code>字段进行测试。</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230812181005602.png" alt="image-20230812181005602"></p>
+<p><img src="/../images/image-20230812181005602.png" alt="image-20230812181005602"></p>
 <p>对于下面的复选框， 随便选一个进行测试，点击提交，注意观看开发者模式的网路一栏的内容。</p>
-<h2 id="抓包内容分析："><a href="#抓包内容分析：" class="headerlink" title="抓包内容分析："></a>抓包内容分析：</h2><p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230812181301129.png" alt="image-20230812181301129"></p>
+<h2 id="抓包内容分析："><a href="#抓包内容分析：" class="headerlink" title="抓包内容分析："></a>抓包内容分析：</h2><p><img src="/../images/image-20230812181301129.png" alt="image-20230812181301129"></p>
 <p>手速要快，主要发现是这几个内容的请求，我们可以进行逐一分析。</p>
 <p>其中三个都是<code>gif</code>图像，显然不是所需的内容。</p>
 <p>快速反应，最后可以确定提交的就是利用的这个<code>POST</code>请求：</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230812181729275.png" alt="image-20230812181729275"></p>
+<p><img src="/../images/image-20230812181729275.png" alt="image-20230812181729275"></p>
 <p>从负载我们可以看到， 这里的表单数据就是在submitdata里面：</p>
 <p><img src="/.com//../../../%E6%8E%A5%E5%8D%95%E4%BD%9C%E4%B8%9A/DataScience3/image-20230812181826371.png" alt="image-20230812181826371"></p>
 <p>就是我们所选取的<code>test</code>字段和默认选择的1的标签，既然知道我们需要进行访问的URL和参数数据集，现在就可以进行模拟请求发送了。</p>
@@ -260,7 +260,7 @@ print(responsed.text)
 </code></pre>
 <p>这里稍作解释下， 对于每一个调查问卷，都有一个<code>shortid</code>， 在这个调查问卷中，就是这个调查问卷的唯一值标识码， 在实际传参中通过路径参数传入， 这里为了防止浏览器检测，选取了浏览器的默认的<code>headers</code> 进行传入反反爬虫。</p>
 <p>而实际数据就是在data传入， 其他参数推测和时间日期和时间戳相关，所以稍作修改，发送<code>POST</code>请求就可以得到访问结果：</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230812183616834.png" alt="image-20230812183616834"></p>
+<p><img src="/../images/image-20230812183616834.png" alt="image-20230812183616834"></p>
 <p>进行发送，未出现报错，基本证明抓包和模拟请求正确，现在， 我们就可以进行仿造来传入自己想传入的数据，比如最后一个复选框，自己什么多不想选，这里可以直接传入<code>-1</code> 或者不传。</p>
 <p>这里我生成一套伪数据来测试：</p>
 <pre><code class="python">&#123;
@@ -291,7 +291,7 @@ print(responsed.text)
 <pre><code class="python">submitdata = &quot;1$张三&#125;2$男&#125;3$2023级1班&#125;4$20230001&#125;5$汉族&#125;6$北京&#125;7$团员&#125;8$2005-01-01&#125;9$110101200501011234&#125;10$13800138000&#125;11$zhangsan@example.com&#125;12$计算机科学与技术&#125;13$13800138001&#125;14$13800138002&#125;15$北京市某某区某某街道123号&#125;16$编程、音乐&#125;17$学生会主席&#125;18$希望能够深入研究，为社会做出贡献&#125;19$是&#125;20$-1&quot;
 </code></pre>
 <p>改变传入，参数， 我们便可以传入我们想传入的虚假数据了， 可以做到开始实现的， 一个学生工作都不做，打破默认复选框的限制！！！！</p>
-<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230812184216533.png" alt="image-20230812184216533"></p>
+<p><img src="/../images/image-20230812184216533.png" alt="image-20230812184216533"></p>
 
     </div>
     
