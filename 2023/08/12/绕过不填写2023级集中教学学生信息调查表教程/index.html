@@ -170,7 +170,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/web%E6%8A%93%E5%8C%85%E7%BB%95%E8%BF%87/" style="color: #03a9f4">web抓包绕过</a>
+                <a href="/tags/web%E6%8A%93%E5%8C%85%E7%BB%95%E8%BF%87/" style="color: #ffa2c4">web抓包绕过</a>
             </span>
             
         </span>
@@ -196,7 +196,7 @@
 <p>快速反应，最后可以确定提交的就是利用的这个<code>POST</code>请求：</p>
 <p><img src="/../images/image-20230812181729275.png" alt="image-20230812181729275"></p>
 <p>从负载我们可以看到， 这里的表单数据就是在submitdata里面：</p>
-<p><img src="/.com//../../../%E6%8E%A5%E5%8D%95%E4%BD%9C%E4%B8%9A/DataScience3/image-20230812181826371.png" alt="image-20230812181826371"></p>
+<p><img src="/../../../../../AppData/Roaming/Typora/typora-user-images/image-20230812184829543.png" alt="image-20230812184829543"></p>
 <p>就是我们所选取的<code>test</code>字段和默认选择的1的标签，既然知道我们需要进行访问的URL和参数数据集，现在就可以进行模拟请求发送了。</p>
 <h2 id="模拟POST表单发送"><a href="#模拟POST表单发送" class="headerlink" title="模拟POST表单发送"></a>模拟POST表单发送</h2><p>这里笔者选择使用Python请求来发送脏数据进行测试，通过这个方法，你也可以在最下面的复选框中一个都不选了！</p>
 <p>基于<code>requests</code>库稍作推测和实现便可得到模拟访问程序：</p>
