@@ -38,6 +38,10 @@
 
 
 
+<script src="https://cdn.staticfile.org/waline/2.14.8/waline.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.14.8/waline.min.css" />
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.14.8/waline-meta.min.css" />
+
 
 
 
@@ -170,7 +174,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%9B%BD%E7%A7%91%E5%A4%A7%EF%BC%8C%E6%96%B0%E6%89%8B%E5%85%A5%E5%AD%A6%E6%95%99%E7%A8%8B%EF%BC%8C%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE/" style="color: #ff7d73">国科大，新手入学教程，详细配置</a>
+                <a href="/tags/%E5%9B%BD%E7%A7%91%E5%A4%A7%EF%BC%8C%E6%96%B0%E6%89%8B%E5%85%A5%E5%AD%A6%E6%95%99%E7%A8%8B%EF%BC%8C%E8%AF%A6%E7%BB%86%E9%85%8D%E7%BD%AE/" style="color: #03a9f4">国科大，新手入学教程，详细配置</a>
             </span>
             
         </span>
@@ -207,6 +211,10 @@
     
     
     
+    
+    <div id="comment">
+        <div id="waline-container"></div>
+    </div>
     
     
     
@@ -257,6 +265,23 @@
         
         
 
+
+<script>
+    Waline.init({
+        el: "#waline-container",
+        serverURL: "my-comment-tau.vercel.app",
+        commentCount: true,
+        pageview: false,
+        emoji: "https://unpkg.com/@waline/emojis@1.2.0/weibo,https://unpkg.com/@waline/emojis@1.2.0/alus,https://unpkg.com/@waline/emojis@1.2.0/bilibili,https://unpkg.com/@waline/emojis@1.2.0/qq,https://unpkg.com/@waline/emojis@1.2.0/tieba,https://unpkg.com/@waline/emojis@1.2.0/tw-emoji".split(","),
+        meta: "nick,mail,link".split(","),
+        requiredMeta: "nick".split(","),
+        lang: "zh-CN",
+        wordLimit: 0,
+        pageSize: "10",
+        login: "enable",
+        
+    });
+</script>
 
 
 

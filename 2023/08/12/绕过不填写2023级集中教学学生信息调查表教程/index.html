@@ -38,6 +38,10 @@
 
 
 
+<script src="https://cdn.staticfile.org/waline/2.14.8/waline.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.14.8/waline.min.css" />
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.14.8/waline-meta.min.css" />
+
 
 
 
@@ -170,7 +174,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/web%E6%8A%93%E5%8C%85%E7%BB%95%E8%BF%87/" style="color: #00bcd4">web抓包绕过</a>
+                <a href="/tags/web%E6%8A%93%E5%8C%85%E7%BB%95%E8%BF%87/" style="color: #ff7d73">web抓包绕过</a>
             </span>
             
         </span>
@@ -301,6 +305,10 @@ print(responsed.text)
     
     
     
+    <div id="comment">
+        <div id="waline-container"></div>
+    </div>
+    
     
     
 </div>
@@ -350,6 +358,23 @@ print(responsed.text)
         
         
 
+
+<script>
+    Waline.init({
+        el: "#waline-container",
+        serverURL: "my-comment-tau.vercel.app",
+        commentCount: true,
+        pageview: false,
+        emoji: "https://unpkg.com/@waline/emojis@1.2.0/weibo,https://unpkg.com/@waline/emojis@1.2.0/alus,https://unpkg.com/@waline/emojis@1.2.0/bilibili,https://unpkg.com/@waline/emojis@1.2.0/qq,https://unpkg.com/@waline/emojis@1.2.0/tieba,https://unpkg.com/@waline/emojis@1.2.0/tw-emoji".split(","),
+        meta: "nick,mail,link".split(","),
+        requiredMeta: "nick".split(","),
+        lang: "zh-CN",
+        wordLimit: 0,
+        pageSize: "10",
+        login: "enable",
+        
+    });
+</script>
 
 
 
