@@ -167,10 +167,138 @@
         </span>
         
         
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Java%E5%AD%A6%E4%B9%A0/" style="color: #00bcd4">Java学习</a>
+            </span>
+            
+        </span>
+        
     </div>
     
     <div class="content" v-pre>
-        
+        <blockquote>
+<p>这篇博客主要用于记录在学习<code>Java</code>过程中遇到的问题，以及主要比较关键的知识点。</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="JavaSE"><a href="#JavaSE" class="headerlink" title="JavaSE"></a>JavaSE</h1><ul>
+<li><p>Instanceof：</p>
+<p>在Java中，<code>instanceof</code>操作符用于测试一个对象是否是特定类或接口的实例。它是一个二元操作符，用于在运行时测试对象的类型。</p>
+<p>以下是一个简单的示例来演示其用法：</p>
+<pre><code class="java">class Animal &#123;&#125;
+class Dog extends Animal &#123;&#125;
+class Cat extends Animal &#123;&#125;
+
+public class InstanceofDemo &#123;
+    public static void main(String[] args) &#123;
+        Animal a = new Animal();
+        Dog d = new Dog();
+        Cat c = new Cat();
+
+        System.out.println(a instanceof Animal);  // true
+        System.out.println(d instanceof Animal);  // true
+        System.out.println(d instanceof Dog);     // true
+        System.out.println(d instanceof Cat);     // false
+        System.out.println(c instanceof Animal);  // true
+        System.out.println(c instanceof Cat);     // true
+    &#125;
+&#125;
+</code></pre>
+<p>在上述代码中：</p>
+<ul>
+<li><code>Dog</code> 和 <code>Cat</code> 是 <code>Animal</code> 的子类。</li>
+<li>我们创建了 <code>Animal</code>、<code>Dog</code> 和 <code>Cat</code> 的实例。</li>
+<li>然后我们使用 <code>instanceof</code> 操作符来检查这些实例的类型。</li>
+</ul>
+<p>输出将是：</p>
+<pre><code>true
+true
+true
+false
+true
+true
+</code></pre>
+<p>需要记住的一些关键点：</p>
+<ol>
+<li><code>null</code> 不是任何东西的实例。所以，<code>null instanceof AnyClass</code> 总是返回 <code>false</code>。</li>
+<li>如果 <code>instanceof</code> 操作符的左侧是右侧类的子类的实例，结果将为 <code>true</code>。例如，因为 <code>Dog</code> 是 <code>Animal</code> 的子类，所以 <code>d instanceof Animal</code> 返回 <code>true</code>。</li>
+<li>如果两种类型不属于同一类型层次结构（即，它们除了 <code>Object</code> 之外没有共同的祖先），代码将无法编译。例如，尝试检查一个 <code>String</code> 是否是 <code>Dog</code> 的实例将导致编译错误。</li>
+</ol>
+</li>
+<li><p>static关键字</p>
+</li>
+</ul>
+<p><code>static</code> 是 Java 中的一个关键字，它表示某个成员（可以是变量、方法、内部类等）不是与实例关联的，而是与类关联的。这意味着，无论创建多少个类的实例，<code>static</code> 成员都只有一份。</p>
+<p>以下是 <code>static</code> 关键字的一些使用场景和示例：</p>
+<ol>
+<li><p><strong>静态变量</strong>：静态变量用于表示该类的所有实例共享的变量。它们通常用于存储应该由类的所有实例共享的信息。</p>
+<pre><code class="java">class Student &#123;
+    static int totalStudents = 0; // 静态变量
+    int rollNo;
+
+    Student() &#123;
+        totalStudents++;
+        rollNo = totalStudents;
+    &#125;
+&#125;
+</code></pre>
+<p>在上面的例子中，每当创建一个新的 <code>Student</code> 对象时，<code>totalStudents</code> 都会增加。所有的 <code>Student</code> 对象都共享同一个 <code>totalStudents</code> 变量。</p>
+</li>
+<li><p><strong>静态方法</strong>：静态方法是与类关联的，而不是与实例关联的。因此，它们不能访问类的非静态成员。</p>
+<pre><code class="java">class MathUtils &#123;
+    static int add(int a, int b) &#123;
+        return a + b;
+    &#125;
+&#125;
+</code></pre>
+<p>在上面的例子中，<code>add</code> 方法是静态的，所以你可以不创建 <code>MathUtils</code> 的对象就直接调用它，如 <code>MathUtils.add(1, 2)</code>。</p>
+</li>
+<li><p><strong>静态块</strong>：这是一个特殊的代码块，只在类加载时执行一次。</p>
+<pre><code class="java">class Test &#123;
+    static &#123;
+        System.out.println(&quot;Static block executed!&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>在上面的例子中，当你第一次访问这个类（例如，创建一个对象或访问其静态成员）时，静态块会被执行。</p>
+</li>
+<li><p><strong>静态内部类</strong>：这是定义在另一个类内部的静态类。它可以访问外部类的静态成员，但不能访问其非静态成员。</p>
+<pre><code class="java">class Outer &#123;
+    static int x = 10;
+
+    static class Inner &#123;
+        void display() &#123;
+            System.out.println(&quot;Value of x: &quot; + x);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>在上面的例子中，<code>Inner</code> 是一个静态内部类，它可以访问 <code>Outer</code> 类的静态变量 <code>x</code>。</p>
+</li>
+</ol>
+<p>总的来说，<code>static</code> 关键字在 Java 中非常有用，它允许我们创建与类关联的成员，而不是与单个实例关联的成员。这在创建工具方法、常量或需要由所有实例共享的变量时特别有用。</p>
+<p>当然可以，我会尽量简化说明。</p>
+<p>在 Java 中，<code>static</code> 关键字的主要作用是告诉程序：“这个东西属于整个类，而不仅仅是某个对象”。</p>
+<p>想象一下学校的教室。每个学生都有自己的书包，这就像每个对象都有自己的变量。但教室里的黑板是共享的，所有学生都使用同一个黑板。在这个比喻中，黑板就像是一个 <code>static</code> 变量，它属于整个“教室”类，而不是单个“学生”。</p>
+<p>以下是 <code>static</code> 的几个主要用途：</p>
+<ol>
+<li><p><strong>静态变量</strong>：这是一个“共享”变量，所有对象都使用同一个。例如，所有学生共享同一个黑板。</p>
+</li>
+<li><p><strong>静态方法</strong>：这是一个不特定于任何对象的方法。你不需要一个对象就可以调用它。例如，学校的规定可能适用于所有学生，而不仅仅是一个。</p>
+</li>
+<li><p><strong>静态块</strong>：当你首次访问一个类时，这段代码会运行一次。想象一下，每天早上教室的门第一次打开时，灯就会自动亮起。这就是静态块的作用。</p>
+</li>
+<li><p><strong>静态内部类</strong>：这是一个属于外部类的类，但它不依赖于外部类的特定对象。就像学校里的特定班级，它属于学校，但不依赖于特定的学生。</p>
+</li>
+</ol>
+<p>简而言之，<code>static</code> 就是一个表示“共享”或“全局”的标志。当你看到 <code>static</code>，你可以想象这个东西是共享的，所有对象都可以访问它，而不仅仅是一个。</p>
+
     </div>
     
     
