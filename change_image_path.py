@@ -37,6 +37,10 @@ def replace_image_path_in_md_files(root_dir):
                         r'../../../../../AppData/Roaming/Typora/typora-user-images/',
                         r'../images/'
                     )
+                    new_contents = new_contents.replace(
+                        r'../../../../AppData/Roaming/Typora/typora-user-images/',
+                        r'../images/'
+                    )
                 
                 # 如果内容有变化，写回文件
                 if new_contents != file_contents:
