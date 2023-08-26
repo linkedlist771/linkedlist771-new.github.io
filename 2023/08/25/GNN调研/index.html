@@ -167,10 +167,866 @@
         </span>
         
         
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/GNN%E8%B0%83%E7%A0%94/" style="color: #ffa2c4">GNN调研</a>
+            </span>
+            
+        </span>
+        
     </div>
     
     <div class="content" v-pre>
-        
+        <blockquote>
+<p>这个博客主要是调研导师安排给我的<code>GNN(图神经网络)</code>的调研的任务。</p>
+</blockquote>
+<span id="more"></span>
+
+
+
+<h2 id="搜索相关的文献"><a href="#搜索相关的文献" class="headerlink" title="搜索相关的文献"></a>搜索相关的文献</h2><h3 id="确定相关的关键词"><a href="#确定相关的关键词" class="headerlink" title="确定相关的关键词"></a>确定相关的关键词</h3><ul>
+<li>GIN</li>
+<li>Graphormer</li>
+</ul>
+<h2 id="Graphormer"><a href="#Graphormer" class="headerlink" title="Graphormer"></a>Graphormer</h2><p>最早提出论文：</p>
+<hr>
+<p><a href="%5E1%5E"><strong>Do Transformers Really Perform Bad for Graph Representation?</strong></a></p>
+<ul>
+<li><p>作者：Chengxuan Ying, Tianle Cai, Shengjie Luo, Shuxin Zheng, Guolin Ke, Di He, Yanming Shen, Tie-Yan Liu</p>
+<blockquote>
+<p>作者提出了Graphormer，这是一个基于标准Transformer架构的模型，在广泛的图表示学习任务上都取得了出色的结果。在图中使用Transformer的关键见解是需要有效地将图的结构信息编码到模型中。为此，作者提出了几种简单但有效的结构编码方法，以帮助Graphormer更好地建模图结构数据¹。</p>
+</blockquote>
+<p>(2021)</p>
+<ul>
+<li><p>被引用次数：未知</p>
+</li>
+<li><p>NeurIPS</p>
+</li>
+<li><p>摘要：Transformer架构已经成为许多领域的主导选择，例如自然语言处理和计算机视觉。然而，与主流的GNN变体相比，它在图级预测的流行排行榜上还没有取得竞争性的表现。因此，Transformers如何在图表示学习上表现良好仍然是一个谜。在这篇论文中，我们通过提出Graphormer来解决这个谜团，它是基于标准Transformer架构构建的，并且可以在广泛的图表示学习任务上取得出色的结果，尤其是在最近的OGB大规模挑战上。我们在图中使用Transformer的关键见解是需要有效地将图的结构信息编码到模型中。为此，我们提出了几种简单但有效的结构编码方法，以帮助Graphormer更好地建模图结构数据¹。</p>
+</li>
+<li><p>[PDF链接](<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2106.05234">https://arxiv.org/abs/2106.05234</a></p>
+</li>
+<li><p>[GitHub仓库链接](<a target="_blank" rel="noopener" href="https://github.com/Microsoft/Graphormer">microsoft&#x2F;Graphormer: Graphormer is a general-purpose deep learning backbone for molecular modeling. (github.com)</a>)</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>前置说明：</p>
+<ul>
+<li><p>OGB Large-Scale Challengel:</p>
+<p>Open Graph Benchmark (OGB) Large-Scale Challenge (OGB-LSC) 是一个大规模的图机器学习挑战。以下是关于这个挑战的总结：</p>
+<ol>
+<li><p><strong>背景</strong>：图机器学习（Graph ML）在近年来受到了巨大的关注，因为在现实世界的应用中，图结构数据非常普遍。这些应用领域包括大规模的社交网络、推荐系统、超链接的网络文档、知识图谱，以及由不断增长的科学计算产生的分子模拟数据。但是，大多数图ML模型都是在非常小的数据集上开发和评估的。</p>
+</li>
+<li><p><strong>挑战</strong>：处理大规模图是具有挑战性的，特别是对于最先进的图神经网络（GNNs），因为它们基于其他许多节点的信息对每个节点进行预测。近期，研究者们通过大大简化GNNs来提高模型的可扩展性，但这不可避免地限制了它们的表达能力。</p>
+</li>
+<li><p><strong>OGB-LSC的目标</strong>：鼓励为大型现代数据集开发最先进的图ML模型。特别是，提供了三个数据集：MAG240M、WikiKG90M和PCQM4M，这些数据集在规模上都是前所未有的大，并分别涵盖了节点、链接和图的预测。</p>
+</li>
+<li><p><strong>数据集概览</strong>：</p>
+<ul>
+<li>MAG240M：一个异构的学术图，任务是预测位于异构图中的论文的主题领域（节点分类）。</li>
+<li>WikiKG90M：一个知识图，任务是补全缺失的三元组（链接预测）。</li>
+<li>PCQM4M：一个量子化学数据集，任务是预测给定分子的一个重要的分子属性，即HOMO-LUMO差距（图回归）。</li>
+</ul>
+</li>
+<li><p><strong>工具和资源</strong>：所有这些数据集都可以使用ogb Python包下载和准备。模型评估和测试提交文件的准备也由该包处理。</p>
+</li>
+<li><p><strong>目标</strong>：鼓励社区开发和扩展表达性强的图ML模型，这可以在各自的领域中取得重大突破。希望OGB-LSC在KDD Cup 2021上能够像“ImageNet大规模视觉识别挑战”那样在图ML领域起到推动作用。</p>
+</li>
+<li><p><strong>团队和联系</strong>：OGB-LSC团队由来自斯坦福大学、TU Dortmund、RIKEN和Facebook AI的研究者组成。他们可以通过电子邮件或GitHub进行联系。</p>
+</li>
+<li><p><strong>合作伙伴</strong>：Intel公司的Amit Bleiweiss和Benjamin Braun。</p>
+</li>
+</ol>
+</li>
+<li><p>GNN（图神经网络）：</p>
+<p>GNN可以被抽象为Aggregate和Combine两个步骤。公式中 $\mathrm{h}$ 代表各个层中某个节点的隐向量，a 表示 某个节点 $\mathrm{i}$ 对于他的邻居 $\mathrm{j}$ 们，通过某个聚合函数aggregate获得的信息。通过某个函数将(l-1)层的隐向量和 (1)层的信息combine，就能够获得(1)层的隐向量。<br>$$<br>a_i^{(l)}&#x3D;\operatorname{AGGREGATE}^{(l)}\left(\left{h_j^{(l-1)}: j \in \mathcal{N}\left(v_i\right)\right}\right), \quad  \h_i^{(l)}&#x3D;\operatorname{COMBINE}^{(l)}\left(h_i^{(l-1)}, a_i^{(l)}\right),<br>$$<br>此外，用一个图读出(Readout)函数来将很多节点的隐向量表征为一个统一长度的向量表示。<br>$$<br>h_G&#x3D;\operatorname{READOUT}\left(\left{h_i^{(L)} \mid v_i \in G\right}\right) .<br>$$<br>在图论和网络科学中，节点的度是与其相连的边的数量。在有向图中，节点的度可以进一步分为入度和出度：</p>
+<ol>
+<li><strong>入度</strong>（$\text{deg}^+(v_i) $）：指向节点 $ v_i $ 的边的数量。简单地说，这是有多少其他节点“指向”这个节点的数量。</li>
+<li><strong>出度</strong>（$ \text{deg}^-(v_i) $）：从节点 $v_i $ 指出的边的数量。这表示节点 $ v_i $ 指向其他节点的边的数量。</li>
+</ol>
+<p>例如，考虑一个社交网络中的用户和他们之间的关注关系。如果 Alice 关注了 5 个人，那么 Alice 的出度是 5。如果有 3 个人关注了 Alice，那么 Alice 的入度是 3。</p>
+<p>使用度中心性（degree centrality）来为每个节点分配嵌入向量。这种方法考虑了节点的入度和出度，并为每个节点分配两个嵌入向量 $ z^+ $ 和 $ z^- $。这些嵌入向量可以进一步与节点的原始特征相结合，以提供更丰富的节点表示。</p>
+<p>这种方法的一个潜在好处是，它可以帮助捕捉到网络中节点的重要性或中心性。具有高入度的节点可能是网络中的权威或受欢迎的节点，而具有高出度的节点可能是广泛连接或传播信息的节点。</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<h3 id="论文阅读"><a href="#论文阅读" class="headerlink" title="论文阅读"></a>论文阅读</h3><ol>
+<li><p><strong>背景与动机</strong>:</p>
+<ul>
+<li>Transformer 架构在许多领域，如自然语言处理和计算机视觉中，已经成为了主导选择。但在图级预测的流行排行榜上，它还没有达到与主流 GNN 变体相媲美的性能。这引发了一个问题：Transformer 架构是否真的适合图表示学习？</li>
+</ul>
+</li>
+<li><p><strong>Graphormer 的提出</strong>:</p>
+<ul>
+<li>为了解决上述问题，作者提出了 Graphormer。这是一个基于标准 Transformer 架构的模型，但进行了特定的修改，使其能够更好地处理图数据。</li>
+</ul>
+</li>
+<li><p><strong>结构编码的重要性</strong>:</p>
+<ul>
+<li><p>作者认为，要使 Transformer 在图上表现得更好，关键是要正确地将图的结构信息纳入模型中。为此，他们提出了三种结构编码方法：</p>
+<ul>
+<li>中心性编码。使用度中心性 (degree centrality)，根据入度 $\operatorname{deg}^{+}\left(\mathrm{v}<em>{\mathrm{i}}\right)$ 和出度 $\operatorname{deg}^{-}\left(\mathrm{v}</em>{\mathrm{i}}\right)$ 给每个节点分配两个嵌 入向量 $z^{+}, z^{-} \in \mathrm{R}^{\mathrm{d}}$ ，将它们加到节点特征上。<br>$$<br>h_i^{(0)}&#x3D;x_i+z_{\operatorname{deg}^{-}\left(v_i\right)}^{-}+z_{\operatorname{deg}^{+}\left(v_i\right)}^{+}<br>$$</li>
+<li>空间编码。用函数 $\varphi\left(v_{\mathrm{i}}, \mathrm{v}<em>{\mathrm{j}}\right): \mathrm{V} \times \mathrm{V} \rightarrow \mathrm{R}$ 来衡量 $\mathrm{v}</em>{\mathrm{i}}, \mathrm{v}<em>{\mathrm{i}}$ 之间的最短路径距离（SPD），以 $\varphi\left(\mathrm{v}</em>{\mathrm{i}}, \mathrm{v}<em>{\mathrm{j}}\right)$ 为索引得到 可学习的标量 $b</em>{\varphi\left(v_i, v_j\right)}$ ，然后将其作为偏置项加到注意力矩阵A中。<br>$$<br>A_{i j}&#x3D;\frac{\left(h_i W_Q\right)\left(h_j W_K\right)^T}{\sqrt{d}}+b_{\phi\left(v_i, v_j\right)}<br>$$</li>
+<li>边编码。找到从 $\mathrm{v}<em>{\mathrm{i}}$ 到 $\mathrm{v}</em>{\mathrm{j}}$ 的最短路径 $\mathrm{SP}_{\mathrm{ij}}&#x3D;\left(\mathrm{e}<em>1, \mathrm{e}<em>2, \ldots, \mathrm{e}</em>{\mathrm{N}}\right)$ ，计算边特征 $x</em>{e_n}$ 与可学习嵌入 $w_n^E$ 的点积的平均 值，作为偏置项加到注意力模块中。</li>
+</ul>
+<p>$$<br>A_{i j}&#x3D;\frac{\left(h_i W_Q\right)\left(h_j W_K\right)^T}{\sqrt{d}}+b_{\phi\left(v_i, v_j\right)}+c_{i j} \text {, where } c_{i j}&#x3D;\frac{1}{N} \sum_{n&#x3D;1}^N x_{e_n}\left(w_n^E\right)^T \text {, }<br>$$</p>
+</li>
+</ul>
+<p><img src="/../images/image-20230825172545059.png" alt="image-20230825172545059"></p>
+</li>
+<li><p><strong>实验结果与分析</strong>:</p>
+<ul>
+<li>Graphormer 在多个图表示学习任务上都表现出色。特别是在最近的 OGB 大规模挑战上，Graphormer 的性能超过了大多数主流 GNN 变体。</li>
+</ul>
+<p><img src="/../images/image-20230825174227776.png" alt="image-20230825174227776"></p>
+<ul>
+<li>作者还从理论上证明了 Graphormer 的强大表达能力，表明许多流行的 GNN 变体都可以被视为 Graphormer 的特殊情况。</li>
+</ul>
+<p><img src="/../images/image-20230825174240833.png" alt="image-20230825174240833"></p>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<h3 id="Graphormer-代码阅读与使用"><a href="#Graphormer-代码阅读与使用" class="headerlink" title="Graphormer 代码阅读与使用"></a>Graphormer 代码阅读与使用</h3><ul>
+<li><p>Graphormer结构：</p>
+<p>encoder示意图：</p>
+<pre><code class="mermaid">graph TD
+    A[Input: batched_data] --&gt; B[GraphNodeFeature]
+    A --&gt; C[GraphAttnBias]
+    B --&gt; D[Token Embeddings]
+    D --&gt; E[Optional: Perturb]
+    E --&gt; F[Embed Scale]
+    F --&gt; G[Quant Noise]
+    G --&gt; H[Emb Layer Norm]
+    H --&gt; I[Dropout]
+    I --&gt; J[Transpose]
+    J --&gt; K[GraphormerGraphEncoderLayer]
+    K --&gt; L[Graph Representation]
+    L --&gt; M[Output: inner_states, graph_rep]
+
+    style A fill:#f9d,stroke:#333,stroke-width:2px
+    style M fill:#f9d,stroke:#333,stroke-width:2px
+</code></pre>
+<p>在前向传播过程中的结构：</p>
+<pre><code class="mermaid">graph TD
+    A[Input: batched_data] --&gt; B[Compute Padding Mask]
+    B --&gt; C[Token Embeddings]
+    C --&gt; D[Optional: Perturb]
+    D --&gt; E[GraphAttnBias]
+    E --&gt; F[Embed Scale]
+    F --&gt; G[Quant Noise]
+    G --&gt; H[Emb Layer Norm]
+    H --&gt; I[Dropout]
+    I --&gt; J[Transpose]
+    J --&gt; K1[GraphormerGraphEncoderLayer 1]
+    K1 --&gt; K2[GraphormerGraphEncoderLayer 2]
+    ...
+    Kn[GraphormerGraphEncoderLayer n] --&gt; L[Graph Representation]
+    L --&gt; M[Output: inner_states, graph_rep]
+
+    style A fill:#f9d,stroke:#333,stroke-width:2px
+    style M fill:#f9d,stroke:#333,stroke-width:2px
+</code></pre>
+<ul>
+<li><h3 id="GraphNodeFeature"><a href="#GraphNodeFeature" class="headerlink" title="GraphNodeFeature"></a>GraphNodeFeature</h3></li>
+</ul>
+<pre><code class="mermaid">graph TD
+    A[Input: batched_data] --&gt; B[Extract x, in_degree, out_degree]
+    B --&gt; C1[Atom Encoder]
+    B --&gt; C2[In Degree Encoder]
+    B --&gt; C3[Out Degree Encoder]
+    C1 --&gt; D[Node Feature]
+    C2 --&gt; D
+    C3 --&gt; D
+    E[Graph Token] --&gt; D
+    D --&gt; F[Concatenate Graph Token Feature]
+    F --&gt; G[Output: graph_node_feature]
+
+    style A fill:#f9d,stroke:#333,stroke-width:2px
+    style G fill:#f9d,stroke:#333,stroke-width:2px
+</code></pre>
+<ul>
+<li>GraphAttnBias</li>
+</ul>
+<pre><code class="mermaid">graph TD
+    A[Input: batched_data] --&gt; B[Extract attn_bias, spatial_pos, x, edge_input, attn_edge_type]
+    B --&gt; C1[Spatial Pos Encoder]
+    B --&gt; C2[Graph Token Virtual Distance]
+    C1 --&gt; D[Spatial Pos Bias]
+    C2 --&gt; D
+    B --&gt; E1[Edge Encoder]
+    E1 --&gt; F[Edge Input]
+    B --&gt; E2[Edge Dis Encoder]
+    E2 --&gt; F
+    F --&gt; G[Edge Input Processing]
+    G --&gt; H[Combine Spatial Pos Bias and Edge Input]
+    H --&gt; I[Output: graph_attn_bias]
+
+    style A fill:#f9d,stroke:#333,stroke-width:2px
+    style I fill:#f9d,stroke:#333,stroke-width:2px
+</code></pre>
+</li>
+<li><p>安装</p>
+</li>
+</ul>
+<pre><code>conda create -n graphormer python=3.9
+conda activate graphormer、
+git clone --recursive https://github.com/microsoft/Graphormer.git
+cd Graphormer
+bash install.sh
+</code></pre>
+<ul>
+<li>示例使用</li>
+</ul>
+<pre><code class="bash">cd examples/property_prediction/
+bash zinc.sh
+</code></pre>
+<p>其中<code>zinc.sh</code>内容为：</p>
+<pre><code class="bash">CUDA_VISIBLE_DEVICES=0 fairseq-train \
+    --user-dir ../../graphormer \
+    --num-workers 16 \
+    --ddp-backend=legacy_ddp \
+    --dataset-name zinc \
+    --dataset-source pyg \
+    --task graph_prediction \
+    --criterion l1_loss \
+    --arch graphormer_slim \
+    --num-classes 1 \
+    --attention-dropout 0.1 --act-dropout 0.1 --dropout 0.0 \
+    --optimizer adam --adam-betas &#39;(0.9, 0.999)&#39; --adam-eps 1e-8 --clip-norm 5.0 --weight-decay 0.01 \
+    --lr-scheduler polynomial_decay --power 1 --warmup-updates 60000 --total-num-update 400000 \
+    --lr 2e-4 --end-learning-rate 1e-9 \
+    --batch-size 64 \
+    --fp16 \
+    --data-buffer-size 20 \
+    --encoder-layers 12 \
+    --encoder-embed-dim 80 \
+    --encoder-ffn-embed-dim 80 \
+    --encoder-attention-heads 8 \
+    --max-epoch 10000 \
+    --save-dir ./ckpts
+</code></pre>
+<ul>
+<li>验证效果</li>
+</ul>
+<pre><code class="bash">python evaluate.py \
+    --user-dir ../../graphormer \
+    --num-workers 16 \
+    --ddp-backend=legacy_ddp \
+    --dataset-name pcqm4m \
+    --dataset-source ogb \
+    --task graph_prediction \
+    --criterion l1_loss \
+    --arch graphormer_base \
+    --num-classes 1 \
+    --batch-size 64 \
+    --pretrained-model-name pcqm4mv1_graphormer_base \
+    --load-pretrained-model-output-layer \
+    --split valid \
+    --seed 1
+</code></pre>
+</blockquote>
+<blockquote>
+<h3 id="思考与分析"><a href="#思考与分析" class="headerlink" title="思考与分析"></a>思考与分析</h3><ol>
+<li><p><strong>Transformer 的适应性</strong>:</p>
+<ul>
+<li>这篇论文进一步证明了 Transformer 架构的灵活性和适应性。尽管它最初是为序列数据设计的，但通过适当的修改和编码，它可以成功地应用于图数据。</li>
+</ul>
+</li>
+<li><p><strong>结构编码的深入分析</strong>:</p>
+<ul>
+<li>传统的 Transformer 模型可能无法捕获图数据的复杂性。这是因为图数据的结构信息与序列数据或图像数据不同。通过引入结构编码，Graphormer 能够更好地理解和表示图结构数据。</li>
+</ul>
+</li>
+<li><p><strong>实践与理论的结合</strong>:</p>
+<ul>
+<li>除了实验验证 Graphormer 的有效性外，作者还从理论上证明了其强大的表达能力。这为进一步的研究提供了坚实的基础。</li>
+</ul>
+</li>
+<li><p><strong>未来方向</strong>:</p>
+<ul>
+<li>虽然 Graphormer 在多个任务上都表现出色，但仍有可能进一步优化或扩展其功能。例如，可以考虑将更多的图特性或其他类型的编码引入模型中。</li>
+</ul>
+</li>
+</ol>
+<p>总的来说，这篇论文为如何使用 Transformer 架构处理图数据提供了有价值的见解，并提出了一个有效的解决方案。这为未来的研究提供了一个很好的起点，并证明了 Transformer 架构在多种任务和数据类型上的潜力。</p>
+</blockquote>
+<hr>
+<blockquote>
+<h3 id="graphormer-相关论文"><a href="#graphormer-相关论文" class="headerlink" title="graphormer 相关论文"></a>graphormer 相关论文</h3></blockquote>
+<table>
+<thead>
+<tr>
+<th>论文名称</th>
+<th>作者</th>
+<th>会议&#x2F;期刊</th>
+<th>年份</th>
+<th>摘要&#x2F;简介</th>
+<th>论文链接</th>
+<th>作者单位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Do Transformers Really Perform Bad for Graph Representation?</td>
+<td>Ying, CX; Cai, TL; (…); Liu, TY</td>
+<td>35th Conference on Neural Information Processing Systems (NeurIPS)</td>
+<td>2021</td>
+<td>The Transformer architecture has become a dominant choice in many domains…</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2106.05234">链接</a></td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Mesh Graphormer</td>
+<td>Lin, K; Wang, LJ; Liu, ZC</td>
+<td>18th IEEE&#x2F;CVF International Conference on Computer Vision (ICCV)</td>
+<td>2021</td>
+<td>We present a graph-convolution-reinforced transformer, named Mesh Graphormer…</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2104.00272">链接</a></td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Two-Stream Spatial Graphormer Networks for Skeleton-Based Action Recognition</td>
+<td>Li, XL; Zhang, JY; (…); Zhou, Q</td>
+<td>IEEE Aceess</td>
+<td>2022</td>
+<td>In skeleton-based human action recognition, Transformer…</td>
+<td>(未提供)</td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Multi-Modal Motion Prediction with Graphormers</td>
+<td>Wonsak, S; Al-Rifai, M; (…); Nejdl, W</td>
+<td>IEEE 25th International Conference on Intelligent Transportation Systems (ITSC)</td>
+<td>2022</td>
+<td>Urban road traffic is a highly dynamic environment…</td>
+<td>(未提供)</td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>STGlow: A Flow-Based Generative Framework With Dual-Graphormer for Pedestrian Trajectory Prediction</td>
+<td>Liang, RQ; Li, YM; (…); Li, X</td>
+<td>(未提及)</td>
+<td>Jul 2023</td>
+<td>The pedestrian trajectory prediction task is an essential component…</td>
+<td>(未提供)</td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>DrugormerDTI: Drug Graphormer for drug-target interaction prediction</td>
+<td>Hu, JY; Yu, W; (…); Wei, LY</td>
+<td>(未提及)</td>
+<td>Jul 2023</td>
+<td>Drug-target interactions (DTI) prediction is a crucial task…</td>
+<td>(未提供)</td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Learning with uncertainty to accelerate the discovery of histone lysine-specific demethylase 1A (KDM1A&#x2F;LSD1) inhibitors</td>
+<td>Wang, D; Wu, ZX; (…); Hou, TJ</td>
+<td>(未提及)</td>
+<td>2023</td>
+<td>Machine learning including modern deep learning models…</td>
+<td>(未提供)</td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Bidirectional Graphormer for Reactivity Understanding: Neural Network Trained to Reaction Atom-to-Atom Mapping Task</td>
+<td>Nugmanov, R; Dyubankova, N; (…); Wegner, JK</td>
+<td>(未提及)</td>
+<td>Jul 25 2022</td>
+<td>This work introduces GraphormerMapper, a new algorithm…</td>
+<td>(未提供)</td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Exploring graph capsual network and graphormer for graph classification</td>
+<td>Zuo, XL; Yuan, H; (…); Wang, Y</td>
+<td>(未提及)</td>
+<td>Sep 2023</td>
+<td>Graph Neural Networks (GNNs) have achieved significant success…</td>
+<td>(未提供)</td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Self-supervised learning with chemistry-aware fragmentation for effective molecular property prediction.</td>
+<td>Xie, Ailin; Zhang, Ziqiao; (…); Zhou, Shuigeng</td>
+<td>(未提及)</td>
+<td>2023-aug-20</td>
+<td>Molecular property prediction (MPP) is a crucial and fundamental task…</td>
+<td>(未提供)</td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Spectral Graphormer: Spectral Graph-based Transformer for Egocentric Two-Hand Reconstruction using Multi-View Color Images</td>
+<td>(未提及)</td>
+<td>ICCV 2023</td>
+<td>2023</td>
+<td>(未提及)</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2308.11015">链接</a></td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Curvature-based Transformer for Molecular Property Prediction</td>
+<td>(未提及)</td>
+<td>(未提及)</td>
+<td>2023</td>
+<td>(未提及)</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2307.13275">链接</a></td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Learning to Group Auxiliary Datasets for Molecule</td>
+<td>(未提及)</td>
+<td>(未提及)</td>
+<td>2023</td>
+<td>(未提及)</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2307.04052">链接</a></td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>CardiGraphormer: Unveiling the Power of Self-Supervised Learning in Revolutionizing Drug Discovery</td>
+<td>(未提及)</td>
+<td>(未提及)</td>
+<td>2023</td>
+<td>(未提及)</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2307.00859">链接</a></td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Graph Interpolation via Fast Fused-Gromovization</td>
+<td>(未提及)</td>
+<td>(未提及)</td>
+<td>2023</td>
+<td>(未提及)</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2306.15963">链接</a></td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Towards Predicting Equilibrium Distributions for Molecular Systems with Deep Learning</td>
+<td>(未提及)</td>
+<td>(未提及)</td>
+<td>2023</td>
+<td>(未提及)</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2306.05445">链接</a></td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>STGlow: A Flow-based Generative Framework with Dual Graphormer for Pedestrian Trajectory Prediction</td>
+<td>(未提及)</td>
+<td>(未提及)</td>
+<td>2022</td>
+<td>(未提及)</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2211.11220">链接</a></td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>An Empirical Study of Graphormer on Large-Scale Molecular Modeling Datasets</td>
+<td>(未提及)</td>
+<td>(未提及)</td>
+<td>2022</td>
+<td>(未提及)</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2203.06123">链接</a></td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Benchmarking Graphormer on Large-Scale Molecular Modeling Datasets</td>
+<td>(未提及)</td>
+<td>(未提及)</td>
+<td>2022</td>
+<td>(未提及)</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2203.04810">链接</a></td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>First Place Solution of KDD Cup 2021 &amp; OGB Large-Scale Challenge Graph Prediction Track</td>
+<td>(未提及)</td>
+<td>(未提及)</td>
+<td>2021</td>
+<td>(未提及)</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2106.08279">链接</a></td>
+<td>(未提及)</td>
+</tr>
+</tbody></table>
+<h3 id="graphormer细读文献"><a href="#graphormer细读文献" class="headerlink" title="graphormer细读文献"></a>graphormer细读文献</h3><table>
+<thead>
+<tr>
+<th>论文名称</th>
+<th>作者</th>
+<th>会议&#x2F;期刊</th>
+<th>年份</th>
+<th>摘要&#x2F;简介</th>
+<th>论文链接</th>
+<th>作者单位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mesh Graphormer</td>
+<td>Lin, K; Wang, LJ; Liu, ZC</td>
+<td>18th IEEE&#x2F;CVF International Conference on Computer Vision (ICCV)</td>
+<td>2021</td>
+<td>We present a graph-convolution-reinforced transformer, named Mesh Graphormer…</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2104.00272">链接</a></td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Two-Stream Spatial Graphormer Networks for Skeleton-Based Action Recognition</td>
+<td>Li, XL; Zhang, JY; (…); Zhou, Q</td>
+<td>IEEE Access</td>
+<td>2022</td>
+<td>In skeleton-based human action recognition, Transformer…</td>
+<td>(未提供)</td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Multi-Modal Motion Prediction with Graphormers</td>
+<td>Wonsak, S; Al-Rifai, M; (…); Nejdl, W</td>
+<td>IEEE 25th International Conference on Intelligent Transportation Systems (ITSC)</td>
+<td>2022</td>
+<td>Urban road traffic is a highly dynamic environment…</td>
+<td>(未提供)</td>
+<td>(未提及)</td>
+</tr>
+<tr>
+<td>Spectral Graphormer: Spectral Graph-based Transformer for Egocentric Two-Hand Reconstruction using Multi-View Color Images</td>
+<td>(未提及)</td>
+<td>ICCV 2023</td>
+<td>2023</td>
+<td>(未提及)</td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2308.11015">链接</a></td>
+<td>(未提及)</td>
+</tr>
+</tbody></table>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2104.00272"><strong>Mesh Graphormer</strong></a></p>
+<p><img src="https://camo.githubusercontent.com/3f85f5acf1fe201154dd83c74d949a429165abaf62dc250b53786597fed1353e/68747470733a2f2f6461746172656c656173652e626c6f622e636f72652e77696e646f77732e6e65742f6d6574726f2f67726170686f726d65725f64656d6f2e676966" alt="img"></p>
+<p><img src="https://github.com/microsoft/MeshGraphormer/blob/main/docs/graphormer_overview.png?raw=true" alt="graphormer_overview.png"></p>
+<ul>
+<li><p>作者：Kevin Lin, Lijuan Wang, Zicheng Liu</p>
+<blockquote>
+<p>作者提出了Mesh Graphormer，这是一个图卷积增强的变压器，用于从单张图片中重建3D人体姿势和网格。近期，变压器和图卷积神经网络（GCNNs）在人体网格重建中都显示出了很好的进展。本文研究如何在变压器中结合图卷积和自注意力来模拟局部和全局的交互。</p>
+</blockquote>
+<p>(2021)</p>
+<ul>
+<li>被引用次数：18th IEEE&#x2F;CVF International Conference on Computer Vision (ICCV)</li>
+<li>arXiv</li>
+<li>摘要：本文提出了一个图卷积增强的变压器，名为 Mesh Graphormer，用于从单张图片中重建3D人体姿势和网格。近期，变压器和图卷积神经网络（GCNNs）在人体网格重建中都显示出了很好的进展。本文研究如何在变压器中结合图卷积和自注意力来模拟局部和全局的交互。实验结果显示，Mesh Graphormer 在多个基准测试中都明显优于之前的最先进方法，包括 Human3.6M、3DPW 和 FreiHAND 数据集。</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2104.00272.pdf">PDF链接</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/MeshGraphormer">GitHub仓库链接</a></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>前置说明：</p>
+<ul>
+<li>Mesh Graphormer:<ol>
+<li><strong>背景</strong>：从单张图片中重建3D人体姿势和网格是一个热门的研究话题，但由于复杂的身体关节，这是一个具有挑战性的任务。</li>
+<li><strong>主要贡献</strong>：本文的目标是结合自注意力和图卷积来重建3D人体网格。</li>
+<li><strong>方法</strong>：介绍了Graphormer编码器的架构，它由N &#x3D; 4个相同的块组成。每个块包含五个子模块，包括层规范化、多头自注意力模块、图残差块、第二层规范化和最后的多层感知机（MLP）。</li>
+<li><strong>实验</strong>：使用公开可用的数据集进行了广泛的训练，包括Human3.6M、MuCo-3DHP、UP-3D、COCO和MPII。与先前的方法进行了比较，结果显示我们的方法在Human3.6M和3DPW数据集上都优于先前的最先进方法。</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<h3 id="论文阅读-1"><a href="#论文阅读-1" class="headerlink" title="论文阅读"></a>论文阅读</h3><ol>
+<li><strong>背景与动机</strong>:<ul>
+<li>从单张图片中重建3D人体姿势和网格是一个热门的研究话题。由于复杂的身体关节，这是一个具有挑战性的任务。近期，变压器和图卷积神经网络（GCNNs）在人体网格重建中都显示出了很好的进展。</li>
+</ul>
+</li>
+<li><strong>Mesh Graphormer 的提出</strong>:<ul>
+<li>为了解决上述问题，作者提出了Mesh Graphormer。这是一个图卷积增强的变压器，用于从单张图片中重建3D人体姿势和网格。本文研究如何在变压器中结合图卷积和自注意力来模拟局部和全局的交互。</li>
+</ul>
+</li>
+<li><strong>Graphormer 编码器</strong>:<ul>
+<li>作者详细介绍了Graphormer编码器的架构，它由N &#x3D; 4个相同的块组成。每个块包含五个子模块，包括层规范化、多头自注意力模块、图残差块、第二层规范化和最后的多层感知机（MLP）。</li>
+</ul>
+</li>
+<li><strong>实验结果与分析</strong>:<ul>
+<li>作者使用公开可用的数据集进行了广泛的训练，包括Human3.6M、MuCo-3DHP、UP-3D、COCO和MPII。与先前的方法进行了比较，结果显示Mesh Graphormer在Human3.6M和3DPW数据集上都优于先前的最先进方法。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<h3 id="思考与分析-1"><a href="#思考与分析-1" class="headerlink" title="思考与分析"></a>思考与分析</h3><ol>
+<li><strong>Transformer 的适应性:</strong><ul>
+<li>“Mesh Graphormer” 论文进一步证明了 Transformer 架构在非传统领域的适应性。尽管 Transformer 最初是为 NLP 设计的，但通过适当的修改和增强，它已经被成功地应用于3D人体姿势和网格的重建。</li>
+</ul>
+</li>
+<li><strong>图卷积的深入分析:</strong><ul>
+<li>传统的 Transformer 可能在处理图数据时遇到困难，因为图数据的结构和关系比序列数据更为复杂。通过结合图卷积，Mesh Graphormer 能够有效地模拟局部和全局的交互，从而更好地处理图数据。</li>
+</ul>
+</li>
+<li><strong>实践与理论的结合:</strong><ul>
+<li>除了实验验证 Mesh Graphormer 的有效性外，论文还详细描述了其编码器的架构和工作原理。这种对模型的深入理解和分析为未来的研究提供了坚实的基础。</li>
+</ul>
+</li>
+<li><strong>未来方向:</strong><ul>
+<li>虽然 Mesh Graphormer 在3D人体姿势和网格重建上表现出色，但仍有可能进一步优化或扩展其功能。例如，可以考虑引入更多的图特性或其他类型的编码来进一步提高模型的性能。</li>
+</ul>
+</li>
+</ol>
+<p>总的来说，这篇论文为如何使用图卷积增强的 Transformer 架构处理3D人体姿势和网格的重建提供了有价值的见解。这为未来的研究提供了一个很好的起点，并证明了 Transformer 架构在多种任务和数据类型上的潜力。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2104.00272"><strong>Multi-Modal Motion Prediction with Graphormers</strong></a></p>
+<ul>
+<li><p>作者：Shimon Wonsak, Mohammad Al-Rifai, Michael Nolting, Wolfgang Nejdl</p>
+<blockquote>
+<p>本文探讨了城市道路交通的动态性，由于其复杂的道路布局、交通规则和道路用户互动，准确预测未来位置仍然是一个具有挑战性的任务。尽管最近的运动预测模型受到自然语言处理领域的启发并利用了Transformer架构，但它们完全忽略了数据中固有的图语义。Graphormer是一个新近提出的架构，用于解决分子科学领域的这一挑战。在本文中，作者展示了如何利用Graphormer架构来处理运动预测任务，并提出了一种新的编码策略来创建一个具有局部感知的Graphormer。此外，还扩展了该架构，使其能够通过自注意力机制处理边特征。为了展示所有组件的有效性，作者在公开的Argoverse城市运动预测数据集上评估了模型。定量和定性评估显示，该模型能够进行精确的最先进的预测。</p>
+</blockquote>
+<p>(2022)</p>
+<ul>
+<li><p>被引用次数：未知</p>
+</li>
+<li><p>IEEE</p>
+</li>
+<li><p>摘要：城市道路交通是一个高度动态的环境，因为它有许多规则、复杂的道路布局和道路用户互动。因此，准确预测未来位置仍然是一个具有挑战性的任务。受到自然语言处理领域成就的启发，最近的运动预测模型利用了Transformer架构。尽管这些模型产生了最先进的结果，但它们完全忽略了数据中固有的图语义。Graphormer是一个新近提出的架构，用于解决分子科学领域的这一挑战。在本文中，我们展示了如何利用Graphormer架构来处理运动预测任务。我们提出了一种新的编码策略来创建一个具有局部感知的Graphormer。此外，我们还扩展了该架构，使其能够通过自注意力机制处理边特征。为了展示所有组件的有效性，我们在公开的Argoverse城市运动预测数据集上评估了我们的模型。定量和定性评估显示，我们的模型能够进行精确的最先进的预测。</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>前置说明：</p>
+<ul>
+<li><p>Multi-Modal Motion Prediction with Graphormers:</p>
+<ol>
+<li><strong>背景</strong>：城市道路交通的动态性使得准确预测未来位置成为一个挑战。尽管Transformer架构在运动预测中取得了一定的进展，但现有的模型忽略了数据中的图语义。</li>
+<li><strong>主要贡献</strong>：本文展示了如何利用Graphormer架构来处理运动预测任务，并提出了一种新的编码策略。</li>
+<li><strong>方法</strong>：作者提出了一个具有局部感知的Graphormer，并扩展了该架构，使其能够通过自注意力机制处理边特征。</li>
+<li><strong>实验</strong>：使用公开的Argoverse城市运动预测数据集进行了评估，结果显示该模型能够进行精确的最先进的预测。</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<h3 id="论文阅读-2"><a href="#论文阅读-2" class="headerlink" title="论文阅读"></a>论文阅读</h3><blockquote>
+<ol>
+<li><strong>背景与动机</strong>:</li>
+</ol>
+<ul>
+<li>城市道路交通是一个高度动态的环境，因为其有许多规则、复杂的道路布局和道路用户之间的互动。因此，准确预测未来的位置仍然是一个具有挑战性的任务。受到自然语言处理领域的成果的启发，最近的运动预测模型利用了 Transformer 架构。尽管这些模型产生了最先进的结果，但它们完全忽略了数据中固有的图语义。Graphormer 是一个新近提出的有前景的架构，用于解决分子科学领域的这一挑战。在本文中，我们展示了如何利用 Graphormer 架构来解决运动预测任务。</li>
+</ul>
+<ol start="2">
+<li><strong>Graphormer 的应用</strong>:</li>
+</ol>
+<ul>
+<li>为了解决上述问题，作者展示了如何利用 Graphormer 架构来解决运动预测任务。他们提出了一种新的编码策略来创建一个具有局部性的 Graphormer。此外，他们扩展了该架构，使其能够使用自注意机制处理边特征。为了展示所有组件的有效性，他们在 Argoverse 的公开可用的城市运动预测数据集上评估了他们的模型。定量和定性的评估显示，我们的模型能够进行精确的最先进的预测。</li>
+</ul>
+<ol start="3">
+<li><strong>结构与编码</strong>:</li>
+</ol>
+<ul>
+<li>作者提出了一种新的图表示，其中每个节点对应于一个中心线点，如果没有明确定义的话，邻接矩阵表示节点之间的连接性。此外，他们为运动预测任务创建了一个图感知的 Transformer，该 Transformer 基于 Graphormer 模型，并引入了新的编码策略，使模型能够捕获运动预测任务的社交和地图图结构。</li>
+</ul>
+<ol start="4">
+<li><strong>实验结果与分析</strong>:</li>
+</ol>
+<ul>
+<li>作者在公开的 Argoverse 数据集上评估了所提出解决方案的性能。</li>
+</ul>
+</blockquote>
+<h3 id="思考与分析-2"><a href="#思考与分析-2" class="headerlink" title="思考与分析"></a>思考与分析</h3><blockquote>
+<ol>
+<li><strong>Transformer 的适应性</strong>:</li>
+</ol>
+<ul>
+<li>这篇论文进一步证明了 Transformer 架构在处理高度动态的环境，如城市道路交通中的适应性。通过适当的修改和编码，它可以成功地应用于运动预测任务。</li>
+</ul>
+<ol start="2">
+<li><strong>结构编码的深入分析</strong>:</li>
+</ol>
+<ul>
+<li>传统的 Transformer 模型可能无法捕获图数据的复杂性。这是因为图数据的结构信息与序列数据或图像数据不同。通过引入结构编码，Graphormer 能够更好地理解和表示图结构数据。</li>
+</ul>
+<ol start="3">
+<li><strong>实践与理论的结合</strong>:</li>
+</ol>
+<ul>
+<li>除了实验验证 Graphormer 的有效性外，作者还展示了如何结合社交和地图信息的图表示来捕获运动预测任务的图结构。</li>
+</ul>
+<ol start="4">
+<li><strong>未来方向</strong>:</li>
+</ol>
+<ul>
+<li>虽然 Graphormer 在运动预测任务上表现出色，但仍有可能进一步优化或扩展其功能。例如，可以考虑将更多的图特性或其他类型的编码引入模型中。</li>
+</ul>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2104.00272"><strong>Spectral Graphormer: Spectral Graph-based Transformer for Egocentric Two-Hand Reconstruction using Multi-View Color Images</strong></a></p>
+<blockquote>
+<p><strong>作者</strong>：Tze Ho Elden Tse, Franziska Mueller, Zhengyang Shen, Danhang Tang, Thabo Beeler, Mingsong Dou, Yinda Zhang, Sasa Petrovic, Hyung Jin Chang, Jonathan Taylor, Bardia Doosti</p>
+<p><strong>发布日期</strong>：(2023)</p>
+<p><strong>来源</strong>：  ICCV 2023</p>
+<p><strong>摘要</strong>：本文提出了一个新颖的基于变压器的框架，该框架从多视图RGB图像中重建两个高保真的手。与现有的手部姿势估计方法不同，其中通常训练一个深度网络从单个RGB图像回归手模型参数，我们考虑一个更具挑战性的问题设置，其中我们直接从以自我为中心的视图中回归两只手的绝对根姿势，这些手具有高分辨率和扩展的前臂。由于现有的数据集要么不适用于以自我为中心的视点，要么缺乏背景变化，因此我们创建了一个大型合成数据集，并收集了一个真实数据集来验证我们提出的多视图图像特征融合策略。为了使重建物理上合理，我们提出了两种策略：(i)一个粗到细的谱图卷积解码器，在上采样过程中平滑网格；(ii)在推理阶段，一个基于优化的细化阶段，以防止自渗透。通过广泛的定量和定性评估，我们展示了我们的框架能够产生逼真的双手重建，并展示了合成训练模型对真实数据的泛化能力，以及实时的AR&#x2F;VR应用。</p>
+<p><strong>前置说明</strong>：</p>
+<p><strong>Spectral Graphormer</strong>:</p>
+<ul>
+<li><p><strong>背景</strong>：3D手部姿势估计在增强和虚拟现实(AR&#x2F;VR)等多种下游应用中都是一个基本问题。尽管单手姿势估计已经取得了很大的进展，但双手姿势估计相对受到了较少的关注。</p>
+</li>
+<li><p><strong>主要贡献</strong>：本文提出了一个能够从多视图RGB图像中重建高保真双手的谱图基变压器架构。</p>
+</li>
+<li><p><strong>方法</strong>：该方法结合了软注意力机制和变压器编码，以及谱图卷积解码器，以从多视图图像中重建两只手。此外，为了处理物理上不可能的网格，还引入了一个基于优化的细化步骤。</p>
+</li>
+<li><p><strong>实验</strong>：作者创建了一个大型合成多视图数据集，并收集了一个真实数据集来验证所提方法。实验结果显示，该方法在各种挑战性场景中都表现出了强大的性能，并可以作为一个强大的基线。</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<h3 id="论文阅读-3"><a href="#论文阅读-3" class="headerlink" title="论文阅读"></a>论文阅读</h3><ol>
+<li><p><strong>背景与动机</strong>:</p>
+<ul>
+<li>该论文提出了一个基于Transformer的新颖框架，用于从多视角RGB图像重建两只高保真的手。与现有的手部姿势估计方法不同，该方法考虑了一个更具挑战性的问题设置，即直接从自我中心视图中回归两只手的绝对根姿势。为了使重建物理上合理，作者提出了两种策略：一种是粗到细的光谱图卷积解码器，用于在上采样过程中平滑网格；另一种是在推理阶段的优化基础上的细化阶段，以防止自穿透。</li>
+</ul>
+</li>
+<li><p><strong>方法</strong>:</p>
+<ul>
+<li>该框架首先将N个多视角RGB输入图像传递给共享的CNN背景，以提取体积特征。然后，这些特征被送入一个基于软注意力的多视角特征编码器，并输出K个区域特定的特征。Transformer编码器接受这些特征以及模板手部网格，并输出一个粗糙的网格表示。最后，光谱图解码器通过在这个粗糙的表示上进行上采样来生成手部网格。</li>
+</ul>
+</li>
+<li><p><strong>实验结果与分析</strong>:</p>
+<ul>
+<li>作者提出了一个新颖的端到端可训练的光谱图基于Transformer的方法，用于从多视角RGB图像中重建高保真的两只手。他们设计了一种有效的基于软注意力的多视角图像特征融合方法，通过这种方法，得到的图像特征是区域特定的，与分段手部网格相关。此外，他们还引入了一种优化方法，用于在推理时细化物理上不合理的网格。为了验证所提出的方法，他们创建了一个大规模的合成多视角数据集，并收集了真实数据集。</li>
+</ul>
+</li>
+</ol>
+<h3 id="思考与分析-3"><a href="#思考与分析-3" class="headerlink" title="思考与分析"></a>思考与分析</h3><ol>
+<li><p><strong>Transformer 的适应性</strong>:</p>
+<ul>
+<li>该论文进一步证明了Transformer架构在处理如两只手的重建这样的复杂任务中的适应性。通过适当的设计和编码，它可以成功地应用于这种任务。</li>
+</ul>
+</li>
+<li><p><strong>多视角融合的重要性</strong>:</p>
+<ul>
+<li>通过软注意力机制和Transformer编码器，该方法能够有效地融合来自多个视角的图像特征，从而提供更准确和详细的手部重建。</li>
+</ul>
+</li>
+<li><p><strong>实践与理论的结合</strong>:</p>
+<ul>
+<li>除了实验验证其方法的有效性外，作者还展示了如何结合光谱图理论和Transformer架构来处理这个问题。这种结合为未来的研究提供了一个有价值的方向。</li>
+</ul>
+</li>
+<li><p><strong>未来方向</strong>:</p>
+<ul>
+<li>虽然该方法在手部重建任务上表现出色，但仍有可能进一步优化或扩展其功能。例如，可以考虑引入更多的图特性或其他类型的编码来进一步提高重建的准确性。</li>
+</ul>
+</li>
+</ol>
+<p>总的来说，这篇论文为如何使用Transformer架构处理两只手的重建任务提供了有价值的见解，并提出了一个有效的解决方案。这为未来的研究提供了一个很好的起点，并证明了Transformer架构在多种任务和数据类型上的潜力。</p>
+</blockquote>
+<h2 id="graphormer相关文献阅读总结"><a href="#graphormer相关文献阅读总结" class="headerlink" title="graphormer相关文献阅读总结"></a>graphormer相关文献阅读总结</h2><table>
+<thead>
+<tr>
+<th>论文名称</th>
+<th>主要贡献</th>
+<th>方法描述</th>
+<th>实验结果与分析</th>
+<th>思考与分析</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mesh Graphormer</td>
+<td>提出了Mesh Graphormer，一个图卷积增强的变压器，用于从单张图片中重建3D人体姿势和网格。</td>
+<td>结合自注意力和图卷积来重建3D人体网格。</td>
+<td>在Human3.6M、3DPW等数据集上优于先前的最先进方法。</td>
+<td>证明了Transformer架构在非传统领域的适应性，以及图卷积在处理图数据时的重要性。</td>
+</tr>
+<tr>
+<td>Multi-Modal Motion Prediction with Graphormers</td>
+<td>展示了如何利用Graphormer架构来处理运动预测任务，并提出了一种新的编码策略。</td>
+<td>利用Graphormer架构处理运动预测任务，并引入了新的编码策略来创建一个具有局部感知的Graphormer。</td>
+<td>在Argoverse城市运动预测数据集上表现出色。</td>
+<td>证明了Transformer架构在处理高度动态的环境中的适应性，以及结构编码在处理图数据时的重要性。</td>
+</tr>
+<tr>
+<td>Spectral Graphormer: Spectral Graph-based Transformer for Egocentric Two-Hand Reconstruction using Multi-View Color Images</td>
+<td>提出了一个基于Transformer的新颖框架，用于从多视角RGB图像重建两只高保真的手。</td>
+<td>结合了软注意力机制和变压器编码，以及谱图卷积解码器，以从多视图图像中重建两只手。</td>
+<td>创建了一个大型合成多视图数据集，并收集了一个真实数据集来验证所提方法。</td>
+<td>证明了Transformer架构在处理如两只手的重建这样的复杂任务中的适应性，以及多视角融合的重要性。</td>
+</tr>
+</tbody></table>
+<h2 id="GIN"><a href="#GIN" class="headerlink" title="GIN"></a>GIN</h2><p>[**How Powerful Are Graph Neural Networks?**](<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1810.00826.pdf">1810.00826.pdf (arxiv.org)</a>)</p>
+<hr>
+<blockquote>
+<ul>
+<li><p><strong>作者</strong>：Keyulu Xu, Weihua Hu, Jure Leskovec, Stefanie Jegelka</p>
+</li>
+<li><p><strong>发布日期</strong>：(2019)</p>
+</li>
+<li><p><strong>来源</strong>：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1810.00826.pdf">arXiv:1810.00826v3</a></p>
+</li>
+<li><p><strong>摘要</strong>：</p>
+</li>
+</ul>
+<blockquote>
+<p>图神经网络 (GNNs) 是一种有效的图表示学习框架。GNNs 采用邻域聚合策略，通过递归地聚合和转换其邻域节点的表示向量来计算节点的表示向量。尽管许多 GNN 变体已经被提出并在节点和图分类任务上取得了最先进的结果，但对于 GNNs 的表示属性和局限性的理解仍然有限。本文提出了一个理论框架，用于分析 GNNs 捕获不同图结构的表达能力。结果表明，流行的 GNN 变体，如图卷积网络和 GraphSAGE，不能学习区分某些简单的图结构。然后，我们开发了一个简单的架构，它在 GNNs 类中具有最大的表达能力，并与 Weisfeiler-Lehman 图同构测试一样强大。我们在多个图分类基准上验证了我们的理论发现，并证明了我们的模型达到了最先进的性能。</p>
+</blockquote>
+<h4 id="前置说明："><a href="#前置说明：" class="headerlink" title="前置说明："></a>前置说明：</h4><p><strong>How Powerful Are Graph Neural Networks?:</strong></p>
+<ul>
+<li><p><strong>背景</strong>：图结构数据的学习，如分子、社交、生物和金融网络，需要有效地表示其图结构。近年来，图神经网络 (GNN) 在图的表示学习中引起了广泛的关注。</p>
+</li>
+<li><p><strong>主要贡献</strong>：本文提出了一个理论框架，用于分析 GNNs 的表达能力，以捕获和区分不同的图结构。</p>
+</li>
+<li><p><strong>方法</strong>：该方法受到 GNNs 和 Weisfeiler-Lehman (WL) 图同构测试之间的紧密联系的启发。与 GNNs 类似，WL 测试通过聚合节点及其网络邻居的特征向量来迭代地更新给定节点的特征向量。</p>
+</li>
+<li><p><strong>实验</strong>：作者在图分类数据集上验证了他们的理论，其中 GNNs 的表达能力对于捕获图结构至关重要。实验结果证实，从理论上讲，最强大的 GNN，即图同构网络 (GIN)，在实践中也具有高度的表示能力。</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<h3 id="论文阅读-4"><a href="#论文阅读-4" class="headerlink" title="论文阅读"></a>论文阅读</h3><ol>
+<li><p><strong>背景与动机</strong>:</p>
+<ul>
+<li>图神经网络 (GNNs) 是图表示学习的有效框架。GNNs 采用邻域聚合方案，通过递归地聚合和转换其邻近节点的表示向量来计算节点的表示向量。尽管许多 GNN 变体已经被提出并在节点和图分类任务上取得了最先进的结果，但对于 GNNs 的表示属性和局限性的理解仍然有限。本文提出了一个理论框架，用于分析 GNNs 捕获不同图结构的表现力。</li>
+</ul>
+</li>
+<li><p><strong>GNNs 的表现力</strong>:</p>
+<ul>
+<li>作者提出了一个理论框架，用于分析 GNNs 的表示能力。他们正式地描述了不同的 GNN 变体在学习表示和区分不同图结构方面的表现力。该框架受到 GNNs 和 Weisfeiler-Lehman (WL) 图同构测试之间的紧密联系的启发。与 GNNs 类似，WL 测试通过聚合其网络邻居的特征向量来迭代地更新给定节点的特征向量。作者的关键洞察是，如果 GNN 的聚合方案具有高度的表现力并且可以模拟可注入的函数，那么 GNN 可以具有与 WL 测试一样大的区分能力。</li>
+</ul>
+</li>
+<li><p><strong>结构与编码</strong>:</p>
+<ul>
+<li>作者首先将给定节点的邻居的特征向量集表示为多集，即可能重复元素的集合。然后，GNNs 中的邻居聚合可以被认为是一个多集上的聚合函数。为了具有强大的表示能力，GNN 必须能够将不同的多集聚合为不同的表示。</li>
+</ul>
+</li>
+<li><p><strong>实验结果与分析</strong>:</p>
+<ul>
+<li>作者在图分类数据集上验证了他们的理论，其中 GNNs 的表现力对于捕获图结构至关重要。特别是，他们比较了具有不同聚合功能的 GNNs 的性能。结果证实，根据我们的理论，最强大的 GNN（即图同构网络 GIN）在实验上也具有很高的表示能力，而较弱的 GNN 变体经常严重地不适合训练数据。此外，在表示上更强大的 GNNs 在测试集准确性上超过了其他方法，并在许多图分类基准上实现了最先进的性能。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<h3 id="思考与分析-4"><a href="#思考与分析-4" class="headerlink" title="思考与分析"></a>思考与分析</h3><ol>
+<li><p><strong>GNNs 的理论分析</strong>:</p>
+<ul>
+<li>本文提供了对 GNNs 表现力的深入理论分析，揭示了其与 WL 图同构测试之间的紧密联系。这种理论分析为 GNNs 的研究提供了坚实的基础。</li>
+</ul>
+</li>
+<li><p><strong>区分图结构的能力</strong>:</p>
+<ul>
+<li>作者明确地描述了 GNNs 的区分能力，即它们能够区分哪些图结构，以及它们可能无法区分的图结构。</li>
+</ul>
+</li>
+<li><p><strong>实践与理论的结合</strong>:</p>
+<ul>
+<li>除了提供理论框架外，作者还通过实验验证了他们的理论发现，展示了不同 GNN 变体在实际任务上的性能。</li>
+</ul>
+</li>
+<li><p><strong>未来方向</strong>:</p>
+<ul>
+<li>虽然本文为 GNNs 的研究提供了深入的理论见解，但仍然存在进一步探索 GNNs 的潜在能力和局限性的可能性。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+
     </div>
     
     
