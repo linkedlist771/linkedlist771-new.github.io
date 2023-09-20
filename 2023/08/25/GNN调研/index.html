@@ -174,7 +174,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/GNN%E8%B0%83%E7%A0%94/" style="color: #ffa2c4">GNN调研</a>
+                <a href="/tags/GNN%E8%B0%83%E7%A0%94/" style="color: #03a9f4">GNN调研</a>
             </span>
             
         </span>
@@ -183,7 +183,7 @@
     
     <div class="content" v-pre>
         <blockquote>
-<p>这个博客主要是调研导师安排给我的<code>GNN(图神经网络)</code>的调研的任务。</p>
+<p><code>GNN(图神经网络)</code>的调研的任务。</p>
 </blockquote>
 <span id="more"></span>
 
@@ -294,150 +294,96 @@
 </li>
 </ol>
 </blockquote>
-<blockquote>
-<h3 id="Graphormer-代码阅读与使用"><a href="#Graphormer-代码阅读与使用" class="headerlink" title="Graphormer 代码阅读与使用"></a>Graphormer 代码阅读与使用</h3><ul>
-<li><p>Graphormer结构：</p>
-<p>encoder示意图：</p>
-<pre><code class="mermaid">graph TD
-    A[Input: batched_data] --&gt; B[GraphNodeFeature]
-    A --&gt; C[GraphAttnBias]
-    B --&gt; D[Token Embeddings]
-    D --&gt; E[Optional: Perturb]
-    E --&gt; F[Embed Scale]
-    F --&gt; G[Quant Noise]
-    G --&gt; H[Emb Layer Norm]
-    H --&gt; I[Dropout]
-    I --&gt; J[Transpose]
-    J --&gt; K[GraphormerGraphEncoderLayer]
-    K --&gt; L[Graph Representation]
-    L --&gt; M[Output: inner_states, graph_rep]
-  
-    style A fill:#f9d,stroke:#333,stroke-width:2px
-    style M fill:#f9d,stroke:#333,stroke-width:2px
-  
-</code></pre>
-<p>在前向传播过程中的结构：</p>
-<pre><code class="mermaid">graph TD
-    A[Input: batched_data] --&gt; B[Compute Padding Mask]
-    B --&gt; C[Token Embeddings]
-    C --&gt; D[Optional: Perturb]
-    D --&gt; E[GraphAttnBias]
-    E --&gt; F[Embed Scale]
-    F --&gt; G[Quant Noise]
-    G --&gt; H[Emb Layer Norm]
-    H --&gt; I[Dropout]
-    I --&gt; J[Transpose]
-    J --&gt; K1[GraphormerGraphEncoderLayer 1]
-    K1 --&gt; K2[GraphormerGraphEncoderLayer 2]
-    ...
-    Kn[GraphormerGraphEncoderLayer n] --&gt; L[Graph Representation]
-    L --&gt; M[Output: inner_states, graph_rep]
-  
-    style A fill:#f9d,stroke:#333,stroke-width:2px
-    style M fill:#f9d,stroke:#333,stroke-width:2px
-  
-</code></pre>
-<ul>
-<li><h3 id="GraphNodeFeature"><a href="#GraphNodeFeature" class="headerlink" title="GraphNodeFeature"></a>GraphNodeFeature</h3></li>
-</ul>
-<pre><code class="mermaid">graph TD
-    A[Input: batched_data] --&gt; B[Extract x, in_degree, out_degree]
-    B --&gt; C1[Atom Encoder]
-    B --&gt; C2[In Degree Encoder]
-    B --&gt; C3[Out Degree Encoder]
-    C1 --&gt; D[Node Feature]
-    C2 --&gt; D
-    C3 --&gt; D
-    E[Graph Token] --&gt; D
-    D --&gt; F[Concatenate Graph Token Feature]
-    F --&gt; G[Output: graph_node_feature]
-
-    style A fill:#f9d,stroke:#333,stroke-width:2px
-    style G fill:#f9d,stroke:#333,stroke-width:2px
-</code></pre>
-<ul>
-<li>GraphAttnBias</li>
-</ul>
-<pre><code class="mermaid">graph TD
-    A[Input: batched_data] --&gt; B[Extract attn_bias, spatial_pos, x, edge_input, attn_edge_type]
-    B --&gt; C1[Spatial Pos Encoder]
-    B --&gt; C2[Graph Token Virtual Distance]
-    C1 --&gt; D[Spatial Pos Bias]
-    C2 --&gt; D
-    B --&gt; E1[Edge Encoder]
-    E1 --&gt; F[Edge Input]
-    B --&gt; E2[Edge Dis Encoder]
-    E2 --&gt; F
-    F --&gt; G[Edge Input Processing]
-    G --&gt; H[Combine Spatial Pos Bias and Edge Input]
-    H --&gt; I[Output: graph_attn_bias]
-
-    style A fill:#f9d,stroke:#333,stroke-width:2px
-    style I fill:#f9d,stroke:#333,stroke-width:2px
-</code></pre>
-</li>
-<li><p>安装</p>
-</li>
-</ul>
-<pre><code>conda create -n graphormer python=3.9
-conda activate graphormer、
-git clone --recursive https://github.com/microsoft/Graphormer.git
-cd Graphormer
-bash install.sh
-</code></pre>
-<ul>
-<li>示例使用</li>
-</ul>
-<pre><code class="bash">cd examples/property_prediction/
-bash zinc.sh
-</code></pre>
-<p>其中<code>zinc.sh</code>内容为：</p>
-<pre><code class="bash">CUDA_VISIBLE_DEVICES=0 fairseq-train \
-    --user-dir ../../graphormer \
-    --num-workers 16 \
-    --ddp-backend=legacy_ddp \
-    --dataset-name zinc \
-    --dataset-source pyg \
-    --task graph_prediction \
-    --criterion l1_loss \
-    --arch graphormer_slim \
-    --num-classes 1 \
-    --attention-dropout 0.1 --act-dropout 0.1 --dropout 0.0 \
-    --optimizer adam --adam-betas &#39;(0.9, 0.999)&#39; --adam-eps 1e-8 --clip-norm 5.0 --weight-decay 0.01 \
-    --lr-scheduler polynomial_decay --power 1 --warmup-updates 60000 --total-num-update 400000 \
-    --lr 2e-4 --end-learning-rate 1e-9 \
-    --batch-size 64 \
-    --fp16 \
-    --data-buffer-size 20 \
-    --encoder-layers 12 \
-    --encoder-embed-dim 80 \
-    --encoder-ffn-embed-dim 80 \
-    --encoder-attention-heads 8 \
-    --max-epoch 10000 \
-    --save-dir ./ckpts
-</code></pre>
-<ul>
-<li>验证效果</li>
-</ul>
-<pre><code class="bash">python evaluate.py \
-    --user-dir ../../graphormer \
-    --num-workers 16 \
-    --ddp-backend=legacy_ddp \
-    --dataset-name pcqm4m \
-    --dataset-source ogb \
-    --task graph_prediction \
-    --criterion l1_loss \
-    --arch graphormer_base \
-    --num-classes 1 \
-    --batch-size 64 \
-    --pretrained-model-name pcqm4mv1_graphormer_base \
-    --load-pretrained-model-output-layer \
-    --split valid \
-    --seed 1
-</code></pre>
-</blockquote>
-<blockquote>
-<h3 id="思考与分析"><a href="#思考与分析" class="headerlink" title="思考与分析"></a>思考与分析</h3><ol>
+<h1 id="baseline模型总结"><a href="#baseline模型总结" class="headerlink" title="baseline模型总结"></a>baseline模型总结</h1><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>说明</th>
+<th>参考文献</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GCN</td>
+<td>经典的图神经网络模型</td>
+<td>[26]</td>
+</tr>
+<tr>
+<td>GIN</td>
+<td>流行的图神经网络模型</td>
+<td>[54]</td>
+</tr>
+<tr>
+<td>GCN-VN</td>
+<td>GCN的虚拟节点版本</td>
+<td>[15]</td>
+</tr>
+<tr>
+<td>GIN-VN</td>
+<td>GIN的虚拟节点版本</td>
+<td>[15]</td>
+</tr>
+<tr>
+<td>GIN的多跳变体</td>
+<td>考虑了多跳的信息的GIN变种</td>
+<td>[5]</td>
+</tr>
+<tr>
+<td>DeeperGCN</td>
+<td>12层深的图神经网络模型</td>
+<td>[30]</td>
+</tr>
+<tr>
+<td>GT</td>
+<td>基于Transformer的图模型</td>
+<td>[13]</td>
+</tr>
+<tr>
+<td>Graphormer</td>
+<td>作者提出的模型，大小为(L &#x3D; 12, d &#x3D; 768)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>GraphormerS MALL</td>
+<td>作者提出的较小版本模型，大小为(L &#x3D; 6, d &#x3D; 512)</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h1 id="数据集及任务"><a href="#数据集及任务" class="headerlink" title="数据集及任务"></a>数据集及任务</h1><table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>说明</th>
+<th>任务</th>
+<th>参考链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PCQM4M-LSC</td>
+<td>来自OGB Large-Scale Challenge的量子化学回归数据集，包含超过3.8M的图。</td>
+<td>回归</td>
+<td><a target="_blank" rel="noopener" href="https://ogb.stanford.edu/kddcup2021/">OGB-LSC</a></td>
+</tr>
+<tr>
+<td>OGBG-MolPCBA</td>
+<td>OGB的一个数据集，用于分子预测。</td>
+<td>二元分类</td>
+<td><a target="_blank" rel="noopener" href="https://ogb.stanford.edu/">OGB</a></td>
+</tr>
+<tr>
+<td>OGBG-MolHIV</td>
+<td>OGB的一个数据集，用于HIV活性预测。</td>
+<td>二元分类</td>
+<td><a target="_blank" rel="noopener" href="https://ogb.stanford.edu/">OGB</a></td>
+</tr>
+<tr>
+<td>ZINC (sub-set)</td>
+<td>一个用于分子属性预测的数据集的子集。</td>
+<td>回归</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h1 id="本文总结"><a href="#本文总结" class="headerlink" title="本文总结"></a>本文总结</h1><blockquote>
+<ol>
 <li><p><strong>Transformer 的适应性</strong>:</p>
 <ul>
 <li>这篇论文进一步证明了 Transformer 架构的灵活性和适应性。尽管它最初是为序列数据设计的，但通过适当的修改和编码，它可以成功地应用于图数据。</li>
@@ -445,26 +391,346 @@ bash zinc.sh
 </li>
 <li><p><strong>结构编码的深入分析</strong>:</p>
 <ul>
-<li>传统的 Transformer 模型可能无法捕获图数据的复杂性。这是因为图数据的结构信息与序列数据或图像数据不同。通过引入结构编码，Graphormer 能够更好地理解和表示图结构数据。</li>
+<li><p>传统的 Transformer 模型可能无法捕获图数据的复杂性。这是因为图数据的结构信息与序列数据或图像数据不同。通过引入结构编码，Graphormer 能够更好地理解和表示图结构数据。</p>
+</li>
+<li><p><strong>事实1</strong>：这一事实表明Graphormer可以代表流行GNN模型的AGGREGATE和COMBINE步骤。证明基于空间编码，该编码允许模型区分不同的节点及其邻居。</p>
+</li>
+<li><p><strong>超越经典的GNN</strong>：借助其空间编码，Graphormer可以超越传统GNN的表达能力。它可以区分Weisfeiler-Lehman测试无法区分的图。</p>
+</li>
+<li><p><strong>自注意与虚拟节点之间的联系</strong>：文本强调了自注意机制与虚拟节点启发式之间的联系。虚拟节点技巧通过添加超节点来提高GNN的性能。但是，得益于其自注意机制，Graphormer可以在不需要这些超节点的情况下实现类似的效果。</p>
+</li>
+<li><p><strong>事实2</strong>：这一事实强调了Graphormer中的自注意机制允许每个节点关注所有其他节点，从而模拟图级READOUT操作。这避免了其他方法中出现的过度平滑问题。</p>
+</li>
 </ul>
 </li>
-<li><p><strong>实践与理论的结合</strong>:</p>
+<li><p>思考和理解：</p>
+<p>通过transformer的编码处理， 可以让传统<code>GNN</code>的表示能力更强，能够表示并区分传统<code>GNN</code>无法区分和表示的内容， 常见的<code>GNN</code>都属于其变体。</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="GIN"><a href="#GIN" class="headerlink" title="GIN"></a>GIN</h2><p>[**How Powerful Are Graph Neural Networks?**](<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1810.00826.pdf">1810.00826.pdf (arxiv.org)</a>)</p>
+<hr>
+<blockquote>
 <ul>
-<li>除了实验验证 Graphormer 的有效性外，作者还从理论上证明了其强大的表达能力。这为进一步的研究提供了坚实的基础。</li>
+<li><p><strong>作者</strong>：Keyulu Xu, Weihua Hu, Jure Leskovec, Stefanie Jegelka</p>
+</li>
+<li><p><strong>发布日期</strong>：(2019)</p>
+</li>
+<li><p><strong>来源</strong>：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1810.00826.pdf">ICLR 2019</a></p>
+</li>
+<li><p><strong>摘要</strong>：</p>
+</li>
+</ul>
+<blockquote>
+<p>图神经网络 (GNNs) 是一种有效的图表示学习框架。GNNs 采用邻域聚合策略，通过递归地聚合和转换其邻域节点的表示向量来计算节点的表示向量。尽管许多 GNN 变体已经被提出并在节点和图分类任务上取得了最先进的结果，但对于 GNNs 的表示属性和局限性的理解仍然有限。本文提出了一个理论框架，用于分析 GNNs 捕获不同图结构的表达能力。结果表明，流行的 GNN 变体，如图卷积网络和 GraphSAGE，不能学习区分某些简单的图结构。然后，我们开发了一个简单的架构，它在 GNNs 类中具有最大的表达能力，并与 Weisfeiler-Lehman 图同构测试一样强大。我们在多个图分类基准上验证了我们的理论发现，并证明了我们的模型达到了最先进的性能。</p>
+</blockquote>
+<h4 id="前置说明："><a href="#前置说明：" class="headerlink" title="前置说明："></a>前置说明：</h4><ul>
+<li><p><strong>WeisfeilerLehman图同构检验</strong>:</p>
+</li>
+<li><p>许多不同的图神经网络变体已经被提出，这些变体具有不同的邻域聚合和图级池化方案。</p>
+</li>
+<li><p>图神经网络常见任务分类：</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<ol>
+<li><p><strong>节点分类 (Node Classification)</strong>:</p>
+<ul>
+<li><strong>定义</strong>：在图中，每个节点可能代表一个实体，节点分类的任务是为每个节点分配一个或多个类别标签。</li>
+<li><strong>应用示例</strong>：在社交网络中，节点可能代表个人，而节点分类的任务可能是预测每个人的兴趣或职业。</li>
+<li><strong>方法</strong>：GNNs通过聚合一个节点的邻居信息来学习节点的表示，这有助于预测节点的类别。</li>
 </ul>
 </li>
-<li><p><strong>未来方向</strong>:</p>
+<li><p><strong>链接预测 (Link Prediction)</strong>:</p>
 <ul>
-<li>虽然 Graphormer 在多个任务上都表现出色，但仍有可能进一步优化或扩展其功能。例如，可以考虑将更多的图特性或其他类型的编码引入模型中。</li>
+<li><strong>定义</strong>：链接预测的任务是预测图中是否应该存在两个节点之间的边。</li>
+<li><strong>应用示例</strong>：在推荐系统中，节点可能代表用户和物品，而链接预测的任务是预测用户是否会对某个物品感兴趣（即是否应该在用户和物品之间存在一个“链接”）。</li>
+<li><strong>方法</strong>：GNNs可以学习节点对之间的相似性或关系，从而预测它们之间是否应该有链接。</li>
+</ul>
+</li>
+<li><p><strong>图分类 (Graph Classification)</strong>:</p>
+<ul>
+<li><strong>定义</strong>：在这个任务中，整个图被赋予一个标签。与节点分类不同，图分类关注的是整个图的属性，而不仅仅是单个节点。</li>
+<li><strong>应用示例</strong>：在化学中，每个图可能代表一个分子，而图分类的任务可能是预测分子的某些属性，如它是否有毒。</li>
+<li><strong>方法</strong>：GNNs可以学习整个图的表示，通常通过池化所有节点的表示来实现，然后使用这个表示来预测图的类别。</li>
 </ul>
 </li>
 </ol>
-<p>总的来说，这篇论文为如何使用 Transformer 架构处理图数据提供了有价值的见解，并提出了一个有效的解决方案。这为未来的研究提供了一个很好的起点，并证明了 Transformer 架构在多种任务和数据类型上的潜力。</p>
 </blockquote>
-<hr>
+<p>- </p>
+<ol>
+<li><p><strong>WL测试的优势</strong>：WL测试的主要优势在于它的”单射聚合更新”能力，这使得它可以将不同的节点邻域映射到不同的特征向量。</p>
+<ul>
+<li>同构的定义：</li>
+</ul>
+<p><img src="/../images/image-20230902232431242.png" alt="image-20230902232431242"></p>
+</li>
+<li><p><strong>关于GNN的关键见解</strong>：如果一个GNN的聚合方式足够强大并能模拟单射函数，那么这个GNN就可以达到与WL测试相同的区分能力。</p>
 <blockquote>
-<h3 id="graphormer-相关论文"><a href="#graphormer-相关论文" class="headerlink" title="graphormer 相关论文"></a>graphormer 相关论文</h3></blockquote>
+<p>首先将给定节点的邻居的特征向量表示为一个多重集，即可能有重复元素的集合。然后，GNN中的邻居聚合可以被认为是对多重集的一个聚合函数。因此，为了具有强大的表示能力，GNN必须能够将不同的多重集聚合成不同的表示。</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>AGGERATE, 汇聚：（GraphSAGE）</li>
+</ul>
+<p>$$<br>a_v^{(k)}&#x3D;\operatorname{MAX}\left(\left{\operatorname{ReLU}\left(W \cdot h_u^{(k-1)}\right), \forall u \in \mathcal{N}(v)\right}\right)<br>$$</p>
+<blockquote>
+<ul>
+<li>对于节点 $\mathrm{v}$ 的每个邻居 $\mathrm{u}$ ，我们首先取其在第 $\mathrm{k}-1$ 轮的特征向量 $h_u^{(k-1)}$ 。</li>
+<li>然后，我们使用权重矩阵W对这个特征向量进行线性变换，并应用ReLU激活函数。</li>
+<li>最后，我们从所有邻居 $\mathrm{u}$ 得到的值中取最大值，得到节点 $\mathrm{v}$ 在第 $\mathrm{k}$ 轮的聚合特征 $a_v^{(k)}$ 。<br>这种操作可以被视为一种特殊的邻居信息聚合策略，其中节点 $v$ 在第 $k$ 轮的特征是基于其所有 邻居在第 $k-1$ 轮的特征的最大激活值得到的。</li>
+</ul>
+</blockquote>
+<ul>
+<li>AGGREGATE and COMBINE 步骤综合在一起（GCN， 图卷积神经网络）：</li>
+</ul>
+<p>$$<br>h_v^{(k)}&#x3D;\operatorname{ReLU}\left(W \cdot \operatorname{MEAN}\left{h_u^{(k-1)}, \forall u \in \mathcal{N}(v) \cup{v}\right}\right) .<br>$$</p>
+<blockquote>
+<ul>
+<li>对于节点 $\mathrm{v}$ ，我们考虑其所有邻居 $\mathrm{u}$ 的特征向量 $h_u^{(k-1)}$ ，以及节点 $\mathrm{v}$ 自己在第 $\mathrm{k}-$ 轮的特征向 量。</li>
+<li>接着，我们计算这些特征向量的平均值。这是通过MEAN操作完成的。</li>
+<li>然后，我们使用权重矩阵W对这个平均值进行线性变换，并应用ReLU激活函数。</li>
+<li>最后，得到的结果是节点 $\mathrm{v}$ 在第 $\mathrm{k}$ 轮的特征向量 $h_v^{(k)}$ 。<br>这种操作是一种邻居信息聚合策略，其中节点 $v$ 在第 $k$ 轮的特征是基于其所有邻居以及其自身 在第 $k-1$ 轮的特征的平均值得到的。这种策略有助于捕捉节点 $v 及$ 其邻居的整体特征或模式。</li>
+</ul>
+</blockquote>
+<p><strong>How Powerful Are Graph Neural Networks?:</strong></p>
+<ul>
+<li><p><strong>背景</strong>：图结构数据的学习，如分子、社交、生物和金融网络，需要有效地表示其图结构。近年来，图神经网络 (GNN) 在图的表示学习中引起了广泛的关注。</p>
+</li>
+<li><p><strong>主要贡献</strong>：本文提出了一个理论框架，用于分析 GNNs 的表达能力，以捕获和区分不同的图结构。</p>
+</li>
+<li><p><strong>方法</strong>：该方法受到 GNNs 和 Weisfeiler-Lehman (WL) 图同构测试之间的紧密联系的启发。与 GNNs 类似，WL 测试通过聚合节点及其网络邻居的特征向量来迭代地更新给定节点的特征向量。</p>
+</li>
+<li><p><strong>实验</strong>：作者在图分类数据集上验证了他们的理论，其中 GNNs 的表达能力对于捕获图结构至关重要。实验结果证实，从理论上讲，最强大的 GNN，即图同构网络 (GIN)，在实践中也具有高度的表示能力。</p>
+</li>
+<li></li>
+</ul>
+</blockquote>
+<blockquote>
+<h3 id="论文阅读-1"><a href="#论文阅读-1" class="headerlink" title="论文阅读"></a>论文阅读</h3><ol>
+<li><p><strong>背景与动机</strong>:</p>
+<ul>
+<li>图神经网络 (GNNs) 是图表示学习的有效框架。GNNs 采用邻域聚合方案，通过递归地聚合和转换其邻近节点的表示向量来计算节点的表示向量。尽管许多 GNN 变体已经被提出并在节点和图分类任务上取得了最先进的结果，但对于 GNNs 的表示属性和局限性的理解仍然有限。本文提出了一个理论框架，用于分析 GNNs 捕获不同图结构的表现力。</li>
+</ul>
+</li>
+<li><p><strong>模型网络框架</strong>:</p>
+<ul>
+<li><img src="/../images/image-20230903100035168.png" alt="image-20230903100035168"></li>
+</ul>
+</li>
+<li><p><strong>结构与编码</strong>:</p>
+<ul>
+<li>作者首先将给定节点的邻居的特征向量集表示为多集，即可能重复元素的集合。然后，GNNs 中的邻居聚合可以被认为是一个多集上的聚合函数。为了具有强大的表示能力，GNN 必须能够将不同的多集聚合为不同的表示。</li>
+</ul>
+</li>
+<li><p><strong>实验结果与分析</strong>:</p>
+<blockquote>
+<p><strong>实验部分笔记</strong>：</p>
+<ol>
+<li><strong>目的</strong>：<ul>
+<li>评估和比较图同构网络（GIN）及其其他图神经网络（GNN）变体的训练和测试性能。</li>
+</ul>
+</li>
+<li><strong>数据集</strong>：<ul>
+<li>使用了9个图分类基准。</li>
+<li>包括4个生物信息学数据集：MUTAG、PTC、NCI1、PROTEINS。</li>
+<li>5个社交网络数据集：COLLAB、IMDB-BINARY、IMDB-MULTI、REDDIT-BINARY、REDDIT-MULTI5K。</li>
+<li>主要目标是从网络结构中学习，而不是依赖于输入节点特征。</li>
+</ul>
+</li>
+<li><strong>模型配置</strong>：<ul>
+<li>评估了 GINs 和其他较弱的 GNN 变体。</li>
+<li>GIN 有两个变体：GIN-ε（通过梯度下降学习）和 GIN-0（ε固定为0）。</li>
+<li>对于其他 GNN 变体，考虑了替换聚合中的求和为平均或最大池化，或用1层感知器替换多层感知器。</li>
+</ul>
+</li>
+<li><strong>评估方法</strong>：<ul>
+<li>使用10折交叉验证。</li>
+<li>使用了 LIB-SVM 进行验证。</li>
+<li>报告了10折交叉验证中的平均验证准确性和标准差。</li>
+</ul>
+</li>
+<li><strong>实验设置</strong>：<ul>
+<li>所有配置都应用了5个 GNN 层。</li>
+<li>所有多层感知器（MLPs）有2层。</li>
+<li>使用 Adam 优化器，初始学习率为0.01。</li>
+<li>超参数包括隐藏单元数、批大小、dropout 比率和时代数。</li>
+</ul>
+</li>
+<li><strong>基线比较</strong>：<ul>
+<li>使用了其他的图分类方法作为基线进行比较。</li>
+<li>包括 WL 子树核、扩散-卷积神经网络（DCNN）、PATCHY-SAN、Deep Graph CNN（DGCNN）和匿名行走嵌入（AWL）。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<ul>
+<li>模型训练：</li>
+</ul>
+<p><img src="/../images/image-20230903134239623.png" alt="image-20230903134239623"></p>
+<ul>
+<li><p>实验结果：</p>
+<p><img src="/../images/image-20230903134304843.png" alt="image-20230903134304843"></p>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h1 id="baseline-模型总结"><a href="#baseline-模型总结" class="headerlink" title="baseline 模型总结"></a>baseline 模型总结</h1><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>说明</th>
+<th>参考文献</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>WL subtree kernel</td>
+<td>使用C-SVM作为分类器的WL子树内核。调整的超参数包括SVM的C和WL迭代的次数。</td>
+<td>Shervashidze et al., 2011; Chang &amp; Lin, 2011</td>
+</tr>
+<tr>
+<td>DCNN</td>
+<td>Diffusion-convolutional neural networks</td>
+<td>Atwood &amp; Towsley, 2016</td>
+</tr>
+<tr>
+<td>PATCHY-SAN</td>
+<td>一种深度学习架构</td>
+<td>Niepert et al., 2016</td>
+</tr>
+<tr>
+<td>DGCNN</td>
+<td>Deep Graph CNN</td>
+<td>Zhang et al., 2018</td>
+</tr>
+<tr>
+<td>AWL</td>
+<td>Anonymous Walk Embeddings</td>
+<td>Ivanov &amp; Burnaev, 2018</td>
+</tr>
+</tbody></table>
+<h1 id="数据集和任务说明"><a href="#数据集和任务说明" class="headerlink" title="数据集和任务说明"></a>数据集和任务说明</h1><table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>说明</th>
+<th>任务</th>
+<th>参考链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IMDB-BINARY</td>
+<td>电影合作数据集。每个图对应一个演员的自我网络，节点对应演员，如果他们出现在同一部电影中则有一条边。</td>
+<td>对其来源的电影类型进行分类</td>
+<td>Yanardag &amp; Vishwanathan, 2015</td>
+</tr>
+<tr>
+<td>IMDB-MULTI</td>
+<td>与IMDB-BINARY类似，但涉及多种电影类型。</td>
+<td>对其来源的电影类型进行分类</td>
+<td>Yanardag &amp; Vishwanathan, 2015</td>
+</tr>
+<tr>
+<td>REDDIT-BINARY</td>
+<td>每个图对应一个在线讨论线程，节点对应用户。如果其中一个回应了另一个的评论，则两个节点之间有一条边。</td>
+<td>对每个图进行分类，属于哪个社区或子reddit</td>
+<td>Yanardag &amp; Vishwanathan, 2015</td>
+</tr>
+<tr>
+<td>REDDIT-MULTI5K</td>
+<td>与REDDIT-BINARY类似，但涉及多个社区或子reddit。</td>
+<td>对每个图进行分类，属于哪个社区或子reddit</td>
+<td>Yanardag &amp; Vishwanathan, 2015</td>
+</tr>
+<tr>
+<td>COLLAB</td>
+<td>科学合作数据集，来源于3个公共合作数据集：高能物理、冷凝物质物理和天体物理。</td>
+<td>对每个图进行分类，属于哪个研究领域</td>
+<td>Yanardag &amp; Vishwanathan, 2015</td>
+</tr>
+<tr>
+<td>MUTAG</td>
+<td>188种致突变的芳香和杂环硝基化合物数据集，有7个离散标签。</td>
+<td>化学物质分类</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PROTEINS</td>
+<td>节点是二级结构元素（SSEs），如果它们在氨基酸序列或3D空间中是邻居，则两个节点之间有一条边。有3个离散标签。</td>
+<td>蛋白质结构分类</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PTC</td>
+<td>344种化学化合物的数据集，报告了雄性和雌性大鼠的致癌性，有19个离散标签。</td>
+<td>化学物质分类</td>
+<td>-</td>
+</tr>
+<tr>
+<td>NCI1</td>
+<td>由国家癌症研究所（NCI）公开提供的数据集，是化学化合物的一个子集，这些化学化合物被筛选出来用于抑制或抑制人类肿瘤细胞系的生长。</td>
+<td>化学物质分类</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<blockquote>
+<h3 id="思考与分析"><a href="#思考与分析" class="headerlink" title="思考与分析"></a>思考与分析</h3><ol>
+<li><p><strong>GNNs 的理论分析</strong>:</p>
+<ul>
+<li>本文提供了对 GNNs 表现力的深入理论分析，揭示了其与 WL 图同构测试之间的紧密联系。主要说明了，一个具有好的表示(<strong>优秀的分类能力</strong>)的GNN是<code>单射的</code>， 也就是说，它不会将不相同的图编码成相同的向量，如果两个图是同构的，那么其编码得到的向量一定是相同的。 其通过将一个节点的临近节点考虑成为一个可以带有重复元素的集合来实现。<ul>
+<li><strong>同构的图被编码成相同的Tensor</strong></li>
+<li><strong>不同构的图被编码成不同的Tensor</strong></li>
+<li><strong>if the neighbor aggregation and graph-level readout functions are injective, then<br>the resulting GNN is as powerful as the WL test.</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>实践与理论的结合</strong>:</p>
 <table>
+<thead>
+<tr>
+<th align="center">项目&#x2F;模型</th>
+<th align="center">一般的GNN</th>
+<th align="center">GIN</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">公式</td>
+<td align="center">$$ h_v^{(l+1)} &#x3D; \sigma \left( W^{(l)} \cdot \text{AGGREGATE}^{(l)}\left( { h_u^{(l)} : u \in \mathcal{N}(v) } \right) \right) $$</td>
+<td align="center">$$ h_v^{(k)}&#x3D;\phi\left(h_v^{(k-1)}, f\left(\left{h_u^{(k-1)}: u \in \mathcal{N}(v)\right}\right)\right) $$</td>
+</tr>
+<tr>
+<td align="center">聚合方式</td>
+<td align="center">使用AGGREGATE函数聚合邻居的信息</td>
+<td align="center">聚合函数 $ f $ 直接对邻居的特征进行求和</td>
+</tr>
+<tr>
+<td align="center">考虑节点自身特征</td>
+<td align="center">不直接考虑</td>
+<td align="center">通过更新函数$ \phi $ 明确地考虑了节点自身的特征</td>
+</tr>
+<tr>
+<td align="center">说明</td>
+<td align="center">一般的GNN主要依赖于邻居的特征聚合来更新节点的特征</td>
+<td align="center">GIN则通过更新函数 $\phi $ 同时考虑了节点自身的特征和其邻居的特征</td>
+</tr>
+</tbody></table>
+<p>其中$\phi$函数可以用一般的<code>MLP</code>表示，或者用<code>1-LAYER</code>来表示：<br>$$<br>h_v^{(k)}&#x3D;\operatorname{MLP}^{(k)}\left(\left(1+\epsilon^{(k)}\right) \cdot h_v^{(k-1)}+\sum_{u \in \mathcal{N}(v)} h_u^{(k-1)}\right)<br>$$</p>
+<h1 id="本文总结-1"><a href="#本文总结-1" class="headerlink" title="本文总结"></a>本文总结</h1><p>本文收到<code>WL</code>图同构测试算法的启发， 提出一个好的<code>GNN</code>神经网络应该具有以下的特征， 量化了对于一个图神经网络的表示性的好坏在数学上的表示：</p>
+<ul>
+<li><strong>同构的图被编码成相同的Tensor</strong></li>
+<li><strong>不同构的图被编码成不同的Tensor</strong></li>
+<li><strong>if the neighbor aggregation and graph-level readout functions are injective, then<br>the resulting GNN is as powerful as the WL test.</strong></li>
+</ul>
+<p>本文主要是通过修改对于每个<code>Vertex</code>的表征手段来实现的， 通过构建<code>\phi</code>函数，考虑临近节点和自身来构建表示。</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="graphormer-相关论文"><a href="#graphormer-相关论文" class="headerlink" title="graphormer 相关论文"></a>graphormer 相关论文</h2><table>
 <thead>
 <tr>
 <th>论文名称</th>
@@ -737,7 +1003,7 @@ bash zinc.sh
 </ul>
 </blockquote>
 <blockquote>
-<h3 id="论文阅读-1"><a href="#论文阅读-1" class="headerlink" title="论文阅读"></a>论文阅读</h3><ol>
+<h3 id="论文阅读-2"><a href="#论文阅读-2" class="headerlink" title="论文阅读"></a>论文阅读</h3><ol>
 <li><strong>背景与动机</strong>:<ul>
 <li>从单张图片中重建3D人体姿势和网格是一个热门的研究话题。由于复杂的身体关节，这是一个具有挑战性的任务。近期，变压器和图卷积神经网络（GCNNs）在人体网格重建中都显示出了很好的进展。</li>
 </ul>
@@ -807,7 +1073,7 @@ bash zinc.sh
 </li>
 </ul>
 </blockquote>
-<h3 id="论文阅读-2"><a href="#论文阅读-2" class="headerlink" title="论文阅读"></a>论文阅读</h3><blockquote>
+<h3 id="论文阅读-3"><a href="#论文阅读-3" class="headerlink" title="论文阅读"></a>论文阅读</h3><blockquote>
 <ol>
 <li><strong>背景与动机</strong>:</li>
 </ol>
@@ -879,7 +1145,7 @@ bash zinc.sh
 </ul>
 </blockquote>
 <blockquote>
-<h3 id="论文阅读-3"><a href="#论文阅读-3" class="headerlink" title="论文阅读"></a>论文阅读</h3><ol>
+<h3 id="论文阅读-4"><a href="#论文阅读-4" class="headerlink" title="论文阅读"></a>论文阅读</h3><ol>
 <li><p><strong>背景与动机</strong>:</p>
 <ul>
 <li>该论文提出了一个基于Transformer的新颖框架，用于从多视角RGB图像重建两只高保真的手。与现有的手部姿势估计方法不同，该方法考虑了一个更具挑战性的问题设置，即直接从自我中心视图中回归两只手的绝对根姿势。为了使重建物理上合理，作者提出了两种策略：一种是粗到细的光谱图卷积解码器，用于在上采样过程中平滑网格；另一种是在推理阶段的优化基础上的细化阶段，以防止自穿透。</li>
@@ -952,82 +1218,315 @@ bash zinc.sh
 <td>证明了Transformer架构在处理如两只手的重建这样的复杂任务中的适应性，以及多视角融合的重要性。</td>
 </tr>
 </tbody></table>
-<h2 id="GIN"><a href="#GIN" class="headerlink" title="GIN"></a>GIN</h2><p>[**How Powerful Are Graph Neural Networks?**](<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1810.00826.pdf">1810.00826.pdf (arxiv.org)</a>)</p>
-<hr>
-<blockquote>
+<h2 id="Graphormer-代码阅读与使用"><a href="#Graphormer-代码阅读与使用" class="headerlink" title="Graphormer 代码阅读与使用"></a>Graphormer 代码阅读与使用</h2><blockquote>
 <ul>
-<li><p><strong>作者</strong>：Keyulu Xu, Weihua Hu, Jure Leskovec, Stefanie Jegelka</p>
+<li><p>Graphormer结构：</p>
+<p>encoder示意图：</p>
+<pre><code class="mermaid">graph TD
+    A[Input: batched_data] --&gt; B[GraphNodeFeature]
+    A --&gt; C[GraphAttnBias]
+    B --&gt; D[Token Embeddings]
+    D --&gt; E[Optional: Perturb]
+    E --&gt; F[Embed Scale]
+    F --&gt; G[Quant Noise]
+    G --&gt; H[Emb Layer Norm]
+    H --&gt; I[Dropout]
+    I --&gt; J[Transpose]
+    J --&gt; K[GraphormerGraphEncoderLayer]
+    K --&gt; L[Graph Representation]
+    L --&gt; M[Output: inner_states, graph_rep]
+    
+    style A fill:#f9d,stroke:#333,stroke-width:2px
+    style M fill:#f9d,stroke:#333,stroke-width:2px
+    
+</code></pre>
+<p>在前向传播过程中的结构：</p>
+<pre><code class="mermaid">graph TD
+    A[Input: batched_data] --&gt; B[Compute Padding Mask]
+    B --&gt; C[Token Embeddings]
+    C --&gt; D[Optional: Perturb]
+    D --&gt; E[GraphAttnBias]
+    E --&gt; F[Embed Scale]
+    F --&gt; G[Quant Noise]
+    G --&gt; H[Emb Layer Norm]
+    H --&gt; I[Dropout]
+    I --&gt; J[Transpose]
+    J --&gt; K1[GraphormerGraphEncoderLayer 1]
+    K1 --&gt; K2[GraphormerGraphEncoderLayer 2]
+    ...
+    Kn[GraphormerGraphEncoderLayer n] --&gt; L[Graph Representation]
+    L --&gt; M[Output: inner_states, graph_rep]
+    
+    style A fill:#f9d,stroke:#333,stroke-width:2px
+    style M fill:#f9d,stroke:#333,stroke-width:2px
+    
+</code></pre>
+<ul>
+<li><h3 id="GraphNodeFeature"><a href="#GraphNodeFeature" class="headerlink" title="GraphNodeFeature"></a>GraphNodeFeature</h3></li>
+</ul>
+<pre><code class="mermaid">graph TD
+    A[Input: batched_data] --&gt; B[Extract x, in_degree, out_degree]
+    B --&gt; C1[Atom Encoder]
+    B --&gt; C2[In Degree Encoder]
+    B --&gt; C3[Out Degree Encoder]
+    C1 --&gt; D[Node Feature]
+    C2 --&gt; D
+    C3 --&gt; D
+    E[Graph Token] --&gt; D
+    D --&gt; F[Concatenate Graph Token Feature]
+    F --&gt; G[Output: graph_node_feature]
+
+    style A fill:#f9d,stroke:#333,stroke-width:2px
+    style G fill:#f9d,stroke:#333,stroke-width:2px
+</code></pre>
+<ul>
+<li>GraphAttnBias</li>
+</ul>
+<pre><code class="mermaid">graph TD
+    A[Input: batched_data] --&gt; B[Extract attn_bias, spatial_pos, x, edge_input, attn_edge_type]
+    B --&gt; C1[Spatial Pos Encoder]
+    B --&gt; C2[Graph Token Virtual Distance]
+    C1 --&gt; D[Spatial Pos Bias]
+    C2 --&gt; D
+    B --&gt; E1[Edge Encoder]
+    E1 --&gt; F[Edge Input]
+    B --&gt; E2[Edge Dis Encoder]
+    E2 --&gt; F
+    F --&gt; G[Edge Input Processing]
+    G --&gt; H[Combine Spatial Pos Bias and Edge Input]
+    H --&gt; I[Output: graph_attn_bias]
+
+    style A fill:#f9d,stroke:#333,stroke-width:2px
+    style I fill:#f9d,stroke:#333,stroke-width:2px
+</code></pre>
 </li>
-<li><p><strong>发布日期</strong>：(2019)</p>
-</li>
-<li><p><strong>来源</strong>：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1810.00826.pdf">arXiv:1810.00826v3</a></p>
-</li>
-<li><p><strong>摘要</strong>：</p>
+<li><p>安装</p>
 </li>
 </ul>
-<blockquote>
-<p>图神经网络 (GNNs) 是一种有效的图表示学习框架。GNNs 采用邻域聚合策略，通过递归地聚合和转换其邻域节点的表示向量来计算节点的表示向量。尽管许多 GNN 变体已经被提出并在节点和图分类任务上取得了最先进的结果，但对于 GNNs 的表示属性和局限性的理解仍然有限。本文提出了一个理论框架，用于分析 GNNs 捕获不同图结构的表达能力。结果表明，流行的 GNN 变体，如图卷积网络和 GraphSAGE，不能学习区分某些简单的图结构。然后，我们开发了一个简单的架构，它在 GNNs 类中具有最大的表达能力，并与 Weisfeiler-Lehman 图同构测试一样强大。我们在多个图分类基准上验证了我们的理论发现，并证明了我们的模型达到了最先进的性能。</p>
+<pre><code>conda create -n graphormer python=3.9
+conda activate graphormer、
+git clone --recursive https://github.com/microsoft/Graphormer.git
+cd Graphormer
+bash install.sh
+</code></pre>
+<ul>
+<li>示例使用</li>
+</ul>
+<pre><code class="bash">cd examples/property_prediction/
+bash zinc.sh
+</code></pre>
+<p>其中<code>zinc.sh</code>内容为：</p>
+<pre><code class="bash">CUDA_VISIBLE_DEVICES=0 fairseq-train \
+    --user-dir ../../graphormer \
+    --num-workers 16 \
+    --ddp-backend=legacy_ddp \
+    --dataset-name zinc \
+    --dataset-source pyg \
+    --task graph_prediction \
+    --criterion l1_loss \
+    --arch graphormer_slim \
+    --num-classes 1 \
+    --attention-dropout 0.1 --act-dropout 0.1 --dropout 0.0 \
+    --optimizer adam --adam-betas &#39;(0.9, 0.999)&#39; --adam-eps 1e-8 --clip-norm 5.0 --weight-decay 0.01 \
+    --lr-scheduler polynomial_decay --power 1 --warmup-updates 60000 --total-num-update 400000 \
+    --lr 2e-4 --end-learning-rate 1e-9 \
+    --batch-size 64 \
+    --fp16 \
+    --data-buffer-size 20 \
+    --encoder-layers 12 \
+    --encoder-embed-dim 80 \
+    --encoder-ffn-embed-dim 80 \
+    --encoder-attention-heads 8 \
+    --max-epoch 10000 \
+    --save-dir ./ckpts
+</code></pre>
+<ul>
+<li>验证效果</li>
+</ul>
+<pre><code class="bash">python evaluate.py \
+    --user-dir ../../graphormer \
+    --num-workers 16 \
+    --ddp-backend=legacy_ddp \
+    --dataset-name pcqm4m \
+    --dataset-source ogb \
+    --task graph_prediction \
+    --criterion l1_loss \
+    --arch graphormer_base \
+    --num-classes 1 \
+    --batch-size 64 \
+    --pretrained-model-name pcqm4mv1_graphormer_base \
+    --load-pretrained-model-output-layer \
+    --split valid \
+    --seed 1
+</code></pre>
 </blockquote>
-<h4 id="前置说明："><a href="#前置说明：" class="headerlink" title="前置说明："></a>前置说明：</h4><p><strong>How Powerful Are Graph Neural Networks?:</strong></p>
-<ul>
-<li><p><strong>背景</strong>：图结构数据的学习，如分子、社交、生物和金融网络，需要有效地表示其图结构。近年来，图神经网络 (GNN) 在图的表示学习中引起了广泛的关注。</p>
-</li>
-<li><p><strong>主要贡献</strong>：本文提出了一个理论框架，用于分析 GNNs 的表达能力，以捕获和区分不同的图结构。</p>
-</li>
-<li><p><strong>方法</strong>：该方法受到 GNNs 和 Weisfeiler-Lehman (WL) 图同构测试之间的紧密联系的启发。与 GNNs 类似，WL 测试通过聚合节点及其网络邻居的特征向量来迭代地更新给定节点的特征向量。</p>
-</li>
-<li><p><strong>实验</strong>：作者在图分类数据集上验证了他们的理论，其中 GNNs 的表达能力对于捕获图结构至关重要。实验结果证实，从理论上讲，最强大的 GNN，即图同构网络 (GIN)，在实践中也具有高度的表示能力。</p>
-</li>
-</ul>
-</blockquote>
-<blockquote>
-<h3 id="论文阅读-4"><a href="#论文阅读-4" class="headerlink" title="论文阅读"></a>论文阅读</h3><ol>
-<li><p><strong>背景与动机</strong>:</p>
-<ul>
-<li>图神经网络 (GNNs) 是图表示学习的有效框架。GNNs 采用邻域聚合方案，通过递归地聚合和转换其邻近节点的表示向量来计算节点的表示向量。尽管许多 GNN 变体已经被提出并在节点和图分类任务上取得了最先进的结果，但对于 GNNs 的表示属性和局限性的理解仍然有限。本文提出了一个理论框架，用于分析 GNNs 捕获不同图结构的表现力。</li>
-</ul>
-</li>
-<li><p><strong>GNNs 的表现力</strong>:</p>
-<ul>
-<li>作者提出了一个理论框架，用于分析 GNNs 的表示能力。他们正式地描述了不同的 GNN 变体在学习表示和区分不同图结构方面的表现力。该框架受到 GNNs 和 Weisfeiler-Lehman (WL) 图同构测试之间的紧密联系的启发。与 GNNs 类似，WL 测试通过聚合其网络邻居的特征向量来迭代地更新给定节点的特征向量。作者的关键洞察是，如果 GNN 的聚合方案具有高度的表现力并且可以模拟可注入的函数，那么 GNN 可以具有与 WL 测试一样大的区分能力。</li>
-</ul>
-</li>
-<li><p><strong>结构与编码</strong>:</p>
-<ul>
-<li>作者首先将给定节点的邻居的特征向量集表示为多集，即可能重复元素的集合。然后，GNNs 中的邻居聚合可以被认为是一个多集上的聚合函数。为了具有强大的表示能力，GNN 必须能够将不同的多集聚合为不同的表示。</li>
-</ul>
-</li>
-<li><p><strong>实验结果与分析</strong>:</p>
-<ul>
-<li>作者在图分类数据集上验证了他们的理论，其中 GNNs 的表现力对于捕获图结构至关重要。特别是，他们比较了具有不同聚合功能的 GNNs 的性能。结果证实，根据我们的理论，最强大的 GNN（即图同构网络 GIN）在实验上也具有很高的表示能力，而较弱的 GNN 变体经常严重地不适合训练数据。此外，在表示上更强大的 GNNs 在测试集准确性上超过了其他方法，并在许多图分类基准上实现了最先进的性能。</li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<blockquote>
-<h3 id="思考与分析-4"><a href="#思考与分析-4" class="headerlink" title="思考与分析"></a>思考与分析</h3><ol>
-<li><p><strong>GNNs 的理论分析</strong>:</p>
-<ul>
-<li>本文提供了对 GNNs 表现力的深入理论分析，揭示了其与 WL 图同构测试之间的紧密联系。这种理论分析为 GNNs 的研究提供了坚实的基础。</li>
-</ul>
-</li>
-<li><p><strong>区分图结构的能力</strong>:</p>
-<ul>
-<li>作者明确地描述了 GNNs 的区分能力，即它们能够区分哪些图结构，以及它们可能无法区分的图结构。</li>
-</ul>
-</li>
-<li><p><strong>实践与理论的结合</strong>:</p>
-<ul>
-<li>除了提供理论框架外，作者还通过实验验证了他们的理论发现，展示了不同 GNN 变体在实际任务上的性能。</li>
-</ul>
-</li>
-<li><p><strong>未来方向</strong>:</p>
-<ul>
-<li>虽然本文为 GNNs 的研究提供了深入的理论见解，但仍然存在进一步探索 GNNs 的潜在能力和局限性的可能性。</li>
-</ul>
-</li>
-</ol>
-</blockquote>
+<h2 id="Baseline-模型总结"><a href="#Baseline-模型总结" class="headerlink" title="Baseline 模型总结"></a>Baseline 模型总结</h2><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>说明</th>
+<th>参考文献</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GCN</td>
+<td>经典的图神经网络模型</td>
+<td>[26]</td>
+</tr>
+<tr>
+<td>GIN</td>
+<td>流行的图神经网络模型</td>
+<td>[54]</td>
+</tr>
+<tr>
+<td>GCN-VN</td>
+<td>GCN的虚拟节点版本</td>
+<td>[15]</td>
+</tr>
+<tr>
+<td>GIN-VN</td>
+<td>GIN的虚拟节点版本</td>
+<td>[15]</td>
+</tr>
+<tr>
+<td>GIN的多跳变体</td>
+<td>考虑了多跳的信息的GIN变种</td>
+<td>[5]</td>
+</tr>
+<tr>
+<td>DeeperGCN</td>
+<td>12层深的图神经网络模型</td>
+<td>[30]</td>
+</tr>
+<tr>
+<td>GT</td>
+<td>基于Transformer的图模型</td>
+<td>[13]</td>
+</tr>
+<tr>
+<td>Graphormer</td>
+<td>作者提出的模型，大小为(L &#x3D; 12, d &#x3D; 768)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>GraphormerS MALL</td>
+<td>作者提出的较小版本模型，大小为(L &#x3D; 6, d &#x3D; 512)</td>
+<td>-</td>
+</tr>
+<tr>
+<td>WL subtree kernel</td>
+<td>使用C-SVM作为分类器的WL子树内核。调整的超参数包括SVM的C和WL迭代的次数。</td>
+<td>Shervashidze et al., 2011; Chang &amp; Lin, 2011</td>
+</tr>
+<tr>
+<td>DCNN</td>
+<td>Diffusion-convolutional neural networks</td>
+<td>Atwood &amp; Towsley, 2016</td>
+</tr>
+<tr>
+<td>PATCHY-SAN</td>
+<td>一种深度学习架构</td>
+<td>Niepert et al., 2016</td>
+</tr>
+<tr>
+<td>DGCNN</td>
+<td>Deep Graph CNN</td>
+<td>Zhang et al., 2018</td>
+</tr>
+<tr>
+<td>AWL</td>
+<td>Anonymous Walk Embeddings</td>
+<td>Ivanov &amp; Burnaev, 2018</td>
+</tr>
+</tbody></table>
+<h2 id="数据集和任务说明-1"><a href="#数据集和任务说明-1" class="headerlink" title="数据集和任务说明"></a>数据集和任务说明</h2><table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>说明</th>
+<th>任务</th>
+<th>参考链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PCQM4M-LSC</td>
+<td>来自OGB Large-Scale Challenge的量子化学回归数据集，包含超过3.8M的图。</td>
+<td>回归</td>
+<td><a target="_blank" rel="noopener" href="https://ogb.stanford.edu/kddcup2021/">OGB-LSC</a></td>
+</tr>
+<tr>
+<td>OGBG-MolPCBA</td>
+<td>OGB的一个数据集，用于分子预测。</td>
+<td>二元分类</td>
+<td><a target="_blank" rel="noopener" href="https://ogb.stanford.edu/">OGB</a></td>
+</tr>
+<tr>
+<td>OGBG-MolHIV</td>
+<td>OGB的一个数据集，用于HIV活性预测。</td>
+<td>二元分类</td>
+<td><a target="_blank" rel="noopener" href="https://ogb.stanford.edu/">OGB</a></td>
+</tr>
+<tr>
+<td>ZINC (sub-set)</td>
+<td>一个用于分子属性预测的数据集的子集。</td>
+<td>回归</td>
+<td>-</td>
+</tr>
+<tr>
+<td>IMDB-BINARY</td>
+<td>电影合作数据集。每个图对应一个演员的自我网络，节点对应演员，如果他们出现在同一部电影中则有一条边。</td>
+<td>对其来源的电影类型进行分类</td>
+<td>Yanardag &amp; Vishwanathan, 2015</td>
+</tr>
+<tr>
+<td>IMDB-MULTI</td>
+<td>与IMDB-BINARY类似，但涉及多种电影类型。</td>
+<td>对其来源的电影类型进行分类</td>
+<td>Yanardag &amp; Vishwanathan, 2015</td>
+</tr>
+<tr>
+<td>REDDIT-BINARY</td>
+<td>每个图对应一个在线讨论线程，节点对应用户。如果其中一个回应了另一个的评论，则两个节点之间有一条边。</td>
+<td>对每个图进行分类，属于哪个社区或子reddit</td>
+<td>Yanardag &amp; Vishwanathan, 2015</td>
+</tr>
+<tr>
+<td>REDDIT-MULTI5K</td>
+<td>与REDDIT-BINARY类似，但涉及多个社区或子reddit。</td>
+<td>对每个图进行分类，属于哪个社区或子reddit</td>
+<td>Yanardag &amp; Vishwanathan, 2015</td>
+</tr>
+<tr>
+<td>COLLAB</td>
+<td>科学合作数据集，来源于3个公共合作数据集：高能物理、冷凝物质物理和天体物理。</td>
+<td>对每个图进行分类，属于哪个研究领域</td>
+<td>Yanardag &amp; Vishwanathan, 2015</td>
+</tr>
+<tr>
+<td>MUTAG</td>
+<td>188种致突变的芳香和杂环硝基化合物数据集，有7个离散标签。</td>
+<td>化学物质分类</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PROTEINS</td>
+<td>节点是二级结构元素（SSEs），如果它们在氨基酸序列或3D空间中是邻居，则两个节点之间有一条边。有3个离散标签。</td>
+<td>蛋白质结构分类</td>
+<td>-</td>
+</tr>
+<tr>
+<td>PTC</td>
+<td>344种化学化合物的数据集，报告了雄性和雌性大鼠的致癌性，有19个离散标签。</td>
+<td>化学物质分类</td>
+<td>-</td>
+</tr>
+<tr>
+<td>NCI1</td>
+<td>由国家癌症研究所（NCI）公开提供的数据集，是化学化合物的一个子集，这些化学化合物被筛选出来用于抑制或抑制人类肿瘤细胞系的生长。</td>
+<td>化学物质分类</td>
+<td>-</td>
+</tr>
+</tbody></table>
 
     </div>
     

@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>Random-Process-Course-Notes | LinkedList&#39;s Blog</title>
+        <meta name="author" content="Ding Li" />
+        <meta name="description" content="This is blog for Linkedlist771, mainly record some learning notes, thank you for your visit!" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/favicon.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.staticfile.org/waline/2.14.8/waline.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.14.8/waline.min.css" />
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.14.8/waline-meta.min.css" />
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>LINKEDLIST&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LINKEDLIST&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1>Random-Process-Course-Notes</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/9/13
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Random-Process/" style="color: #00a596">Random-Process</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <blockquote>
+<p>This blog records how I learn the random process in the UCAS.</p>
+</blockquote>
+<span id="more"></span>
+
+
+
+<h2 id="Course-Link"><a href="#Course-Link" class="headerlink" title="Course  Link"></a>Course  Link</h2><p><a target="_blank" rel="noopener" href="https://course.ucas.ac.cn/portal/site/246489">Course : 随机过程（电子与通信类）二班23-24秋季 : 主页 (ucas.ac.cn)</a></p>
+<h2 id="Random-Process-and-its-classification"><a href="#Random-Process-and-its-classification" class="headerlink" title="Random Process and its classification"></a>Random Process and its classification</h2><blockquote>
+<p><strong>Random Process Definition:</strong></p>
+<p>A random process, also known as a stochastic process, is a collection of random variables indexed by a set, often representing time or space. Mathematically, a random process {X(t), t ∈ T} is defined as a family of random variables {X(t), t ∈ T} defined on a probability space (Ω, F, P), </p>
+<p>where: </p>
+<ul>
+<li><strong>X(t)</strong>: is a random variable at index t </li>
+<li><strong>t</strong>: belongs to an indexing set T </li>
+<li><strong>Ω</strong>: is the sample space </li>
+<li><strong>F</strong>: is the σ-algebra of events - <strong>P</strong>: is the probability measure</li>
+</ul>
+<p>$$<br>A\times B(卡氏积的定义) &#x3D; {(a,b)|a\in A, b\in B }<br>$$</p>
+<p>The two expressions of the random process:</p>
+<ul>
+<li><p>$$<br>X(t,\omega): T\times \Omega \rightarrow R<br>$$</p>
+</li>
+<li></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>Random Experiment:</strong></p>
+<p>A random experiment is a process that yields one outcome from a well-defined set of possible outcomes. Mathematically, it can be characterized as follows:</p>
+<ul>
+<li><p><strong>Sample Space ($\Omega$)</strong>: This is the set of all possible outcomes of the experiment, where each outcome is denoted by a sample point ($\omega$). The sample space is known a priori, meaning before the experiment is conducted.</p>
+</li>
+<li><p><strong>Reproducibility</strong>: The experiment can be repeated under identical conditions, yielding potentially different outcomes in each repetition. This property ensures the statistical reliability of the experiment.</p>
+</li>
+<li><p><strong>Unpredictability</strong>: Although the sample space is known, the specific outcome of a single trial of the experiment cannot be determined in advance; it is realized as a random variable which takes values from the sample space.</p>
+</li>
+</ul>
+<p>By adhering to these principles, a random experiment allows for the systematic study of random phenomena and facilitates the application of probability theory to analyze and predict outcomes.</p>
+</blockquote>
+<blockquote>
+<p><strong>Event Domain:</strong><br>$$<br>\sum &#x3D; {A| A \subseteq \Omega }<br>$$<br>The σ-algebra must satisfy the following conditions: </p>
+<ul>
+<li><p><strong>Non-emptiness</strong>: The σ-algebra contains at least the empty set and the sample space itself, that is,    $$   \emptyset \in \Sigma \quad \text{and} \quad \Omega \in \Sigma   $$ </p>
+</li>
+<li><p><strong>Closure under complement</strong>: If an event (A) is in the σ-algebra, then its complement ((A^c) or (\overline{A})) is also in the σ-algebra, mathematically represented as:   $$   A \in \Sigma \implies A^c \in \Sigma   $$ </p>
+</li>
+<li><p><strong>Closure under countable unions (and intersections)</strong>: If (A_1, A_2, A_3, \ldots) are events in the σ-algebra, then their countable union (and, by extension, their countable intersection) is also in the σ-algebra, expressed as:   </p>
+</li>
+<li><p>$$   A_i \in \Sigma , \text{ for all } i \implies \bigcup_{i&#x3D;1}^{\infty} A_i \in \Sigma , \text{ and } \bigcap_{i&#x3D;1}^{\infty} A_i \in \Sigma   $$ </p>
+<p>By satisfying these conditions, the σ-algebra, (\Sigma), forms the foundational structure upon which probability measures are defined, assigning probabilities to events in a manner consistent with the axioms of probability theory.</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><h3 id="Statistical-Moments"><a href="#Statistical-Moments" class="headerlink" title="Statistical Moments"></a>Statistical Moments</h3><h4 id="Expectation-期望"><a href="#Expectation-期望" class="headerlink" title="Expectation (期望)"></a>Expectation (期望)</h4><p>The expectation or expected value of a random variable (X), denoted as (E[X]), is defined as:</p>
+<ul>
+<li><p><strong>Discrete Case</strong>:<br>$$<br>E[X] &#x3D; \sum x_i P(X&#x3D;x_i)<br>$$</p>
+</li>
+<li><p><strong>Continuous Case</strong>:<br>$$<br>E[X] &#x3D; \int x f(x) dx<br>$$</p>
+</li>
+</ul>
+<h4 id="Deviation-偏差"><a href="#Deviation-偏差" class="headerlink" title="Deviation (偏差)"></a>Deviation (偏差)</h4><p>The deviation of a random variable (X) from its expected value (E[X]) is given by:</p>
+<ul>
+<li><p><strong>Discrete Case</strong>:<br>$$<br>D[X_i] &#x3D; x_i - E[X]<br>$$</p>
+</li>
+<li><p><strong>Continuous Case</strong>:<br>$$<br>D[X(x)] &#x3D; x - E[X]<br>$$</p>
+</li>
+</ul>
+<h4 id="Covariance-协方差"><a href="#Covariance-协方差" class="headerlink" title="Covariance (协方差)"></a>Covariance (协方差)</h4><p>The covariance between two random variables (X) and (Y), denoted as $Cov(X, Y)$, is defined as:</p>
+<ul>
+<li><p><strong>Discrete Case</strong>:<br>$$<br>Cov(X, Y) &#x3D; \sum \sum (x_i - E[X])(y_j - E[Y])P(X&#x3D;x_i, Y&#x3D;y_j)<br>$$</p>
+</li>
+<li><p><strong>Continuous Case</strong>:<br>$$<br>Cov(X, Y) &#x3D; \int \int (x - E[X])(y - E[Y])f(x, y) dx dy<br>$$</p>
+</li>
+<li></li>
+</ul>
+<h4 id="Pearson-Correlation-Coefficient-皮尔逊相关系数"><a href="#Pearson-Correlation-Coefficient-皮尔逊相关系数" class="headerlink" title="Pearson Correlation Coefficient (皮尔逊相关系数)"></a>Pearson Correlation Coefficient (皮尔逊相关系数)</h4><p> The Pearson correlation coefficient, denoted as ( \rho ) for population and ( r ) for sample, measures the linear relationship between two random variables (X) and (Y). It is defined as the ratio of the covariance of (X) and (Y) to the product of their standard deviations ($\sigma_X$ and (\sigma_Y)). The formula is given by:<br>$$<br>\rho_{XY} &#x3D; \frac{Cov(X, Y)}{\sigma_X \sigma_Y}<br>$$</p>
+<p> or in terms of expectations:</p>
+</li>
+</ul>
+<p>$$<br>\rho_{XY} &#x3D; \frac{E[(X - E[X])(Y - E[Y])]}{\sigma_X \sigma_Y}<br>$$</p>
+<ul>
+<li><p><strong>Discrete Case</strong>:  </p>
+</li>
+<li><p>$$<br>\rho_{XY} &#x3D; \frac{\sum \sum (x_i - E[X])(y_j - E[Y])P(X&#x3D;x_i, Y&#x3D;y_j)}{\sigma_X \sigma_Y}<br>$$</p>
+</li>
+<li><p><strong>Continuous Case</strong>:  </p>
+</li>
+<li><p>$$<br>\rho_{XY} &#x3D; \frac{\int \int (x - E[X])(y - E[Y])f(x, y) dx dy}{\sigma_X \sigma_Y}<br>$$</p>
+<p>The Pearson correlation coefficient ranges between -1 and +1, where +1 indicates a perfect positive linear relationship, -1 indicates a perfect negative linear relationship, and 0 indicates no linear relationship.</p>
+</li>
+</ul>
+<p>  These statistical moments are fundamental in understanding the properties and behaviors of random variables and are pivotal in the field of statistics and probability theory.</p>
+</blockquote>
+<h2 id="科莫戈洛夫存在定理（Kolmogorov’s-Existence-Theorem）"><a href="#科莫戈洛夫存在定理（Kolmogorov’s-Existence-Theorem）" class="headerlink" title="科莫戈洛夫存在定理（Kolmogorov’s Existence Theorem）"></a>科莫戈洛夫存在定理（Kolmogorov’s Existence Theorem）</h2><p>科莫戈洛夫存在定理（Kolmogorov’s Existence Theorem）是概率论中一个非常重要的定理，它提供了一个构造联合概率分布的方法，给定任意一组一维边缘分 布和条件分布。这个定理是由安德烈.尼古拉耶维奇. 科莫戈洛夫在20世纪30年代提出的。<br>这个定理可以表述为:<br>给定一系列的随机变量 $X_1, X_2, X_3, \ldots, X_n$ 和它们的边缘分布以及条件分布，如果这些分布满足一定的一致性条件（即Kolmogorov的一致性条件），那么存 在一个概率空间和一系列的随机变量，使得这些随机变量具有给定的边缘分布和条件分布。<br>这个定理的证明是基于Kolmogorov扩展定理，它使用了测度论的一些基本概念和工具。</p>
+<p>$$<br>X与Y独立\iff X与Y不相关<br>$$<br>（条件为：(X,Y)正态， 而不是 X和Y都是正态）</p>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p>$$ f(x) &#x3D; \sum_{k} p_k\delta(x-x_k) $$</p>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>该公式表示一个离散的点分布或称为Dirac组合。</p>
+<ol>
+<li><p>$ \delta(x-x_k) $ 是Dirac的δ函数。在数学和物理学中，它被定义为一个函数，其值在除了点 $ x &#x3D; x_k $ 外的所有地方都为零，并且其在整个实数线上的积分为1。简单地说，它在 $ x &#x3D; x_k $ 处呈现一个“尖峰”。</p>
+</li>
+<li><p>$ p_k $ 是与位置 $ x_k $ 相关的权重或强度。这表示在 $ x_k $ 位置的δ函数的幅度或强度。</p>
+</li>
+<li><p>$ \sum_{k} $ 是一个求和符号，表示对所有的 $ k $ 值进行求和。</p>
+</li>
+</ol>
+<p>整体上，函数 $ f(x) $ 是由许多在不同 $ x_k $ 位置的Dirac δ函数组成的组合。每个 δ 函数都被其相应的 $ p_k $ 权重放大或缩小。这种表示方法经常用于描述一个由多个离散事件或粒子组成的分布，其中每个事件或粒子在特定的位置 $ x_k $ 上产生一个“冲击”，并且这个“冲击”的强度由 $ p_k $ 给出。</p>
+<p>公式：<br>$$<br>f(x) &#x3D; \sum_{k} p_k\delta(x-x_k)<br>$$<br>描述：</p>
+<p>该公式表示一个离散型随机变量的概率分布。</p>
+<ol>
+<li><p>$ \delta(x-x_k) $ 是Dirac的δ函数。它在 $ x &#x3D; x_k $ 处呈现一个“尖峰”，并在其他所有地方为零。</p>
+</li>
+<li><p>$ p_k $ 是随机变量取值 $ x_k $ 的概率。这意味着，当随机变量的值为 $ x_k $ 时，其概率为 $ p_k $。</p>
+</li>
+<li><p>$ \sum_{k} $ 是一个求和符号，表示对所有的 $ k $ 值进行求和。在离散型随机变量的情境中，这意味着我们考虑随机变量可能取的所有值。</p>
+</li>
+</ol>
+<p>整体上，函数 $ f(x) $ 描述了一个离散型随机变量的概率分布。对于每一个可能的值 $ x_k $，Dirac δ函数确保只有在 $ x &#x3D; x_k $ 时函数有值，而该值的幅度或强度由概率 $ p_k $ 给出。这种表示方法提供了一个数学上的方式来描述离散型随机变量的概率分布，其中每个可能的值都有一个与之关联的概率。</p>
+<h2 id="条件数学期望"><a href="#条件数学期望" class="headerlink" title="条件数学期望"></a>条件数学期望</h2><p>全数学期望公式是一个在概率论和统计学中非常重要的公式，它用于计算复合随机变量的期望。下面是全数学期望公式的推导：</p>
+<p>假设我们有一个离散随机变量 $X$ 和一个与 $X$ 相关的随机变量 $Y$。我们想要找到 $Y$ 的期望 $E[Y]$。</p>
+<p>首先，我们可以找到 $Y$ 给定 $X &#x3D; x$ 的条件期望，记作 $E[Y | X &#x3D; x]$。</p>
+<p>然后我们可以使用全数学期望公式来找到 $Y$ 的期望，该公式定义如下：</p>
+<p>$$<br>E[Y] &#x3D; E[E[Y | X]]<br>$$</p>
+<p>我们可以进一步将其展开为：</p>
+<p>$$<br>E[Y] &#x3D; \sum_x E[Y | X &#x3D; x] P(X &#x3D; x)<br>$$</p>
+<p>对于连续随机变量，这个公式可以改写为积分形式：</p>
+<p>$$<br>E[Y] &#x3D; \int E[Y | X &#x3D; x] f_X(x) dx<br>$$</p>
+<p>其中 $f_X(x)$ 是 $X$ 的概率密度函数。</p>
+<h2 id="全概率密度函数"><a href="#全概率密度函数" class="headerlink" title="全概率密度函数"></a>全概率密度函数</h2><p>$$<br>P{X\leq x} &#x3D; \int_{-\infty} ^{+\infty} P{X\leq x|Y\leq y }f_{Y}(y) dy<br>$$</p>
+<p><strong>作业：继续做5,6,7,8</strong></p>
+
+    </div>
+    
+    
+    
+    
+    
+    <div id="comment">
+        <div id="waline-container"></div>
+    </div>
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 LinkedList&#39;s Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Ding Li
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+
+
+    
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+<script>
+    Waline.init({
+        el: "#waline-container",
+        serverURL: "my-comment-tau.vercel.app",
+        commentCount: true,
+        pageview: false,
+        emoji: "https://unpkg.com/@waline/emojis@1.2.0/weibo,https://unpkg.com/@waline/emojis@1.2.0/alus,https://unpkg.com/@waline/emojis@1.2.0/bilibili,https://unpkg.com/@waline/emojis@1.2.0/qq,https://unpkg.com/@waline/emojis@1.2.0/tieba,https://unpkg.com/@waline/emojis@1.2.0/tw-emoji".split(","),
+        meta: "nick,mail,link".split(","),
+        requiredMeta: "nick".split(","),
+        lang: "zh-CN",
+        wordLimit: 0,
+        pageSize: "10",
+        login: "enable",
+        
+    });
+</script>
+
+
+
+        
+    </body>
+</html>

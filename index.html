@@ -169,6 +169,411 @@
         
 
 <div class="post">
+    <a href="/2023/09/18/MySqlInOneHour/">
+        <h2 class="post-title">MySqlInOneHour</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/9/18
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>我这里采用的是采用<code>docker</code>来启动<code>mysql</code>。</p>
+<p>为了解决这个问题，你可以选择以下方法之一：</p>
+<ol>
+<li><p>设置一个 root 密码：</p>
+<pre><code class="bash">docker run -e MYSQL_ROOT_PASSWORD=my-secret-pw mysql
+</code></pre>
+</li>
+<li><p>允许空密码（不推荐在生产环境中使用）：</p>
+<pre><code class="bash">docker run -e MYSQL_ALLOW_EMPTY_PASSWORD=yes mysql
+</code></pre>
+</li>
+<li><p>使用随机密码：</p>
+<pre><code class="bash">docker run -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
+</code></pre>
+</li>
+</ol>
+<p><img src="/../images/image-20230918213252741.png" alt="image-20230918213252741"></p>
+<p><img src="/../images/image-20230918213300244.png" alt="image-20230918213300244"></p>
+<h3 id="切换mysql"><a href="#切换mysql" class="headerlink" title="切换mysql"></a>切换<code>mysql</code></h3><p><img src="/../images/image-20230918213330283.png" alt="image-20230918213330283"></p>
+<p><img src="/../images/image-20230918213413786.png" alt="image-20230918213413786"></p>
+<h2 id="关系型数据库-x2F-非关系型数据库"><a href="#关系型数据库-x2F-非关系型数据库" class="headerlink" title="关系型数据库&#x2F;非关系型数据库"></a>关系型数据库&#x2F;非关系型数据库</h2><ul>
+<li>mysql清屏：你可以使用 <code>Ctrl + L</code> 来清屏</li>
+</ul>
+<h2 id="MySQL常用命令"><a href="#MySQL常用命令" class="headerlink" title="MySQL常用命令"></a>MySQL常用命令</h2><ul>
+<li>展示数据库</li>
+</ul>
+<pre><code class="mysql">show databases;
+</code></pre>
+<pre><code class="bash">+--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.00 sec)
+</code></pre>
+<ul>
+<li>创建数据库</li>
+</ul>
+<p>比如说要创建一个名叫<code>game</code>的数据库：</p>
+<pre><code class="mysql">create database game;
+</code></pre>
+<ul>
+<li>删除数据库</li>
+</ul>
+<pre><code class="mysql">DROP DATABASE game;
+</code></pre>
+<p>这个数据库名是<code>大小写敏感·</code>的。</p>
+<ul>
+<li>创建表</li>
+</ul>
+<p>创建表之前需要先<code>use</code>该database</p>
+<pre><code class="mysql">USE game;
+
+CREATE TABLE player (
+    id INT,
+    name VARCHAR(100),
+    level INT,
+    exp INT,
+    gold DECIMAL(10,2)
+);
+</code></pre>
+<p>创建表结构。</p>
+<ul>
+<li>展示表</li>
+</ul>
+<pre><code class="mysql">DESC player;
+</code></pre>
+<p><img src="/../images/image-20230919140254679.png" alt="image-20230919140254679"></p>
+<ul>
+<li><p>修改表</p>
+</li>
+<li><p><strong>添加新列</strong></p>
+<p>使用<code>ALTER TABLE</code>命令可以添加新列。例如，我们可以添加一个新列<code>birth_date</code>来存储玩家的生日：</p>
+<pre><code class="mysql">ALTER TABLE player
+ADD COLUMN birth_date DATE;
+</code></pre>
+</li>
+<li><p><strong>删除列</strong></p>
+<p>如果你想删除某个列，可以使用<code>DROP COLUMN</code>命令。例如，我们可以删除刚刚添加的<code>birth_date</code>列：</p>
+<pre><code class="mysql">ALTER TABLE player
+DROP COLUMN birth_date;
+</code></pre>
+</li>
+<li><p><strong>修改列</strong></p>
+<p>你可以使用<code>MODIFY COLUMN</code>命令来修改一个现有列的数据类型或其他属性。例如，我们可以将<code>name</code>列的长度从100修改为150：</p>
+<pre><code class="mysql">ALTER TABLE player
+MODIFY COLUMN name VARCHAR(150);
+</code></pre>
+</li>
+<li><p><strong>重命名列</strong></p>
+<p>如果你想重命名一个列，可以使用<code>CHANGE COLUMN</code>命令。例如，我们可以将<code>exp</code>列重命名为<code>experience</code>：</p>
+<pre><code class="mysql">ALTER TABLE player
+CHANGE COLUMN exp experience INT;
+</code></pre>
+</li>
+<li><p><strong>添加主键</strong></p>
+<p>为了确保<code>id</code>列中的每个值都是唯一的，我们可以将其设置为主键：</p>
+<pre><code class="mysql">ALTER TABLE player
+ADD PRIMARY KEY (id);
+</code></pre>
+</li>
+<li><p><strong>添加索引</strong></p>
+<p>为了提高查询速度，我们可以为某些列添加索引：</p>
+<pre><code class="mysql">ALTER TABLE player
+ADD INDEX idx_name (name);
+</code></pre>
+</li>
+</ul>
+<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><pre><code class="mysql">INSERT INTO player (id, name, level, exp, gold) VALUES (1, &quot;你好&quot;, 1, 1, 1);
+SELECT * FROM player;
+</code></pre>
+<h2 id="更新表的数据"><a href="#更新表的数据" class="headerlink" title="更新表的数据"></a>更新表的数据</h2><pre><code class="mysql">UPDATE player set level = 2 where name=&quot;你好&quot;;
+SELECT * FROM player;
+</code></pre>
+<h2 id="数据库的导入导出"><a href="#数据库的导入导出" class="headerlink" title="数据库的导入导出"></a>数据库的导入导出</h2><h3 id="1-数据库的导出"><a href="#1-数据库的导出" class="headerlink" title="1. 数据库的导出"></a>1. 数据库的导出</h3><p>要导出MySQL数据库，您可以使用<code>mysqldump</code>工具。以下是一个基本的命令示例，用于导出整个数据库到一个<code>.sql</code>文件：</p>
+<pre><code class="bash">mysqldump -u [username] -p[password] [database_name] &gt; [filename].sql
+</code></pre>
+<ul>
+<li><code>[username]</code>：MySQL的用户名。</li>
+<li><code>[password]</code>：该用户名的密码。注意，<code>-p</code>和密码之间没有空格。</li>
+<li><code>[database_name]</code>：您想要导出的数据库名称。</li>
+<li><code>[filename].sql</code>：您想要保存的文件名。</li>
+</ul>
+<h3 id="2-数据库的导入"><a href="#2-数据库的导入" class="headerlink" title="2. 数据库的导入"></a>2. 数据库的导入</h3><p>要导入一个<code>.sql</code>文件到MySQL数据库，您可以使用以下命令：</p>
+<pre><code class="bash">mysql -u [username] -p[password] [database_name] &lt; [filename].sql
+</code></pre>
+<p>参数的意义与上面的导出命令相同。</p>
+<h3 id="3-表连接"><a href="#3-表连接" class="headerlink" title="3. 表连接"></a>3. 表连接</h3><p>表连接是关系型数据库中的一个核心概念，它允许您从两个或多个表中基于某些相关列组合数据。以下是一些常见的连接类型：</p>
+<ol>
+<li><strong>内连接 (INNER JOIN)</strong>: 返回两个表中都有匹配的行。</li>
+<li><strong>左连接 (LEFT JOIN 或 LEFT OUTER JOIN)</strong>: 返回左表中的所有行，即使右表中没有匹配的行。</li>
+<li><strong>右连接 (RIGHT JOIN 或 RIGHT OUTER JOIN)</strong>: 返回右表中的所有行，即使左表中没有匹配的行。</li>
+<li><strong>全连接 (FULL JOIN 或 FULL OUTER JOIN)</strong>: 返回左表和右表中的所有行。</li>
+<li><strong>交叉连接 (CROSS JOIN)</strong>: 返回左表和右表中所有可能的行组合。</li>
+</ol>
+<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><p>假设我们有两个表：<code>employees</code> 和 <code>departments</code>。</p>
+<p><code>employees</code> 表:</p>
+<table>
+<thead>
+<tr>
+<th>emp_id</th>
+<th>emp_name</th>
+<th>dept_id</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Alice</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Bob</td>
+<td>20</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Charlie</td>
+<td>NULL</td>
+</tr>
+</tbody></table>
+<p><code>departments</code> 表:</p>
+<table>
+<thead>
+<tr>
+<th>dept_id</th>
+<th>dept_name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Finance</td>
+</tr>
+<tr>
+<td>30</td>
+<td>Marketing</td>
+</tr>
+</tbody></table>
+<h4 id="1-内连接"><a href="#1-内连接" class="headerlink" title="1. 内连接"></a>1. 内连接</h4><pre><code class="sql">SELECT emp_name, dept_name
+FROM employees
+INNER JOIN departments ON employees.dept_id = departments.dept_id;
+</code></pre>
+<p>结果:</p>
+<table>
+<thead>
+<tr>
+<th>emp_name</th>
+<th>dept_name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Alice</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>Bob</td>
+<td>Finance</td>
+</tr>
+</tbody></table>
+<h4 id="2-左连接"><a href="#2-左连接" class="headerlink" title="2. 左连接"></a>2. 左连接</h4><pre><code class="sql">SELECT emp_name, dept_name
+FROM employees
+LEFT JOIN departments ON employees.dept_id = departments.dept_id;
+</code></pre>
+<p>结果:</p>
+<table>
+<thead>
+<tr>
+<th>emp_name</th>
+<th>dept_name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Alice</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>Bob</td>
+<td>Finance</td>
+</tr>
+<tr>
+<td>Charlie</td>
+<td>NULL</td>
+</tr>
+</tbody></table>
+<h4 id="3-右连接"><a href="#3-右连接" class="headerlink" title="3. 右连接"></a>3. 右连接</h4><pre><code class="sql">SELECT emp_name, dept_name
+FROM employees
+RIGHT JOIN departments ON employees.dept_id = departments.dept_id;
+</code></pre>
+<p>结果:</p>
+<table>
+<thead>
+<tr>
+<th>emp_name</th>
+<th>dept_name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Alice</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>Bob</td>
+<td>Finance</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>Marketing</td>
+</tr>
+</tbody></table>
+<h4 id="4-全连接"><a href="#4-全连接" class="headerlink" title="4. 全连接"></a>4. 全连接</h4><p>由于MySQL不直接支持FULL JOIN，但如果它支持，结果将是：</p>
+<table>
+<thead>
+<tr>
+<th>emp_name</th>
+<th>dept_name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Alice</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>Bob</td>
+<td>Finance</td>
+</tr>
+<tr>
+<td>Charlie</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>Marketing</td>
+</tr>
+</tbody></table>
+<h4 id="5-交叉连接"><a href="#5-交叉连接" class="headerlink" title="5. 交叉连接"></a>5. 交叉连接</h4><pre><code class="sql">SELECT emp_name, dept_name
+FROM employees
+CROSS JOIN departments;
+</code></pre>
+<p>这会返回每个员工与每个部门的所有可能组合，总共9行。</p>
+<p>希望这个例子更清晰地展示了不同连接类型的区别。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/MySQL/" style="color: #00a596">MySQL</a>
+        </span>
+        
+    </div>
+    <a href="/2023/09/18/MySqlInOneHour/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">
+        <h2 class="post-title">计算机体系结构</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/9/17
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <blockquote>
+<p>这篇博客主要用于描述计算机体系结构以及操作系统相关的知识。</p>
+</blockquote>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="color: #ffa2c4">计算机体系结构</a>
+        </span>
+        
+    </div>
+    <a href="/2023/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2023/09/13/Random-Process-Course-Notes/">
+        <h2 class="post-title">Random-Process-Course-Notes</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/9/13
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <blockquote>
+<p>This blog records how I learn the random process in the UCAS.</p>
+</blockquote>
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/Random-Process/" style="color: #ff7d73">Random-Process</a>
+        </span>
+        
+    </div>
+    <a href="/2023/09/13/Random-Process-Course-Notes/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/08/25/SoVits%E8%B0%83%E7%A0%94%E4%BD%BF%E7%94%A8/">
         <h2 class="post-title">SoVits调研使用</h2>
     </a>
@@ -202,7 +607,7 @@
         
         <span class="tag">
             
-            <a href="/tags/SoVits-TTS/" style="color: #ffa2c4">SoVits;TTS</a>
+            <a href="/tags/SoVits-TTS/" style="color: #03a9f4">SoVits;TTS</a>
         </span>
         
     </div>
@@ -272,7 +677,7 @@
         <div class="content" v-pre>
             
             <blockquote>
-<p>这个博客主要是调研导师安排给我的<code>GNN(图神经网络)</code>的调研的任务。</p>
+<p><code>GNN(图神经网络)</code>的调研的任务。</p>
 </blockquote>
             
         </div>
@@ -286,7 +691,7 @@
         
         <span class="tag">
             
-            <a href="/tags/GNN%E8%B0%83%E7%A0%94/" style="color: #03a9f4">GNN调研</a>
+            <a href="/tags/GNN%E8%B0%83%E7%A0%94/" style="color: #ff7d73">GNN调研</a>
         </span>
         
     </div>
@@ -356,7 +761,7 @@
         
         <span class="tag">
             
-            <a href="/tags/web%E6%8A%93%E5%8C%85%E7%BB%95%E8%BF%87/" style="color: #ff7d73">web抓包绕过</a>
+            <a href="/tags/web%E6%8A%93%E5%8C%85%E7%BB%95%E8%BF%87/" style="color: #00a596">web抓包绕过</a>
         </span>
         
     </div>
@@ -396,7 +801,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E4%BB%8E%E9%9B%B6%E6%89%8B%E6%90%93Python%E8%A7%A3%E9%87%8A%E5%99%A8/" style="color: #00a596">从零手搓Python解释器</a>
+            <a href="/tags/%E4%BB%8E%E9%9B%B6%E6%89%8B%E6%90%93Python%E8%A7%A3%E9%87%8A%E5%99%A8/" style="color: #ff7d73">从零手搓Python解释器</a>
         </span>
         
     </div>
@@ -441,125 +846,6 @@
         
     </div>
     <a href="/2023/08/10/%E5%9B%BD%E7%A7%91%E5%A4%A7%E5%85%A5%E5%AD%A6%E5%89%8D%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/08/08/Java%E5%AD%A6%E4%B9%A0/">
-        <h2 class="post-title">Java学习</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/8/8
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <blockquote>
-<p>这篇博客主要用于记录在学习<code>Java</code>过程中遇到的问题，以及主要比较关键的知识点。</p>
-</blockquote>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Java%E5%AD%A6%E4%B9%A0/" style="color: #ffa2c4">Java学习</a>
-        </span>
-        
-    </div>
-    <a href="/2023/08/08/Java%E5%AD%A6%E4%B9%A0/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/08/07/mysql%E5%AD%A6%E4%B9%A0/">
-        <h2 class="post-title">mysql学习</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/8/7
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <span id="more"></span>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/MySQL%E5%AD%A6%E4%B9%A0/" style="color: #ff7d73">MySQL学习</a>
-        </span>
-        
-    </div>
-    <a href="/2023/08/07/mysql%E5%AD%A6%E4%B9%A0/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/08/05/%E9%AB%98%E7%BA%A7python%E7%9F%A5%E8%AF%86/">
-        <h2 class="post-title">高级python知识</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/8/5
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <blockquote>
-<p>这个博客主要记录在学习Python的使用技巧， 关于<code>异步编程</code> ， <code>decorator</code>, <code>GIL</code>, <code>CPython</code>的学习和使用。</p>
-</blockquote>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E9%AB%98%E7%BA%A7python%E6%8A%80%E5%B7%A7/" style="color: #00a596">高级python技巧</a>
-        </span>
-        
-    </div>
-    <a href="/2023/08/05/%E9%AB%98%E7%BA%A7python%E7%9F%A5%E8%AF%86/" class="go-post">阅读全文</a>
 </div>
 
 

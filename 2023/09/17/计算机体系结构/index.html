@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>计算机体系结构 | LinkedList&#39;s Blog</title>
+        <meta name="author" content="Ding Li" />
+        <meta name="description" content="This is blog for Linkedlist771, mainly record some learning notes, thank you for your visit!" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/favicon.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.staticfile.org/waline/2.14.8/waline.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.14.8/waline.min.css" />
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.14.8/waline-meta.min.css" />
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>LINKEDLIST&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LINKEDLIST&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1>计算机体系结构</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/9/17
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="color: #ffa2c4">计算机体系结构</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <blockquote>
+<p>这篇博客主要用于描述计算机体系结构以及操作系统相关的知识。</p>
+</blockquote>
+<span id="more"></span>
+
+
+
+<h2 id="并发BUG"><a href="#并发BUG" class="headerlink" title="并发BUG"></a>并发BUG</h2><blockquote>
+<p>并发<code>bug</code>杀人事件：</p>
+<p><img src="/../images/image-20230917142432572.png" alt="image-20230917142432572"></p>
+<p><img src="/../images/image-20230917142203321.png" alt="image-20230917142203321"></p>
+<p>该电路具有两个模式：</p>
+<ul>
+<li>高能模式： <code>需要带上滤镜</code>。</li>
+<li>低能模式：</li>
+</ul>
+<p>选择高能量的模式的时候， 镜片开始就位（机械部件就位需要<code>8s</code>），在镜片就位前，切换成低能模式时， 可能发生：</p>
+<ul>
+<li>mirror未到位， 射出<code>X-Ray</code>射线。 此时会发生问题。</li>
+</ul>
+</blockquote>
+<ul>
+<li>死锁(dead lock)</li>
+</ul>
+<blockquote>
+<p>出现线程互相等待的时候， 就是<code>死锁</code>。 </p>
+</blockquote>
+<p>同一个线程对<code>lock</code>进行两次<code>acquire</code>就会发生死锁。$\rightarrow$ AA型死锁。</p>
+<p><img src="/../images/image-20230917144810847.png" alt="image-20230917144810847"></p>
+<p>死锁的避免， 其实只有破除<code>第四条</code>, 1-3条是对定义的解释， 比较难破除， 避免循环等待。</p>
+<ul>
+<li>数据竞争(Data Race)</li>
+</ul>
+<blockquote>
+<p>同时发生两个或两个以上对同一个内存的操作，并且其中至少一个是写的话， 就会发生<code>数据竞争</code>。</p>
+<p>不同的发生顺序，会导致不同的运行结果。</p>
+</blockquote>
+<ul>
+<li>原子性和重排</li>
+</ul>
+<p><code>sendmail</code>的unix漏洞， 因为<code>sendmail</code>具有很高的权限吗，他具有sudo权限，但是在执行之前会检查，是不是软连接的一个程序， 但是</p>
+<p>这里考虑到原子性的问题， 如果我创建的软连接足够快， 那么在他检查软连接的时候发生了并发的问题，就有可能执行我这个软连接。</p>
+<p>这种类型的攻击通常被称为时间窗口竞态条件攻击或TOCTOU（Time-of-Check to Time-of-Use）攻击。在这种攻击中，攻击者试图在检查（Time-of-Check）和使用（Time-of-Use）之间更改系统的状态。</p>
+<ul>
+<li>Lock Ordering</li>
+</ul>
+<blockquote>
+<p>为了避免死锁，当一个进程需要多个锁时，应该总是按照预定的顺序获取它们。这样，所有的进程都会按照同样的顺序尝试获取锁，从而避免了循环等待条件。</p>
+</blockquote>
+<ul>
+<li>Bug 的本质和防御性编程</li>
+</ul>
+<blockquote>
+<p>写代码的时候，都假设你的代码是错的， 添加多的测试用例， 检查任何你可能觉得是错的地方。</p>
+</blockquote>
+<ul>
+<li>Lockdep</li>
+</ul>
+<blockquote>
+<p>规定： 为每一个所确定唯一的<code>allocation site</code> ，同一个allocation site的锁存在一个全局唯一的上锁顺序。 $\rightarrow$ 解决死锁的</p>
+<p>问题。</p>
+</blockquote>
+<ul>
+<li>解决数据竞争的问题</li>
+</ul>
+<p>记录每个内存时的写和读， 跨线程的编译是lock和unlock， 最后会得到一个有向图， 从一个节点到另一个节点，存不存在一个路径， </p>
+<p>用于判断是否存在datarace。 是现实Lampor’s Vector Clock.</p>
+<p><img src="/../images/image-20230917192951193.png" alt="image-20230917192951193">1</p>
+<ul>
+<li>保护栈空间：判断栈是否溢出。</li>
+</ul>
+<blockquote>
+<p>在内存的top和bottom都占用一部分， 然后判断是否使用溢出？</p>
+</blockquote>
+<p><img src="/../images/image-20230917194047198.png" alt="image-20230917194047198"></p>
+<h2 id="代码编写指南"><a href="#代码编写指南" class="headerlink" title="代码编写指南"></a>代码编写指南</h2><ul>
+<li>break the big block code into the small code</li>
+</ul>
+<h2 id="系统调用和Unix-Shell"><a href="#系统调用和Unix-Shell" class="headerlink" title="系统调用和Unix Shell"></a>系统调用和Unix Shell</h2><pre><code class="mermaid">graph TD
+    A[状态1: CPU Rest]
+    B[状态2: Firmware or BIOS Execution]
+    C[状态3: Load OS]
+    D[状态4: OS Initialization]
+    E[状态5: fork - 完整复制状态机]
+    A --&gt; B
+    B --&gt; C
+    C --&gt; D
+    D --&gt; E
+</code></pre>
+<p>操作系统：<code>API+对象</code></p>
+<blockquote>
+<p>Shell是一门把用户指令翻译成系统调用的编程语言。</p>
+</blockquote>
+
+    </div>
+    
+    
+    
+    
+    
+    <div id="comment">
+        <div id="waline-container"></div>
+    </div>
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 LinkedList&#39;s Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Ding Li
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+
+
+    
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+<script>
+    Waline.init({
+        el: "#waline-container",
+        serverURL: "my-comment-tau.vercel.app",
+        commentCount: true,
+        pageview: false,
+        emoji: "https://unpkg.com/@waline/emojis@1.2.0/weibo,https://unpkg.com/@waline/emojis@1.2.0/alus,https://unpkg.com/@waline/emojis@1.2.0/bilibili,https://unpkg.com/@waline/emojis@1.2.0/qq,https://unpkg.com/@waline/emojis@1.2.0/tieba,https://unpkg.com/@waline/emojis@1.2.0/tw-emoji".split(","),
+        meta: "nick,mail,link".split(","),
+        requiredMeta: "nick".split(","),
+        lang: "zh-CN",
+        wordLimit: 0,
+        pageSize: "10",
+        login: "enable",
+        
+    });
+</script>
+
+
+
+        
+    </body>
+</html>
