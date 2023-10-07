@@ -169,6 +169,123 @@
         
 
 <div class="post">
+    <a href="/2023/10/07/SearchDirectionDecision/">
+        <h2 class="post-title">SearchDirectionDecision</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/10/7
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="总览汇总"><a href="#总览汇总" class="headerlink" title="总览汇总"></a>总览汇总</h2><table>
+<thead>
+<tr>
+<th>文章题目</th>
+<th>本地文件位置</th>
+<th>发表刊物</th>
+<th>年份</th>
+<th>解决问题</th>
+<th>方法</th>
+<th>关键创新点</th>
+<th>数据集</th>
+<th>代码</th>
+<th>实现难易程度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://proceedings.mlr.press/v202/duval23a.html">Scalable Gradients for Stochastic Differential Equations</a></td>
+<td><a href="SearchDirectionDecision%5Cduval23a.pdf">duval23a.pdf</a></td>
+<td>JMLR</td>
+<td>2023</td>
+<td>Stochastic differential equations</td>
+<td>Stochastic adjoint method</td>
+<td>Scalable gradient computation</td>
+<td>OC20 dataset (S2EF, IS2RE)，(QM9, QM7-X)</td>
+<td><a target="_blank" rel="noopener" href="https://faenet.readthedocs.io/en/latest/">FAENet: Frame Averaging Equivariant GNN for Materials modeling — faenet documentation</a></td>
+<td>Not mentioned</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://proceedings.mlr.press/v198/wang22d/wang22d.pdf">Flashlight: Scalable Link Prediction With Effective Decoders</a></td>
+<td><a href="SearchDirectionDecision%5Cwang22d.pdf">wang22d.pdf</a></td>
+<td>PMLR 198:14:1-14:17, 2022</td>
+<td>2022</td>
+<td>Link prediction in graph learning</td>
+<td>Flashlight algorithm with HadamardMLP decoders</td>
+<td>Scalable HadamardMLP decoders, 100x speedup on OGBL-CITATION2 dataset</td>
+<td>OGBL-CITATION2</td>
+<td>Not mentioned</td>
+<td>Not mentioned</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper/2018/hash/e2ad76f2326fbc6b56a45a56c59fafdb-Abstract.html">End-to-end Symmetry Preserving Inter-atomic Potential Energy Model for Finite and Extended Systems</a></td>
+<td><a href="SearchDirectionDecision%5CNeurIPS-2018-end-to-end-symmetry-preserving-inter-atomic-potential-energy-model-for-finite-and-extended-systems-Paper.pdf">NeurIPS</a></td>
+<td>NeurIPS 2018</td>
+<td>2018</td>
+<td>Molecular modeling, Inter-atomic potential energy surface modeling</td>
+<td>Deep Potential - Smooth Edition (DeepPot-SE)</td>
+<td>Extensive, continuously differentiable, linear scalability, symmetry preservation</td>
+<td>Not mentioned</td>
+<td>Not mentioned</td>
+<td>Not mentioned</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://101.132.169.133:5000/file/download/Su_2023_Mach._Learn.__Sci._Technol._4_035010.pdf">Efficient determination of the Hamiltonian and electronic properties using graph neural network with complete local coordinates</a></td>
+<td><a href="SearchDirectionDecision%5CSu_2023_Mach._Learn.__Sci._Technol._4_035010.pdf">Su_2023_</a></td>
+<td>Mach. Learn.: Sci. Technol. 4 (2023) 035010</td>
+<td>2023</td>
+<td>Prediction of the Hamiltonian and electronic properties</td>
+<td>Graph neural network with complete local coordinates</td>
+<td>Rotational equivariance of the Hamiltonian, efficiency in computing Hamiltonian of large systems</td>
+<td>Graphene and SiGe random alloys</td>
+<td>Not mentioned</td>
+<td>Not mentioned</td>
+</tr>
+</tbody></table>
+<h2 id="数据集汇总"><a href="#数据集汇总" class="headerlink" title="数据集汇总"></a>数据集汇总</h2><ol>
+<li><p><strong>OC20 Dataset (S2EF, IS2RE)</strong>:</p>
+<ul>
+<li>The <a target="_blank" rel="noopener" href="https://paperswithcode.com/dataset/oc20">Open Catalyst 2020 Dataset (OC20)</a> is used for catalysis in chemical engineering, with a focus on molecules significant in renewable energy applications. It includes over 1.3 million relaxations of molecular adsorptions onto surfaces, making it a substantial dataset for electrocatalyst structures.</li>
+<li>The dataset provides Bader charge data for all final frames in its training and validation systems. It’s organized in a .tar.gz file, which, when uncompressed, reveals several directories with unique system IDs. Each directory contains raw Bader charge analysis outputs (<a target="_blank" rel="noopener" href="https://github.com/Open-Catalyst-Project/ocp/blob/main/docs/DATASET.md">source</a>).</li>
+<li>Data in OC20 is stored in PyTorch Geometric Data objects and saved in LMDB files, including several sized training splits for different tasks (<a target="_blank" rel="noopener" href="https://ulissigroup.cheme.cmu.edu/docs/data.html">source</a>).</li>
+<li>It comprises 1,281,121 Density Functional Theory (DFT) relaxations across various materials, surfaces, and adsorbates (nitrogen, carbon, and oxygen chemistries) (<a target="_blank" rel="noopener" href="https://ar5iv.labs.arxiv.org/html/2002.12682">source</a>).</li>
+</ul>
+</li>
+<li><p><strong>QM9 Dataset</strong>:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://paperswithcode.com/dataset/qm9">QM9</a> provides quantum chemical properties for a relevant, consistent, and comprehensive chemical space of small organic molecules. It’s become a standard for machine learning predictions of various chemical properties.</li>
+<li>The dataset consists of about 130,000 molecules with 19 regression targets. Each molecule includes complete spatial information for the single low energy conformation of the atoms in the molecule (<a target="_blank" rel="noopener" href="https://pytorch-geometric.readthedocs.io/en/latest/modules/datasets.html#torch_geometric.datasets.QM9">source</a>).</li>
+<li>It contains 133,885 stable small organic molecules made up of CHONF (carbon, hydrogen, oxygen, nitrogen, and fluorine) and is publicly available for data-driven researches of material property prediction and chemical space exploration (<a target="_blank" rel="noopener" href="https://chainer-chemistry.readthedocs.io/en/latest/tutorial.html#qm9-dataset">source</a>).</li>
+</ul>
+</li>
+<li><p><strong>QM7-X Dataset</strong>:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41597-020-00621-5">QM7-X</a> is a comprehensive dataset with approximately 4.2 million equilibrium and non-equilibrium structures of small organic molecules. It provides 42 physicochemical properties for these molecules, which comprise up to seven non-hydrogen atoms (C, N, O, S, Cl).</li>
+<li>The dataset is organized into HDF5 files, and a script is provided to produce a database file named QM7X.db containing atomic position, atomic number, and the required physicochemical properties (<a target="_blank" rel="noopener" href="https://github.com/datasets-mila/datasets--qm7x">source</a>).</li>
+<li>It covers a broad range of physicochemical properties, making it a valuable resource for researchers interested in the quantum-mechanical properties of small organic molecules (<a target="_blank" rel="noopener" href="https://zenodo.org/record/4061137">source</a>).</li>
+</ul>
+</li>
+</ol>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+    </div>
+    <a href="/2023/10/07/SearchDirectionDecision/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2023/09/30/ChatGPTSecurity/">
         <h2 class="post-title">ChatGPTSecurity</h2>
     </a>
@@ -201,7 +318,7 @@
         
         <span class="tag">
             
-            <a href="/tags/ChatGPT%E5%AE%89%E5%85%A8%E6%80%A7/" style="color: #00bcd4">ChatGPT安全性</a>
+            <a href="/tags/ChatGPT%E5%AE%89%E5%85%A8%E6%80%A7/" style="color: #ff7d73">ChatGPT安全性</a>
         </span>
         
     </div>
@@ -566,7 +683,7 @@ CROSS JOIN departments;
         
         <span class="tag">
             
-            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="color: #ff7d73">计算机体系结构</a>
+            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" style="color: #ffa2c4">计算机体系结构</a>
         </span>
         
     </div>
@@ -606,7 +723,7 @@ CROSS JOIN departments;
         
         <span class="tag">
             
-            <a href="/tags/Random-Process/" style="color: #ff7d73">Random-Process</a>
+            <a href="/tags/Random-Process/" style="color: #03a9f4">Random-Process</a>
         </span>
         
     </div>
@@ -647,7 +764,7 @@ CROSS JOIN departments;
         
         <span class="tag">
             
-            <a href="/tags/SoVits-TTS/" style="color: #ffa2c4">SoVits;TTS</a>
+            <a href="/tags/SoVits-TTS/" style="color: #00a596">SoVits;TTS</a>
         </span>
         
     </div>
@@ -731,7 +848,7 @@ CROSS JOIN departments;
         
         <span class="tag">
             
-            <a href="/tags/GNN%E8%B0%83%E7%A0%94/" style="color: #ff7d73">GNN调研</a>
+            <a href="/tags/GNN%E8%B0%83%E7%A0%94/" style="color: #03a9f4">GNN调研</a>
         </span>
         
     </div>
@@ -801,51 +918,11 @@ CROSS JOIN departments;
         
         <span class="tag">
             
-            <a href="/tags/web%E6%8A%93%E5%8C%85%E7%BB%95%E8%BF%87/" style="color: #00a596">web抓包绕过</a>
+            <a href="/tags/web%E6%8A%93%E5%8C%85%E7%BB%95%E8%BF%87/" style="color: #00bcd4">web抓包绕过</a>
         </span>
         
     </div>
     <a href="/2023/08/12/%E7%BB%95%E8%BF%87%E4%B8%8D%E5%A1%AB%E5%86%992023%E7%BA%A7%E9%9B%86%E4%B8%AD%E6%95%99%E5%AD%A6%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E8%B0%83%E6%9F%A5%E8%A1%A8%E6%95%99%E7%A8%8B/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2023/08/11/%E4%BD%BF%E7%94%A8Python%E4%BB%8E%E9%9B%B6%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AAPython%E8%A7%A3%E9%87%8A%E5%99%A8/">
-        <h2 class="post-title">使用Python从零构建一个Python解释器</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2023/8/11
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <blockquote>
-<p>本项目主要是对<a target="_blank" rel="noopener" href="https://aosabook.org/en/500L/a-python-interpreter-written-in-python.html">500 Lines or LessA Python Interpreter Written in Python (aosabook.org)</a> 的复现，尝试通过Python来实现Python的解释器，从而理解Python的原理。</p>
-</blockquote>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E4%BB%8E%E9%9B%B6%E6%89%8B%E6%90%93Python%E8%A7%A3%E9%87%8A%E5%99%A8/" style="color: #ffa2c4">从零手搓Python解释器</a>
-        </span>
-        
-    </div>
-    <a href="/2023/08/11/%E4%BD%BF%E7%94%A8Python%E4%BB%8E%E9%9B%B6%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AAPython%E8%A7%A3%E9%87%8A%E5%99%A8/" class="go-post">阅读全文</a>
 </div>
 
 
