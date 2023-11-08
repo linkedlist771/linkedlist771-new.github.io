@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>build_self_transformer | LinkedList&#39;s Blog</title>
+        <meta name="author" content="Ding Li" />
+        <meta name="description" content="This is blog for Linkedlist771, mainly record some learning notes, thank you for your visit!" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/favicon.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.staticfile.org/waline/2.14.8/waline.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.14.8/waline.min.css" />
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.14.8/waline-meta.min.css" />
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>LINKEDLIST&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LINKEDLIST&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1>build_self_transformer</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/11/3
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Transformer/" style="color: #ffa2c4">Transformer</a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <blockquote>
+<p>This blog tells you how to build a transformers from scratch.</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="Why-when-need-transformers"><a href="#Why-when-need-transformers" class="headerlink" title="Why when need transformers"></a>Why when need transformers</h1><p>How far the Neural Network can look back depends on the length of the NN and the choice.</p>
+<p><strong>CNN have a notable disadvantage for time series prediction</strong> :</p>
+<ul>
+<li>Increase the kernel size(also increase the parameters).</li>
+<li><code>Skips over</code> some past state&#x2F;inputs</li>
+</ul>
+<p>$\rightarrow$ trade-off</p>
+<h1 id="Transformers"><a href="#Transformers" class="headerlink" title="Transformers"></a>Transformers</h1><h2 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h2><p><img src="/../images/image-20231103151429168.png" alt="image-20231103151429168"></p>
+<blockquote>
+<p><strong>Attention</strong> in deep networks generally refers to any mechanism <code>where individual states are weighted and then combined</code>.</p>
+</blockquote>
+<blockquote>
+<p>The states depend more on the later element than the previous element (problem for RNN, LSTM).</p>
+<p>For the <code>Attention</code> , we take several latter states rather than one to compute  :<br>$$<br>\overline{h} &#x3D; \sum_{t&#x3D;1}^T w_th_t(k) \text{for example the whole time sequence}<br>$$</p>
+</blockquote>
+<h1 id="Self-Attention-Mechansim"><a href="#Self-Attention-Mechansim" class="headerlink" title="Self-Attention Mechansim"></a>Self-Attention Mechansim</h1><blockquote>
+<p>$K,Q,V\in R^{T\times d}$ (keys, queries, values):</p>
+<p>To get $K$, $K &#x3D; XW_k$, $k_1$ only depends on the $x_1$, and so on.<br>$$<br>SelfAttention(K,Q,V) &#x3D; softmax(\frac{KQ^T}{\sqrt{d}}) V<br>$$<br> $KQ^T$ is $R	^{T\times T}$ ， in this matrix:<br>$$<br>entry_{(i,j)} &#x3D; k_i^Tq_j<br>$$<br>Similarity of the $k_i$ and $q_j$.</p>
+<p>The softmax is by row, each of the row will now turn into weights sum to 1.</p>
+<p>$d\in R^{T\times}$, so the output is also $R^{T\times d}$.</p>
+<p>Each row of the output </p>
+<p><code>Properties</code>:</p>
+<ul>
+<li>Invariant, same permutations of the $K,Q,V$ lead to the same permutation of the output.</li>
+<li>Allows influence between $k_t, q_t, v_t$ over all times.  <em>Without increase the parameter counts</em></li>
+<li>Compute cost is $O(T^2 d +Td)$.</li>
+</ul>
+</blockquote>
+<h1 id="Transformers-architecture"><a href="#Transformers-architecture" class="headerlink" title="Transformers architecture"></a>Transformers architecture</h1><p><img src="/../images/image-20231103154001603.png" alt="image-20231103154001603"></p>
+<h2 id="Transformer-Block"><a href="#Transformer-Block" class="headerlink" title="Transformer Block"></a>Transformer Block</h2><p>$z_1 &#x3D; SelfAttention(z^{i}w_K,z^{i}w_Q,z^{i}w_V &#x3D; softmax(\frac{z^{i}w_Kw_Q^Tz^{i T}}{\sqrt{d}}) z^{i}w_V$</p>
+<p>$z_2 &#x3D; LayerNorm(z^{i}+z_1)$</p>
+<p>$z^{i+1} &#x3D; LayerNorm(z_2+Relu(z_2w_1)w_2)$</p>
+<p>$Relu(z_2w_1)w_2$ is a two layer network in the <code>MLP</code>. </p>
+<h1 id="Masked-Self-Attention"><a href="#Masked-Self-Attention" class="headerlink" title="Masked Self-Attention"></a>Masked Self-Attention</h1><blockquote>
+<p>Encode the position into the transformer</p>
+</blockquote>
+<p><img src="/../images/image-20231103160658243.png" alt="image-20231103160658243"></p>
+<p>After the softmax， make the upper triangle are all zeros.</p>
+<p><img src="/../images/image-20231103161830126.png" alt="image-20231103161830126"></p>
+<p><img src="/../images/image-20231103162039410.png" alt="image-20231103162039410"></p>
+<p>Add <em>Position encoding</em> so that the neural network knows where is the x.</p>
+
+    </div>
+    
+    
+    
+    
+    
+    <div id="comment">
+        <div id="waline-container"></div>
+    </div>
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 LinkedList&#39;s Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Ding Li
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+
+
+    
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+<script>
+    Waline.init({
+        el: "#waline-container",
+        serverURL: "my-comment-tau.vercel.app",
+        commentCount: true,
+        pageview: false,
+        emoji: "https://unpkg.com/@waline/emojis@1.2.0/weibo,https://unpkg.com/@waline/emojis@1.2.0/alus,https://unpkg.com/@waline/emojis@1.2.0/bilibili,https://unpkg.com/@waline/emojis@1.2.0/qq,https://unpkg.com/@waline/emojis@1.2.0/tieba,https://unpkg.com/@waline/emojis@1.2.0/tw-emoji".split(","),
+        meta: "nick,mail,link".split(","),
+        requiredMeta: "nick".split(","),
+        lang: "zh-CN",
+        wordLimit: 0,
+        pageSize: "10",
+        login: "enable",
+        
+    });
+</script>
+
+
+
+        
+    </body>
+</html>

@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <title>ElectronFristPractice | LinkedList&#39;s Blog</title>
+        <meta name="author" content="Ding Li" />
+        <meta name="description" content="This is blog for Linkedlist771, mainly record some learning notes, thank you for your visit!" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <link rel="icon" href="/images/favicon.png" />
+        <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.3.0/css/all.min.css" />
+<link rel="stylesheet" href="/css/fonts.min.css" />
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.js"></script>
+<script src="https://cdn.staticfile.org/KaTeX/0.16.4/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.4/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.staticfile.org/waline/2.14.8/waline.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.14.8/waline.min.css" />
+<link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.14.8/waline-meta.min.css" />
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+    <meta name="generator" content="Hexo 6.3.0"></head>
+    <body>
+        <div id="layout">
+            <transition name="fade">
+                <div id="loading" v-show="loading">
+                    <div id="loading-circle">
+                        <h2>LOADING</h2>
+                        <p>加载过慢请开启缓存 浏览器默认开启</p>
+                        <img src="/images/loading.gif" />
+                    </div>
+                </div>
+            </transition>
+            <nav id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <div id="desktop-menu">
+        <a class="title" href="/">
+            <span>LINKEDLIST&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </div>
+    <div id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;LINKEDLIST&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </div>
+</nav>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+            <transition name="into">
+                <div id="main" v-show="!loading">
+                    <div class="article">
+    <div>
+        <h1>ElectronFristPractice</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2023/11/3
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <blockquote>
+<p>This blog tells how you could build your own first <code>electron app</code> from scratch.</p>
+</blockquote>
+<span id="more"></span>
+
+
+
+<h1 id="Raw-electron"><a href="#Raw-electron" class="headerlink" title="Raw electron"></a>Raw electron</h1><h3 id="1-Prerequisites"><a href="#1-Prerequisites" class="headerlink" title="1. Prerequisites:"></a>1. Prerequisites:</h3><ul>
+<li><strong>Node.js and npm</strong>: Ensure you have Node.js and npm installed. If not, download and install them from <a target="_blank" rel="noopener" href="https://nodejs.org/">Node.js official website</a>.</li>
+</ul>
+<h3 id="2-Setting-Up-Your-Project"><a href="#2-Setting-Up-Your-Project" class="headerlink" title="2. Setting Up Your Project:"></a>2. Setting Up Your Project:</h3><ol>
+<li><p><strong>Create a new directory</strong> for your project:</p>
+<pre><code class="bash">mkdir my-electron-app
+cd my-electron-app
+</code></pre>
+</li>
+<li><p><strong>Initialize a new Node.js project</strong>:</p>
+<pre><code class="bash">npm init
+</code></pre>
+</li>
+<li><p><strong>Install Electron</strong>:</p>
+<pre><code class="bash">npm install electron --save-dev
+</code></pre>
+</li>
+</ol>
+<h3 id="3-Create-Your-App"><a href="#3-Create-Your-App" class="headerlink" title="3. Create Your App:"></a>3. Create Your App:</h3><ol>
+<li><p>In the root directory of your project, create an <code>index.html</code> file. This will be the main page of your app. Add some basic HTML content:</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Electron App&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, Electron!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</li>
+<li><p>Create a <code>main.js</code> file in the root directory. This will be the main process of your Electron app:</p>
+<pre><code class="javascript">const &#123; app, BrowserWindow &#125; = require(&#39;electron&#39;);
+
+let mainWindow;
+
+app.on(&#39;ready&#39;, () =&gt; &#123;
+    mainWindow = new BrowserWindow(&#123;
+        width: 800,
+        height: 600,
+        webPreferences: &#123;
+            nodeIntegration: true
+        &#125;
+    &#125;);
+
+    mainWindow.loadFile(&#39;index.html&#39;);
+&#125;);
+</code></pre>
+</li>
+<li><p>In your <code>package.json</code>, set the <code>main</code> field to <code>main.js</code> and add a start script:</p>
+<pre><code class="json">&quot;main&quot;: &quot;main.js&quot;,
+&quot;scripts&quot;: &#123;
+    &quot;start&quot;: &quot;electron .&quot;
+&#125;
+</code></pre>
+</li>
+</ol>
+<h3 id="4-Test-Your-App"><a href="#4-Test-Your-App" class="headerlink" title="4. Test Your App:"></a>4. Test Your App:</h3><p>Run the following command to start your Electron app:</p>
+<pre><code class="bash">npm start
+</code></pre>
+<p>If everything is set up correctly, you should see a new window displaying the content of your <code>index.html</code> file.</p>
+<h3 id="5-Package-Your-App-with-Electron"><a href="#5-Package-Your-App-with-Electron" class="headerlink" title="5. Package Your App with Electron:"></a>5. Package Your App with Electron:</h3><ol>
+<li><p><strong>Install electron-packager</strong>:</p>
+<pre><code class="bash">npm install electron-packager --save-dev
+</code></pre>
+</li>
+<li><p><strong>Package your app</strong>:</p>
+<pre><code class="bash">npx electron-packager . MyElectronApp --platform=win32 --arch=x64
+</code></pre>
+<p>This command will package your app for Windows (64-bit). You can specify other platforms and architectures as needed.</p>
+</li>
+<li><p>Once the packaging process is complete, you’ll find a new directory named <code>MyElectronApp-win32-x64</code> (or similar, depending on the platform and architecture you specified) in your project directory. This directory contains the packaged version of your app.</p>
+</li>
+<li><p>Navigate to the directory and run the <code>.exe</code> file (on Windows) to launch your packaged app.</p>
+</li>
+</ol>
+<h3 id="1-Use-electron-builder"><a href="#1-Use-electron-builder" class="headerlink" title="1. Use electron-builder:"></a>1. <strong>Use electron-builder</strong>:</h3><p><a target="_blank" rel="noopener" href="https://www.electron.build/">electron-builder</a> is a complete solution to package and build a ready-for-distribution Electron app. It can help reduce the size of the packaged app by removing unnecessary files.</p>
+<ol>
+<li><p>Install electron-builder:</p>
+<pre><code class="bash">npm install electron-builder --save-dev
+</code></pre>
+</li>
+<li><p>Add a build script to your <code>package.json</code>:</p>
+<pre><code class="json">&quot;scripts&quot;: &#123;
+    &quot;pack&quot;: &quot;electron-builder --dir&quot;,
+    &quot;dist&quot;: &quot;electron-builder&quot;
+&#125;
+</code></pre>
+</li>
+<li><p>Add a <code>build</code> field to your <code>package.json</code> to specify build options:</p>
+<pre><code class="json">&quot;build&quot;: &#123;
+    &quot;appId&quot;: &quot;your.id&quot;,
+    &quot;productName&quot;: &quot;YourProductName&quot;,
+    &quot;directories&quot;: &#123;
+        &quot;output&quot;: &quot;dist&quot;
+    &#125;,
+    &quot;files&quot;: [
+        &quot;index.html&quot;,
+        &quot;main.js&quot;,
+        &quot;package.json&quot;
+    ]
+&#125;
+</code></pre>
+</li>
+<li><p>Run the build script:</p>
+<pre><code class="bash">npm run dist
+</code></pre>
+</li>
+</ol>
+<h1 id="Use-Electron-Forge"><a href="#Use-Electron-Forge" class="headerlink" title="Use Electron Forge"></a>Use Electron Forge</h1><p><a target="_blank" rel="noopener" href="https://www.electronforge.io/">Electron Forge</a> is a complete tool for building, packaging, and publishing Electron applications. It provides a unified way to work with Electron projects and simplifies many of the tasks associated with Electron development.</p>
+<p>Here’s a step-by-step guide to using Electron Forge to package your Electron app:</p>
+<h3 id="1-Install-Electron-Forge"><a href="#1-Install-Electron-Forge" class="headerlink" title="1. Install Electron Forge:"></a>1. Install Electron Forge:</h3><p>If you’re starting a new project, you can use the Electron Forge CLI to initialize it:</p>
+<pre><code class="bash">npx create-electron-app my-new-app
+cd my-new-app
+</code></pre>
+<p>For an existing project like yours, you can integrate Electron Forge:</p>
+<pre><code class="bash">npx electron-forge import
+</code></pre>
+<p>This command will make necessary changes to your project to make it compatible with Electron Forge.</p>
+<h3 id="2-Modify-Package-Configuration"><a href="#2-Modify-Package-Configuration" class="headerlink" title="2. Modify Package Configuration:"></a>2. Modify Package Configuration:</h3><p>Electron Forge will add a new <code>config</code> section to your <code>package.json</code>. You can modify this section to customize the build process. For example, to enable packaging with the <code>asar</code> format:</p>
+<pre><code class="json">&quot;config&quot;: &#123;
+  &quot;forge&quot;: &#123;
+    &quot;packagerConfig&quot;: &#123;
+      &quot;asar&quot;: true
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+<h3 id="3-Package-Your-App"><a href="#3-Package-Your-App" class="headerlink" title="3. Package Your App:"></a>3. Package Your App:</h3><p>To package your app, simply run:</p>
+<pre><code class="bash">npm run package
+</code></pre>
+<p>This will create a packaged version of your app in the <code>out</code> directory.</p>
+<h3 id="4-Create-a-Distributable"><a href="#4-Create-a-Distributable" class="headerlink" title="4. Create a Distributable:"></a>4. Create a Distributable:</h3><p>If you want to create a distributable format (like an installer for Windows or a dmg for macOS), you can use:</p>
+<pre><code class="bash">npm run make
+</code></pre>
+<p>This will create the distributable files in the <code>out/make</code> directory.</p>
+<h3 id="5-Customize-the-Build"><a href="#5-Customize-the-Build" class="headerlink" title="5. Customize the Build:"></a>5. Customize the Build:</h3><p>Electron Forge supports various “makers” and “publishers” to customize the build and publishing process. You can add them to the <code>forge</code> configuration in your <code>package.json</code>.</p>
+<p>For example, to add support for creating a Windows installer:</p>
+<pre><code class="json">&quot;config&quot;: &#123;
+  &quot;forge&quot;: &#123;
+    &quot;makers&quot;: [
+      &#123;
+        &quot;name&quot;: &quot;@electron-forge/maker-squirrel&quot;,
+        &quot;config&quot;: &#123;
+          &quot;name&quot;: &quot;my_electron_app&quot;
+        &#125;
+      &#125;
+    ]
+  &#125;
+&#125;
+</code></pre>
+<p>You’ll also need to install the necessary maker:</p>
+<pre><code class="bash">npm install --save-dev @electron-forge/maker-squirrel
+</code></pre>
+<h3 id="6-Publish-Your-App"><a href="#6-Publish-Your-App" class="headerlink" title="6. Publish Your App:"></a>6. Publish Your App:</h3><p>If you want to publish your app to platforms like GitHub Releases, you can configure a publisher in the <code>forge</code> configuration and then use:</p>
+<pre><code class="bash">npm run publish
+</code></pre>
+<p>Remember to always test your packaged and distributed app to ensure it works as expected on all target platforms.</p>
+<p>Electron Forge provides a streamlined process for Electron development, but the size of the packaged app will still include the Electron runtime. If size remains a concern, consider the strategies mentioned earlier to reduce the overall size.</p>
+
+    </div>
+    
+    
+    
+    
+    
+    <div id="comment">
+        <div id="waline-container"></div>
+    </div>
+    
+    
+    
+</div>
+
+                    <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2023 LinkedList&#39;s Blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Ding Li
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+
+
+    
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</footer>
+
+                </div>
+            </transition>
+            
+            <transition name="fade">
+                <div id="preview" ref="preview" v-show="previewShow">
+                    <img id="preview-content" ref="previewContent" />
+                </div>
+            </transition>
+            
+        </div>
+        <script src="/js/main.js"></script>
+        
+        
+
+
+<script>
+    Waline.init({
+        el: "#waline-container",
+        serverURL: "my-comment-tau.vercel.app",
+        commentCount: true,
+        pageview: false,
+        emoji: "https://unpkg.com/@waline/emojis@1.2.0/weibo,https://unpkg.com/@waline/emojis@1.2.0/alus,https://unpkg.com/@waline/emojis@1.2.0/bilibili,https://unpkg.com/@waline/emojis@1.2.0/qq,https://unpkg.com/@waline/emojis@1.2.0/tieba,https://unpkg.com/@waline/emojis@1.2.0/tw-emoji".split(","),
+        meta: "nick,mail,link".split(","),
+        requiredMeta: "nick".split(","),
+        lang: "zh-CN",
+        wordLimit: 0,
+        pageSize: "10",
+        login: "enable",
+        
+    });
+</script>
+
+
+
+        
+    </body>
+</html>

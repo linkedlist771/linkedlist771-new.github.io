@@ -12,8 +12,11 @@ for image_name in os.listdir(typro_image_dir_path):
     # 检查目标目录中是否已经存在同名文件
     if not os.path.exists(target_image_path):
         # 如果不存在，则复制
-        shutil.copy(source_image_path, target_image_path)
-        print(f"Copied {image_name} to Hexo image directory.")
+        try:
+            shutil.copy(source_image_path, target_image_path)
+            print(f"Copied {image_name} to Hexo image directory.")
+        except Exception as e:
+            print(f"Failed to copy {image_name} to Hexo image directory with error: {e}")
     else:
         print(f"{image_name} already exists in Hexo image directory. Skipping.")
 
