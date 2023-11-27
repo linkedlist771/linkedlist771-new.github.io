@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>基于GPTPlus账号部署API | LinkedList&#39;s Blog</title>
+        <title>ScrapyStartUpBestPractice | LinkedList&#39;s Blog</title>
         <meta name="author" content="Ding Li" />
         <meta name="description" content="This is blog for Linkedlist771, mainly record some learning notes, thank you for your visit!" />
         <meta name="keywords" content="" />
@@ -156,14 +156,14 @@
                 <div id="main" v-show="!loading">
                     <div class="article">
     <div>
-        <h1>基于GPTPlus账号部署API</h1>
+        <h1>ScrapyStartUpBestPractice</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2023/6/10
+            2023/11/22
         </span>
         
         
@@ -174,7 +174,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/GPTPlus-GPT4-API%E9%83%A8%E7%BD%B2/" style="color: #03a9f4">GPTPlus, GPT4 API部署</a>
+                <a href="/tags/scrapy/" style="color: #00a596">scrapy</a>
             </span>
             
         </span>
@@ -183,104 +183,103 @@
     
     <div class="content" v-pre>
         <blockquote>
-<p>这个博客主要介绍如何基于<code>GPT - Plus</code>用户的账号来部署<code>API</code>。</p>
+<p>This blog tells you mainly about how to build your first scrapy project.</p>
 </blockquote>
 <span id="more"></span>
 
-<p>整个项目是对<a target="_blank" rel="noopener" href="https://github.com/linkedlist771/infiniteGPT4">linkedlist771&#x2F;infiniteGPT4: 基于revChatGPT和IOS新推出的无限次GPT4使用实现GPT4无限次数使用的API (github.com)</a> 的一个延伸， 在之前的项目中没有解决很重要的问题， 就是反代服务器利用的是作者部署的公网服务器。如果要自己使用的话，最好能够基于自己的服务器实现一个。所以第一步我们需要构建一个反代服务。</p>
-<h3 id="ChatGPT反代服务构建"><a href="#ChatGPT反代服务构建" class="headerlink" title="ChatGPT反代服务构建"></a>ChatGPT反代服务构建</h3><p>反代服务器的搭建，可以参考：<a target="_blank" rel="noopener" href="https://github.com/acheong08/ChatGPT-Proxy-V4">acheong08&#x2F;ChatGPT-Proxy-V4: Simple Cloudflare bypass for ChatGPT (github.com)</a>。 </p>
-<p>首先需要下载这个项目：</p>
-<pre><code class="bash">git clone git@github.com:acheong08/ChatGPT-Proxy-V4.git
+<h2 id="installation"><a href="#installation" class="headerlink" title="installation"></a>installation</h2><p>Skip this part</p>
+<h2 id="first-project"><a href="#first-project" class="headerlink" title="first project"></a>first project</h2><pre><code class="bash">scrapy startproject tutorial
 </code></pre>
-<p>笔者使用的服务器为<code>centos</code>， 基于你使用的服务器的类型，不同的命令可能稍有不同，稍作调整即可。主要分为以下几步:</p>
-<ol>
-<li><strong>安装Go环境：</strong></li>
-</ol>
-<p>Go的安装包可以从<a target="_blank" rel="noopener" href="https://golang.org/dl/">Go官网</a>上找到，选择一个合适的版本下载到你的CentOS服务器。例如，如果我们要下载Go 1.16.4版本，可以使用下面的命令：</p>
-<pre><code class="bash">
-wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz
-</code></pre>
-<p>然后，解压这个文件到<code>/usr/local</code>：</p>
-<pre><code class="bash">tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz
-</code></pre>
-<p>将Go的二进制文件添加到<code>PATH</code>中：</p>
-<pre><code class="bash">echo &quot;export PATH=$PATH:/usr/local/go/bin&quot; &gt;&gt; ~/.bash_profile
-source ~/.bash_profile
-</code></pre>
-<p>你可以使用<code>go version</code>命令来验证Go是否安装成功。</p>
-<p> <img src="/../images/image-20230610174001359.png" alt="image-20230610174001359"></p>
-<p>我这里测试是成功的。</p>
-<ol start="2">
-<li><strong>设置环境变量：</strong></li>
-</ol>
-<p>你需要一个ChatGPT Plus账号的PUID来设置环境变量。你可以使用下面的命令将PUID添加到环境变量中：</p>
-<pre><code>bashCopy codeecho &quot;export PUID=\&quot;user-...\&quot;&quot; &gt;&gt; ~/.bash_profile
-source ~/.bash_profile
-</code></pre>
-<p>记得将”user-…”替换为你的实际PUID。</p>
-<p>其中<code>PUID</code>意思为<code>Plus UID</code> 也就是你的账户的ID， 可以在这里找到：<a target="_blank" rel="noopener" href="https://chat.openai.com/api/auth/session">chat.openai.com&#x2F;api&#x2F;auth&#x2F;session</a>， </p>
-<ol start="3">
-<li><strong>构建和运行项目：</strong></li>
-</ol>
-<p>首先，你需要把项目代码复制到你的服务器上。你可以使用<code>git clone</code>命令来完成这个步骤，如果项目代码托管在一个git仓库上的话。</p>
-<p>在项目的根目录下，使用<code>go build</code>命令构建项目：</p>
-<pre><code class="bash">go build
-</code></pre>
-<p>将会输出一下内容：</p>
-<pre><code class="bash">go build
-go: downloading github.com/acheong08/endless v0.0.0-20230522010333-1359fd84c836
-go: downloading github.com/bogdanfinn/fhttp v0.5.22
-go: downloading github.com/bogdanfinn/tls-client v1.3.12
-go: downloading github.com/gin-gonic/gin v1.9.0
-go: downloading github.com/andybalholm/brotli v1.0.5
-go: downloading github.com/bogdanfinn/utls v1.5.16
-go: downloading golang.org/x/net v0.10.0
-go: downloading github.com/tam7t/hpkp v0.0.0-20160821193359-2b70b4024ed5
-go: downloading github.com/gin-contrib/sse v0.1.0
-go: downloading github.com/mattn/go-isatty v0.0.19
-go: downloading github.com/klauspost/compress v1.16.5
-go: downloading golang.org/x/crypto v0.9.0
-go: downloading golang.org/x/text v0.9.0
-go: downloading github.com/go-playground/validator/v10 v10.14.0
-go: downloading github.com/pelletier/go-toml/v2 v2.0.8
-go: downloading github.com/ugorji/go/codec v1.2.11
-go: downloading google.golang.org/protobuf v1.30.0
-go: downloading gopkg.in/yaml.v3 v3.0.1
-go: downloading golang.org/x/sys v0.8.0
-go: downloading github.com/gabriel-vasile/mimetype v1.4.2
-go: downloading github.com/go-playground/universal-translator v0.18.1
-go: downloading github.com/leodido/go-urn v1.2.4
-...
-</code></pre>
-<p>现在，你应该可以在项目的根目录下看到一个叫做<code>ChatGPT-Proxy-V4</code>的可执行文件。你可以直接运行这个文件来启动项目：</p>
-<p>这是我的目录：</p>
-<pre><code class="bash">ChatGPT-Proxy-V4  docker-compose.yml  Dockerfile  go1.20.5.linux-amd64.tar.gz  go.mod  go.sum  LICENSE  main.go  README.md
-</code></pre>
-<p>运行后， 你讲看到以下输出：</p>
-<pre><code class="bash">[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+<p>This will create a <code>tutorial</code> directory with the following contents:</p>
+<pre><code class="bash">tutorial/
+    scrapy.cfg            # deploy configuration file
 
-[GIN-debug] [WARNING] Running in &quot;debug&quot; mode. Switch to &quot;release&quot; mode in production.
- - using env:   export GIN_MODE=release
- - using code:  gin.SetMode(gin.ReleaseMode)
+    tutorial/             # project&#39;s Python module, you&#39;ll import your code from here
+        __init__.py
 
-[GIN-debug] GET    /ping                     --&gt; main.main.func1 (3 handlers)
-[GIN-debug] PATCH  /admin/puid               --&gt; main.main.func2 (4 handlers)
-[GIN-debug] PATCH  /admin/password           --&gt; main.main.func3 (4 handlers)
-[GIN-debug] GET    /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] POST   /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] PUT    /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] PATCH  /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] HEAD   /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] OPTIONS /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] DELETE /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] CONNECT /api/*path                --&gt; main.proxy (3 handlers)
-[GIN-debug] TRACE  /api/*path                --&gt; main.proxy (3 handlers)
-2023/06/10 05:54:46 1878014 :9090
+        items.py          # project items definition file
+
+        middlewares.py    # project middlewares file
+
+        pipelines.py      # project pipelines file
+
+        settings.py       # project settings file
+
+        spiders/          # a directory where you&#39;ll later put your spiders
+            __init__.py
 </code></pre>
-<p>目前，我们就部署完毕了。 注意，这里你需要打开<code>9090</code>端口的防火墙，不然的话反代无法发挥作用。</p>
-<pre><code class="bash">sudo firewall-cmd --permanent --add-port=9090/tcp
-sudo firewall-cmd --reload
+<p>Spiders are classes that you define and that Scrapy uses to scrape information from a website (or a group of websites). They must subclass <a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/spiders.html#scrapy.Spider"><code>Spider</code></a> and define the initial requests to make, optionally how to follow links in the pages, and how to parse the downloaded page content to extract data.</p>
+<p>This is the code for our first Spider. Save it in a file named <code>quotes_spider.py</code> under the <code>tutorial/spiders</code> directory in your project:</p>
+<pre><code class="python">from pathlib import Path
+
+import scrapy
+
+
+class QuotesSpider(scrapy.Spider):
+    name = &quot;quotes&quot;
+
+    def start_requests(self):
+        urls = [
+            &quot;https://quotes.toscrape.com/page/1/&quot;,
+            &quot;https://quotes.toscrape.com/page/2/&quot;,
+        ]
+        for url in urls:
+            yield scrapy.Request(url=url, callback=self.parse)
+
+    def parse(self, response):
+        page = response.url.split(&quot;/&quot;)[-2]
+        filename = f&quot;quotes-&#123;page&#125;.html&quot;
+        Path(filename).write_bytes(response.body)
+        self.log(f&quot;Saved file &#123;filename&#125;&quot;)
 </code></pre>
+<p>As you can see, our Spider subclasses <a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/spiders.html#scrapy.Spider"><code>scrapy.Spider</code></a> and defines some attributes and methods:</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/spiders.html#scrapy.Spider.name"><code>name</code></a>: identifies the Spider. It must be unique within a project, that is, you can’t set the same name for different Spiders.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/spiders.html#scrapy.Spider.start_requests"><code>start_requests()</code></a>: must return an iterable of Requests (you can return a list of requests or write a generator function) which the Spider will begin to crawl from. Subsequent requests will be generated successively from these initial requests.</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/spiders.html#scrapy.Spider.parse"><code>parse()</code></a>: a method that will be called to handle the response downloaded for each of the requests made. The response parameter is an instance of <a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/request-response.html#scrapy.http.TextResponse"><code>TextResponse</code></a> that holds the page content and has further helpful methods to handle it.</p>
+<p>The <a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/spiders.html#scrapy.Spider.parse"><code>parse()</code></a> method usually parses the response, extracting the scraped data as dicts and also finding new URLs to follow and creating new requests (<code>Request</code>) from them.</p>
+<h3 id="How-to-run-our-spider¶"><a href="#How-to-run-our-spider¶" class="headerlink" title="How to run our spider¶"></a>How to run our spider<a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/intro/tutorial.html#how-to-run-our-spider">¶</a></h3><p>To put our spider to work, go to the project’s top level directory and run:</p>
+<pre><code>scrapy crawl quotes
+</code></pre>
+</li>
+</ul>
+<h3 id="Extracting-data¶"><a href="#Extracting-data¶" class="headerlink" title="Extracting data¶"></a>Extracting data<a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/intro/tutorial.html#extracting-data">¶</a></h3><p>The best way to learn how to extract data with Scrapy is trying selectors using the <a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/shell.html#topics-shell">Scrapy shell</a>. Run:</p>
+<pre><code>scrapy shell &#39;https://quotes.toscrape.com/page/1/&#39;
+</code></pre>
+<h1 id="Scrapy-Course"><a href="#Scrapy-Course" class="headerlink" title="Scrapy Course"></a>Scrapy Course</h1><h2 id="Scrapy-Item"><a href="#Scrapy-Item" class="headerlink" title="Scrapy Item"></a>Scrapy Item</h2><h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><blockquote>
+<p>Clean data, convert …. Process data, store the data(&#x3D;&gt; into a database). </p>
+</blockquote>
+<p>These class should be activated in the <code>settings.py</code> when finished the convert.</p>
+<h2 id="Save-data-setting"><a href="#Save-data-setting" class="headerlink" title="Save data setting"></a>Save data setting</h2><pre><code class="python">FEEDS = &#123;
+    &quot;xxx.json&quot;: &#123;&quot;format&quot;:&quot;json&quot;&#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>You can rewrite settings in the <code>settings.py</code> in the <code>Class</code>.</p>
+</blockquote>
+<p><img src="/../images/image-20231124152152217.png" alt="image-20231124152152217"></p>
+<h3 id="Save-the-data-into-the-SQL-database"><a href="#Save-the-data-into-the-SQL-database" class="headerlink" title="Save the data into the SQL database"></a>Save the data into the <code>SQL</code> database</h3><hr>
+<blockquote>
+<p>TO BE CONTINUED</p>
+</blockquote>
+<hr>
+<h3 id="User-agent-and-headers"><a href="#User-agent-and-headers" class="headerlink" title="User agent and headers"></a>User agent and headers</h3><blockquote>
+<p>The user agent is a string that a browser sends to a web server to identify itself. This string often includes details about the browser, its version, and the operating system it’s running on. For example, a user agent string might look like “Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;58.0.3029.110 Safari&#x2F;537.36”. This helps the server understand what kind of browser is making the request, so it can tailor its response appropriately, such as formatting the web page for a specific browser, user agent is a subset of the <code>headers</code>.</p>
+</blockquote>
+<p>Use different <code>user-agent</code> in the spiders.</p>
+<p>In the <code>settings.py</code> define the <strong>USER_AGENT</strong> :</p>
+<pre><code>USER_AGENT = &quot;...&quot;
+</code></pre>
+<p><img src="/../images/image-20231127113637596.png" alt="image-20231127113637596"></p>
+<p>In the <code>response.fellow</code> function, you can specify the <code>user-agent</code> in the call back functions to override the user-agent.</p>
+<p>In the <code>middlewares.py</code>  we can use the fake user-agent and pass it into the requests. You can use the website:</p>
+<p><a target="_blank" rel="noopener" href="https://scrapeops.io/">ScrapeOps - The DevOps Tool For Web Scraping. | ScrapeOps</a></p>
+<p>To make fake <code>User-Agent</code>, and use <code>api</code> from this website to make fake user-agent.</p>
+<p><img src="/../images/image-20231127114228372.png" alt="image-20231127114228372"></p>
+<p>定义完成后需要将中间件导入</p>
+<p><img src="/../images/image-20231127115749628.png" alt="image-20231127115749628"></p>
 
     </div>
     
