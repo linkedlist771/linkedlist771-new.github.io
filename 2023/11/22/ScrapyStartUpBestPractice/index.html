@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>ScrapyStartUpBestPractice | LinkedList&#39;s Blog</title>
+        <title> | LinkedList&#39;s Blog</title>
         <meta name="author" content="Ding Li" />
         <meta name="description" content="This is blog for Linkedlist771, mainly record some learning notes, thank you for your visit!" />
         <meta name="keywords" content="" />
@@ -156,7 +156,7 @@
                 <div id="main" v-show="!loading">
                     <div class="article">
     <div>
-        <h1>ScrapyStartUpBestPractice</h1>
+        <h1></h1>
     </div>
     <div class="info">
         <span class="date">
@@ -167,120 +167,10 @@
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/scrapy/" style="color: #ffa2c4">scrapy</a>
-            </span>
-            
-        </span>
-        
     </div>
     
     <div class="content" v-pre>
-        <blockquote>
-<p>This blog tells you mainly about how to build your first scrapy project.</p>
-</blockquote>
-<span id="more"></span>
-
-<h2 id="installation"><a href="#installation" class="headerlink" title="installation"></a>installation</h2><p>Skip this part</p>
-<h2 id="first-project"><a href="#first-project" class="headerlink" title="first project"></a>first project</h2><pre><code class="bash">scrapy startproject tutorial
-</code></pre>
-<p>This will create a <code>tutorial</code> directory with the following contents:</p>
-<pre><code class="bash">tutorial/
-    scrapy.cfg            # deploy configuration file
-
-    tutorial/             # project&#39;s Python module, you&#39;ll import your code from here
-        __init__.py
-
-        items.py          # project items definition file
-
-        middlewares.py    # project middlewares file
-
-        pipelines.py      # project pipelines file
-
-        settings.py       # project settings file
-
-        spiders/          # a directory where you&#39;ll later put your spiders
-            __init__.py
-</code></pre>
-<p>Spiders are classes that you define and that Scrapy uses to scrape information from a website (or a group of websites). They must subclass <a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/spiders.html#scrapy.Spider"><code>Spider</code></a> and define the initial requests to make, optionally how to follow links in the pages, and how to parse the downloaded page content to extract data.</p>
-<p>This is the code for our first Spider. Save it in a file named <code>quotes_spider.py</code> under the <code>tutorial/spiders</code> directory in your project:</p>
-<pre><code class="python">from pathlib import Path
-
-import scrapy
-
-
-class QuotesSpider(scrapy.Spider):
-    name = &quot;quotes&quot;
-
-    def start_requests(self):
-        urls = [
-            &quot;https://quotes.toscrape.com/page/1/&quot;,
-            &quot;https://quotes.toscrape.com/page/2/&quot;,
-        ]
-        for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse)
-
-    def parse(self, response):
-        page = response.url.split(&quot;/&quot;)[-2]
-        filename = f&quot;quotes-&#123;page&#125;.html&quot;
-        Path(filename).write_bytes(response.body)
-        self.log(f&quot;Saved file &#123;filename&#125;&quot;)
-</code></pre>
-<p>As you can see, our Spider subclasses <a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/spiders.html#scrapy.Spider"><code>scrapy.Spider</code></a> and defines some attributes and methods:</p>
-<ul>
-<li><p><a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/spiders.html#scrapy.Spider.name"><code>name</code></a>: identifies the Spider. It must be unique within a project, that is, you can’t set the same name for different Spiders.</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/spiders.html#scrapy.Spider.start_requests"><code>start_requests()</code></a>: must return an iterable of Requests (you can return a list of requests or write a generator function) which the Spider will begin to crawl from. Subsequent requests will be generated successively from these initial requests.</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/spiders.html#scrapy.Spider.parse"><code>parse()</code></a>: a method that will be called to handle the response downloaded for each of the requests made. The response parameter is an instance of <a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/request-response.html#scrapy.http.TextResponse"><code>TextResponse</code></a> that holds the page content and has further helpful methods to handle it.</p>
-<p>The <a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/spiders.html#scrapy.Spider.parse"><code>parse()</code></a> method usually parses the response, extracting the scraped data as dicts and also finding new URLs to follow and creating new requests (<code>Request</code>) from them.</p>
-<h3 id="How-to-run-our-spider¶"><a href="#How-to-run-our-spider¶" class="headerlink" title="How to run our spider¶"></a>How to run our spider<a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/intro/tutorial.html#how-to-run-our-spider">¶</a></h3><p>To put our spider to work, go to the project’s top level directory and run:</p>
-<pre><code>scrapy crawl quotes
-</code></pre>
-</li>
-</ul>
-<h3 id="Extracting-data¶"><a href="#Extracting-data¶" class="headerlink" title="Extracting data¶"></a>Extracting data<a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/intro/tutorial.html#extracting-data">¶</a></h3><p>The best way to learn how to extract data with Scrapy is trying selectors using the <a target="_blank" rel="noopener" href="https://docs.scrapy.org/en/latest/topics/shell.html#topics-shell">Scrapy shell</a>. Run:</p>
-<pre><code>scrapy shell &#39;https://quotes.toscrape.com/page/1/&#39;
-</code></pre>
-<h1 id="Scrapy-Course"><a href="#Scrapy-Course" class="headerlink" title="Scrapy Course"></a>Scrapy Course</h1><h2 id="Scrapy-Item"><a href="#Scrapy-Item" class="headerlink" title="Scrapy Item"></a>Scrapy Item</h2><h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><blockquote>
-<p>Clean data, convert …. Process data, store the data(&#x3D;&gt; into a database). </p>
-</blockquote>
-<p>These class should be activated in the <code>settings.py</code> when finished the convert.</p>
-<h2 id="Save-data-setting"><a href="#Save-data-setting" class="headerlink" title="Save data setting"></a>Save data setting</h2><pre><code class="python">FEEDS = &#123;
-    &quot;xxx.json&quot;: &#123;&quot;format&quot;:&quot;json&quot;&#125;
-&#125;
-</code></pre>
-<blockquote>
-<p>You can rewrite settings in the <code>settings.py</code> in the <code>Class</code>.</p>
-</blockquote>
-<p><img src="/../images/image-20231124152152217.png" alt="image-20231124152152217"></p>
-<h3 id="Save-the-data-into-the-SQL-database"><a href="#Save-the-data-into-the-SQL-database" class="headerlink" title="Save the data into the SQL database"></a>Save the data into the <code>SQL</code> database</h3><hr>
-<blockquote>
-<p>TO BE CONTINUED</p>
-</blockquote>
-<hr>
-<h3 id="User-agent-and-headers"><a href="#User-agent-and-headers" class="headerlink" title="User agent and headers"></a>User agent and headers</h3><blockquote>
-<p>The user agent is a string that a browser sends to a web server to identify itself. This string often includes details about the browser, its version, and the operating system it’s running on. For example, a user agent string might look like “Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;58.0.3029.110 Safari&#x2F;537.36”. This helps the server understand what kind of browser is making the request, so it can tailor its response appropriately, such as formatting the web page for a specific browser, user agent is a subset of the <code>headers</code>.</p>
-</blockquote>
-<p>Use different <code>user-agent</code> in the spiders.</p>
-<p>In the <code>settings.py</code> define the <strong>USER_AGENT</strong> :</p>
-<pre><code>USER_AGENT = &quot;...&quot;
-</code></pre>
-<p><img src="/../images/image-20231127113637596.png" alt="image-20231127113637596"></p>
-<p>In the <code>response.fellow</code> function, you can specify the <code>user-agent</code> in the call back functions to override the user-agent.</p>
-<p>In the <code>middlewares.py</code>  we can use the fake user-agent and pass it into the requests. You can use the website:</p>
-<p><a target="_blank" rel="noopener" href="https://scrapeops.io/">ScrapeOps - The DevOps Tool For Web Scraping. | ScrapeOps</a></p>
-<p>To make fake <code>User-Agent</code>, and use <code>api</code> from this website to make fake user-agent.</p>
-<p><img src="/../images/image-20231127114228372.png" alt="image-20231127114228372"></p>
-<p>定义完成后需要将中间件导入</p>
-<p><img src="/../images/image-20231127115749628.png" alt="image-20231127115749628"></p>
-
+        
     </div>
     
     

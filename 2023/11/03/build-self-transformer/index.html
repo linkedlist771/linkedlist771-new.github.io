@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>build_self_transformer | LinkedList&#39;s Blog</title>
+        <title> | LinkedList&#39;s Blog</title>
         <meta name="author" content="Ding Li" />
         <meta name="description" content="This is blog for Linkedlist771, mainly record some learning notes, thank you for your visit!" />
         <meta name="keywords" content="" />
@@ -156,7 +156,7 @@
                 <div id="main" v-show="!loading">
                     <div class="article">
     <div>
-        <h1>build_self_transformer</h1>
+        <h1></h1>
     </div>
     <div class="info">
         <span class="date">
@@ -167,68 +167,10 @@
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Transformer/" style="color: #00a596">Transformer</a>
-            </span>
-            
-        </span>
-        
     </div>
     
     <div class="content" v-pre>
-        <blockquote>
-<p>This blog tells you how to build a transformers from scratch.</p>
-</blockquote>
-<span id="more"></span>
-
-<h1 id="Why-when-need-transformers"><a href="#Why-when-need-transformers" class="headerlink" title="Why when need transformers"></a>Why when need transformers</h1><p>How far the Neural Network can look back depends on the length of the NN and the choice.</p>
-<p><strong>CNN have a notable disadvantage for time series prediction</strong> :</p>
-<ul>
-<li>Increase the kernel size(also increase the parameters).</li>
-<li><code>Skips over</code> some past state&#x2F;inputs</li>
-</ul>
-<p>$\rightarrow$ trade-off</p>
-<h1 id="Transformers"><a href="#Transformers" class="headerlink" title="Transformers"></a>Transformers</h1><h2 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h2><p><img src="/../images/image-20231103151429168.png" alt="image-20231103151429168"></p>
-<blockquote>
-<p><strong>Attention</strong> in deep networks generally refers to any mechanism <code>where individual states are weighted and then combined</code>.</p>
-</blockquote>
-<blockquote>
-<p>The states depend more on the later element than the previous element (problem for RNN, LSTM).</p>
-<p>For the <code>Attention</code> , we take several latter states rather than one to compute  :<br>$$<br>\overline{h} &#x3D; \sum_{t&#x3D;1}^T w_th_t(k) \text{for example the whole time sequence}<br>$$</p>
-</blockquote>
-<h1 id="Self-Attention-Mechansim"><a href="#Self-Attention-Mechansim" class="headerlink" title="Self-Attention Mechansim"></a>Self-Attention Mechansim</h1><blockquote>
-<p>$K,Q,V\in R^{T\times d}$ (keys, queries, values):</p>
-<p>To get $K$, $K &#x3D; XW_k$, $k_1$ only depends on the $x_1$, and so on.<br>$$<br>SelfAttention(K,Q,V) &#x3D; softmax(\frac{KQ^T}{\sqrt{d}}) V<br>$$<br> $KQ^T$ is $R	^{T\times T}$ ， in this matrix:<br>$$<br>entry_{(i,j)} &#x3D; k_i^Tq_j<br>$$<br>Similarity of the $k_i$ and $q_j$.</p>
-<p>The softmax is by row, each of the row will now turn into weights sum to 1.</p>
-<p>$d\in R^{T\times}$, so the output is also $R^{T\times d}$.</p>
-<p>Each row of the output </p>
-<p><code>Properties</code>:</p>
-<ul>
-<li>Invariant, same permutations of the $K,Q,V$ lead to the same permutation of the output.</li>
-<li>Allows influence between $k_t, q_t, v_t$ over all times.  <em>Without increase the parameter counts</em></li>
-<li>Compute cost is $O(T^2 d +Td)$.</li>
-</ul>
-</blockquote>
-<h1 id="Transformers-architecture"><a href="#Transformers-architecture" class="headerlink" title="Transformers architecture"></a>Transformers architecture</h1><p><img src="/../images/image-20231103154001603.png" alt="image-20231103154001603"></p>
-<h2 id="Transformer-Block"><a href="#Transformer-Block" class="headerlink" title="Transformer Block"></a>Transformer Block</h2><p>$z_1 &#x3D; SelfAttention(z^{i}w_K,z^{i}w_Q,z^{i}w_V &#x3D; softmax(\frac{z^{i}w_Kw_Q^Tz^{i T}}{\sqrt{d}}) z^{i}w_V$</p>
-<p>$z_2 &#x3D; LayerNorm(z^{i}+z_1)$</p>
-<p>$z^{i+1} &#x3D; LayerNorm(z_2+Relu(z_2w_1)w_2)$</p>
-<p>$Relu(z_2w_1)w_2$ is a two layer network in the <code>MLP</code>. </p>
-<h1 id="Masked-Self-Attention"><a href="#Masked-Self-Attention" class="headerlink" title="Masked Self-Attention"></a>Masked Self-Attention</h1><blockquote>
-<p>Encode the position into the transformer</p>
-</blockquote>
-<p><img src="/../images/image-20231103160658243.png" alt="image-20231103160658243"></p>
-<p>After the softmax， make the upper triangle are all zeros.</p>
-<p><img src="/../images/image-20231103161830126.png" alt="image-20231103161830126"></p>
-<p><img src="/../images/image-20231103162039410.png" alt="image-20231103162039410"></p>
-<p>Add <em>Position encoding</em> so that the neural network knows where is the x.</p>
-
+        
     </div>
     
     

@@ -170,44 +170,7 @@
     </div>
     
     <div class="content" v-pre>
-        <h4 id="RVC项目部署教程"><a href="#RVC项目部署教程" class="headerlink" title="RVC项目部署教程"></a>RVC项目部署教程</h4><span id="more"></span>
-
-<pre><code class="bash">git clone git@github.com:RVC-Project/Retrieval-based-Voice-Conversion-WebUI.git
-</code></pre>
-<h4 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h4><pre><code class="bash">conda create -n SVC python=3.9
-pip install -r requirements.txt
-</code></pre>
-<h4 id="下载对应的配置环境"><a href="#下载对应的配置环境" class="headerlink" title="下载对应的配置环境"></a>下载对应的配置环境</h4><p><a target="_blank" rel="noopener" href="https://huggingface.co/lj1995/VoiceConversionWebUI/tree/main">lj1995&#x2F;VoiceConversionWebUI at main (huggingface.co)</a></p>
-<p><img src="/.com//Users\23174\AppData\Roaming\Typora\typora-user-images\image-20230723155912006.png" alt="image-20230723155912006"></p>
-<p><img src="/.com//Users\23174\AppData\Roaming\Typora\typora-user-images\image-20230723155937470.png" alt="image-20230723155937470"></p>
-<p><img src="/.com//Users\23174\AppData\Roaming\Typora\typora-user-images\image-20230723155959215.png" alt="image-20230723155959215"></p>
-<p>将这些文件配置在对应的路径中：</p>
-<pre><code class="bash">hubert_base.pt
-
-./pretrained 
-
-./uvr5_weights
-
-想测试v2版本模型的话，需要额外下载
-
-./pretrained_v2 
-
-如果你正在使用Windows，则你可能需要这个文件，若ffmpeg和ffprobe已安装则跳过; ubuntu/debian 用户可以通过apt install ffmpeg来安装这2个库
-
-./ffmpeg
-
-https://huggingface.co/lj1995/VoiceConversionWebUI/blob/main/ffmpeg.exe
-
-./ffprobe
-
-https://huggingface.co/lj1995/VoiceConversionWebUI/blob/main/ffprobe.exe
-
-如果你想使用最新的RMVPE人声音高提取算法，则你需要下载音高提取模型参数并放置于RVC根目录
-
-https://huggingface.co/lj1995/VoiceConversionWebUI/blob/main/rmvpe.pt
-</code></pre>
-<p>然后启动<code>infer-web.py</code> 来运行webui。</p>
-
+        
     </div>
     
     

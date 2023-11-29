@@ -3,7 +3,7 @@
 <html lang="zh-CN">
     <head>
         <meta charset="utf-8" />
-        <title>导出项目依赖库为requirements.txt | LinkedList&#39;s Blog</title>
+        <title> | LinkedList&#39;s Blog</title>
         <meta name="author" content="Ding Li" />
         <meta name="description" content="This is blog for Linkedlist771, mainly record some learning notes, thank you for your visit!" />
         <meta name="keywords" content="" />
@@ -156,7 +156,7 @@
                 <div id="main" v-show="!loading">
                     <div class="article">
     <div>
-        <h1>导出项目依赖库为requirements.txt</h1>
+        <h1></h1>
     </div>
     <div class="info">
         <span class="date">
@@ -170,40 +170,7 @@
     </div>
     
     <div class="content" v-pre>
-        <blockquote>
-<p>在开发Python项目的时候，我们常常需要导出一个Python项目的依赖文件为<code>requirements.txt</code>, 很多人尝试都是一个个逐一查找依赖，其实有库可以帮我们做这个。</p>
-<p>下面介绍的这个库为<code>pipreqs</code>。</p>
-</blockquote>
-<span id="more"></span>
-
-<p>具体步骤可以分为两步。</p>
-<ol>
-<li><p><strong>安装pipreqs</strong>：<br>首先，你需要安装<code>pipreqs</code>。在命令行中运行以下命令：</p>
-<pre><code class="bash">pip install pipreqs
-</code></pre>
-</li>
-<li><p><strong>在项目目录中运行pipreqs</strong>：<br>然后，切换到你的项目目录，并运行<code>pipreqs</code>：</p>
-<pre><code class="bash">cd /path/to/your/project
-pipreqs -force ./
-</code></pre>
-<p>这将在当前目录（你的项目根目录）生成一个<code>requirements.txt</code>文件，其中包含项目实际需要的依赖。</p>
-</li>
-</ol>
-<blockquote>
-<p>请注意，<code>pipreqs</code>有时可能无法识别一些复杂的依赖关系，或者可能会错过一些不是直接通过import语句导入的库。在这种情况下，你可能需要手动编辑生成的<code>requirements.txt</code>文件。</p>
-</blockquote>
-<ul>
-<li>举例， 之前编写了一个用于构建embedding的项目，导出内容为：</li>
-</ul>
-<pre><code class="bash">chromadb==0.4.15
-fastapi==0.104.1
-fire==0.5.0
-numpy==1.24.3
-pydantic==1.10.2
-starlette==0.32.0.post1
-uvicorn==0.24.0.post1
-</code></pre>
-
+        
     </div>
     
     
